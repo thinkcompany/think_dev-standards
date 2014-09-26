@@ -59,7 +59,7 @@ Example:
 
 ####FORMATTING FOR READABILITY
 
-For code readability, insert a line break after any opening block-level tag that contains additional block-level tags (e.g. <div>) and indent nested elements to standard spacing (one tab space). For each additional level of nested tags, indent another tab space. Do not use spaces.
+For code readability, insert a line break after any opening block-level tag that contains additional block-level tags (e.g. `<div>`) and indent nested elements to standard spacing (one tab space). For each additional level of nested tags, indent another tab space. Do not use spaces.
 
 Inline elements may appear on the same line as their block-level containers when it makes sense. For instance, anchors may appear on the same line as their containing `<li>` tags, if they are the only content.
 
@@ -115,7 +115,7 @@ Example:
 ```
 ####PAGE LAYOUTS
 
-Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use <div>. Give structural elements unique class names that describe their purpose, not their location. 
+Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location. 
 
 When appropriate, use structural elements to create a grid of "columns" that contain the core content of the page. Classes should be used so that these grids can be used multiple times per page if necessary.
 
