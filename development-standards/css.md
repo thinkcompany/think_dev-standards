@@ -19,7 +19,7 @@ This helps us avoid complexity and easily move between style rules in a logicall
 
 ### BEM
 
-BEM is a methodology that spans an entire project's lifecycle. Designers, Front-End Developers, and Back-End Developers are all working on the same codebase, and are always aware of how design decisions inform architecture decisions. These are the origins of the BEM methodology:
+BEM is a front-end naming methodology that spans an entire project's lifecycle. Designers, Front-End Developers, and Back-End Developers are all working on the same codebase, and are always aware of how design decisions inform architecture decisions. These are the origins of the BEM methodology:
 
 * Standard projects should be developed fast and the results last long: a product created in a short time, built on an architecture that ensures its maintainability and longevity for years.
 * A project involves many people. The ability to efficiently organize people’s work in a team is important, whether it’s a team of two or dozens of developers.
