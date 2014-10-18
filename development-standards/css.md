@@ -81,9 +81,9 @@ It's important to define some custom color names, which will prevent us from nee
 
 $white          	: #fff;
 $black          	: #0b0b0b;
-$grey          	: #797e83
+$grey          		: #797e83
 
-$fountain-blue 	: #52bab3;
+$fountain-blue 		: #52bab3;
 $emerald        	: #5ece7f;
 $sunglo         	: #e67478;
 $coral          	: #ff784f;
@@ -96,10 +96,10 @@ We also build out the shades and variations we use across the project:
 ```
 // Color Usage
 
-$color-primary 	: $fountain-blue;
-$color-secondary  : $scooter;
-$color-accent     : $emerald;
-$color-shadow     : rgba($black, .2);
+$color-primary 		: $fountain-blue;
+$color-secondary  	: $scooter;
+$color-accent     	: $emerald;
+$color-shadow     	: rgba($black, .2);
 ```
 
 ### Utilities
@@ -126,6 +126,102 @@ This is a collection of useful Sass mixins, functions, and directives that we us
 This `@if variable-exists()` control declaration is an introspective Sass function determins if we've declared a variable. In this case, the variable exists, so we `@import` it into the compiled application.css file. This allows us to build a boilerplate Sass template, which will only make use of certain features if we're actually using them.
 
 ### Pixels to Em Function
+
+This function uses math to automatically create `em` values out of `px` values. It can be used anytime we know pixel value and want it to be `em`.
+
+```
+// Calculate em values
+
+@function em($target, $context: $base__font-size) {
+  @return ($target / $context) * 1em;
+}
+```
+
+### Sass Maps and Mixins
+
+Sass maps allow you to specify groups of styles that contextually make sense together. These can then be used to generate contextual rulesets. For example:
+
+```
+// Descriptive Base Colors
+
+$white    : #fff;
+$black    : #0b0b0b;
+$grey     : #797e83;
+
+$fountain-blue  : #52bab3;
+$emerald        : #5ece7f;
+$sunglo         : #e67478;
+$coral          : #ff784f;
+$purple-majesty : #9279c3;
+$scooter        : #39add1;
+
+// UI Colors Map
+
+$ui-colors: (
+  default : $fountain-blue,
+  success : $emerald,
+  error   : $sunglo,
+  warning : $coral,
+  info    : $purple-majesty  
+);
+```
+
+The `$ui-colors` map now contains all of our UI colors, which could then easily be updated, and generate new CSS from our Sass files. Check it out:
+
+```
+// Mixins
+  
+@mixin bg-colors($map){
+  @each $theme, $color in $map {
+    &--#{$theme} {
+      background-color: $color;
+    }
+  }
+}
+```
+
+This mixin loops through the key, value pairs in `$ui-colors` to generate CSS selectors that are named after the relevant theme class, or ui-color. Check it:
+
+```
+.btn,
+.progbar,
+.tooltip{
+  @include bg-colors($ui-colors);
+}
+```
+
+We have now used a mixin on the `btn`, `progbar`, and `tooltip` classes, and passed the mixin our desired Sass map, `$ui-colors`. This will automagically generate the following: 
+
+```
+.btn--default,
+.progbar--default,
+.tooltip--default {
+  background-color: #52bab3; }
+.btn--success,
+.progbar--success,
+.tooltip--success {
+  background-color: #5ece7f; }
+.btn--error,
+.progbar--error,
+.tooltip--error {
+  background-color: #e67478; }
+.btn--warning,
+.progbar--warning,
+.tooltip--warning {
+  background-color: #ff784f; }
+.btn--info,
+.progbar--info,
+.tooltip--info {
+  background-color: #9279c3; }
+```
+
+So now, any time we want, we can change the hex value of our Sass color variables, or even declare new colors and replace old ones within the `$ui-colors` Sass map!
+
+### Nested Sass Maps
+
+ 
+
+Using the above function in our Sass is as easy as `h1 { font-size: em(42px); }`, which will take 42 pixels, divide that by our `$base__font-size` and output
 
 
 
