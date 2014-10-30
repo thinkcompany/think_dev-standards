@@ -1,0 +1,26 @@
+{
+  "name": "tbi-sass-template",
+  "version": "0.0.0",
+  "description": "A collection of Sass files and Gulp utilities to start any project off quickly.",
+  "main": "gulpfile.js",
+  "dependencies": {
+    "gulp": "^3.8.9",
+    "gulp-sass": "^1.2.2"
+  },
+  "devDependencies": {
+    "gulp-sass": "^1.2.2"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thinkbrownstone/tbi-dev-utils"
+  },
+  "author": "Think Brownstone Dev Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/thinkbrownstone/tbi-dev-utils/issues"
+  },
+  "homepage": "https://github.com/thinkbrownstone/tbi-dev-utils"
+}
