@@ -15,8 +15,11 @@ This is a starter template for any front-end TBI project. There are a number of 
 - [x] Add Readme
 - [ ] Write installation instructions
 - [ ] Pick and install Gulp modules
-- [ ] Write `gulpfile.js`
 	- [ ] Pick a good cleaner to prevent renamed file trash
+	- [ ] Auto prefixer
+	- [ ] Minifier
+	- [ ] Livereload
+- [ ] Write `gulpfile.js`
 - [ ] Ignore compiled directories
 - [ ] Build out `_config` template
 - [ ] Build out `_base` template
