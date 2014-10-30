@@ -29,8 +29,9 @@ Running `gulp watch` will start a livereload server and watch for changes in `sr
 	- [x] Gulp clean
 	- [ ] Auto prefixer
 	- [ ] Minifier
-	- [x] Livereload
+	- [x] ~~Livereload~~ (gulp-connect comes with livereload)
 	- [x] Watch
+	- [x] Connect
 - [ ] Write `gulpfile.js`
 - [ ] Fill in README section for Gulp
 - [ ] Ignore compiled directories
