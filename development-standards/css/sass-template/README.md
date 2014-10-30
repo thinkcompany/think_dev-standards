@@ -33,6 +33,7 @@ This is a starter template for any front-end TBI project. There are a number of 
 - [ ] Document all `_.scss` files
 - [ ] Move Sass template into a public repo and add as a submodule
 - [ ] Someday / Maybe
+	- [ ] [Add sourcemapping](http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/)
 	- [ ] `gulp-util` for good messages on compile
 	- [ ] `gulp-filesize` outputs filesizes before/after compiling
 	- [ ] Do we want to CSS Lint?
