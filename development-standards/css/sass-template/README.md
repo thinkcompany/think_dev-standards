@@ -19,7 +19,7 @@ This is a starter template for any front-end TBI project. There are a number of 
 - [x] Add Readme
 - [x] Write installation instructions
 - [ ] Pick and install Gulp modules
-	- [ ] Gulp clean
+	- [x] Gulp clean
 	- [ ] Auto prefixer
 	- [ ] Minifier
 	- [ ] Livereload
