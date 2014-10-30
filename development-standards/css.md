@@ -143,6 +143,8 @@ This function uses math to automatically create `em` values out of `px` values. 
 }
 ```
 
+Using the above function in our Sass is as easy as `h1 { font-size: em(42px); }`, which will take 42 pixels, divide that by our `$base__font-size` and output
+
 ### Sass Maps and Mixins
 
 Sass maps allow you to specify groups of styles that contextually make sense together. These can then be used to generate contextual rulesets. For example:
@@ -225,11 +227,11 @@ So now, any time we want, we can change the hex value of our Sass color variable
 
 ### Nested Sass Maps
 
- 
+http://teamtreehouse.com/library/modular-css-with-sass/getting-modular-with-mixins-and-functions/nested-sass-maps
 
-Using the above function in our Sass is as easy as `h1 { font-size: em(42px); }`, which will take 42 pixels, divide that by our `$base__font-size` and output
+### Background Image Mixin
 
-
+http://teamtreehouse.com/library/modular-css-with-sass/getting-modular-with-mixins-and-functions/background-image-mixin
 
 ### Notes
 
