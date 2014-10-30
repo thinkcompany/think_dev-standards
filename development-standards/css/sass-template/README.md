@@ -6,7 +6,7 @@ This is a starter template for any front-end TBI project. There are a number of 
 
 1. Pull down the latest repository
 2. Install [Node](http://nodejs.org/)
-3. Run `npm install` from within the `development-standards/css/sass-template` directory
+3. Run `npm install` (sometimes `sudo npm install`) from within the `development-standards/css/sass-template` directory
 4. Running `gulp` will compile `src` to `build`
 5. Running `gulp watch` will start a livereload server and watch for changes in `src/scss`
 
