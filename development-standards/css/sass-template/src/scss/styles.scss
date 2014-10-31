@@ -33,4 +33,64 @@ div{
 	&.blue--x-dark{
 		background-color: palette(blue, x-dark);
 	}
+	&.green{
+		background-color: palette(green);
+	}
+	&.green--light{
+		background-color: palette(green, light);
+	}
+	&.green--x-light{
+		background-color: palette(green, x-light);
+	}
+	&.green--dark{
+		background-color: palette(green, dark);
+	}
+	&.green--x-dark{
+		background-color: palette(green, x-dark);
+	}
+	&.red{
+		background-color: palette(red);
+	}
+	&.red--light{
+		background-color: palette(red, light);
+	}
+	&.red--x-light{
+		background-color: palette(red, x-light);
+	}
+	&.red--dark{
+		background-color: palette(red, dark);
+	}
+	&.red--x-dark{
+		background-color: palette(red, x-dark);
+	}
+	&.yellow{
+		background-color: palette(yellow);
+	}
+	&.yellow--light{
+		background-color: palette(yellow, light);
+	}
+	&.yellow--x-light{
+		background-color: palette(yellow, x-light);
+	}
+	&.yellow--dark{
+		background-color: palette(yellow, dark);
+	}
+	&.yellow--x-dark{
+		background-color: palette(yellow, x-dark);
+	}
+	&.purple{
+		background-color: palette(purple);
+	}
+	&.purple--light{
+		background-color: palette(purple, light);
+	}
+	&.purple--x-light{
+		background-color: palette(purple, x-light);
+	}
+	&.purple--dark{
+		background-color: palette(purple, dark);
+	}
+	&.purple--x-dark{
+		background-color: palette(purple, x-dark);
+	}
 }

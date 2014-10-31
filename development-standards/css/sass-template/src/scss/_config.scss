@@ -61,6 +61,38 @@ $palettes: (
 		base 		: $scooter,
 		dark 		: darken($scooter, 8%),
 		x-dark 	: darken($scooter, 16%)
+	),
+	green: (
+		xx-light 	: lighten($emerald, 43%),
+		x-light 	: lighten($emerald, 35%),
+		light 		: lighten($emerald, 12%),
+		base 		: $emerald,
+		dark 		: darken($emerald, 8%),
+		x-dark 	: darken($emerald, 16%)
+	),
+	red: (
+		xx-light 	: lighten($sunglo, 43%),
+		x-light 	: lighten($sunglo, 35%),
+		light 		: lighten($sunglo, 12%),
+		base 		: $sunglo,
+		dark 		: darken($sunglo, 8%),
+		x-dark 	: darken($sunglo, 16%)
+	),
+	yellow: (
+		xx-light 	: lighten($coral, 43%),
+		x-light 	: lighten($coral, 35%),
+		light 		: lighten($coral, 12%),
+		base 		: $coral,
+		dark 		: darken($coral, 8%),
+		x-dark 	: darken($coral, 16%)
+	),
+	purple: (
+		xx-light 	: lighten($purple-majesty, 43%),
+		x-light 	: lighten($purple-majesty, 35%),
+		light 		: lighten($purple-majesty, 12%),
+		base 		: $purple-majesty,
+		dark 		: darken($purple-majesty, 8%),
+		x-dark 	: darken($purple-majesty, 16%)
 	)
 );
 
