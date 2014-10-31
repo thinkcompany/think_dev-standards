@@ -8,4 +8,26 @@ body {
   line-height: 1.5;
   font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
+header {
+  text-align: center;
+  padding: 3em 0; }
+
+h1 {
+  font-weight: font-weight--light;
+  font-size: 3em;
+  line-height: 1.09524;
+  margin-bottom: 1.66667em; }
+
+h2 {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 100;
+  font-size: 1.5em; }
+
+header {
+  background-color: #39add1; }
+  header h1 {
+    color: #fff; }
+  header h2 {
+    color: #0b0b0b; }
+
 /*# sourceMappingURL=styles.css.map */

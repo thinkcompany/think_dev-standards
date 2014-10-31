@@ -2,3 +2,13 @@
 @import 'helpers';
 @import 'utilities';
 @import 'base';
+
+header{
+	background-color: $color-secondary;
+	h1{
+		color: $white;
+	}
+	h2{
+		color: $black;
+	}
+}
