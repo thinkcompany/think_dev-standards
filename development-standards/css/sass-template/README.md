@@ -12,9 +12,7 @@ This is a starter template for any front-end TBI project. There are a number of 
 	2. Ensure you have at least Sass 3.3 installed by running `sass -v`
 5. You're done!
 
-Running `gulp` will compile `src` to `build`.
-
-Running `gulp watch` will start a livereload server and watch for changes in `src/scss`.
+Running `gulp` will start a webserver at `localhost:8080`, watch for file changes in `src`, and livereload when it sees those changes.
 
 ## Contents
 
@@ -33,7 +31,7 @@ Running `gulp watch` will start a livereload server and watch for changes in `sr
 	- [x] Watch
 	- [x] Connect
 - [ ] Write `gulpfile.js`
-- [ ] Fill in README section for Gulp
+- [ ] Fill in README section for Gulp Plugins
 - [ ] Ignore compiled directories
 - [ ] Build out `_config` template
 - [ ] Build out `_base` template
