@@ -8,6 +8,11 @@
 	@import url($font-url--google);
 }
 
+// Import if Typekit Fonts are defined
+@if variable-exists(font-url--typekit) {
+	@import url($font-url--typekit);
+}
+
 // Calculate em values
 
 @function em($target, $context: $base__font-size) {
