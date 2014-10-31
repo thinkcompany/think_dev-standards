@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAOS,8EAAsB;ACP/B,CAAE;EACD,eAAe,EAAE,UAAU;EAC3B,UAAU,EAAE,UAAU;;AAGvB,IAAI;EACH,SAAS,ECmCU,IAAI;EDlCvB,WAAW,EAAE,GAA8B;EAC3C,WAAW,ECAc,sDAAM;;ADGhC,MAAO;EACN,UAAU,EAAE,MAAM;EAClB,OAAO,EAAE,KAAU;;AAGpB,EAAG;EACF,WAAW,EAAE,kBAAkB;EAC/B,SAAS,EAAE,GAAQ;EACnB,WAAW,EAAE,OAAa;EAC1B,aAAa,EAAE,SAAc;;AAG9B,EAAG;EACF,WAAW,ECfe,8CAAgB;EDgB1C,WAAW,ECZY,GAAG;EDa1B,SAAS,EAAE,KAAQ;;AErBpB,MAAM;EACL,gBAAgB,ED6BG,OAAQ;EC5B3B,SAAE;IACD,KAAK,EDaG,IAAI;ECXb,SAAE;IACD,KAAK,EDWI,OAAO",
-"sources": ["../../../../../../../Users/dgrebb/Projects/Think-Brownstone/tbi-dev-utils/development-standards/css/sass-template/src/scss/_utilities.scss","../../../../../../../Users/dgrebb/Projects/Think-Brownstone/tbi-dev-utils/development-standards/css/sass-template/src/scss/_base.scss","../../../../../../../Users/dgrebb/Projects/Think-Brownstone/tbi-dev-utils/development-standards/css/sass-template/src/scss/_config.scss","../styles.scss"],
-"names": [],
-"file": "styles.css"
-}
