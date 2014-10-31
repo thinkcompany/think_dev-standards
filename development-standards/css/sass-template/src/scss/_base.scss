@@ -1,4 +1,10 @@
+* {
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
 body{ 
-	margin: 100px; 
-	color: $fountain-blue;
+	font-size: $base__font-size;
+	line-height: ($base__line/$base__font-size);
+	font-family: $font-family--primary;
 }
