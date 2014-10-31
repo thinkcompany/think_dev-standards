@@ -1,0 +1,9 @@
+// ========================
+// Main
+// ========================
+
+.btn,
+.progbar,
+.tooltip{
+	@include bg-colors($ui-colors);
+}
