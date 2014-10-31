@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AAAA,IAAI;EACH,MAAM,EAAE,KAAK;EACb,KAAK,ECgCY,OAAc",
+"sources": ["../../../../../../../Users/dgrebb/Projects/Think-Brownstone/tbi-dev-utils/development-standards/css/sass-template/src/scss/_base.scss","../../../../../../../Users/dgrebb/Projects/Think-Brownstone/tbi-dev-utils/development-standards/css/sass-template/src/scss/_config.scss"],
+"names": [],
+"file": "styles.css"
+}
