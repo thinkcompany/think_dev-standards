@@ -5,11 +5,32 @@
 @import 'main';
 
 header{
-	background-color: $color-secondary;
+	background-color: palette(blue, x-dark);
 	h1{
 		color: $white;
 	}
 	h2{
 		color: $black;
+	}
+}
+div{
+	height: 200px;
+	margin-bottom: 5px;
+	width: 200px;
+	display: inline-block;
+	&.blue{
+		background-color: palette(blue);
+	}
+	&.blue--light{
+		background-color: palette(blue, light);
+	}
+	&.blue--x-light{
+		background-color: palette(blue, x-light);
+	}
+	&.blue--dark{
+		background-color: palette(blue, dark);
+	}
+	&.blue--x-dark{
+		background-color: palette(blue, x-dark);
 	}
 }

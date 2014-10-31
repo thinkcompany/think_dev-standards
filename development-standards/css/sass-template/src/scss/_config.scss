@@ -53,6 +53,14 @@ $palettes: (
 		light 		: lighten($black, 10%),
 		base 		: $black,
 		dark 		: darken($black, 10%)
+	),
+	blue: (
+		xx-light 	: lighten($scooter, 43%),
+		x-light 	: lighten($scooter, 35%),
+		light 		: lighten($scooter, 12%),
+		base 		: $scooter,
+		dark 		: darken($scooter, 8%),
+		x-dark 	: darken($scooter, 16%)
 	)
 );
 
