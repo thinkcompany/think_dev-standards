@@ -42,5 +42,7 @@ Running `gulp` will start a webserver at `localhost:8080`, watch for file change
 	- [ ] [Add sourcemapping](http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/)
 	- [ ] `gulp-util` for good messages on compile
 	- [ ] `gulp-filesize` outputs filesizes before/after compiling
+	- [ ] add some flags for dev work
+		- [ ] add [`gulp-if`](https://github.com/robrich/gulp-if) for dev/production flags (to supress CSS minification)
 	- [ ] Do we want to CSS Lint?
 	- [ ] Do we want to add Bless?
