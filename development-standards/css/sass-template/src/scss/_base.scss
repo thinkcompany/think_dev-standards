@@ -28,3 +28,7 @@ h2 {
 	font-size: em(24px);
 	color: palette(grey, light);
 }
+
+.btn{
+	@extend %btn;
+}

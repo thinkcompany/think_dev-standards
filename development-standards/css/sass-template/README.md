@@ -36,7 +36,7 @@ Instead of:
 }
 ```
 
-We keeps it DRY by defining the base styles as an extend, and including it in both rules:
+We keeps it DRY by defining the base styles as a placeholder, and including it in both rules:
 
 ```
 %nav-item-display{
