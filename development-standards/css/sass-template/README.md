@@ -18,6 +18,40 @@ Running `gulp` will start a webserver at `localhost:8080`, watch for file change
 
 ### `.scss` Files
 
+#### `_extends.scss`
+
+The extends file contains styles that we can reuse in element rules which sometimes use the same CSS, but then modify on top of base styles.
+
+Instead of:
+
+```
+.nav__item{
+	display: inline-block;
+	margin: 0 em(12px);
+}
+.nav__item--current{
+	display: inline-block;
+	margin: 0 em(12px);
+	opacity: 0.75;
+}
+```
+
+We keeps it DRY by defining the base styles as an extend, and including it in both rules:
+
+```
+%nav-item-display{
+	display: inline-block;
+	margin: 0 em(12px);
+}
+.nav__item{
+	@extends %nav-item-display;
+}
+.nav__item--current{
+	@extends %nav-item-display;
+	opacity: 0.75;
+}
+```
+
 ## Task List
 
 - [x] Add Readme
