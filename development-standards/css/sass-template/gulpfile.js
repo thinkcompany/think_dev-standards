@@ -22,7 +22,7 @@ gulp.task('connect', function() {
     livereload: true
   });
   gulp.src('./build/index.html')
-  .pipe(shell('open http://localhost:8080'));
+  //.pipe(shell('open http://localhost:8080'));
 })
 
 // start the livereload server and watch
