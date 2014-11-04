@@ -6,7 +6,7 @@ The Front-End Web Development Standards are broken down into coding guidelines f
 
 **Chapters:**
 - [HTML](html.md)
-- [CSS](css.md)
+- [CSS](css)
 - [Javascript](javascript.md)
 - [Accessibility](accessibility.md)
 - [SEO](seo.md)
