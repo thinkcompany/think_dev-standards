@@ -36,7 +36,12 @@ Running `gulp` will start a webserver at `localhost:8080`, watch for file change
 - [ ] Build out `_config` template
 - [ ] Build out `_base` template
 - [ ] Build out `_mixins` template
+- [ ] Build out `_helpers` template
+- [ ] Build out `_extends` template
+- [ ] Build out `_utilities` template
+- [ ] Build out `_nav` template
 - [ ] Document all `_.scss` files
+	- [ ] Describe how each file works and what it should contain
 - [ ] Move Sass template into a public repo and add as a submodule
 - [ ] Someday / Maybe
 	- [ ] [Add sourcemapping](http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/)

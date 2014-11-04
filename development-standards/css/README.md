@@ -237,4 +237,5 @@ http://teamtreehouse.com/library/modular-css-with-sass/getting-modular-with-mixi
 
 ## Related Reading Material
 
-[Dropbox Design Cabin](https://medium.com/@_dte/building-the-dropbox-design-cabin-9fdec4356671)
+* [Dropbox Design Cabin](https://medium.com/@_dte/building-the-dropbox-design-cabin-9fdec4356671)
+* [The Sass Way](http://thesassway.com/)
