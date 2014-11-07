@@ -52,6 +52,10 @@ We keeps it DRY by defining the base styles as a placeholder, and including it i
 }
 ```
 
+## Resources
+
+* [enabling sourcemaps in Chrome](https://developer.chrome.com/devtools/docs/css-preprocessors)
+
 ## Task List
 
 - [x] Add Readme
@@ -76,9 +80,10 @@ We keeps it DRY by defining the base styles as a placeholder, and including it i
 - [ ] Build out `_nav` template
 - [ ] Document all `_.scss` files
 	- [ ] Describe how each file works and what it should contain
+- [ ] Document the process for sourcemapping files above webroot (map to filesystem resource in [Chrome Devtools](https://developer.chrome.com/devtools/docs/workspaces#mapping-a network resource))
 - [ ] Move Sass template into a public repo and add as a submodule
 - [ ] Someday / Maybe
-	- [ ] [Add sourcemapping](http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/)
+	- [x] [Add sourcemapping](http://fettblog.eu/blog/2014/04/10/gulp-sass-autoprefixer-sourcemaps/)
 	- [ ] `gulp-util` for good messages on compile
 	- [ ] `gulp-filesize` outputs filesizes before/after compiling
 	- [ ] add some flags for dev work
