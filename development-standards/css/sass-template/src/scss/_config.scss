@@ -18,6 +18,11 @@ $font-weight--medium		: 	400;
 $font-weight--bold		: 	700;
 $font-weight--ultra-bold	: 	900;
 
+// Text
+
+$base__font-size		: 	16px;
+$base__line			: 	24px;
+
 // Descriptive Base Colors
 
 $white	:	#fff;
@@ -66,11 +71,6 @@ $ui-colors: (
 	warning 	: $coral,
 	info 		: $purple-majesty
 );
-
-// Text
-
-$base__font-size		: 	16px;
-$base__line			: 	24px;
 
 // Border radius
 
