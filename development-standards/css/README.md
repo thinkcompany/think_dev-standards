@@ -21,7 +21,7 @@ SMACSS is mostly a styleguide for how to best organize styles. We break CSS down
 4. State
 5. Theme
 
-This helps us avoid complexity and easily move between style rules in a logically ordered way. 
+This helps us avoid complexity and easily move between style rules in a logically ordered way. We can also use this structure to better plan the `sass-template` partials that make up our compiled CSS.
 
 ### BEM
 
@@ -243,3 +243,4 @@ http://teamtreehouse.com/library/modular-css-with-sass/getting-modular-with-mixi
 
 * [Dropbox Design Cabin](https://medium.com/@_dte/building-the-dropbox-design-cabin-9fdec4356671)
 * [The Sass Way](http://thesassway.com/)
+* [Sassy Starter](https://github.com/minamarkham/sassy-starter)
