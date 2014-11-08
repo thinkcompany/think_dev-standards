@@ -9,26 +9,46 @@ body{
 	font-family: $font-family--primary;
 }
 
+h1{
+	@extend %hdln-prim;
+}
+h2{
+	@extend %hdln-sec;
+}
+
+p {
+	font-size: em(18px);
+	line-height: (27px / 18px);
+	margin: 0 0 em(30px, 18px);
+	font-weight: $font-weight--light;
+}
+
+blockquote{
+	font{
+		size: em(24px);
+		style: italic;
+		weight: $font-weight--light;
+	}
+	margin: em(32px, 24px) 0;
+	padding: 0 0 0 5%;
+	border-left: solid em(8px, 24px) palette(grey, xx-light);
+}
+
 header {
 	text-align: center;
 	padding: em(48px) 0;
 }
 
-h1 {
-	font-weight: $font-weight--light;
-	font-size: em(48px);
-	line-height: (46px / 42px);
-	margin-bottom: em(70px, 42px);
-	color: palette(grey, x-dark);
+// Form elements
+
+input, 
+textarea {
+	display: block;
+	outline: 0;
+	border: 0;
 }
 
-h2 {
-	font-family: $font-family--secondary;
-	font-weight: $font-weight--thin;
-	font-size: em(24px);
-	color: palette(grey, light);
-}
-
-.btn{
-	@extend %btn;
+input:focus, 
+textarea:focus {
+	transition: $trns_duration;
 }

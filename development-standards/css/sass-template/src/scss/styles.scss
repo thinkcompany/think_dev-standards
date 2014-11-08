@@ -1,4 +1,4 @@
-@import 'config', 'helpers', 'utilities', 'extends', 'base', 'main', 'nav';
+@import 'config', 'helpers', 'utilities', 'reset', 'extends', 'base', 'main', 'nav', 'headlines', 'form';
 
 header{
 	background-color: map-get($ui-colors, default);
@@ -8,10 +8,4 @@ header{
 	h2{
 		color: $black;
 	}
-}
-div{
-	height: 200px;
-	margin-bottom: 5px;
-	width: 200px;
-	display: inline-block;
 }
