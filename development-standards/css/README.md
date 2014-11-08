@@ -34,6 +34,10 @@ BEM is a front-end naming methodology that spans an entire project's lifecycle. 
 
 [This Treehouse course](http://teamtreehouse.com/library/modular-css-with-sass) is a great place to start if you're new to these concepts.
 
+## SMACSS and BEM together
+
+@todo Describe how BEM can work in harmony with the base, layout, module, state, theme categories of the SMACSS methodology.
+
 ## Sass and Project Setup
 
 All new projects begin with a `_config.scss` file, which contains variables for the project. We're going to set some standard variables for use across other `.scss` files.
