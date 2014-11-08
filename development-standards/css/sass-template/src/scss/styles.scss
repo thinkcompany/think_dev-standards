@@ -1,4 +1,4 @@
-@import 'config', 'helpers', 'utilities', 'base', 'main', 'nav', 'extends';
+@import 'config', 'helpers', 'utilities', 'extends', 'base', 'main', 'nav';
 
 header{
 	background-color: map-get($ui-colors, default);

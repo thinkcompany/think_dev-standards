@@ -7,6 +7,7 @@ This is a starter template for any front-end TBI project. There are a number of 
 1. Pull down the latest repository
 2. Install [Node](http://nodejs.org/)
 3. Run `npm install` (sometimes `sudo npm install`) from within the `development-standards/css/sass-template` directory
+4. Make sure you have Gulp installed by running `gulp -v` if you get `gulp: command not found`, run `sudo npm install gulp -g`
 4. Ensure you have Ruby Sass installed
 	1. Run `gem install sass` (sometimes `sudo gem install sass`)
 	2. Ensure you have at least Sass 3.3 installed by running `sass -v`
