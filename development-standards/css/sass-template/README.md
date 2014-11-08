@@ -72,14 +72,18 @@ We keeps it DRY by defining the base styles as a placeholder, and including it i
 - [ ] Write `gulpfile.js`
 - [ ] Fill in README section for Gulp Plugins
 - [ ] Ignore compiled directories
-- [ ] Build out `_config` template
-- [ ] Build out `_base` template
-- [ ] Build out `_mixins` template
-- [ ] Build out `_helpers` template
-- [ ] Build out `_extends` template
-- [ ] Build out `_utilities` template
-- [ ] Build out `_nav` template
-- [ ] Document all `_.scss` files
+- [ ] Build out `_base` partial
+- [ ] Build out `_config` partial
+- [ ] Build out `_extends` partial
+- [ ] Build out `_forms` partial
+- [ ] Build out `_headlines` partial
+- [ ] Build out `_helpers` partial
+- [ ] Build out `_main` partial
+- [ ] Build out `_nav` partial
+- [ ] Build out `_reset` partial
+- [ ] Build out `_utilities` partial
+- [ ] Wrap up `styles.scss`
+- [ ] Document all Sass partials
 	- [ ] Describe how each file works and what it should contain
 - [ ] Document the process for sourcemapping files above webroot (map to filesystem resource in [Chrome Devtools](https://developer.chrome.com/devtools/docs/workspaces#mapping-a network resource))
 - [ ] Move Sass template into a public repo and add as a submodule
