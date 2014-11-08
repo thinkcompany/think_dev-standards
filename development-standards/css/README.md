@@ -13,7 +13,7 @@ Here's [a great article](http://css-tricks.com/sass-vs-less/) from Chris Coyier 
 
 ### SMACSS
 
-We break CSS down into five types of categories:
+SMACSS is mostly a styleguide for how to best organize styles. We break CSS down into five categories:
 
 1. Base
 2. Layout
