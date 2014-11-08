@@ -4,6 +4,9 @@
 
 .form {
 	@include e(label){
+		@include m(hidden) {
+			@extend .srt;
+		}
 		display: block;
 		margin-bottom: em(10px);
 	}

@@ -57,6 +57,10 @@ We keeps it DRY by defining the base styles as a placeholder, and including it i
 
 * [enabling sourcemaps in Chrome](https://developer.chrome.com/devtools/docs/css-preprocessors)
 
+## Notes
+
+* include information about @extending class names, and how that adds comma separation to those classes
+
 ## Task List
 
 - [x] Add Readme
