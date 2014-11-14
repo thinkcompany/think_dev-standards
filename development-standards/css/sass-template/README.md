@@ -87,6 +87,7 @@ We keeps it DRY by defining the base styles as a placeholder, and including it i
 - [ ] Build out `_reset` partial
 - [ ] Build out `_utilities` partial
 - [ ] Wrap up `styles.scss`
+- [ ] Determine the best syntax to build bemful classes and html: http://viget.com/extend/bem-sass-modifiers
 - [ ] Document all Sass partials
 	- [ ] Describe how each file works and what it should contain
 - [ ] Document the process for sourcemapping files above webroot (map to filesystem resource in [Chrome Devtools](https://developer.chrome.com/devtools/docs/workspaces#mapping-a network resource))
