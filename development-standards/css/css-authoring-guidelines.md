@@ -160,7 +160,7 @@ Poor examples:
 #topHeader {...}
 #topHeader div.xpBar {...}
 #topHeader * {...}
-input[type=text]
+input[type=text] {...}
 ```
 
 Good examples:
@@ -170,7 +170,7 @@ Good examples:
 .header .navigation {...}
 .header a {...}
 .header-alt {...}
-input[type="text"]
+input[type="text"] {...}
 ```
 
 Modifier classes are applied to components when there are slight variants in visual display that do not necessitate
@@ -420,7 +420,7 @@ Example:
 
 ```css
 .list-vertical {}
-.list-vertial .list-item {}
+.list-vertical .list-item {}
 
 /* instead use */
 .list-vertical > li {}
@@ -538,7 +538,7 @@ When using Sass, add media queries along with their base rulesets, ordered from 
 
 Sass example:
 
-```css
+```scss
 .component {
 	background: white;
 	font-size: 100%;
