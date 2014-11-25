@@ -3,7 +3,7 @@
 ## Programming Principles
 
 "Styles change but style doesn't." Leverage the cascade and inheritance, write efficient selectors, remain in normal
-flow as often as possible, and hack for older browsers as little as possible. 
+flow as often as possible, and hack for older browsers as little as possible.
 
 ## Versions, Validation, & Linting
 
@@ -28,7 +28,7 @@ Style sheets may not validate due to unsupported properties, such as:
 * vendor-specific prefixes for new CSS features (i.e. –moz, -webkit, or -ms)
 
 Syntax or parsing errors are not acceptable and must be fixed. Lint warnings should be reviewed to ensure poor
-programming practices are avoided. 
+programming practices are avoided.
 
 ### Approved Properties
 
@@ -51,7 +51,7 @@ Example:
 
 Since CSS 3 properties are not well supported in older versions of Internet Explorer, use CSS 3 properties only for
 non-essential design details. Work with the designer to determine if fallback support is necessary, and document
-decisions for the client. 
+decisions for the client.
 
 ### Disallowed Properties & Values
 
@@ -59,7 +59,7 @@ Do not use IE-proprietary styling (such as filters or expressions).
 
 Refrain from using !important. The !important declaration is a hint that other CSS is overly specific. Rewrite any
 CSS where you think that !important is necessary, unless there are extenuating circumstances such as unmodifiable,
-third-party code. 
+third-party code.
 
 ## Tools & Libraries
 
@@ -96,7 +96,7 @@ Spaces should be used between:
 * each value in a declaration
 * a declaration's colon and value
 
-There should be no space between a declaration's value and the closing semicolon. 
+There should be no space between a declaration's value and the closing semicolon.
 
 Examples:
 
@@ -117,21 +117,21 @@ Add comments to any rule that might not be readily understood by another develop
 declarations to indicate targeted browsers, in order to make future removal easy.
 
 Always retain comments related to licensing of open source code. Comments may never contain alarming or
-negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc. 
+negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
 
 Examples: [GG: Added]
 
 ```css
 /**
- * Use this format for long comments spanning multiple lines, 
+ * Use this format for long comments spanning multiple lines,
  * e.g. to describe a component
  */
- 
-/* Use this format for short comments, e.g. a note on a property */ 
+
+/* Use this format for short comments, e.g. a note on a property */
 
 /*----------------------------------------------*\
     #SECTION-NAME
-\*----------------------------------------------*/ 
+\*----------------------------------------------*/
 
 // Preprocessor comment, when you do not want it in the generated source
 ```
@@ -150,7 +150,7 @@ Class names should be constructed from generic to specific (e.g. list-vertical, 
 
 Refrain from over-qualifying selectors (i.e. body.class) and using adjoining classes (i.e. .component.variant). Never
 use the universal selector (*). Keep in mind that selectors are parsed from right to left – not left to right – so only
-be as specific as you need to be in composing a selector. 
+be as specific as you need to be in composing a selector.
 
 Use quotes in your attribute selectors, even though they are not always required. [GG: Added]
 
@@ -196,7 +196,7 @@ Example:
 Always specify CSS properties in the following order. This enhances readability and helps compression algorithms.
 
 This order also helps troubleshooting efforts by placing the most commonly problematic properties at the
-beginning. 
+beginning.
 
 * z-index
 * position (and top, bottom, left, right)
@@ -213,7 +213,7 @@ beginning.
 * list
 * line
 * text
-* letter 
+* letter
 
 #### Shorthand
 
@@ -232,7 +232,7 @@ Example:
 ```
 
 If multiple values of the shorthand property need to be overridden, then simply re-write the entire set of shorthand
-values. 
+values.
 
 #### Line-height
 
@@ -255,7 +255,7 @@ lead front-end developers when there are questions concerning box model sizing.
 
 Existing code largely uses pixels to define all box-model dimensions, however, responsive design techniques are
 increasingly practiced, relative values (percents or ems) may be used. Care must be taken to ensure that sizing
-values do not complicate content requirements and agree with the UX team's intended vision for the design. 
+values do not complicate content requirements and agree with the UX team's intended vision for the design.
 
 #### Flow, Floats, & Positioning
 
@@ -266,7 +266,7 @@ When floats are used for layout, ensure the parent container is assigned the ove
 takes the floated elements into consideration. Do not use ugly "clearfix" hacks.
 
 When positioning is used for layout in a component-based system, ensure that the container wrapper has
-position:relative set, in order to set the appropriate parent for positioned children. 
+position:relative set, in order to set the appropriate parent for positioned children.
 
 #### Fonts
 
@@ -289,13 +289,13 @@ Example:
 When developing a style sheet based on a Photoshop document, translate points directly into pixels. For example,
 if the Photoshop document displays a heading at 24 points, use 24 pixels in the CSS rule.
 
-Always end font-family declarations with a generic font family (i.e. serif, sans-serif). 
+Always end font-family declarations with a generic font family (i.e. serif, sans-serif).
 
 #### Colors
 
 Use hexadecimal notation (lowercase) to define colors without alpha-transparency. Reduce six-character values to three character
 values whenever possible. Developers may use RGBA color as long as a hex fallback is also provided for
-browsers that do not support RGBA. 
+browsers that do not support RGBA.
 
 Example:
 
@@ -303,7 +303,7 @@ Example:
 .button {
 	color: #f00;
 	color: rgba(255,0,0,.2);
-} 
+}
 ```
 
 #### Images
@@ -328,7 +328,7 @@ Encourage designers to visually distinguish between visited and unvisited links,
 the :hover pseudo-class for anchors, always specify a corresponding value for :focus and :active to aid keyboard
 navigation. The order of these selectors matters, so always specify in LVHFA order.
 
-Example: 
+Example:
 
 ```css
 .nav a:link {
@@ -344,8 +344,8 @@ Example:
 .nav a:focus,
 .nav a:active {
 	color: #f60000;
-} 
-```	
+}
+```
 
 #### Sprites
 
@@ -362,7 +362,7 @@ Specify all of the relevant style data in this initial rule, including:
 * background
 
 For all of the different icons in the series (i.e. "video", "photo", etc.) you only need to specify a new background-position
-value that corresponds to the pixel coordinates in the sprite graphic file. 
+value that corresponds to the pixel coordinates in the sprite graphic file.
 
 Example:
 
@@ -379,7 +379,7 @@ Example:
 }
 .icon-photo {
 	background-position: 0 -100px;
-} 
+}
 ```
 
 #### Hack Strategy
@@ -387,7 +387,7 @@ Example:
 Minimize the use of hacks by re-writing rules that are problematic for particular browsers.
 
 When hacks are necessary, write a browser-specific hack in the style sheet directly following the affected rule. Add
-a comment detailing what the hack rule is doing and for which browser it is intended. 
+a comment detailing what the hack rule is doing and for which browser it is intended.
 
 Example:
 
@@ -398,13 +398,13 @@ Example:
 /* sets equivalent padding on button class in IE7 */
 *:first-child+html .button {
 	padding: 6px;
-} 
+}
 ```
 
 Do not link to an external stylesheet for hack rules unless there are major layout overrides needed to support IE7
 or IE8. These older browser are already slow, and forcing the browser to download an additional will further
 impact page performance. If an additional style sheet is necessary, however, use conditional comments to load it
-only for the browsers that need it. 
+only for the browsers that need it.
 
 ## Coding Practices
 
@@ -412,7 +412,7 @@ This section represents general coding practices that should be considered when 
 
 ### Be pragmatic [GG: added]
 
-Don't add a class to absolutely everything that needs to be styled. 
+Don't add a class to absolutely everything that needs to be styled.
 
 Lists, for example, often won't need a class for each list item. Instead, class the ul/ol and use a child selector to keep the markup cleaner.
 
@@ -454,7 +454,7 @@ Comment each section as follows:
 
 .footer-global {
 	...
-} 
+}
 ```
 
 ### Additional Stylesheets
@@ -467,18 +467,18 @@ Example:
 ```css
 .component-body {
 	margin: 0 0 20px 0;
-} 
+}
 ```
 
 A developer should be able to edit a component style sheet without introducing bugs into other parts of the site.
 
 ### Specificity [GG: Added]
 
-Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized. 
+Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized.
 
 Guidelines:
 
-* If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed. 
+* If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed.
 * Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
 * Avoid chaining selectors when possible
 * Avoid location-specific selectors
@@ -505,7 +505,7 @@ Good example:
 ### Grouping Styles
 
 Styles applying to a particular object should be grouped into a single rule. Do not specify a selector multiple times
-and spread out properties across multiple rules. 
+and spread out properties across multiple rules.
 
 Bad Example:
 
@@ -516,7 +516,7 @@ Bad Example:
 }
 .header, .footer {
 	color: #bada55;
-} 
+}
 ```
 
 Good Example:
@@ -529,7 +529,7 @@ Good Example:
 }
 .footer {
 	color: #bada55;
-} 
+}
 ```
 
 ### Media Queries [GG: Added, needs additional content and examples]
@@ -565,7 +565,7 @@ inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 #### CSS Ordering [GG: Needs review/edit - or refer to Grebb's doc]
 
 Global files must be included first so that they may be over-written by more specific component styles. Style
-sheets referenced by conditional comments (usually browser-specific files) should be included last. 
+sheets referenced by conditional comments (usually browser-specific files) should be included last.
 
 1. Base (normalize, global, grid)
 2. Components (1 through n)
@@ -582,12 +582,12 @@ sheets referenced by conditional comments (usually browser-specific files) shoul
 6. Helpers (state, helpers)
 
 [GG: edit - should we make this a practical limit, such as 3 - 5 max?] NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after
-it reaches 30, and the browser will not report an error, making debugging difficult. 
+it reaches 30, and the browser will not report an error, making debugging difficult.
 
 ### Integrating CSS with JavaScript
 
 When visual changes must be applied using JavaScript, the script must change the class value of the element. The
-rules for the visual change must be included in the appropriate style sheet. 
+rules for the visual change must be included in the appropriate style sheet.
 
 Example Style:
 
@@ -595,7 +595,7 @@ Example Style:
 .tab-selected {
 	background-color: #ccc;
 	font-weight: bold;
-} 
+}
 ```
 
 Corresponding JQuery Snippet:
@@ -603,7 +603,7 @@ Corresponding JQuery Snippet:
 ```javascript
 $('.tab').click(function() {
 	$(this).addClass('tab-selected');
-}); 
+});
 ```
 
 Developers may use JavaScript to add inline styles to an element only when the values will not be known ahead of
@@ -611,7 +611,7 @@ time, such as when changing the position of an element during a drag-and-drop ev
 
 When jQuery is implemented as part of a Build Kit or other deliverable, use the hide() and show() functions in
 jQuery to toggle the display property of an element, which adds an inline style. All other visual changes must be
-made by changing class names. 
+made by changing class names.
 
 #### Binding [GG: Added]
 
@@ -620,15 +620,16 @@ Use "js-" prefixed classes (or data attributes such as date-js="something" for J
 
 ## To do [GG: Added]
 
-* Create Sass rules for mixins, extends, placeholders (should we even use extends, placeholders, and nesting?)
-* Create rules/variables for z-index scale
-* Create rules for naming media queries in Sass
-* Create rules for no-js styling
-* Rules/process for IE<9 in responsive/mobile-first sites
-* Decide about linting and which rules to apply
-* Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]-[varient/component] (e.g. $color-gray-light)
-* Rules for modifier and subcomponent (self-contained components/modules) naming
-* Think about how to bundle our styles - 1 file, multiple? Try for 3 or fewer css references per page (all, section, page)
-* Consider prefixing helpers/utility with u-, and mixins with m-
-* Consider whether component isolation may be a better approach than abstracting reusable objects. Maybe objects should be a very limited set of single responsibility classes/modules (e.g. pipe list) 
-* Consider prefixing state selectors with "is-", (e.g. .is-open)
+- [ ] Create Sass rules for mixins, extends, placeholders (should we even use extends, placeholders, and nesting?)
+- [ ] Create rules/variables for z-index scale
+- [ ] Create rules for naming media queries in Sass
+- [ ] Create rules for no-js styling
+- [ ] Rules/process for IE<9 in responsive/mobile-first sites
+- [ ] Decide about linting and which rules to apply
+- [ ] Standards for self-hosted webfonts and vendor-hosted webfonts
+- [ ] Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]-[varient/component] (e.g. $color-gray-light)
+- [ ] Rules for modifier and subcomponent (self-contained components/modules) naming
+- [ ] Think about how to bundle our styles - 1 file, multiple? Try for 3 or fewer css references per page (all, section, page)
+- [ ] Consider prefixing helpers/utility with u-, and mixins with m-
+- [ ] Consider whether component isolation may be a better approach than abstracting reusable objects. Maybe objects should be a very limited set of single responsibility classes/modules (e.g. pipe list)
+- [ ] Consider prefixing state selectors with "is-", (e.g. .is-open)
