@@ -30,7 +30,7 @@ BEM is a front-end naming methodology that spans an entire project's lifecycle. 
 * Standard projects should be developed fast and the results last long: a product created in a short time, built on an architecture that ensures its maintainability and longevity for years.
 * A project involves many people. The ability to efficiently organize people’s work in a team is important, whether it’s a team of two or dozens of developers.
 * Scalable teams. Adding more people to a team should improve the team’s performance. A process must be in place that ensures that new developers are brought up to speed quickly and are duly allocated their specific areas of responsibility. Code must be carefully structured to ensure its maintainability over time and through team changes.
-* Code reuse. Each new project or interface element should not be started from scratch. Code reuse between similar tasks should be maximized within the company. Code should not be context-dependent but be easily transferable to different contexts. 
+* Code reuse. Each new project or interface element should not be started from scratch. Code reuse between similar tasks should be maximized within the company. Code should not be context-dependent but be easily transferable to different contexts.
 
 [This Treehouse course](http://teamtreehouse.com/library/modular-css-with-sass) is a great place to start if you're new to these concepts.
 
@@ -174,7 +174,7 @@ $ui-colors: (
   success : $emerald,
   error   : $sunglo,
   warning : $coral,
-  info    : $purple-majesty  
+  info    : $purple-majesty
 );
 ```
 
@@ -182,7 +182,7 @@ The `$ui-colors` map now contains all of our UI colors, which could then easily 
 
 ```
 // Mixins
-  
+
 @mixin bg-colors($map){
   @each $theme, $color in $map {
     &--#{$theme} {
@@ -202,7 +202,7 @@ This mixin loops through the key, value pairs in `$ui-colors` to generate CSS se
 }
 ```
 
-We have now used a mixin on the `btn`, `progbar`, and `tooltip` classes, and passed the mixin our desired Sass map, `$ui-colors`. This will automagically generate the following: 
+We have now used a mixin on the `btn`, `progbar`, and `tooltip` classes, and passed the mixin our desired Sass map, `$ui-colors`. This will automagically generate the following:
 
 ```
 .btn--default,
