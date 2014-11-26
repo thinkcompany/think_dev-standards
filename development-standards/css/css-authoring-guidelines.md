@@ -617,6 +617,9 @@ made by changing class names.
 
 Use "js-" prefixed classes (or data attributes such as date-js="something" for JavaScript hooks. Don't ever style these, and don't bind JavaScript other classes or IDs.
 
+## Resources
+
+* [Sass Meister](http://sassmeister.com/) is an online IDE that on-the-fly shows what CSS Sass outputs when compiled.
 
 ## To do [GG: Added]
 
@@ -627,7 +630,7 @@ Use "js-" prefixed classes (or data attributes such as date-js="something" for J
 - [ ] Rules/process for IE<9 in responsive/mobile-first sites
 - [ ] Decide about linting and which rules to apply
 - [ ] Standards for self-hosted webfonts and vendor-hosted webfonts
-- [ ] Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]-[varient/component] (e.g. $color-gray-light)
+- [ ] Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]-[variant/component] (e.g. $color-gray-light)
 - [ ] Rules for modifier and subcomponent (self-contained components/modules) naming
 - [ ] Think about how to bundle our styles - 1 file, multiple? Try for 3 or fewer css references per page (all, section, page)
 - [ ] Consider prefixing helpers/utility with u-, and mixins with m-
