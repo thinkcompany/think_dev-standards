@@ -9,3 +9,20 @@ header{
 		color: $black;
 	}
 }
+
+h1 {
+	font-size: 400px;
+	@include responsive(wide-screens) {
+		font-size: 48px;
+	}
+	@include responsive(medium-screens) {
+		font-size: 32px;
+	}
+	@include responsive(small-screens) {
+		font-size: 20px;
+	}
+}
+
+li.twitter a {
+	@include retinize('icon-twitter', 'png', 24px, 24px);
+}
