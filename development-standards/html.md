@@ -353,6 +353,94 @@ Example:
 </table>
 ```
 
+####FORMS
+The `<form>` element must include action and method attributes. When choosing the form submission method, consider the user experience:
+- GET: form data is encoded by the browser and appended to the URL; typically used for retrieving data
+- POST: form data appears in a message body which in encrypted over HTTPS; typically used for sending or storing data
+
+Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) should always come first, regardless of visual order. 
 
 
+####FIELDSET
+Structure complex forms with fieldset elements in order to provide context to groups of form fields. For example, in a form where both a billing address and a shipping address are collected, wrap each set of address form fields in a fieldset. Use the legend element to title the section of the form; hide the content off-screen if it does not visually appear on screen.
+
+Example:
+
+```html
+<fieldset>
+    <legend><span>Contact Information</span></legend>
+    <p>
+        <label for="contact-name">Your Name</label>
+        <input type="text" id="contact-name" />
+    </p>
+    ...
+</fieldset>
+```
+
+####LABEL
+All form fields (`input`, `textarea`, `select`) must have a corresponding label that describes the purpose of the field. Associate a label explicitly, matching the for attribute value on the `<label>` element with the ID attribute value from the related form field.
+
+Example:
+
+```html
+<p>
+    <label for="newsletter-zip">Zip Code</label>
+    <input type="text" id="newsletter-zip" maxlength="10" />
+</p>
+```
+
+Labels must always be present. If a design does not contain visible labels, use CSS to shift them off screen. Do not ever omit them.
+
+####FORM FIELDS
+Wrap form fields and their corresponding labels in `<p>` tags. Instructional or help text related to a form field (i.e. optional, required, etc.) should be included as part of the label; to style this text separate from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
+
+Example:
+
+```html
+<p>
+    <label for="name-first">First Name <span class="help">(required)</span></label>
+    <span> class="field"><input type="text" id="name-first" required="required" /></span>
+</p>
+```
+
+Refrain from complicated CSS styling of form inputs so as not to override default cues of the browser or operating system. When styling inputs, ensure selectors are specific to type=text so as not to affect other types. Hidden input fields should be grouped at the top or bottom of a `<form>`, to ensure that they do not interfere with any visual rendering.
+
+####CHECKBOXES AND RADIO BUTTONS
+Group sets of checkboxes and radio buttons using the `<fieldset>` element. The `<legend>` provides a text label for the group, since the `<label>` is required for each individual input.
+
+Example:
+ 
+```html
+<fieldset>
+    <legend>What is your favorite ice cream flavor?</legend>
+    <p>
+        <input type="radio" name="radio_icecream" value="vanilla" id="radio_icecream_vanilla" />
+        <label for="radio_icecream_vanilla">Vanilla</label>
+    </p>
+    <p>
+        <input type="radio" name="radio_icecream" value="chocolate" id="radio_icecream_chocolate" />
+        <label for="radio_icecream_chocolate">Chocolate</label>
+    </p>
+</fieldset>
+```
+
+For groups of radio buttons, ensure that the *name* attribute value matches, so that checking one radio button unchecks all others in the group.
+
+####BUTTONS
+
+Use the `<button>` element to render actionable buttons in forms instead of inputs. Use type="submit" to generate a submit button. Use CSS to style buttons according to designs. Do not use the image input type.
+
+Bad Example:
+
+```html
+<image type="submit" src="button.png" alt="Submit" />
+```
+
+Good Example:
+
+```html
+<button type="submit">Submit</button>
+```
+
+*NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the <button> element is not supported.
 
