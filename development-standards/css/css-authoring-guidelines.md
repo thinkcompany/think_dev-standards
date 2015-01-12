@@ -101,7 +101,7 @@ There should be no space between a declaration's value and the closing semicolon
 Examples:
 
 ```css
-.component {
+.module {
 	margin: 0 0 15em 0;
 	padding: 0;
 }
@@ -124,7 +124,7 @@ Examples:
 ```css
 /**
  * Use this format for long comments spanning multiple lines,
- * e.g. to describe a component
+ * e.g. to describe a module
  */
 
 /* Use this format for short comments, e.g. a note on a property */
@@ -148,7 +148,7 @@ needed, separate words using hyphens.
 
 Class names should be constructed from generic to specific (e.g. list-vertical, list-inline vs vertical-list, inline-list; .nav, .nav-primary, .nav-secondary)
 
-Refrain from over-qualifying selectors (i.e. body.class) and using adjoining classes (i.e. .component.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only
+Refrain from over-qualifying selectors (i.e. body.class) and using adjoining classes (i.e. .module.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only
 be as specific as you need to be in composing a selector.
 
 Use quotes in your attribute selectors, even though they are not always required.
@@ -307,7 +307,7 @@ When using rems for font-size, provide a px fallback for browsers that do not su
 Example:
 
 ```css
-	.component {
+	.module {
 		font-size: 12px;
 		font-size: .75rem;
 	}
