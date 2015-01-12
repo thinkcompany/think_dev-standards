@@ -68,7 +68,7 @@ third-party code.
 TBI will be incorporating Sass as a common CSS development tool. Build Kit deliverables will not include Sass files
 unless requested by the client.
 
-We will use the SCSS syntax for Sass files, along with the .scss file extension.
+We will use the .scss syntax for Sass files
 
 http://sass-lang.com/
 
@@ -267,7 +267,7 @@ Don't use a unit on the line-height property. line-height: 1.5 is the same as li
 
 Avoid using vendor prefixes in authored stylesheets when possible.
 
-Instead use Autoprefixer, https://github.com/postcss/autoprefixer in your build script to add these automatically.
+Instead use Autoprefixer, https://github.com/postcss/autoprefixer, in your build script to add these automatically.
 
 If Autoprefixer cannot be used, refer to caniuse.com for the prefixes required for the browsers you support.
 
@@ -435,7 +435,7 @@ only for the browsers that need it.
 
 ## Coding Practices
 
-This section represents general coding practices that should be considered when authoring and organization stylesheets.
+This section represents general coding practices that should be considered when authoring and organizating stylesheets.
 
 ### Be pragmatic
 
@@ -502,7 +502,8 @@ A developer should be able to edit a module style sheet without introducing bugs
 
 ### Specificity
 
-Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized.
+Keep specificity low and author CSS in specificity order as much as possible - from general to specific, 
+low specificity to high specificity, global to localized.
 
 Guidelines:
 
@@ -510,7 +511,9 @@ Guidelines:
 * Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
 * Avoid chaining selectors when possible
 * Avoid location-specific selectors
-* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc) , use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
+* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), 
+use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. 
+Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
 
 Bad example:
 
@@ -562,7 +565,8 @@ Good Example:
 
 ### Media Queries
 
-When using Sass, add media queries along with their base rulesets, ordered from smallest to largest. Otherwise, media queries should be placed in separate files.
+When using Sass, add media queries along with their base rulesets, ordered from smallest to largest. 
+Otherwise, media queries should be placed in separate files.
 
 Sass example:
 
@@ -592,21 +596,22 @@ inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 
 #### CSS Architecture/Organizaition
 
-Global files must be included first so that they may be over-written by more specific styles. Style
+Global files must be included first so that they may be overwritten by more specific styles. Style
 sheets referenced by conditional comments (usually browser-specific files) should be included last.
 
 We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS). 
 
-* Settings & Tools [preprocessor only]: Variables, conditionals, mixins, functions
-* Base: normalize, type selectors, universals (e.g. setting box-sizing globally)
-* Layout: page layout including header, footer, main content, sidebars, wrappers, and (optional) grid
-* Modules: modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
-* Theme: optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
-* Helpers: generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
+* **Settings & Tools:** Variables, conditionals, mixins, functions *[preprocessor only]*
+* **Base:** normalize, type selectors, universals (e.g. setting box-sizing globally)
+* **Layout:** page layout including header, footer, main content, sidebars, wrappers, and (optional) grid
+* **Modules:** modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
+* **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
+* **Helpers:** generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
 
 Note regarding state rules: general rules that are globally applicable, such as .is-visually-hidden, should be included in the helpers layer.  
 
-Stylesheets should be concatenated and minified in production code, and aim for the fewest number of stylesheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after
+Stylesheets should be concatenated and minified in production code, and aim for the fewest number of stylesheets per page. 
+NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after
 it reaches 30, and the browser will not report an error, making debugging difficult.
 
 
@@ -641,7 +646,8 @@ made by changing class names.
 
 #### Binding
 
-Use "js-" prefixed classes (or data attributes such as data-js="something", data-component="component-name") for JavaScript hooks. Don't ever style these, and don't bind JavaScript other classes or IDs.
+Use "js-" prefixed classes (or data attributes such as data-js="something", data-component="component-name") for JavaScript hooks. 
+Don't style these, and don't bind JavaScript other classes or IDs.
 
 ## Resources
 
