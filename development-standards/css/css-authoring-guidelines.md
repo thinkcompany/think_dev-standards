@@ -102,7 +102,7 @@ Examples:
 
 ```css
 .component {
-	margin: 0 0 15px 0;
+	margin: 0 0 15em 0;
 	padding: 0;
 }
 
@@ -171,19 +171,44 @@ Good examples:
 input[type="text"] {...}
 ```
 
-Modifier classes are applied to components when there are slight variants in visual display that do not necessitate
-an entirely new component. Both the base class name and the modifier class name are applied to the markup, but
-selectors are composed using only the modified class name. To create a modifier class, repeat the base class name,
-followed by a hyphen, then the modifier name.
+#### Module Structure
 
-We'll use "--" in the class name to indicate that the class is modifying a base class.
-
-```css
-.base {...}
-.base--modifier {...}
-```
+Modules are the discrete and/or reusable components of the UI. A simple module, such as a button, may require
+only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents. 
+Subcomponents should be named as follows: [module]-[subcomponent].
 
 Example:
+
+```html
+<div class="modal">
+	<div class="modal-header">...</div>
+	<div class="modal-main">...</div>
+	<div class="modal-footer">...</div>
+</div>
+```
+
+```css
+.modal {...}
+.modal-header {...}
+.modal-main {...}
+.modal-footer {...}
+```
+
+#### Modifiers
+
+Modifier classes are applied to modules when there are slight variants in visual display that do not necessitate
+an entirely new module. Both the base class name and the modifier class name are applied to the markup, but
+selectors are composed using only the modified class name. To create a modifier class, repeat the base class name,
+followed by two hyphens, then the modifier name: [module]--[modifier].
+
+CSS example:
+
+```css
+.module {...}
+.module--modifier {...}
+```
+
+HTML Example:
 
 ```html
 <button class="btn btn--primary" type="submit">Button Text</button>
@@ -223,11 +248,11 @@ one, use the shorthand version on the main rule and the expanded version in the 
 Example:
 ```css
 .example {
-	margin: 5px 2px 10px 2px;
+	margin: 5em 2em 10em 2em;
 }
 
 .example-alt {
-	margin-bottom: 20px;
+	margin-bottom: 20em;
 }
 ```
 
@@ -256,6 +281,8 @@ lead front-end developers when there are questions concerning box model sizing.
 Existing code largely uses pixels to define all box-model dimensions, however, responsive design techniques are
 increasingly practiced, relative values (percents or ems) may be used. Care must be taken to ensure that sizing
 values do not complicate content requirements and agree with the UX team's intended vision for the design.
+
+Generally, use em or rem (with px fallback if using rem) for font-sizing, and em for margin and padding values.
 
 #### Flow, Floats, & Positioning
 
