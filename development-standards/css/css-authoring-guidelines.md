@@ -63,16 +63,16 @@ third-party code.
 
 ## Tools & Libraries
 
-### Preprocessors [GG: edited/updated from Sass section]
+### Preprocessors
 
-TBI will be incorporating Sass as a common CSS development tool. Build Kit deliverables will not include SCSS files
+TBI will be incorporating Sass as a common CSS development tool. Build Kit deliverables will not include Sass files
 unless requested by the client.
 
 We will use the SCSS syntax for Sass files, along with the .scss file extension.
 
 http://sass-lang.com/
 
-We won't use vendor mixin libraries (Compass, Bourbon, etc). It's an unnecessary dependency and we would likely only need a small subset of what they provide. Instead we will write our own mixins or extract the best of what's useful from a library and include it in our own stylesheets.
+We won't use vendor mixin libraries (Compass, Bourbon, etc). Instead we will write our own mixins or extract the best of what's useful from a library and include it in our own stylesheets.
 
 ### Browser Resets (Normalize)
 
@@ -119,7 +119,7 @@ declarations to indicate targeted browsers, in order to make future removal easy
 Always retain comments related to licensing of open source code. Comments may never contain alarming or
 negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
 
-Examples: [GG: Added]
+Examples:
 
 ```css
 /**
@@ -146,13 +146,12 @@ Class names should follow the HTML coding practices: Assign names to objects bas
 rather than what they look like. Names should be a single lowercase word. In cases where a longer description is
 needed, separate words using hyphens.
 
-Class names should be constructed from generic to specific (e.g. list-vertical, list-inline vs vertical-list, inline-list; .nav, .nav-primary, .nav-secondary) [GG: Added]
+Class names should be constructed from generic to specific (e.g. list-vertical, list-inline vs vertical-list, inline-list; .nav, .nav-primary, .nav-secondary)
 
-Refrain from over-qualifying selectors (i.e. body.class) and using adjoining classes (i.e. .component.variant). Never
-use the universal selector (*). Keep in mind that selectors are parsed from right to left – not left to right – so only
+Refrain from over-qualifying selectors (i.e. body.class) and using adjoining classes (i.e. .component.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only
 be as specific as you need to be in composing a selector.
 
-Use quotes in your attribute selectors, even though they are not always required. [GG: Added]
+Use quotes in your attribute selectors, even though they are not always required.
 
 Poor examples:
 
@@ -167,9 +166,8 @@ Good examples:
 
 ```css
 .header {...}
-.header .navigation {...}
-.header a {...}
-.header-alt {...}
+.navigation {...}
+.navigation a {...}
 input[type="text"] {...}
 ```
 
@@ -178,15 +176,17 @@ an entirely new component. Both the base class name and the modifier class name 
 selectors are composed using only the modified class name. To create a modifier class, repeat the base class name,
 followed by a hyphen, then the modifier name.
 
+We'll use "--" in the class name to indicate that the class is modifying a base class.
+
 ```css
 .base {...}
-.base-modifier {...}
+.base--modifier {...}
 ```
 
 Example:
 
 ```html
-<button class="btn btn-primary" type="submit">Button Text</button>
+<button class="btn btn--primary" type="submit">Button Text</button>
 ```
 
 ### Properties
@@ -238,7 +238,7 @@ values.
 
 Don't use a unit on the line-height property. line-height: 1.5 is the same as line-height: 150% and doesn't affect child elements when used without a unit.
 
-#### Vendor Prefixes [GG: added]
+#### Vendor Prefixes
 
 Avoid using vendor prefixes in authored stylesheets when possible.
 
@@ -275,7 +275,7 @@ been used on a page, continue using pixel sizes.
 
 In newer CSS, where the base CSS sets the body font size 16px, use relative units (em, rem) to specify font sizes.
 
-[GG: Added an example] When using rems for font-size, provide a px fallback for browsers that do not support rem.
+When using rems for font-size, provide a px fallback for browsers that do not support rem.
 
 Example:
 
@@ -410,7 +410,7 @@ only for the browsers that need it.
 
 This section represents general coding practices that should be considered when authoring and organization stylesheets.
 
-### Be pragmatic [GG: added]
+### Be pragmatic
 
 Don't add a class to absolutely everything that needs to be styled.
 
@@ -426,10 +426,10 @@ Example:
 .list-vertical > li {}
 ```
 
-### Recommended File Structure [GG: EDITED, changed section comment style]
+### Recommended File Structure
 
 To enhance readability, use comments to divide a style sheet into logical sections. Write rules for elements in the
-order in which they appear in the HTML source. [GG: Is this last sentence relevant if we're organizing by object and component?]
+order in which they appear in the HTML source.
 
 Comment each section as follows:
 
@@ -438,41 +438,42 @@ Comment each section as follows:
     #HEADER
 \*----------------------------------------------*/
 
-.header-global {
+.header {
 	...
 }
 /*----------------------------------------------*\
     #NAV
 \*----------------------------------------------*/
 
-.nav-primary {
+.nav {
 	...
 }
 /*----------------------------------------------*\
     #FOOTER
 \*----------------------------------------------*/
 
-.footer-global {
+.footer {
 	...
 }
 ```
 
 ### Additional Stylesheets
 
-Each discrete component or module appearing on a page should be styled by a separate style sheet (or Sass partial). Selectors
-should always be namespaced to avoid conflicts with other components.
+Each discrete module appearing on a page should be styled by a separate style sheet (or Sass partial). Selectors
+should always be namespaced to avoid conflicts with other modules.
 
 Example:
 
 ```css
-.component-body {
-	margin: 0 0 20px 0;
+.module
+.module-body {
+	margin: 0 0 20em 0;
 }
 ```
 
-A developer should be able to edit a component style sheet without introducing bugs into other parts of the site.
+A developer should be able to edit a module style sheet without introducing bugs into other parts of the site.
 
-### Specificity [GG: Added]
+### Specificity
 
 Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized.
 
@@ -482,24 +483,24 @@ Guidelines:
 * Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
 * Avoid chaining selectors when possible
 * Avoid location-specific selectors
-* Avoid styling IDs. If an ID must be styled, use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
+* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc) , use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
 
 Bad example:
 
 ```css
-.component {}
-.component .component-subcomponent {} /* nested, unnecessarily specific */
+.module {}
+.module .module-subcomponent {} /* nested, unnecessarily specific */
 
-.component.modifier {} /* avoid chaining */
-.sidebar .component {} /* avoid location-specific selectors */
+.module.modifier {} /* avoid chaining */
+.sidebar .module {} /* avoid location-specific selectors */
 ```
 
 Good example:
 
 ```css
-.component {}
-.component-subcomponent {} /* e.g. component-body */
-.component-modifier {} /* div class="component component-modifier" */
+.module {}
+.module-subcomponent {} /* e.g. module-body */
+.module--modifier {} /* div class="module module--modifier" */
 ```
 
 ### Grouping Styles
@@ -512,7 +513,7 @@ Bad Example:
 ```css
 .header {
 	background-color: #fff;
-	margin: 10px 0 15px 5px;
+	margin: 10em 0 15em 5em;
 }
 .header, .footer {
 	color: #bada55;
@@ -523,7 +524,7 @@ Good Example:
 
 ```css
 .header {
-	margin: 10px 0 15px 5px;
+	margin: 10em 0 15em 5em;
 	color: #bada55;
 	background-color: #fff;
 }
@@ -532,14 +533,14 @@ Good Example:
 }
 ```
 
-### Media Queries [GG: Added, needs additional content and examples]
+### Media Queries
 
 When using Sass, add media queries along with their base rulesets, ordered from smallest to largest. Otherwise, media queries should be placed in separate files.
 
 Sass example:
 
 ```scss
-.component {
+.module {
 	background: white;
 	font-size: 100%;
 	@media screen and (min-width: 20em) {
@@ -562,27 +563,25 @@ Sass example:
 Always link style sheets in the HEAD of an HTML document, before any JavaScript or favicon references. Never use
 inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 
-#### CSS Ordering [GG: Needs review/edit - or refer to Grebb's doc]
+#### CSS Architecture/Organizaition
 
-Global files must be included first so that they may be over-written by more specific component styles. Style
+Global files must be included first so that they may be over-written by more specific styles. Style
 sheets referenced by conditional comments (usually browser-specific files) should be included last.
 
-1. Base (normalize, global, grid)
-2. Components (1 through n)
-3. Theme
-4. Page-specific
+We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS). 
 
-[GG: Consider the following as well as SMACSS]
+* Settings & Tools [preprocessor only]: Variables, conditionals, mixins, functions
+* Base: normalize, type selectors, universals (e.g. setting box-sizing globally)
+* Layout: page layout including header, footer, main content, sidebars, wrappers, and (optional) grid
+* Modules: modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
+* Theme: optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
+* Helpers: generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
 
-1. Settings (variables/config switches - only if preprocessor is used)
-2. Tools (mixins/functions - only if preprocessor is used)
-3. Base (normalize, box-sizing, type selectors)
-4. Objects (abstracted, reusable patterns)
-5. Components (discrete UI components)
-6. Helpers (state, helpers)
+Note regarding state rules: general rules that are globally applicable, such as .is-visually-hidden, should be included in the helpers layer.  
 
-[GG: edit - should we make this a practical limit, such as 3 - 5 max?] NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after
+Stylesheets should be concatenated and minified in production code, and aim for the fewest number of stylesheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after
 it reaches 30, and the browser will not report an error, making debugging difficult.
+
 
 ### Integrating CSS with JavaScript
 
@@ -613,15 +612,15 @@ When jQuery is implemented as part of a Build Kit or other deliverable, use the 
 jQuery to toggle the display property of an element, which adds an inline style. All other visual changes must be
 made by changing class names.
 
-#### Binding [GG: Added]
+#### Binding
 
-Use "js-" prefixed classes (or data attributes such as date-js="something" for JavaScript hooks. Don't ever style these, and don't bind JavaScript other classes or IDs.
+Use "js-" prefixed classes (or data attributes such as data-js="something", data-component="component-name") for JavaScript hooks. Don't ever style these, and don't bind JavaScript other classes or IDs.
 
 ## Resources
 
 * [Sass Meister](http://sassmeister.com/) is an online IDE that on-the-fly shows what CSS Sass outputs when compiled.
 
-## To do [GG: Added]
+## To do
 
 - [ ] Create Sass rules for mixins, extends, placeholders (should we even use extends, placeholders, and nesting?)
 - [ ] Create rules/variables for z-index scale
@@ -630,8 +629,7 @@ Use "js-" prefixed classes (or data attributes such as date-js="something" for J
 - [ ] Rules/process for IE<9 in responsive/mobile-first sites
 - [ ] Decide about linting and which rules to apply
 - [ ] Standards for self-hosted webfonts and vendor-hosted webfonts
-- [ ] Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]-[variant/component] (e.g. $color-gray-light)
-- [ ] Rules for modifier and subcomponent (self-contained components/modules) naming
+- [ ] Rules for Sass variable naming ($type-small or $fontsize-small vs $font-small, etc, colors, ...) [property]-[value]--[variant/component] (e.g. $color-gray-light)
 - [ ] Think about how to bundle our styles - 1 file, multiple? Try for 3 or fewer css references per page (all, section, page)
 - [ ] Consider prefixing helpers/utility with u-, and mixins with m-
 - [ ] Consider whether component isolation may be a better approach than abstracting reusable objects. Maybe objects should be a very limited set of single responsibility classes/modules (e.g. pipe list)
