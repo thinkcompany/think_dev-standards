@@ -594,7 +594,7 @@ Sass example:
 Always link style sheets in the HEAD of an HTML document, before any JavaScript or favicon references. Never use
 inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 
-#### CSS Architecture/Organizaition
+#### CSS Architecture/Organization
 
 Global files must be included first so that they may be overwritten by more specific styles. Style
 sheets referenced by conditional comments (usually browser-specific files) should be included last.
