@@ -602,7 +602,7 @@ sheets referenced by conditional comments (usually browser-specific files) shoul
 We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS). 
 
 * **Settings & Tools:** Variables, conditionals, mixins, functions *[preprocessor only]*
-* **Base:** normalize, type selectors, universals (e.g. setting box-sizing globally)
+* **Base:** normalize, type selectors (unclassed html elements - html, body, p, ul, headings, etc), universals (e.g. setting box-sizing globally)
 * **Layout:** page layout including header, footer, main content, sidebars, wrappers, and (optional) grid
 * **Modules:** modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
 * **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
