@@ -24,4 +24,31 @@ Who should be involved from what team and when? Where and when should documents 
 
 ### Adding authentication
 
-### Setting up a database 
+### Setting up a database
+
+## Local Development
+
+### Gulp
+
+We use gulp for development task automtation. Below you'll find a collection of our favorites, and some instructions describing the setup process.
+
+#### Installation
+
+Gulp is a utility hosted with `npm`, the nameless package manager (made famous by Node.js).
+
+1. Start by [installing Node](https://www.npmjs.com/package/gulp-strip-debug).
+2. `npm` comes with Node. Now you can run `npm install`... in a project directory and Node packages will be installed in a `node_modules` directory.
+3. Run `npm install --global gulp`, which will install Gulp globally so you can use it in any project.
+4. Profit.
+
+#### Typical Project Setup
+
+You'll find project-specific instructions in a `README.md` file at the root of the project. Typically all you'll need to do is run `npm install` and all of a project's dependencies will be download and installed to `node_modules`.
+
+#### Installing New Plugins
+
+Find a plugin below or add a new one to the list, then use `npm install gulp-plugin-name --save-dev` to install it. The `--save-dev` command flag saves this plugin as a dependency to the `package.json` file.
+
+#### Fave Plugins
+
+* [`gulp-strip-debug`](https://www.npmjs.com/package/gulp-strip-debug) removes console and debugger statements from JavaScript (useful for testing in old versions of Internet Explorer)
