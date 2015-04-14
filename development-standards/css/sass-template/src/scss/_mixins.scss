@@ -1,0 +1,72 @@
+/*----------------------------------------------*\
+| creates a css "arrow" or "pointer" or "caret"  |
+\*----------------------------------------------*/
+@mixin pointer($background, $borderwidth, $bordercolor, $pointersize, $pointerposition) {
+    background: $background;
+    border: $borderwidth solid $bordercolor;
+    &:after, &:before {
+        @if $pointerposition == 'top' {
+            bottom: 100%;
+            left: 50%;
+        }
+        @if $pointerposition == 'bottom' {
+            top: 100%;
+            left: 50%;
+        }
+        @if $pointerposition == 'left' {
+            right: 100%;
+            top: 50%;
+        }
+        @if $pointerposition == 'right' {
+            left: 100%;
+            top: 50%;
+        }
+        border: solid transparent;
+        content: " ";
+        height: 0;
+        width: 0;
+        position: absolute;
+        pointer-events: none;
+    }
+
+    &:after {
+        border-color: rgba(255, 255, 255, 0);
+        @if $pointerposition == 'top' {
+            border-bottom-color: $background;
+            margin-left: -$pointersize;
+        }
+        @if $pointerposition == 'bottom' {
+            border-top-color: $background;
+            margin-left: -$pointersize;
+        }
+        @if $pointerposition == 'left' {
+            border-right-color: $background;
+            margin-top: -$pointersize;
+        }
+        @if $pointerposition == 'right' {
+            border-left-color: $background;
+            margin-top: -$pointersize;
+        }
+        border-width: $borderwidth;
+    }
+    &:before {
+        border-color: rgba(0, 0, 0, 0);
+        @if $pointerposition == 'top' {
+            border-bottom-color: $bordercolor;
+            margin-left: -$borderwidth - $pointersize;
+        }
+        @if $pointerposition == 'bottom' {
+            border-top-color: $bordercolor;
+            margin-left: -$borderwidth - $pointersize;
+        }
+        @if $pointerposition == 'left' {
+            border-right-color: $bordercolor;
+            margin-top: -$borderwidth - $pointersize;
+        }
+        @if $pointerposition == 'right' {
+            border-left-color: $bordercolor;
+            margin-top: -$borderwidth - $pointersize;
+        }
+        border-width: $borderwidth + $pointersize;
+    }
+}
