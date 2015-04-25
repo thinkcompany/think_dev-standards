@@ -471,7 +471,7 @@ Note regarding state rules: general rules that are globally applicable, such as 
 
 ### Modules
 
-Each discrete module should be styled by a separate style sheet (or Sass partial), and module selectors should always be namespaced to avoid conflicts with other modules.
+Modules are the discrete and/or reusable components of the UI. Each discrete module should be styled by a separate style sheet (or Sass partial), and module selectors should always be namespaced to avoid conflicts with other modules.
 
 ```css
 .module
@@ -484,11 +484,11 @@ A developer should be able to edit a module style sheet without introducing bugs
 
 #### Module Structure
 
-Modules are the discrete and/or reusable components of the UI. A simple module, such as a button, may require only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents.
+A simple module, such as a button, may require only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents.
 
 Subcomponents should be named as follows: [module]-[subcomponent].
 
-Example:
+HTML:
 
 ```html
 <div class="modal">
@@ -497,6 +497,7 @@ Example:
 	<div class="modal-footer">...</div>
 </div>
 ```
+CSS (note that we're not nesting here, more on this in the Specificity section):
 
 ```css
 .modal {...}
@@ -507,19 +508,19 @@ Example:
 
 #### Module Modifiers
 
-Modifier classes are applied to modules when there are slight variants in visual display that do not necessitate an entirely new module. Both the base class name and the modifier class name are applied to the markup, but selectors are composed using only the modified class name. To create a modifier class, repeat the base class name, followed by two hyphens, then the modifier name: [module]--[modifier].
+Modifier classes are applied to modules when there are slight variants in the display that do not necessitate an entirely new module. Both the base class name and the modifier class name are applied to the markup, but selectors are composed using only the modified class name. To create a modifier class, repeat the base class name, followed by two hyphens, then the modifier name: [module]--[modifier].
 
-CSS example:
+HTML:
+
+```html
+<button class="btn btn--primary" type="submit">Button Text</button>
+```
+
+CSS:
 
 ```css
 .btn {...}
 .btn--primary {...}
-```
-
-HTML Example:
-
-```html
-<button class="btn btn--primary" type="submit">Button Text</button>
 ```
 
 ### Specificity
@@ -539,15 +540,21 @@ Poor example:
 ```css
 .module {}
 .module .module-subcomponent {} /* nested, unnecessarily specific */
-
 .module.modifier {} /* avoid chaining */
 .sidebar .module {} /* avoid location-specific selectors */
 ```
 
-Good example:
+Good example (CSS for our general module pattern):
 
 ```css
 .module {}
-.module-subcomponent {} /* e.g. module-body */
-.module--modifier {} /* div class="module module--modifier" */
+.module-subcomponent {}
+.module--modifier {}
+.module--modifier .module-subcomponent {} /* nesting make sense here to avoid having to create a modifier for every subcomponent of a modified module */
+```
+
+State example:
+
+```css
+.module.is-visibile {} /* chaining/higher specificity makes sense with states as they are temporary, only applied given specific conditions, and you want to ensure that the styles are applied */
 ```
