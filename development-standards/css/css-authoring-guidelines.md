@@ -4,7 +4,7 @@
 
 "Styles change but style doesn't." Leverage the cascade and inheritance, write efficient selectors, remain in normal flow as often as possible, and hack for older browsers as little as possible.
 
-## Versions, Validation, & Linting
+### Versions, Validation, & Linting
 
 All style sheets must be authored according to the CSS Level 2, Revision 1 specification (CSS 2.1) or the latest CSS Level 3 module in candidate recommendation status.
 
@@ -106,6 +106,8 @@ Add comments to any rule that might not be readily understood by another develop
 
 Always retain comments related to licensing of open source code. Comments may never contain alarming or negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
 
+Use a #SECTION comment at the top of every partial or module file, and to delineate major sections of larger CSS files.
+
 Examples:
 
 ```css
@@ -129,8 +131,6 @@ Aside from a base style sheet, which will specify default styles for HTML elemen
 
 Class names should follow the HTML coding practices: Assign names to objects based on the function they fulfill rather than what they look like. Names should be a single lowercase word. In cases where a longer description is needed, separate words using hyphens.
 
-Class names should be constructed from generic to specific (e.g. list-vertical, list-inline vs vertical-list, inline-list)
-
 Refrain from over-qualifying selectors (e.g. body.class) and chaining classes (i.e. .module.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only be as specific as you need to be in composing a selector.
 
 Use quotes in your attribute selectors, even though they are not always required.
@@ -151,46 +151,6 @@ Good examples:
 .navigation {...}
 .navigation a {...}
 input[type="text"] {...}
-```
-
-#### Module Structure
-
-Modules are the discrete and/or reusable components of the UI. A simple module, such as a button, may require only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents.
-
-Subcomponents should be named as follows: [module]-[subcomponent].
-
-Example:
-
-```html
-<div class="modal">
-	<div class="modal-header">...</div>
-	<div class="modal-main">...</div>
-	<div class="modal-footer">...</div>
-</div>
-```
-
-```css
-.modal {...}
-.modal-header {...}
-.modal-main {...}
-.modal-footer {...}
-```
-
-#### Modifiers
-
-Modifier classes are applied to modules when there are slight variants in visual display that do not necessitate an entirely new module. Both the base class name and the modifier class name are applied to the markup, but selectors are composed using only the modified class name. To create a modifier class, repeat the base class name, followed by two hyphens, then the modifier name: [module]--[modifier].
-
-CSS example:
-
-```css
-.btn {...}
-.btn--primary {...}
-```
-
-HTML Example:
-
-```html
-<button class="btn btn--primary" type="submit">Button Text</button>
 ```
 
 ### Properties
@@ -247,7 +207,6 @@ Instead use Autoprefixer, https://github.com/postcss/autoprefixer, in your build
 
 If Autoprefixer cannot be used, refer to caniuse.com for the prefixes required for the browsers you support.
 
-
 #### Box Model & Layout Dimensions
 
 We'll use box-sizing: border-box as a general rule in our base CSS file, set up as below. This approach allows the box model to be easily overridden for a specific module when needed.
@@ -262,11 +221,9 @@ html {
 }
 ```
 
-Relative units should be used whenever possible to maintain a flexible layout. 
-
-In responsive and fluid layouts, use % for container widths.
-
-Use em units for margin and padding values.
+* Relative units should be used whenever possible to maintain a flexible layout. 
+* In responsive and fluid layouts, use % for container widths.
+* Use em units for margin and padding values.
 
 #### Flow, Floats, & Positioning
 
@@ -316,20 +273,13 @@ Unless coding a responsive design, set image dimensions using the width and heig
 Set image presentation attributes using CSS. Always remove the border from images nested inside anchors. By default, this rule should be specified in the base CSS file.
 
 
-Example:
-
 ```css
 a img { border: 0; }
 ```
 
-
 #### Anchors
 
-Encourage designers to visually distinguish between visited and unvisited links, to improve usability. When using
-the :hover pseudo-class for anchors, always specify a corresponding value for :focus and :active to aid keyboard
-navigation. The order of these selectors matters, so always specify in LVHFA order.
-
-Example:
+Encourage designers to visually distinguish between visited and unvisited links, to improve usability. When using the :hover pseudo-class for anchors, always specify a corresponding value for :focus and :active to aid keyboard navigation. The order of these selectors matters, so always specify in LVHFA order.
 
 ```css
 .nav a:link {
@@ -348,63 +298,13 @@ Example:
 }
 ```
 
-#### Sprites
-
-CSS sprites are best used to combine graphic design elements such as logos, icons, buttons and badges that will display well when compressed in PNG format. Do not use sprites to combine content images or photographs.
-
-When writing rules for sprites, first create a class that will be used for all of the sprites in a series (i.e. "icon"). Specify all of the relevant style data in this initial rule, including:
-
-* display
-* width
-* height
-* overflow
-* background
-
-For all of the different icons in the series (i.e. "video", "photo", etc.) you only need to specify a new background-position value that corresponds to the pixel coordinates in the sprite graphic file.
-
-```css
-.icon {
-	display: block;
-	width: 10px;
-	height: 10px;
-	overflow: hidden;
-	background: transparent url(/layout/images/sprites/standard/base.png) no-repeat 0 0;
-}
-.icon-video {
-	background-position: 0 -50px;
-}
-.icon-photo {
-	background-position: 0 -100px;
-}
-```
-
-#### Hack Strategy
-
-Minimize the use of hacks by re-writing rules that are problematic for particular browsers.
-
-When hacks are necessary, write a browser-specific hack in the style sheet directly following the affected rule. Add a comment detailing what the hack rule is doing and for which browser it is intended.
-
-Example:
-
-```css
-.button {
-	padding: 3px;
-}
-/* sets equivalent padding on button class in IE7 */
-*:first-child+html .button {
-	padding: 6px;
-}
-```
-
-Do not link to an external style sheet for hack rules unless there are major layout overrides needed to support IE7 or IE8. These older browser are already slow, and forcing the browser to download an additional style sheet will further impact page performance. If an additional style sheet is necessary, however, use conditional comments to load it only for the browsers that need it.
-
 ## Coding Practices
 
-This section represents general coding practices that should be considered when authoring and organizating style sheets.
+This section represents general coding practices that should be considered.
 
-### Be pragmatic
+### Don't class EVERY element
 
-Don't add a class to absolutely everything that needs to be styled.
+You don't need to add a class to absolutely everything that needs to be styled.
 
 Lists, for example, often won't need a class for each list item. Instead, class the ul/ol and use a child selector to keep the markup cleaner.
 
@@ -417,56 +317,9 @@ Lists, for example, often won't need a class for each list item. Instead, class 
 .feature-list > li {}
 ```
 
-### Style sheet organization
-
-Each discrete module should be styled by a separate style sheet (or Sass partial). Selectors should always be namespaced to avoid conflicts with other modules.
-
-Example:
-
-```css
-.module
-.module-body {
-	margin: 0 0 20em 0;
-}
-```
-
-A developer should be able to edit a module style sheet without introducing bugs into other parts of the site.
-
-Module style sheets should be concatenated, rather than individually included on a page.
-
-### Specificity
-
-Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized.
-
-Guidelines:
-
-* If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed.
-* Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
-* Avoid chaining selectors when possible
-* Avoid location-specific selectors
-* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
-
-Poor example:
-
-```css
-.module {}
-.module .module-subcomponent {} /* nested, unnecessarily specific */
-
-.module.modifier {} /* avoid chaining */
-.sidebar .module {} /* avoid location-specific selectors */
-```
-
-Good example:
-
-```css
-.module {}
-.module-subcomponent {} /* e.g. module-body */
-.module--modifier {} /* div class="module module--modifier" */
-```
-
 ### Grouping Styles
 
-Styles applying to a particular object should be grouped into a single rule. Do not specify a selector multiple times and spread out properties across multiple rules.
+Styles applying to a particular module should be grouped into a single rule. Do not specify a selector multiple times and spread out properties across multiple rules.
 
 Poor Example:
 
@@ -514,6 +367,56 @@ Sass example:
 }
 ```
 
+### Using Sprites
+
+CSS sprites are best used to combine graphic design elements such as logos, icons, buttons and badges that will display well when compressed in PNG format. Do not use sprites to combine content images or photographs.
+
+When writing rules for sprites, first create a class that will be used for all of the sprites in a series (i.e. "icon"). Specify all of the relevant style data in this initial rule, including:
+
+* display
+* width
+* height
+* overflow
+* background
+
+For all of the different icons in the series (i.e. "video", "photo", etc.) you only need to specify a new background-position value that corresponds to the pixel coordinates in the sprite graphic file.
+
+```css
+.icon {
+	display: block;
+	width: 10px;
+	height: 10px;
+	overflow: hidden;
+	background: transparent url(/layout/images/sprites/standard/base.png) no-repeat 0 0;
+}
+.icon-video {
+	background-position: 0 -50px;
+}
+.icon-photo {
+	background-position: 0 -100px;
+}
+```
+
+### Hack Strategy
+
+Minimize the use of hacks by re-writing rules that are problematic for particular browsers.
+
+When hacks are necessary, write a browser-specific hack in the style sheet directly following the affected rule. Add a comment detailing what the hack rule is doing and for which browser it is intended.
+
+Example:
+
+```css
+.button {
+	padding: 3px;
+}
+/* sets equivalent padding on button class in IE7 */
+*:first-child+html .button {
+	padding: 6px;
+}
+```
+
+Do not link to an external style sheet for hack rules unless there are major layout overrides needed to support IE7 or IE8. These older browser are already slow, and forcing the browser to download an additional style sheet will further impact page performance. If an additional style sheet is necessary, however, use conditional comments to load it only for the browsers that need it.
+
 ## Integration
 
 ### Integrating CSS with HTML
@@ -549,7 +452,9 @@ Developers may use JavaScript to add inline styles to an element only when the v
 
 Use data attributes such as data-hook="something", data-component="component-name") for JavaScript hooks, rather than binding to classes or IDs. 
 
-## CSS Architecture/Organization
+## Organization & Architectural Principles
+
+### Style sheet organization
 
 Global files must be included first so that they may be overwritten by more specific styles. Style sheets referenced by conditional comments (usually browser-specific files) should be included last.
 
@@ -562,4 +467,87 @@ We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architec
 * **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
 * **Helpers:** generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
 
-Note regarding state rules: general rules that are globally applicable, such as .is-visually-hidden, should be included in the helpers layer.
+Note regarding state rules: general rules that are globally applicable, such as .is-visually-hidden, should be included in the helpers layer. State classes should be prefixed with "is-" or "has-".
+
+### Modules
+
+Each discrete module should be styled by a separate style sheet (or Sass partial), and module selectors should always be namespaced to avoid conflicts with other modules.
+
+```css
+.module
+.module-body {
+	margin: 0 0 20em 0;
+}
+```
+
+A developer should be able to edit a module style sheet without introducing bugs into other parts of the site.
+
+#### Module Structure
+
+Modules are the discrete and/or reusable components of the UI. A simple module, such as a button, may require only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents.
+
+Subcomponents should be named as follows: [module]-[subcomponent].
+
+Example:
+
+```html
+<div class="modal">
+	<div class="modal-header">...</div>
+	<div class="modal-main">...</div>
+	<div class="modal-footer">...</div>
+</div>
+```
+
+```css
+.modal {...}
+.modal-header {...}
+.modal-main {...}
+.modal-footer {...}
+```
+
+#### Module Modifiers
+
+Modifier classes are applied to modules when there are slight variants in visual display that do not necessitate an entirely new module. Both the base class name and the modifier class name are applied to the markup, but selectors are composed using only the modified class name. To create a modifier class, repeat the base class name, followed by two hyphens, then the modifier name: [module]--[modifier].
+
+CSS example:
+
+```css
+.btn {...}
+.btn--primary {...}
+```
+
+HTML Example:
+
+```html
+<button class="btn btn--primary" type="submit">Button Text</button>
+```
+
+### Specificity
+
+Keep specificity low and author CSS in specificity order as much as possible - from general to specific, low specificity to high specificity, global to localized.
+
+Guidelines:
+
+* If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed.
+* Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
+* Avoid chaining selectors when possible
+* Avoid location-specific selectors
+* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
+
+Poor example:
+
+```css
+.module {}
+.module .module-subcomponent {} /* nested, unnecessarily specific */
+
+.module.modifier {} /* avoid chaining */
+.sidebar .module {} /* avoid location-specific selectors */
+```
+
+Good example:
+
+```css
+.module {}
+.module-subcomponent {} /* e.g. module-body */
+.module--modifier {} /* div class="module module--modifier" */
+```
