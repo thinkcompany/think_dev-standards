@@ -1,8 +1,6 @@
 # HTML Development Standards
 
-## Coding Guidelines
-
-### Programming Principles
+## Programming Principles
 A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
 
 ### Versions & Validation
@@ -16,9 +14,10 @@ Use the W3C validator to check your markup. Limited errors may be ignored, read 
 
 [W3C Validator](http://validator.w3.org/)
 
-#### Allowed Elements & Attributes
+### Allowed Elements & Attributes
 Developers should use only those elements and attributes that have semantic value, or are commonly used to structure markup for styling or interaction. This includes the following elements:
 
+#### Elements
 - `html`, `head`, `title`, `meta`, `body`
 - `script`, `style`, `link`
 - `header`, `footer`, `main`, `section`, `article`, `aside`
@@ -33,8 +32,7 @@ Developers should use only those elements and attributes that have semantic valu
 - `form`, `fieldset`, `legend`, `label`, `input`, `textarea`, `select`, `button`
 - `div`, `span`
 
-And the following attributes:
-
+#### Attributes
 - `id`, `class`
 - `href`, `src`
 - `alt`, `title`
@@ -47,7 +45,7 @@ And the following attributes:
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript.md) to achieve the desired result.
 
-### Format & Style
+## Format & Style
 
 Markup must be written as XHTML: all elements and attributes must be written in lowercase characters; attribute values must be contained in double quotes; and all tags must be closed. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
 
@@ -56,7 +54,7 @@ Example:
 <img src="logo.png" alt="Client Name" />
 ```
 
-#### Formatting for Readability
+### Formatting for Readability
 
 For code readability, insert a line break after any opening block-level tag that contains additional block-level tags (e.g. `<div>`) and indent nested elements to standard spacing (one tab space). For each additional level of nested tags, indent another tab space. Do not use spaces.
 
@@ -74,7 +72,7 @@ Example:
 </div>
 ```
 
-#### Module-based Markup
+### Module-based Markup
 
 Although wireframes and visual designs may approach the user experience from a page or flow perspective, a web site is actually constructed from many smaller pieces of code. Sometimes referred to as LEGO blocks or modules, we refer to them as modules.
 
@@ -97,8 +95,7 @@ Modules are generally wrapped in DIV tags, to give the overall object a class na
 
 To support the goal of maximum reusability of modules, refrain from using IDs on any piece of markup in a module. One exception to this is form controls, where an ID must be used on the form field in order to explicitly pair a label to it. 
 
-
-#### Classes, IDs, & Custom Data Attributes
+### Classes, IDs, & Custom Data Attributes
 
 Class names are the preferred method for linking styles to markup. Custom data (data-*) attributes are the preferred hooks for behavior (JavaScript). Only use IDs on objects which are unique within the entire site or when commonly prescribed (in-page anchors). Avoid the use of IDs on module elements (i.e. buttons, links, list items), since these objects are likely to appear multiple times in a single page and can cause both validation and back-end issues. 
 
@@ -112,17 +109,17 @@ Example:
     <div class="module-search"> ... </div>
 </div>
 ```
-#### Page Layouts
+### Page Layouts
 
 Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location. 
 
 When appropriate, use structural elements to create a grid of "columns" that contain the core content of the page. Classes should be used so that these grids can be used multiple times per page if necessary.
 
-### Coding Practices
+## Coding Practices
 
 This section outlines Think Brownstone's standard practices for composing HTML documents.
 
-#### Doctype
+### Doctype
 
 Use the HTML5 doctype on the first line of the HTML file.
 
@@ -130,7 +127,7 @@ Use the HTML5 doctype on the first line of the HTML file.
 <!DOCTYPE html>
 ```
 
-#### HTML
+### HTML
 Always specify the lang attribute on the opening `<html>` tag.
 
 Example:
@@ -141,7 +138,7 @@ Example:
 
 Use the appropriate language code for the page. For instance, use "es" for Spanish language pages. Nearly all pages use "en" (English).
 
-#### Head
+### Head
 
 The `<head>` element is always required and should immediately follow the opening <html> tag.
 
@@ -206,6 +203,8 @@ Example:
 ```html
 <script src="/js/lib/jquery.js"></script>
 ```
+
+### Content Markup
 
 #### Headings
 
