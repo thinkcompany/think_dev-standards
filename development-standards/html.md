@@ -49,7 +49,6 @@ Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`
 
 Markup must be written as XHTML: all elements and attributes must be written in lowercase characters; attribute values must be contained in double quotes; and all tags must be closed. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
 
-Example:
 ```html
 <img src="logo.png" alt="Client Name" />
 ```
@@ -60,7 +59,6 @@ For code readability, insert a line break after any opening block-level tag that
 
 Inline elements may appear on the same line as their block-level containers when it makes sense. For instance, anchors may appear on the same line as their containing `<li>` tags, if they are the only content.
 
-Example:
 ```html
 <div class="header-global">
     <h1>Site Name</h1>
@@ -102,13 +100,27 @@ Class names are the preferred method for linking styles to markup. Custom data (
 Assign names to objects based on the function they fulfill rather than what they look like. For example, a navbar will always provide a menu of links regardless of whether it is horizontal or vertical, or whether it is placed at the top or bottom of a page. 
 Names should be a single lowercase word. In cases where a longer description is needed, separate words using hyphens. Do not use camel case and do not use underscores.
 
-Example:
 ```html
 <div class="header-sitewide">
     <div class="module-brand"> ... </div>
     <div class="module-search"> ... </div>
 </div>
 ```
+
+### Attribute Order
+Add attributes to HTML elements in the following order: 
+
+* `class`
+* `id`/`name`
+* `data-*`
+* `src`, `for`, `type`, `href`, `value`
+* `title`, `alt`
+* `aria-*`, `role`
+
+```html
+<a class="classes" id="id" data-hook="expand" href="href" title="link title">link text</a>
+```  
+
 ### Page Layouts
 
 Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location. 
@@ -130,8 +142,6 @@ Use the HTML5 doctype on the first line of the HTML file.
 ### HTML
 Always specify the lang attribute on the opening `<html>` tag.
 
-Example:
-
 ```html
 <html lang="en">
 ```
@@ -150,10 +160,16 @@ One or more `<meta>` elements may be nested in the document head.
 
 Character set should always be specified and must appear first. (This prevents IE from re-parsing the page, if it appears too late.) The current standard for character encoding is UTF-8. The HTML5 meta charset tag may be used in XHTML documents (validation errors may be ignored) as all browsers support this.
 
-Example:
-
 ```html
 <meta charset="utf-8" />
+```
+
+#### Http-equiv Meta Tag
+
+Ensure that Internet Explorer uses the latest supported rendering mode.
+
+```html
+<meta http-equiv="X-UA-Compatible" content="IE=Edge">
 ```
 
 #### Viewport Meta Tag
@@ -176,8 +192,6 @@ In addition, use the corresponding `@viewport` rule in your base CSS file for br
 
 Style sheets must always be included in the `<head>` of an HTML document. Never import a style sheet in the `<body>` of a page. Always use the `<link>` element to include external style sheets. Specify the media attribute value (i.e. all, screen, print) to scope the style sheet appropriately for browser application and download.
 
-Example:
-
 ```html
 <link href="/css/global.css" type="text/css" media="screen" />
 ```
@@ -185,8 +199,6 @@ Example:
 #### Conditional Comments
 
 Use conditional comments in the `<head>` to include IE browser version specific content, such as CSS.
-
-Example:
 
 ```html
 <!--[if lte IE 8]>
@@ -197,8 +209,6 @@ Example:
 #### Importing JavaScript
 
 JavaScript files may be included in the `<head>` of an HTML document but for optimal performance developers should place scripts at the bottom of a page, just inside the closing `</body>` tag. 
-
-Example:
 
 ```html
 <script src="/js/lib/jquery.js"></script>
@@ -213,8 +223,6 @@ Use headings to denote important passages of text and to build a semantic conten
 Headings must appear in logical order, beginning with `<h1>`. For instance, an `<h4>` cannot appear in the document before an `<h3>`.
 
 Headings should never be used for subtitles or subheadlines. The `hgroup` concept that was once part of the HTML5 specification is invalid, in part because it is detrimental to accessibility.
-
-Example:
 
 ```html
 <h2>Getting Started</h2>
@@ -292,7 +300,6 @@ Good Example:
 
 Use a title attribute to confer additional information about an `<a>` that may not be clear.
 
-Example:
 ```html
 <a href="/webmail" title="Email: View your email inbox">Email</a>
 ```
@@ -307,14 +314,11 @@ Unless coding a responsive design, the dimensions of an image should be specifie
 
 Always specify an alt attribute that describes the image. If a design element is loaded via HTML, use a blank alt attribute value rather than no alt attribute.
 
-Example:
 ```html
 <img src="logo.png" alt="Client Name" width="320" height="240" />
 ```
 
 If there is descriptive text directly adjacent to the image, then you may leave the alt attribute blank.
-
-Example:
 
 ```html
 <img src="photo.jpg" alt="" width="640" height="480" />
@@ -334,8 +338,6 @@ Provide content in the summary attribute that describes the data in the table. T
 - Use `scope="col"` on all cells in the header to explicitly specify a column
 - Use `scope="row"` on the first cell in a row to explicitly specify a row
 - Use `<tfoot>` as appropriate.
-
-Example:
 
 ```html
 <table summary="This table describes the Unicode entity codes used to render special characters in an HTML document">
@@ -370,8 +372,6 @@ Code form fields in their natural (i.e. visual) navigation order, to aid in keyb
 #### Fieldset
 Structure complex forms with fieldset elements in order to provide context to groups of form fields. For example, in a form where both a billing address and a shipping address are collected, wrap each set of address form fields in a fieldset. Use the legend element to title the section of the form; hide the content off-screen if it does not visually appear on screen.
 
-Example:
-
 ```html
 <fieldset>
     <legend><span>Contact Information</span></legend>
@@ -386,8 +386,6 @@ Example:
 #### Label
 All form fields (`input`, `textarea`, `select`) must have a corresponding label that describes the purpose of the field. Associate a label explicitly, matching the for attribute value on the `<label>` element with the ID attribute value from the related form field.
 
-Example:
-
 ```html
 <p>
     <label for="newsletter-zip">Zip Code</label>
@@ -400,8 +398,6 @@ Labels must always be present. If a design does not contain visible labels, use 
 #### Form Fields
 Wrap form fields and their corresponding labels in `<p>` tags. Instructional or help text related to a form field (i.e. optional, required, etc.) should be included as part of the label; to style this text separately from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
 
-Example:
-
 ```html
 <p>
     <label for="name-first">First Name <span class="help">(required)</span></label>
@@ -413,8 +409,6 @@ Refrain from complicated CSS styling of form inputs so as not to override defaul
 
 #### Checkboxes & Radio Buttons
 Group sets of checkboxes and radio buttons using the `<fieldset>` element. The `<legend>` provides a text label for the group, since the `<label>` is required for each individual input.
-
-Example:
  
 ```html
 <fieldset>
@@ -449,4 +443,3 @@ Good Example:
 ```
 
 *NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the <button> element is not supported.
-
