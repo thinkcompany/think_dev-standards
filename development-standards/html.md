@@ -36,12 +36,12 @@ Developers should use only those elements and attributes that have semantic valu
 - `id`, `class`
 - `href`, `src`
 - `alt`, `title`
-- `role`, `tabindex`, `accesskey`
+- `role`, `tabindex`, `accesskey`, `aria-*` (refer to the HTML5 spec for appropriate use ARIA attributes)
 - `target` (validation errors in XHTML may be ignored)
 - `action`, `method`, `type`, `maxsize`, and other form-specific attributes
 - `rowspan`, `colspan`, `scope`
 - `placeholder` and other HTML5 form attributes/attribute values 
-- custom data attributes (`data-*`) 
+- custom data attributes (`data-*`)
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript.md) to achieve the desired result.
 
@@ -117,6 +117,7 @@ Add attributes to HTML elements in the following order:
 * `title`, `alt`
 * `aria-*`, `role`
 
+Example:
 ```html
 <a class="classes" id="id" data-hook="expand" href="href" title="link title">link text</a>
 ```  
@@ -331,30 +332,35 @@ A title attribute may be added to confer additional meaning, but it is not recom
 
 Use tables to provide structure for tabular data. Do not use tables to produce side-by-side content rendering or any other visual effect. Use CSS instead.
 
-Provide content in the summary attribute that describes the data in the table. This will not render on-screen but can be read by search engines and screen readers. Also provide a `<caption>` element that provides a shorter description of the table. This will render on-screen but can be shifted off-screen if necessary.
+Refer to the latest W3C recommendations for marking up tabular data: http://www.w3.org/TR/html5/tabular-data.html#tabular-data.
+
+Provide a `<caption>` element that describes the table. This will render on-screen but can be shifted off-screen if necessary.
 
 - Use `<thead>` to specify the heading row of a table. Use `<th>` tags to render each heading cell.
 - Use `<tbody>` to specify the body of the table. Use `<th>` tags to specify row headers. Use `<td>` to render all other body cells.
 - Use `scope="col"` on all cells in the header to explicitly specify a column
-- Use `scope="row"` on the first cell in a row to explicitly specify a row
+- Use `scope="row"` on any `<th>` cells in the `<tbody>` to explicitly specify a row
 - Use `<tfoot>` as appropriate.
 
 ```html
-<table summary="This table describes the Unicode entity codes used to render special characters in an HTML document">
-    <caption>Unicode Entities for Common Special Characters</caption>
+<table>
+    <caption>HTML & Unicode Entities for Common Special Characters</caption>
     <thead>
         <tr>
             <th scope="col">Character</th>
+            <th scope="col">HTMl Entity</th>
             <th scope="col">Entity Code</th>
         </tr>
     </thead>
     <tbody>
         <tr>
-            <td scope="row">Em Dash</td>
+            <th scope="row">Em Dash</th>
+            <td>&mdash;</td>
             <td>&#8212;</td>
         </tr>
         <tr>
-            <td scope="row">Registered Trademark</td>
+            <th scope="row">Trademark</th>
+            <td>&trade;</td>
             <td>&#8482;</td>
         </tr>
     </tbody>
