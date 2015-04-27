@@ -36,7 +36,7 @@ Developers should use only those elements and attributes that have semantic valu
 - `id`, `class`
 - `href`, `src`
 - `alt`, `title`
-- `role`, `tabindex`, `accesskey`, `aria-*` (refer to the HTML5 spec for appropriate use ARIA attributes)
+- `role`, `tabindex`, `accesskey`, `aria-*` (refer to the HTML5 spec for appropriate use of ARIA attributes)
 - `target` (validation errors in XHTML may be ignored)
 - `action`, `method`, `type`, `maxsize`, and other form-specific attributes
 - `rowspan`, `colspan`, `scope`
