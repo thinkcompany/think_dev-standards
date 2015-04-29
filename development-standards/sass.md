@@ -91,6 +91,7 @@ _[category].[partial-name].scss
 
 e.g... corresponding to our categorization in css.md
 
+```scss
 _settings.variables.scss
 _settings.functions.scss
 _settings.mixins.scss
@@ -111,5 +112,4 @@ _theme.admin.scss (example theme partial)
 _helpers.spacing.scss
 _helpers.width.scss
 _helpers.states.scss
-
-
+```
