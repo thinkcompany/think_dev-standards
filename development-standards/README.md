@@ -8,9 +8,9 @@ The Front-End Web Development Standards are broken down into coding guidelines f
 
 - [HTML](html.md)
 - [CSS](css.md)
-- [Sass] (sass.md)
+- [Sass](sass.md)
 - [JavaScript](javascript)
 - [Accessibility](accessibility.md)
 - [SEO](seo.md)
 - [Performance](performance.md)
-- [Git] (git.md)
+- [Git](git.md)
