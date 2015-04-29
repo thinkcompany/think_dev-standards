@@ -43,7 +43,7 @@ Developers should use only those elements and attributes that have semantic valu
 - `placeholder` and other HTML5 form attributes/attribute values 
 - custom data attributes (`data-*`)
 
-Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript.md) to achieve the desired result.
+Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript) to achieve the desired result.
 
 ## Format & Style
 
