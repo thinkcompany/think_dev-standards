@@ -2,25 +2,25 @@
 
 ## Table of Contents
 
-  1. [Types](#types)
+  1. [Types](#markdown-header-types)
   1. [Objects](#markdown-header-objects)
-  1. [Arrays](#arrays)
-  1. [Strings](#strings)
-  1. [Functions](#functions)
-  1. [Properties](#properties)
-  1. [Variables](#variables)
-  1. [Comparison Operators & Equality](#comparison-operators--equality)
-  1. [Blocks](#blocks)
-  1. [Comments](#comments)
-  1. [Whitespace](#whitespace)
-  1. [Commas](#commas)
-  1. [Semicolons](#semicolons)
-  1. [Type Casting & Coercion](#type-casting--coercion)
-  1. [Naming Conventions](#naming-conventions)
-  1. [Constructors](#constructors)
-  1. [Performance](#performance)
-  1. [Miscellaneous](#miscellaneous)
-  1. [License](#license)
+  1. [Arrays](#markdown-header-arrays)
+  1. [Strings](#markdown-header-strings)
+  1. [Functions](#markdown-header-functions)
+  1. [Properties](#markdown-header-properties)
+  1. [Variables](#markdown-header-variables)
+  1. [Comparison Operators & Equality](#markdown-header-comparison-operators--equality)
+  1. [Blocks](#markdown-header-blocks)
+  1. [Comments](#markdown-header-comments)
+  1. [Whitespace](#markdown-header-whitespace)
+  1. [Commas](#markdown-header-commas)
+  1. [Semicolons](#markdown-header-semicolons)
+  1. [Type Casting & Coercion](#markdown-header-type-casting--coercion)
+  1. [Naming Conventions](#markdown-header-naming-conventions)
+  1. [Constructors](#markdown-header-constructors)
+  1. [Performance](#markdown-header-performance)
+  1. [Miscellaneous](#markdown-header-miscellaneous)
+  1. [License](#markdown-header-license)
 
 ##Types
 
@@ -55,7 +55,7 @@
     console.log(foo[0], bar[0]); // => 9, 9
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Objects
 
@@ -104,7 +104,7 @@
     };
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Arrays
 
@@ -156,7 +156,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Strings
@@ -242,7 +242,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Functions
 
@@ -384,7 +384,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Properties
 
@@ -418,7 +418,7 @@
     var isJedi = getProp('jedi');
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Variables
 
@@ -545,7 +545,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Comparison Operators & Equality
 
@@ -592,7 +592,7 @@
 
   - For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Blocks
 
@@ -745,7 +745,7 @@
   - The `with` statement should not be used. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Comments
 
@@ -849,7 +849,7 @@
     }
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Whitespace
@@ -1036,7 +1036,7 @@
     ```
 
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Commas
 
@@ -1100,7 +1100,7 @@
     ];
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Semicolons
@@ -1129,7 +1129,7 @@
 
     [Read more](http://stackoverflow.com/a/7365214/1712802).
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Type Casting & Coercion
 
@@ -1194,7 +1194,7 @@
     var hasAge = Boolean(age);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Naming Conventions
 
@@ -1340,7 +1340,7 @@
     var CheckBox = require('./CheckBox');
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Constructors
 
@@ -1406,7 +1406,7 @@
         .setHeight(20);
     ```
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Performance
@@ -1420,7 +1420,7 @@
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
   - Loading...
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 ## Miscellaneous
 
@@ -1462,7 +1462,7 @@ The `eval` function is the most misused feature of JavaScript. Avoid it.
 
 Most uses of `eval` involve the developer generating some code on the fly to include a variable's value in the source. This is inefficient and can be avoided with some simple refactoring. When you're tempted to use `eval` in this way, stop and consider alternative implementations that will be more readable and maintainable in the future.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## License
@@ -1490,5 +1490,5 @@ CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
 TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
 SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-**[⬆ back to top](#table-of-contents)**
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
