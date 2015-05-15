@@ -1,318 +1,1428 @@
-#General Authoring Guidelines 
+#General Authoring Guidelines
 
-##JAVASCRIPT FILES
-JavaScript programs should be stored in and delivered as .js files.
+## Table of Contents
 
-JavaScript code should not be embedded in HTML files unless the code is specific to a single session. Code in HTML adds significantly to page weight with no opportunity for mitigation by caching and compression. Under certain, limited, circumstances, JavaScript code may be placed in the document in order to speed execution or for dynamically generated scripting. This should be avoided.
+  1. [Types](#types)
+  1. [Objects](#objects)
+  1. [Arrays](#arrays)
+  1. [Strings](#strings)
+  1. [Functions](#functions)
+  1. [Properties](#properties)
+  1. [Variables](#variables)
+  1. [Comparison Operators & Equality](#comparison-operators--equality)
+  1. [Blocks](#blocks)
+  1. [Comments](#comments)
+  1. [Whitespace](#whitespace)
+  1. [Commas](#commas)
+  1. [Semicolons](#semicolons)
+  1. [Type Casting & Coercion](#type-casting--coercion)
+  1. [Naming Conventions](#naming-conventions)
+  1. [Constructors](#constructors)
+  1. [Performance](#performance)
+  1. [Miscellaneous](#miscellaneous)
+  1. [License](#license)
 
-`<script src="filename.js">` tags should be placed as late in the body as possible. This reduces the effects of delays imposed by script loading on other page components. Script tags may be placed higher in the document if required (by a third party, for example).
+##Types
 
-##INDENTATION
-Use tabs for indentation of code.
+  - **Primitives**: When you access a primitive type you work directly on its value.
 
-##LINE LENGTH
-**Break up excessively long lines.** The general suggestion for maximum length is 80 characters, but with modern screens longer lines are tolerable. When a statement will not fit on a single line, it may be necessary to break it. Place the break after an operator, ideally after a comma. A break after an operator decreases the likelihood that a copy-paste error will be masked by semicolon insertion. The next line should be indented to indicate that it is a continuation of the previous statement.
+    + `string`
+    + `number`
+    + `boolean`
+    + `null`
+    + `undefined`
 
-When using jQuery's method chaining to apply multiple effects to a single selector, place the newline BEFORE the period and indent the line. If the object referred to changes, then subsequent lines should be indented to indicate which object they're operating on. This should be used sparingly since the chained code can easily become hard to follow.
+    ```javascript
+    var foo = 1;
+    var bar = foo;
 
-```javascript
-     $('.container-class')
-          .css('display', 'block')
-          .find('.child-class')
-               .css('color', '#f00')
-               .attr('href', '#');
-```
+    bar = 9;
 
-##COMMENTS
-**Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments should be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Inappropriate language should never be used. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
+    console.log(foo, bar); // => 1, 9
+    ```
+  - **Complex**: When you access a complex type you work on a reference to its value.
 
-It is important that comments be kept up-to-date. Erroneous comments can make programs even harder to read and understand.
+    + `object`
+    + `array`
+    + `function`
 
-Make comments meaningful. Focus on what is not immediately visible. Don't waste the reader's time with stuff like:
+    ```javascript
+    var foo = [1, 2];
+    var bar = foo;
 
-```javascript
-    i = 0; // Set i to zero.
-```
+    bar[0] = 9;
 
-Generally use line comments. Save block comments for formal documentation and for commenting out.
+    console.log(foo[0], bar[0]); // => 9, 9
+    ```
 
-Always retain comments related to licensing of open source code. Comments may never contain alarming or negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
+**[⬆ back to top](#table-of-contents)**
+
+## Objects
+
+  - Use the literal syntax for object creation.
+
+    ```javascript
+    // bad
+    var item = new Object();
+
+    // good
+    var item = {};
+    ```
+
+  - Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+
+    ```javascript
+    // bad
+    var superman = {
+        default: { clark: 'kent' },
+        private: true
+    };
+
+    // good
+    var superman = {
+        defaults: { clark: 'kent' },
+        hidden: true
+    };
+    ```
+
+  - Use readable synonyms in place of reserved words.
+
+    ```javascript
+    // bad
+    var superman = {
+        class: 'alien'
+    };
+
+    // bad
+    var superman = {
+        klass: 'alien'
+    };
+
+    // good
+    var superman = {
+        type: 'alien'
+    };
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Arrays
+
+  - Use the literal syntax for array creation.
+
+    ```javascript
+    // bad
+    var items = new Array();
+
+    // good
+    var items = [];
+    ```
+
+  - Use Array#push instead of direct assignment to add items to an array.
+
+    ```javascript
+    var someStack = [];
 
 
-##VARIABLE DECLARATIONS
-Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
+    // bad
+    someStack[someStack.length] = 'abracadabra';
 
-Use of global variables should be minimized. Do not use implied global variables.
+    // good
+    someStack.push('abracadabra');
+    ```
 
-The var statements should be the first statements in the function body.
+  - When you need to copy an array use Array#slice. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
-It is preferred that each variable be given its own line and comment.
+    ```javascript
+    var len = items.length;
+    var itemsCopy = [];
+    var i;
 
-```javascript
-    var currentEntry; // currently selected table entry
-    var level;        // indentation level
-    var size;         // size of table
-```
-
-JavaScript does not have block scope, so defining variables in blocks can confuse programmers who are experienced with other C family languages.
-
-##FUNCTION DECLARATIONS
-**Declare all functions before they are used.** Inner functions should follow the var statement. This helps make it clear what variables are included in its scope.
-
-There should be no space between the name of a function and the `(` (left parenthesis) of its parameter list. There should be one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
-
-```javascript
-    function outer(c, d) {
-        var e = c * d;
-        function inner(a, b) {
-            return (e * a) + b;
-        }
-        return inner(0, 1);
+    // bad
+    for (i = 0; i < len; i++) {
+        itemsCopy[i] = items[i];
     }
-```
 
-This convention works well with JavaScript because in JavaScript, functions and object literals can be placed anywhere that an expression is allowed. It provides the best readability with inline functions and complex structures.
+    // good
+    itemsCopy = items.slice();
+    ```
 
-```javascript
-    function getElementsByClassName(className) {
-        var results = [];
-        walkTheDOM(document.body, function (node) {
-            var a;                  // array of class names
-            var c = node.className; // the node's classname
-            var i;                  // loop counter
-// If the node has a class name, then split it into a list of simple names.
-// If any of them match the requested name, then append the node to the set of results.
-            if (c) {
-                a = c.split(' ');
-                for (i = 0; i < a.length; i += 1) {
-                    if (a[i] === className) {
-                        results.push(node);
-                        break;
+  - To convert an array-like object to an array, use Array#slice.
+
+    ```javascript
+    function trigger() {
+        var args = Array.prototype.slice.call(arguments);
+        ...
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Strings
+
+  - Use single quotes `''` for strings.
+
+    ```javascript
+    // bad
+    var name = "Bob Parr";
+
+    // good
+    var name = 'Bob Parr';
+
+    // bad
+    var fullName = "Bob " + this.lastName;
+
+    // good
+    var fullName = 'Bob ' + this.lastName;
+    ```
+
+  - Strings longer than 80 characters should be written across multiple lines using string concatenation.
+
+  - Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+
+    ```javascript
+    // bad
+    var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+
+    // bad
+    var errorMessage = 'This is a super long error that was thrown because \
+    of Batman. When you stop to think about how Batman had anything to do \
+    with this, you would get nowhere \
+    fast.';
+
+    // good
+    var errorMessage = 'This is a super long error that was thrown because ' +
+        'of Batman. When you stop to think about how Batman had anything to do ' +
+        'with this, you would get nowhere fast.';
+    ```
+
+  - When programmatically building up a string, use Array#join instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
+
+    ```javascript
+    var items;
+    var messages;
+    var length;
+    var i;
+
+    messages = [{
+        state: 'success',
+        message: 'This one worked.'
+    }, {
+        state: 'success',
+        message: 'This one worked as well.'
+    }, {
+        state: 'error',
+        message: 'This one did not work.'
+    }];
+
+    length = messages.length;
+
+    // bad
+    function inbox(messages) {
+        items = '<ul>';
+
+        for (i = 0; i < length; i++) {
+          items += '<li>' + messages[i].message + '</li>';
+        }
+
+        return items + '</ul>';
+    }
+
+    // good
+    function inbox(messages) {
+      items = [];
+
+      for (i = 0; i < length; i++) {
+          // use direct assignment in this case because we're micro-optimizing.
+          items[i] = '<li>' + messages[i].message + '</li>';
+      }
+
+      return '<ul>' + items.join('') + '</ul>';
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Functions
+
+  - Function expressions:
+
+    ```javascript
+    // anonymous function expression
+    var anonymous = function() {
+        return true;
+    };
+
+    // named function expression
+    var named = function named() {
+        return true;
+    };
+
+    // immediately-invoked function expression (IIFE)
+    (function() {
+        console.log('Welcome to the Internet. Please follow me.');
+    })();
+    ```
+    **Declare all functions before they are used.** Inner functions should follow the var statement. This helps make it clear what variables are included in its scope.
+
+    There should be no space between the name of a function and the `(` (left parenthesis) of its parameter list. There should be one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
+
+    ```javascript
+        function outer(c, d) {
+            var e = c * d;
+            function inner(a, b) {
+                return (e * a) + b;
+            }
+            return inner(0, 1);
+        }
+    ```
+
+    This convention works well with JavaScript because in JavaScript, functions and object literals can be placed anywhere that an expression is allowed. It provides the best readability with inline functions and complex structures.
+
+    ```javascript
+        function getElementsByClassName(className) {
+            var results = [];
+            walkTheDOM(document.body, function (node) {
+                var a;                  // array of class names
+                var c = node.className; // the node's classname
+                var i;                  // loop counter
+    // If the node has a class name, then split it into a list of simple names.
+    // If any of them match the requested name, then append the node to the set of results.
+                if (c) {
+                    a = c.split(' ');
+                    for (i = 0; i < a.length; i += 1) {
+                        if (a[i] === className) {
+                            results.push(node);
+                            break;
+                        }
                     }
                 }
+            });
+            return results;
+        }
+    ```
+
+  - If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
+
+    ```javascript
+        div.onclick = function (e) {
+            return false;
+        };
+        that = {
+            method: function () {
+                return this.datum;
+            },
+            datum: 0
+        };
+    ```
+
+  - Use of global functions should be minimized. If your code contains functions that are only useful to the module, then those functions should be encapsulated in an immediately executed anonymous function with the rest of the module's code.
+
+  - When a function is to be invoked immediately, the entire invocation expression should be wrapped in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
+
+    ```javascript
+    var collection = (function () {
+        var keys = [], values = [];
+        return {
+            get: function (key) {
+                var at = keys.indexOf(key);
+                if (at >= 0) {
+                    return value[at];
+                }
+            },
+            set: function (key, value) {
+                var at = keys.indexOf(key);
+                if (at < 0) {
+                    at = keys.length;
+                }
+                keys[at] = key;
+                value[at] = value;
+            },
+            remove: function (key) {
+                var at = keys.indexOf(key);
+                if (at >= 0) {
+                    keys.splice(at, 1);
+                    value.splice(at, 1);
+                }
             }
-        });
-        return results;
+        };
+    }());
+    ```
+
+  - Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
+  **Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
+
+    ```javascript
+    // bad
+    if (currentUser) {
+        function test() {
+            console.log('Nope.');
+        }
     }
-```
 
-If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
+    // good
+    var test;
+    if (currentUser) {
+        test = function test() {
+            console.log('Yup.');
+        };
+    }
+    ```
 
-```javascript
-    div.onclick = function (e) {
+  - Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
+
+    ```javascript
+    // bad
+    function nope(name, options, arguments) {
+        // ...stuff...
+    }
+
+    // good
+    function yup(name, options, args) {
+        // ...stuff...
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Properties
+
+  - Use dot notation when accessing properties.
+
+    ```javascript
+    var luke = {
+        jedi: true,
+        age: 28
+    };
+
+    // bad
+    var isJedi = luke['jedi'];
+
+    // good
+    var isJedi = luke.jedi;
+    ```
+
+  - Use subscript notation `[]` when accessing properties with a variable.
+
+    ```javascript
+    var luke = {
+        jedi: true,
+        age: 28
+    };
+
+    function getProp(prop) {
+        return luke[prop];
+    }
+
+    var isJedi = getProp('jedi');
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Variables
+
+  - Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace.
+
+    ```javascript
+    // bad
+    superPower = new SuperPower();
+
+    // good
+    var superPower = new SuperPower();
+    ```
+
+  - Use one `var` declaration per variable.
+    It's easier to add new variable declarations this way, and you never have
+    to worry about swapping out a `;` for a `,` or introducing punctuation-only
+    diffs.
+
+    ```javascript
+    // bad
+    var items = getItems(),
+        goSportsTeam = true,
+        dragonball = 'z';
+
+    // bad
+    // (compare to above, and try to spot the mistake)
+    var items = getItems(),
+        goSportsTeam = true;
+        dragonball = 'z';
+
+    // good
+    var items = getItems();
+    var goSportsTeam = true;
+    var dragonball = 'z';
+    ```
+
+  - Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
+
+    ```javascript
+    // bad
+    var i, len, dragonball,
+        items = getItems(),
+        goSportsTeam = true;
+
+    // bad
+    var i;
+    var items = getItems();
+    var dragonball;
+    var goSportsTeam = true;
+    var len;
+
+    // good
+    var items = getItems();
+    var goSportsTeam = true;
+    var dragonball;
+    var length;
+    var i;
+    ```
+
+  - Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
+
+  - Use of global variables should be minimized. Do not use implied global variables.
+  
+  - Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues. 
+
+    ```javascript
+    // bad
+    function() {
+        test();
+        console.log('doing stuff..');
+
+        //..other stuff..
+
+        var name = getName();
+
+        if (name === 'test') {
+            return false;
+        }
+
+        return name;
+    }
+
+    // good
+    function() {
+        var name = getName();
+
+        test();
+        console.log('doing stuff..');
+
+        //..other stuff..
+
+        if (name === 'test') {
+            return false;
+        }
+
+        return name;
+    }
+
+    // bad - unnessary function call
+    function() {
+        var name = getName();
+
+        if (!arguments.length) {
+            return false;
+        }
+
+        this.setFirstName(name);
+
+        return true;
+    }
+
+    // good
+    function() {
+        var name;
+
+        if (!arguments.length) {
+            return false;
+        }
+
+        name = getName();
+        this.setFirstName(name);
+
+        return true;
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Comparison Operators & Equality
+
+  - Use `===` and `!==` over `==` and `!=`.
+  - Conditional statements such as the `if` statement evaulate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+
+    + **Objects** evaluate to **true**
+    + **Undefined** evaluates to **false**
+    + **Null** evaluates to **false**
+    + **Booleans** evaluate to **the value of the boolean**
+    + **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
+    + **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+
+    ```javascript
+    if ([0]) {
+        // true
+        // An array is an object, objects evaluate to true
+    }
+    ```
+
+  - Use shortcuts.
+
+    ```javascript
+    // bad
+    if (name !== '') {
+        // ...stuff...
+    }
+
+    // good
+    if (name) {
+        // ...stuff...
+    }
+
+    // bad
+    if (collection.length > 0) {
+        // ...stuff...
+    }
+
+    // good
+    if (collection.length) {
+        // ...stuff...
+    }
+    ```
+
+  - For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+
+**[⬆ back to top](#table-of-contents)**
+
+## Blocks
+
+  - Use braces with all multi-line blocks.
+
+    ```javascript
+    // bad
+    if (test)
         return false;
-    };
-    that = {
-        method: function () {
-            return this.datum;
-        },
-        datum: 0
-    };
-```
 
-Use of global functions should be minimized. If your code contains functions that are only useful to the module, then those functions should be encapsulated in an immediately executed anonymous function with the rest of the module's code.
+    // good
+    if (test) return false;
 
-When a function is to be invoked immediately, the entire invocation expression should be wrapped in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
-
-```javascript
-var collection = (function () {
-    var keys = [], values = [];
-    return {
-        get: function (key) {
-            var at = keys.indexOf(key);
-            if (at >= 0) {
-                return value[at];
-            }
-        },
-        set: function (key, value) {
-            var at = keys.indexOf(key);
-            if (at < 0) {
-                at = keys.length;
-            }
-            keys[at] = key;
-            value[at] = value;
-        },
-        remove: function (key) {
-            var at = keys.indexOf(key);
-            if (at >= 0) {
-                keys.splice(at, 1);
-                value.splice(at, 1);
-            }
-        }
-    };
-}());
-```
-
-##NAMES
-**Names should be formed from the 26 upper and lower case letters (A .. Z, a .. z), the 10 digits (0 .. 9), and `_` (underscore).** Avoid use of international characters because they may not read well or be understood everywhere. Do not use `$` (dollar sign) or `\\` (backslash) in names.
-
-Do not use `_` (underscore) as the first character of a name. It is sometimes used to indicate privacy, but it does not actually provide [privacy](http://javascript.crockford.com/private.html). If privacy is important, use the forms that provide private members. Avoid conventions that demonstrate a lack of competence.
-
-Most variables and functions should start with a lower case letter.
-
-Constructor functions which must be used with the [new](http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/) prefix should start with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is not used, so the capitalization convention is the only defense we have.
-
-
-##STATEMENTS
-
-###SIMPLE STATEMENTS
-Each line should contain at most one statement. Put a `;` (semicolon) at the end of every simple statement. Note that an assignment statement which is assigning a function literal or object literal is still an assignment statement and must end with a semicolon.
-
-JavaScript allows any expression to be used as a statement. This can mask some errors, particularly in the presence of semicolon insertion. The only expressions that should be used as statements are assignments and invocations.
-
-###COMPOUND STATEMENTS
-Compound statements are statements that contain lists of statements enclosed in `{ }` (curly braces).
-- The enclosed statements should be indented four more spaces.
-- The `{` (left curly brace) should be at the end of the line that begins the compound statement.
-- The `}` (right curly brace) should begin a line and be indented to align with the beginning of the line containing the matching `{` (left curly brace).
-- Braces should be used around all statements, even single statements, when they are part of a control structure, such as an if or for statement. This makes it easier to add statements without accidentally introducing bugs. 
-
-###LABELS
-Statement labels are optional. Only these statements should be labeled: `while`, `do`, `for`, `switch`.
-
-###RETURN STATEMENT
-A return statement with a value should not use `( )` (parentheses) around the value. The return value expression must start on the same line as the `return` keyword in order to avoid semicolon insertion.
-
-###IF STATEMENT
-The `if` class of statements should have the following form:
-
-```javascript
-    if (condition) {
-        // statements
+    // good
+    if (test) {
+        return false;
     }
-     
-    if (condition) {
-        // statements
+
+    // bad
+    function() { return false; }
+
+    // good
+    function() {
+        return false;
+    }
+    ```
+
+  - If you're using multi-line blocks with `if` and `else`, put `else` on the same line as your
+    `if` block's closing brace.
+
+    ```javascript
+    // bad
+    if (test) {
+        thing1();
+        thing2();
+    }
+    else {
+        thing3();
+    }
+
+    // good
+    if (test) {
+        thing1();
+        thing2();
     } else {
-        // statements
+        thing3();
     }
-     
-    if (condition) {
-        // statements
-    } else if (condition) {
-        // statements
-    } else {
-        // statements
-    }
-```
+    ```
 
-###FOR STATEMENT
-A `for` class of statements should have the following form:
+  - The `if` class of statements should have the following form:
 
-```javascript
-
-    for (initialization; condition; update) {
-        // statements
-    }
-
-    for (variable in object) {
-        if (filter) {
+    ```javascript
+        if (condition) {
             // statements
         }
-    }
-```
-
-The first form should be used with arrays and with loops of a predeterminable number of iterations.
-
-The second form should only be used with objects. Be aware that members that are added to the prototype of the object will be included in the enumeration. It is wise to program defensively by using the `hasOwnProperty` method to distinguish the true members of the object:
-
-```javascript
-    for (variable in object) {
-        if (object.hasOwnProperty(variable)) {
+         
+        if (condition) {
+            // statements
+        } else {
             // statements
         }
+         
+        if (condition) {
+            // statements
+        } else if (condition) {
+            // statements
+        } else {
+            // statements
+        }
+    ```
+  - A `for` class of statements should have the following form:
+
+    ```javascript
+
+        for (initialization; condition; update) {
+            // statements
+        }
+
+        for (variable in object) {
+            if (filter) {
+                // statements
+            }
+        }
+    ```
+
+    The first form should be used with arrays and with loops of a predeterminable number of iterations.
+
+    The second form should only be used with objects. Be aware that members that are added to the prototype of the object will be included in the enumeration. It is wise to program defensively by using the `hasOwnProperty` method to distinguish the true members of the object:
+
+    ```javascript
+        for (variable in object) {
+            if (object.hasOwnProperty(variable)) {
+                // statements
+            }
+        }
+    ```
+
+  - A `while` statement should have the following form:
+
+    ```javascript
+        while (condition) {
+            // statements
+        }
+    ```
+  - A `do` statement should have the following form:
+
+    ```javascript
+        do {
+            // statements
+        } while (condition);
+    ```
+
+    Unlike the other compound statements, the do statement always ends with a `;` (semicolon).
+
+  - A switch statement should have the following form:
+
+    ```javascript
+        switch (expression) {
+        case expression:
+            // statements
+        default:
+            // statements
+        }
+    ```
+
+    Each `case` is aligned with the `switch`. This avoids over-indentation.
+
+    Each group of statements (except the `default`) should end with `break`, `return`, or `throw`. If your intention is to fall though into the next case, it must be indicated with a comment in place of the `break`.
+
+  - The `try` class of statements should have the following form:
+
+    ```javascript
+        try {
+            // statements
+        } catch (variable) {
+            // statements
+        }
+
+        try {
+            // statements
+        } catch (variable) {
+            // statements
+        } finally {
+            // statements
+        }
+    ```
+
+  - Use of the `continue` statement should be limited since it can obscure control flow in a function. It is best used at the start of a loop to handle pre-conditions. This technique reduces excessive indentation.
+
+  - The `with` statement should not be used. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
+
+
+**[⬆ back to top](#table-of-contents)**
+
+## Comments
+
+  - **Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments should be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Inappropriate language should never be used. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
+
+  - It is important that comments be kept up-to-date. Erroneous comments can make programs even harder to read and understand.
+
+  - Make comments meaningful. Focus on what is not immediately visible. Don't waste the reader's time with stuff like:
+
+    ```javascript
+        i = 0; // Set i to zero.
+    ```
+
+  - Always retain comments related to licensing of open source code. Comments may never contain alarming or negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
+
+  - Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
+
+    ```javascript
+    // bad
+    // make() returns a new element
+    // based on the passed in tag name
+    //
+    // @param {String} tag
+    // @return {Element} element
+    function make(tag) {
+
+        // ...stuff...
+
+        return element;
     }
-```
 
-###WHILE STATEMENT
-A `while` statement should have the following form:
+    // good
+    /**
+     * make() returns a new element
+     * based on the passed in tag name
+     *
+     * @param {String} tag
+     * @return {Element} element
+     */
+    function make(tag) {
 
-```javascript
-    while (condition) {
-        // statements
+        // ...stuff...
+
+        return element;
     }
-```
+    ```
 
-###DO STATEMENT
-A `do` statement should have the following form:
+  - Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
 
-```javascript
-    do {
-        // statements
-    } while (condition);
-```
+    ```javascript
+    // bad
+    var active = true;  // is current tab
 
-Unlike the other compound statements, the do statement always ends with a `;` (semicolon).
+    // good
+    // is current tab
+    var active = true;
 
+    // bad
+    function getType() {
+        console.log('fetching type...');
+        // set the default type to 'no type'
+        var type = this._type || 'no type';
 
-###SWITCH STATEMENT
-A switch statement should have the following form:
-
-```javascript
-    switch (expression) {
-    case expression:
-        // statements
-    default:
-        // statements
-    }
-```
-
-Each `case` is aligned with the `switch`. This avoids over-indentation.
-
-Each group of statements (except the `default`) should end with `break`, `return`, or `throw`. If your intention is to fall though into the next case, it must be indicated with a comment in place of the `break`.
-
-
-###TRY STATEMENT
-The `try` class of statements should have the following form:
-
-```javascript
-    try {
-        // statements
-    } catch (variable) {
-        // statements
+        return type;
     }
 
-    try {
-        // statements
-    } catch (variable) {
-        // statements
-    } finally {
-        // statements
+    // good
+    function getType() {
+        console.log('fetching type...');
+
+        // set the default type to 'no type'
+        var type = this._type || 'no type';
+
+        return type;
     }
-```
+    ```
 
-###CONTINUE STATEMENT
-Use of the `continue` statement should be limited since it can obscure control flow in a function. It is best used at the start of a loop to handle pre-conditions. This technique reduces excessive indentation.
+  - Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
+
+  - Use `// FIXME:` to annotate problems.
+
+    ```javascript
+    function Calculator() {
+
+        // FIXME: shouldn't use a global here
+        total = 0;
+
+        return this;
+    }
+    ```
+
+  - Use `// TODO:` to annotate solutions to problems.
+
+    ```javascript
+    function Calculator() {
+
+        // TODO: total should be configurable by an options param
+        this.total = 0;
+
+        return this;
+    }
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 
-###WITH STATEMENT
-The `with` statement should not be used. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
+## Whitespace
+  - Blank lines improve readability by setting off sections of code that are logically related.
+
+  - Use soft tabs set to 4 spaces. ([Stack Overflow: Soft tabs or hard tabs?](http://stackoverflow.com/a/9446364/1096083))
+
+    ```javascript
+    // no
+    function() {
+    ∙∙var name;
+    }
+
+    // no
+    function() {
+    ∙var name;
+    }
+
+    // yeah
+    function() {
+    ∙∙∙∙var name;
+    }
+    ```
+
+  - Place 1 space before the leading brace.
+
+    ```javascript
+    // bad
+    function test(){
+        console.log('test');
+    }
+
+    // good
+    function test() {
+        console.log('test');
+    }
+
+    // bad
+    dog.set('attr',{
+        age: '1 year',
+        breed: 'Bernese Mountain Dog'
+    });
+
+    // good
+    dog.set('attr', {
+        age: '1 year',
+        breed: 'Bernese Mountain Dog'
+    });
+    ```
+
+  - Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
+
+    ```javascript
+    // bad
+    if(isJedi) {
+        fight ();
+    }
+
+    // good
+    if (isJedi) {
+        fight();
+    }
+
+    // bad
+    function fight () {
+        console.log ('Swooosh!');
+    }
+
+    // good
+    function fight() {
+        console.log('Swooosh!');
+    }
+    ```
+
+  - Set off operators with spaces.
+
+    ```javascript
+    // bad
+    var x=y+5;
+
+    // good
+    var x = y + 5;
+    ```
+
+  - End files with a single newline character.
+
+    ```javascript
+    // bad
+    (function(global) {
+        // ...stuff...
+    })(this);
+    ```
+
+    ```javascript
+    // bad
+    (function(global) {
+        // ...stuff...
+    })(this);↵
+    ↵
+    ```
+
+    ```javascript
+    // good
+    (function(global) {
+        // ...stuff...
+    })(this);↵
+    ```
+
+  - Use indentation when making long method chains. Use a leading dot, which
+    emphasizes that the line is a method call, not a new statement.
+
+    ```javascript
+    // bad
+    $('#items').find('.selected').highlight().end().find('.open').updateCount();
+
+    // bad
+    $('#items').
+        find('.selected').
+            highlight().
+            end().
+        find('.open').
+            updateCount();
+
+    // good
+    $('#items')
+        .find('.selected')
+            .highlight()
+            .end()
+        .find('.open')
+            .updateCount();
+
+    // bad
+    var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
+        .attr('width', (radius + margin) * 2).append('svg:g')
+        .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
+        .call(tron.led);
+
+    // good
+    var leds = stage.selectAll('.led')
+      .data(data)
+      .enter().append('svg:svg')
+          .classed('led', true)
+          .attr('width', (radius + margin) * 2)
+      .append('svg:g')
+          .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
+          .call(tron.led);
+    ```
+
+  - Leave a blank line after blocks and before the next statement
+
+    ```javascript
+    // bad
+    if (foo) {
+        return bar;
+    }
+    return baz;
+
+    // good
+    if (foo) {
+        return bar;
+    }
+
+    return baz;
+
+    // bad
+    var obj = {
+        foo: function() {
+        },
+        bar: function() {
+        }
+    };
+    return obj;
+
+    // good
+    var obj = {
+        foo: function() {
+        },
+
+        bar: function() {
+        }
+    };
+
+    return obj;
+    ```
 
 
-##WHITESPACE
-Blank lines improve readability by setting off sections of code that are logically related.
+**[⬆ back to top](#table-of-contents)**
 
-Blank spaces should be used in the following circumstances:
-- A keyword followed by `(` (left parenthesis) should be separated by a space.
-```javascript
-        while (true) {
-```
-- A blank space should not be used between a function value and its `(` (left parenthesis). This helps to distinguish between keywords and function invocations.
-- All binary operators except `.` (period) and `(` (left parenthesis) and `[` (left bracket) should be separated from their operands by a space.
-- No space should separate a unary operator and its operand except when the operator is a word such as `typeof`.
-- Each `;` (semicolon) in the control part of a `for` statement should be followed with a space.
-- Whitespace should follow every `,` (comma).
+## Commas
+
+  - Leading commas: **No, please.**
+
+    ```javascript
+    // bad
+    var story = [
+        once
+      , upon
+      , aTime
+    ];
+
+    // good
+    var story = [
+        once,
+        upon,
+        aTime
+    ];
+
+    // bad
+    var hero = {
+        firstName: 'Bob'
+      , lastName: 'Parr'
+      , heroName: 'Mr. Incredible'
+      , superPower: 'strength'
+    };
+
+    // good
+    var hero = {
+        firstName: 'Bob',
+        lastName: 'Parr',
+        heroName: 'Mr. Incredible',
+        superPower: 'strength'
+    };
+    ```
+
+  - Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 if it's in quirksmode. 
+
+    ```javascript
+    // kaboooom
+    var hero = {
+        firstName: 'Kevin',
+        lastName: 'Flynn',
+    };
+
+    var heroes = [
+        'Batman',
+        'Superman',
+    ];
+
+    // phew
+    var hero = {
+        firstName: 'Kevin',
+        lastName: 'Flynn'
+    };
+
+    var heroes = [
+        'Batman',
+        'Superman'
+    ];
+    ```
+
+**[⬆ back to top](#table-of-contents)**
 
 
-##MISCELLANEOUS STANDARDS
+## Semicolons
 
-###`{}` AND `[]`
-Use `{}` instead of `new Object()`. Use `[]` instead of `new Array()`. Using the `new Object()` and `new Array()` forms is needlessly verbose, and error prone since the Array and Object constructors can be overridden.
+  - **[Yes, have some.](https://www.youtube.com/watch?v=pdMGPvODN44)**
 
-Use arrays when the member names would be sequential integers. Use objects when the member names are arbitrary strings or names.
+    ```javascript
+    // bad
+    (function() {
+        var name = 'Skywalker'
+        return name
+    })()
 
-###`,` (COMMA) OPERATOR
-Avoid the use of the comma operator except for very disciplined use in the control part of `for` statements. (This does not apply to the comma separator, which is used in object literals, array literals, `var` statements, and parameter lists.)
+    // good
+    (function() {
+        var name = 'Skywalker';
+        return name;
+    })();
+
+    // good (guards against the function becoming an argument when two files with IIFEs are concatenated)
+    ;(function() {
+        var name = 'Skywalker';
+        return name;
+    })();
+    ```
+
+    [Read more](http://stackoverflow.com/a/7365214/1712802).
+
+**[⬆ back to top](#table-of-contents)**
+
+## Type Casting & Coercion
+
+  - Perform type coercion at the beginning of the statement.
+  - Strings:
+
+    ```javascript
+    //  => this.reviewScore = 9;
+
+    // bad
+    var totalScore = this.reviewScore + '';
+
+    // good
+    var totalScore = '' + this.reviewScore;
+
+    // bad
+    var totalScore = '' + this.reviewScore + ' total score';
+
+    // good
+    var totalScore = this.reviewScore + ' total score';
+    ```
+
+  - Use `parseInt` for Numbers and always with a radix for type casting.
+
+    ```javascript
+    var inputValue = '4';
+
+    // bad
+    var val = new Number(inputValue);
+
+    // bad
+    var val = +inputValue;
+
+    // bad
+    var val = inputValue >> 0;
+
+    // bad
+    var val = parseInt(inputValue);
+
+    // bad
+    var val = 1 * inputValue;
+
+    // good
+    var val = Number(inputValue);
+
+    // good
+    var val = parseInt(inputValue, 10);
+    ```
+
+  - Booleans:
+
+    ```javascript
+    var age = 0;
+
+    // bad
+    var hasAge = new Boolean(age);
+
+    // bad
+    var hasAge = !!age;
+
+    // good
+    var hasAge = Boolean(age);
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Naming Conventions
+
+  - **Names should be formed from the 26 upper and lower case letters (A .. Z, a .. z), the 10 digits (0 .. 9), and `_` (underscore).** Avoid use of international characters because they may not read well or be understood everywhere. 
+
+  - Do not use `_` (underscore) as the first character of a name. It is sometimes used to indicate privacy, but it does not actually provide [privacy](http://javascript.crockford.com/private.html). If privacy is important, use the forms that provide private members. Avoid conventions that demonstrate a lack of competence.
+
+  - Avoid single letter names. Be descriptive with your naming.
+
+    ```javascript
+    // bad
+    function q() {
+        // ...stuff...
+    }
+
+    // good
+    function query() {
+        // ..stuff..
+    }
+    ```
+
+  - Be consistent with either camelCase or underscore_case convention when naming objects, functions, and instances. Don't mix naming conventions within a single project.
+
+    ```javascript
+    // bad, matches neither convention:
+    var OBJEcttsssss = {};
+    var o = {};
+    function c() {}
+
+    // bad, mixed conventions:
+    var thisIsMyObject = {};
+    function this_is_my_function() {}
+
+    // good, camelCase:
+    var thisIsMyObject = {};
+    function thisIsMyFunction() {}
+
+    // good, underscore_case:
+    var this_is_my_object = {};
+    function this_is_my_function() {}
+
+    ```
+
+  - Use PascalCase when naming constructors or classes. Constructor functions which must be used with the [new](http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/) prefix should start with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is not used, so the capitalization convention is the only defense we have.
+
+    ```javascript
+    // bad
+    function user(options) {
+        this.name = options.name;
+    }
+
+    var bad = new user({
+        name: 'nope'
+    });
+
+    // good
+    function User(options) {
+        this.name = options.name;
+    }
+
+    var good = new User({
+        name: 'yup'
+    });
+    ```
+
+  - Use a leading underscore `_` when naming private properties.
+
+    ```javascript
+    // bad
+    this.__firstName__ = 'Panda';
+    this.firstName_ = 'Panda';
+
+    // good
+    this._firstName = 'Panda';
+    ```
+
+  - To indicate that a variable contains a jQuery object, names should start with a `$`:
+
+    ```javascript
+    var $email = $("#email");
+    ```
+
+  - When saving a reference to `this` use `_this`.
+
+    ```javascript
+    // bad
+    function() {
+        var self = this;
+        return function() {
+            console.log(self);
+        };
+    }
+
+    // bad
+    function() {
+        var that = this;
+        return function() {
+            console.log(that);
+        };
+    }
+
+    // good
+    function() {
+        var _this = this;
+        return function() {
+            console.log(_this);
+        };
+    }
+    ```
+
+  - Name your functions. This is helpful for stack traces.
+
+    ```javascript
+    // bad
+    var log = function(msg) {
+        console.log(msg);
+    };
+
+    // good
+    var log = function log(msg) {
+        console.log(msg);
+    };
+    ```
+
+  - **Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
+
+  - If your file exports a single class, your filename should be exactly the name of the class.
+    ```javascript
+    // file contents
+    class CheckBox {
+      // ...
+    }
+    module.exports = CheckBox;
+
+    // in some other file
+    // bad
+    var CheckBox = require('./checkBox');
+
+    // bad
+    var CheckBox = require('./check_box');
+
+    // good
+    var CheckBox = require('./CheckBox');
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+## Constructors
+
+  - Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!
+
+    ```javascript
+    function Jedi() {
+        console.log('new jedi');
+    }
+
+    // bad
+    Jedi.prototype = {
+      fight: function fight() {
+          console.log('fighting');
+      },
+
+      block: function block() {
+          console.log('blocking');
+      }
+    };
+
+    // good
+    Jedi.prototype.fight = function fight() {
+        console.log('fighting');
+    };
+
+    Jedi.prototype.block = function block() {
+        console.log('blocking');
+    };
+    ```
+
+  - Methods can return `this` to help with method chaining.
+
+    ```javascript
+    // bad
+    Jedi.prototype.jump = function() {
+        this.jumping = true;
+        return true;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+        this.height = height;
+    };
+
+    var luke = new Jedi();
+    luke.jump(); // => true
+    luke.setHeight(20); // => undefined
+
+    // good
+    Jedi.prototype.jump = function() {
+        this.jumping = true;
+        return this;
+    };
+
+    Jedi.prototype.setHeight = function(height) {
+        this.height = height;
+        return this;
+    };
+
+    var luke = new Jedi();
+
+    luke.jump()
+        .setHeight(20);
+    ```
+
+**[⬆ back to top](#table-of-contents)**
+
+
+## Performance
+
+  - [On Layout & Web Performance](http://kellegous.com/j/2013/01/26/layout-performance/)
+  - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
+  - [Try/Catch Cost In a Loop](http://jsperf.com/try-catch-in-loop-cost)
+  - [Bang Function](http://jsperf.com/bang-function)
+  - [jQuery Find vs Context, Selector](http://jsperf.com/jquery-find-vs-context-sel/13)
+  - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
+  - [Long String Concatenation](http://jsperf.com/ya-string-concat)
+  - Loading...
+
+**[⬆ back to top](#table-of-contents)**
+
+## Miscellaneous
 
 ###BLOCK SCOPE
 In JavaScript blocks do not have scope. Only functions have scope. Do not use blocks except as required by the compound statements.
@@ -352,41 +1462,33 @@ The `eval` function is the most misused feature of JavaScript. Avoid it.
 
 Most uses of `eval` involve the developer generating some code on the fly to include a variable's value in the source. This is inefficient and can be avoided with some simple refactoring. When you're tempted to use `eval` in this way, stop and consider alternative implementations that will be more readable and maintainable in the future.
 
+**[⬆ back to top](#table-of-contents)**
 
-###CONFUSING CONVERSIONS
-Avoid using confusing type conversion techniques. For most of the following techniques, there is a built in JavaScript method that is easier to read and more directly indicates your intentions to other developers.
 
-####STRING CONVERSIONS
-```javascript
-     var example = 3.14159;
-     str = "" + example; // Bad, string concatenation should only be used when building a string
-     str = example.toString(); // Good
-```
+## License
 
-####INTEGER CONVERSIONS
-```javascript
-     var example = "3.14159";
-     int = ~~example; // Bad, bit-wise operators are rarely used in JavaScript, and should only be used when doing bit operations
-     int = parseInt(example, 10); // Good
-```
+(The MIT License)
 
-Be aware that `parseInt` takes a second, optional argument specifying the radix for base conversion. If this argument is ommitted, then parseInt will attempt to do base detection, and if the first argument starts with a "0", then it will be treated as an octal value, which is probably not the intention. Whenever using `parseInt`, always specify the second argument (which will be 10 for a vast majority of the time).
+Copyright (c) 2014 Airbnb
 
-###FLOAT COVERSIONS
-```javascript
-     var example = "3.14159";
-     float = 1 * example; // Bad, not obvious that this is doing a conversion, and future developers might optimize it away
-     float = parseFloat(example); // Good
-```
+Permission is hereby granted, free of charge, to any person obtaining
+a copy of this software and associated documentation files (the
+'Software'), to deal in the Software without restriction, including
+without limitation the rights to use, copy, modify, merge, publish,
+distribute, sublicense, and/or sell copies of the Software, and to
+permit persons to whom the Software is furnished to do so, subject to
+the following conditions:
 
-###BOOLEAN CONVERSIONS
-```javascript
-     var example = 3.14159;
-     bool = !!example; // Bad, this is a non-obvious construct and can be confusing for some developers
-     bool = (example !== 0); // Good
-```
+The above copyright notice and this permission notice shall be
+included in all copies or substantial portions of the Software.
 
-When converting a value to a boolean, use a comparison operator. If you're only interested in the truthy-ness of the value, then either use the `?:` operator or just use the value in a conditional.
+THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-##LINT-ING
-We need to determine how we’re going to support this automatically. Meanwhile, please lint your code manually.
+**[⬆ back to top](#table-of-contents)**
+
