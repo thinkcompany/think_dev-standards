@@ -18,7 +18,11 @@
   * [Maintainable Javascript](https://www.dropbox.com/s/aoe4in65rlmyqdq/Maintainable_JavaScript.pdf?dl=0)
   * [Marijn Haverbeke - Eloquent Javascript](http://eloquentjavascript.net/)
 
+## Podcasts
+  * [JavaScript Jabber](http://devchat.tv/js-jabber/)
+  
 ## Tools
+  * [JSHint](http://www.jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
   * [Javascript Code Style Checker](https://github.com/jscs-dev/node-jscs)
 
 ## People
