@@ -6,15 +6,20 @@ Navigate to our development process and standards folders to read about the appr
 
 The following lists the team members responsible for individual standards documents.
 
-- Accessibility (TBD)
+- Accessibility (Helene)
 - CSS (Greg)
-- Git (TBD)
+- Git (Dan Gautsch)
 - HTML (Greg)
 - JavaScript (TJ)
-- Performance (TBD)
+- Performance (Kimberly)
 - Sass (Greg)
-- SEO (TBD)
+- SEO (Dan Gautsch)
+
+- Automated Testing (TBD)
+
+- Process (TBD)
+- QA (TBD)
 
 ## Providing feedback
 
-We'll use Bitbucket's Issue Tracker to submit feedback and updates to our standards documentation. We'll provide more information about this process soon.
+We'll use [Bitbucket's Issue Tracker](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/issues?status=new&status=open) to submit feedback and updates to our standards documentation. We'll provide more information about this process soon.
