@@ -4,8 +4,10 @@
   * [airbnb/javascript](https://github.com/airbnb/javascript)
   * [yuanyan/pragmatic-jquery](https://github.com/yuanyan/pragmatic-jquery)
 
+
 ## Articles
   * [Douglas Crockford - Code Conventions for the Javascript Programming Language](http://javascript.crockford.com/code.html)
+  * [jQuery Coding Standards & Best Practices](http://lab.abhinayrathore.com/jquery-standards/)
 
 ## Presentations
   * [Greg Franko - jQuery Best Practices](http://gregfranko.com/jquery-best-practices/#/)
@@ -20,7 +22,7 @@
 
 ## Podcasts
   * [JavaScript Jabber](http://devchat.tv/js-jabber/)
-  
+
 ## Tools
   * [JSHint](http://www.jshint.com/) - [Airbnb Style .jshintrc](https://github.com/airbnb/javascript/blob/master/linters/jshintrc)
   * [Javascript Code Style Checker](https://github.com/jscs-dev/node-jscs)
