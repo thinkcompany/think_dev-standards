@@ -2,6 +2,7 @@
 
 ## Table of Contents
 
+  1. [Loading jQuery](#markdown-header-loading-jquery)
   1. [Determine jQuery Objects](#markdown-header-determine-jquery-objects)
   1. [Document Ready](#markdown-header-document-ready)
   1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
@@ -14,6 +15,23 @@
   1. [Plugins](#markdown-header-plugins)
   1. Animation
 
+## Loading jQuery
+
+### CDNs
+Don't load jQuery using a CDN link - always include it locally in your project. There are no pre-caching guarantees with CDNs, and blocked access / availability that differs from your application can introduce unnessecary points of failure. [More info](http://www.sitepoint.com/7-reasons-not-to-use-a-cdn/).
+
+### Version
+  - Use the 1.x branch of jQuery if your project must support Internet Explorer 7 or 8.
+  - Use the latest branch if you are authoring a greenfield project with modern browser support and/or no plugin compatibility issues.
+  - Do not load multiple jQuery libraries / versions on the same page.
+
+### Other JS Libraries
+  - If you are using other libraries like Prototype, MooTools, Zepto etc. that uses `$` sign as well, try not to use `$` for calling jQuery functions and instead use `jQuery` simply. You can return control of `$` back to the other library with a call to `$.noConflict()`. However:
+  - In general, try to use only one DOM manipulation / Ajax wrapper library in your application at a time. And, keep in mind:
+  - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Determine jQuery Objects
