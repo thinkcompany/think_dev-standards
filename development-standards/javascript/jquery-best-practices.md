@@ -6,7 +6,7 @@
   1. [Document Ready](#markdown-header-document-ready)
   1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
   1. [Event Prevent](#markdown-header-event-prevent)
-  1. Method Chaining
+  1. [Method Chains](#markdown-header-method-chains)
   1. Toggling Element Visibility
   1. [Element Create](#markdown-header-element-create)
   1. [Element Exists](#markdown-header-element-exists)
@@ -125,6 +125,27 @@ $(".btn").click(function(event){
     event.preventDefault();
     event.stopImmediatePropagation();
 });
+```
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
+
+## Method Chains
+Use indentation when making long method chains, and avoid more than 6 methods chained. 
+Less method chains, more friendly debugging. 
+
+```js
+// bad
+$('#items').find('.selected').highlight().end().find('.open').updateCount();
+
+// good
+$('#items')
+.find('.selected')
+  .highlight()
+  .end()
+.find('.open')
+  .updateCount();
 ```
 
 
