@@ -9,7 +9,7 @@
   1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
   1. [Event Prevent](#markdown-header-event-prevent)
   1. [Method Chains](#markdown-header-method-chains)
-  1. Toggling Element Visibility
+  1. [Manipulating Element Appearance](#markdown-header-manipulating-element-appearance)
   1. [Element Create](#markdown-header-element-create)
   1. [Element Exists](#markdown-header-element-exists)
   1. [Performance](#markdown-header-performance)
@@ -202,6 +202,34 @@ $('#items')
   .end()
 .find('.open')
   .updateCount();
+```
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
+
+## Manipulating Element Appearance
+Avoid use of `.show()` or `.hide()` when toggling element visibility. These methods create inline styles on the elements being targeted using the `display:` property.
+
+Similarly, avoid manipulating any element style properties using jQuery's `.css()` method. This also affects inline styles and has the ability to cascade further than stylesheets and cause conflicts.
+
+Prefer `.addClass()` and `.removeClass()` for toggling visibility and element apperance states. This provides true separation of style and functionality by allowing styles to live within the application's stylesheets.
+
+```javascript
+// No
+$([data-change-appearance]).hide();
+$([data-change-appearance]).show();
+
+// Yes
+$([data-change-appearance]).addClass('hidden');
+$([data-change-appearance]).removeClass('hidden');
+```
+```javascript
+// No
+$([data-change-appearance]).css({'color: red, 'font-weight': 'bold'});
+
+// Yes
+$([data-change-appearance]).addClass('urgent');
 ```
 
 
