@@ -22,4 +22,6 @@ The following lists the team members responsible for individual standards docume
 
 ## Providing feedback
 
-We'll use [Bitbucket's Issue Tracker](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/issues?status=new&status=open) to submit feedback and updates to our standards documentation. We'll provide more information about this process soon.
+We'll use [Bitbucket's Issue Tracker](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/issues?status=new&status=open) to submit feedback and updates to our standards documentation. 
+
+Questions should also be posted in the Issue Tracker, which will be automatically posted to #ui-dev in the Think Brownstone Slack chat room.
