@@ -356,7 +356,8 @@ function setSidebar() {
 ###Context-Specific Selection
 For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > .ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
 
-Use `find` with scoped jQuery object queries. (Note: Performance in IE8 )
+Use `find` with scoped jQuery object queries. (Performance note in IE7/8: using .find in these browsers can slow to a crawl ([double-digit operations per second](http://jsperf.com/jquery-find-vs-context-sel/16)) depending on how many child elements are being crawled for matches.)
+
 ```javascript
 // bad
 $('.sidebar', 'ul').hide();
