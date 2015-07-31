@@ -14,7 +14,6 @@
   1. [Element Exists](#markdown-header-element-exists)
   1. [Performance](#markdown-header-performance)
   1. [Plugins](#markdown-header-plugins)
-  1. Animation
 
 ## Loading jQuery
 
