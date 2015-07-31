@@ -3,6 +3,7 @@
 ## Table of Contents
 
   1. [Loading jQuery](#markdown-header-loading-jquery)
+  1. [Selectors](#markdown-header-selectors)
   1. [Determine jQuery Objects](#markdown-header-determine-jquery-objects)
   1. [Document Ready](#markdown-header-document-ready)
   1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
@@ -29,6 +30,31 @@ Don't load jQuery using a CDN link - always include it locally in your project. 
   - If you are using other libraries like Prototype, MooTools, Zepto etc. that uses `$` sign as well, try not to use `$` for calling jQuery functions and instead use `jQuery` simply. You can return control of `$` back to the other library with a call to `$.noConflict()`. However:
   - In general, try to use only one DOM manipulation / Ajax wrapper library in your application at a time. And, keep in mind:
   - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
+
+## Selectors
+Use data attribute selectors over class or ID selectors whenever possible. Although the performance of class/ID selectors are [markedly better](http://jsperf.com/jquery-data-attribute-selector-vs-class-selector), we anticipate that faster browser Javascript engine speeds will eventually bring relative parity to alternate DOM crawling methods. Using data selectors whenever the slower performance can be tolerated will allow authors to reserve class attributes for styles only, and the style and the functionality of the page can have true separation in this way.
+
+```html
+<div data-selector-name>Select me</div>
+<div data-selector-name="todd">Select me</div>
+```
+```javascript
+$('[data-selector-name]');
+$('[data-selector-name="todd"]');
+```
+
+If performance dictates you must switch to classnames as selectors, use classnames prepended with `js-` to indicate to other authors that it's a functionality hook and not intended to be in the document for styling purposes.
+
+```html
+<div class="btn js-action">Click me</div>
+```
+```javascript
+$('.js-action');
+```
 
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
