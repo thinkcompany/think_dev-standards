@@ -32,14 +32,14 @@
     + `null`
     + `undefined`
 
-    ```javascript
-    var foo = 1;
-    var bar = foo;
+```javascript
+var foo = 1;
+var bar = foo;
 
-    bar = 9;
+bar = 9;
 
-    console.log(foo, bar); // => 1, 9
-    ```
+console.log(foo, bar); // => 1, 9
+```
   - **Complex**: When you access a complex type you work on a reference to its value.
 
     + `object`
