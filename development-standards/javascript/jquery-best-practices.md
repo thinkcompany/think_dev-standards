@@ -19,13 +19,24 @@
 ## Determine jQuery Objects
 
 Determine if an object is a jQuery object:
-
 ```javascript
 // bad (fast)
 if( obj.jquery ){}
 
 // good (slow)
 if( obj instanceof jQuery){}
+```
+
+Prefix jQuery object variables with a `$`.
+The dollar notation on all jQuery-related variables helps us easily distinguish jQuery variables from standard JavaScript variables at a glance.
+```js
+// bad
+var sidebar = $('.sidebar');
+var that = $(this);
+
+// good
+var $sidebar = $('.sidebar');
+var $this = $(this);
 ```
 
 
@@ -35,7 +46,6 @@ if( obj instanceof jQuery){}
 ## Document Ready
 
 Begin executing statements with jQuery as soon as the DOM is ready:
-
 ```javascript
 // bad
 $(function() {
