@@ -10,6 +10,7 @@
   1. [Event Prevent](#markdown-header-event-prevent)
   1. [Method Chains](#markdown-header-method-chains)
   1. [Manipulating Element Appearance](#markdown-header-manipulating-element-appearance)
+  1. [AJAX](#markdown-header-ajax)
   1. [Element Create](#markdown-header-element-create)
   1. [Element Exists](#markdown-header-element-exists)
   1. [Performance](#markdown-header-performance)
@@ -231,6 +232,52 @@ $([data-change-appearance]).css({'color: red, 'font-weight': 'bold'});
 $([data-change-appearance]).addClass('urgent');
 ```
 
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
+
+## AJAX
+
+Avoid `.getJSON()` or `.get()` - these are wrappers for `.ajax()`. Using `.ajax()` right off the bat allows for more configuration.
+
+Prefer schemaless URLs (leave the protocol http/https out of your URL) being passed in the `url:` property of `.ajax()`.
+
+Instead of concatenating request parameters in your URL, send them using the data object setting:
+
+```javascript
+// Less readable...
+$.ajax({
+    url: "something.php?param1=test1&param2=test2",
+    ....
+});
+ 
+// More readable...
+$.ajax({
+    url: "something.php",
+    data: { param1: test1, param2: test2 }
+});
+```
+
+Try to specify the dataType setting so it's easier to know what kind of data you are working with. (See Ajax Template example below)
+
+Sample AJAX template using the Promise interface:
+
+```javascript
+var jqxhr = $.ajax({
+    url: url,
+    type: "GET", // default is GET but you can use other verbs based on your needs.
+    cache: true, // default is true, but false for dataType 'script' and 'jsonp', so set it on need basis.
+    data: {}, // add your request parameters in the data object.
+    dataType: "json", // specify the dataType for future reference
+    jsonp: "callback", // only specify this to match the name of callback parameter your API is expecting for JSONP requests.
+    statusCode: { // if you want to handle specific error codes, use the status code mapping settings.
+        404: handler404,
+        500: handler500
+    }
+});
+jqxhr.done(successHandler);
+jqxhr.fail(failureHandler);
+```
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
