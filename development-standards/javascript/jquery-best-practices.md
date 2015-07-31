@@ -101,7 +101,7 @@ $(document).ready(function() {
     // Handler for .ready() called.
 });
 ```
-
+Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
@@ -137,6 +137,18 @@ $( "#members" ).delegate( "li a", "click", function( e ) {} );
 $( "#members" ).on( "click", "li a", function( e ) {} ); 
 ```
 
+When possible, use a [custom namespace](http://api.jquery.com/event.namespace/) for events. It's easier to unbind the exact event that you attached without affecting other events bound to the DOM element.
+```javascript
+$("[data-special-link]").on("click.mySpecialClick", myEventHandler); // GOOD
+// Later on, it's easier to unbind just your click event
+$("[data-special-link]").unbind("click.mySpecialClick");
+```
+
+Use event delegation  when you have to attach same event to multiple elements. Event delegation allows us to attach a single event listener, to a parent element, that will fire for all descendants matching a selector, whether those descendants exist now or are added in the future.
+```javascript
+$("[data-special-list] a").on("click", myClickHandler); // BAD, you are attaching an event to all the links under the list.
+$("[data-special-list]").on("click", "a", myClickHandler); // GOOD, only one event handler is attached to the parent.
+```
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
@@ -241,7 +253,7 @@ if ($('#myElement').length) {
 
 ## Performance
 
-Cache jQuery lookups
+###Cache jQuery lookups
 ```javascript
 // bad
 function setSidebar() {
@@ -267,9 +279,10 @@ function setSidebar() {
 }
 ```
 
+###Context-Specific Selection
 For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > .ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
 
-Use `find` with scoped jQuery object queries. (Note: Performance in long )
+Use `find` with scoped jQuery object queries. (Note: Performance in IE8 )
 ```javascript
 // bad
 $('.sidebar', 'ul').hide();
@@ -289,7 +302,7 @@ $sidebar.find('ul');
 // good (faster)
 $($sidebar[0]).find('ul');
 ``` 
-
+###Event Delegation
 Use `event delegation` with list of elements.
 ```html
 <ul>
@@ -313,6 +326,39 @@ $("ul").on("click", "li", function() {
 });
 ```
 
+###Detach elements prior to manipulation
+Always detach any existing element before manipulation and attach it back after manipulating it. [More info](http://learn.jquery.com/performance/detach-elements-before-work-with-them/)
+
+```javascript
+var $myList = $("[data-my-list]").detach();
+//...a lot of complicated things on $myList
+$myList.appendTo("[data-my-list-container]");
+```
+
+###Prefer string concatenation or `array.join()` over `.append()`
+[Performance comparison](http://jsperf.com/jquery-append-vs-string-concat)
+```javascript
+// BAD
+var $myList = $("#list");
+for(var i = 0; i < 10000; i++){
+    $myList.append("<li>"+i+"</li>");
+}
+ 
+// GOOD
+var $myList = $("#list");
+var list = "";
+for(var i = 0; i < 10000; i++){
+    list += "<li>"+i+"</li>";
+}
+$myList.html(list);
+ 
+// EVEN FASTER
+var array = []; 
+for(var i = 0; i < 10000; i++){
+    array[i] = "<li>"+i+"</li>"; 
+}
+$myList.html(array.join(''));
+```
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
