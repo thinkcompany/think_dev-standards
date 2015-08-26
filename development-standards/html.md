@@ -4,7 +4,7 @@
 A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
 
 ### Versions & Validation
-All HTML documents must be authored according to the W3C HTML 5 specification, keeping in mind the tenants of the XHTML 1.0 Strict specification.
+All HTML documents must be authored according to the W3C HTML 5 specification, keeping in mind the tenets of the XHTML 1.0 Strict specification.
 
 [HTML5 Spec](http://www.w3.org/TR/html5/)
 
