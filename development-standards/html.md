@@ -402,7 +402,7 @@ All form fields (`input`, `textarea`, `select`) must have a corresponding label 
 Labels must always be present. If a design does not contain visible labels, use CSS to shift them off screen. Do not ever omit them.
 
 #### Form Fields
-Wrap form fields and their corresponding labels in `<p>` tags. Instructional or help text related to a form field (i.e. optional, required, etc.) should be included as part of the label; to style this text separately from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
+Wrapping form fields and their corresponding labels in `<p>` tags is considered good practice, but a `<div>` with an appropriate class is fine as well. Instructional or help text related to a form field (i.e. optional, required, etc.) should be included as part of the label; to style this text separately from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
 
 ```html
 <p>
