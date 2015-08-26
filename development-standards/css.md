@@ -178,6 +178,8 @@ This order also helps troubleshooting efforts by placing the most commonly probl
 * text
 * letter
 
+Tools such as CSScomb can be used to assist with checking/automating this rule.
+
 #### Shorthand
 
 Always use the shorthand version of a property. When using the cascade to overwrite a rule with a more specific one, use the shorthand version on the main rule and the expanded version in the superseding rule.
