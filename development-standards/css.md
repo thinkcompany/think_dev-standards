@@ -425,7 +425,9 @@ Do not link to an external style sheet for hack rules unless there are major lay
 
 Always link style sheets in the HEAD of an HTML document, before any JavaScript or favicon references. Never use inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 
-Style sheets should be concatenated and minified in production code, and aim for the fewest number of style sheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after it reaches 30, and the browser will not report an error, making debugging difficult.  
+Style sheets should be concatenated and minified in production code, and aim for the fewest number of style sheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after it reaches 30, and the browser will not report an error, making debugging difficult.
+
+Note also that Internet Explorer 9 and below are limited to 4095 selectors per style sheet. If you are hitting that limit, consider a tool such as Bless (blesscss.com) to split you selectors across multiple style sheets.
 
 ### Integrating CSS with JavaScript
 
