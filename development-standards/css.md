@@ -554,7 +554,7 @@ Good example (CSS for our general module pattern):
 .module {}
 .module-subcomponent {}
 .module--modifier {}
-.module--modifier .module-subcomponent {} /* nesting make sense here to avoid having to create a modifier for every subcomponent of a modified module */
+.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having to create a modifier for every subcomponent of a modified module */
 ```
 
 State example:
