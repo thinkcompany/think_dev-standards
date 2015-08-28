@@ -51,6 +51,8 @@ Do not use IE-proprietary styling (such as filters or expressions).
 
 Refrain from using !important. The !important declaration is a hint that other CSS is overly specific. Rewrite any CSS where you think that !important is necessary, unless there are extenuating circumstances such as unmodifiable, third-party code.
 
+In cases where legacy browser support is required, work with the design team to determine acceptable defaults for properties that are not supported (e.g. use a border rather than a drop shadow in IE7/8).
+
 ## Tools & Libraries
 
 ### Preprocessors
