@@ -257,7 +257,7 @@ Use the appropriate list tag to mark up a list of elements. It is common to form
 - `<dl>`: used for definitions and name-value pairs
 
 #### Links
-Use anchors `<a>` for all actionable elements in a module or page. Do not use the JavaScript pseudo-protocol in the href attribute; do not use the onclick attribute. If you need to attach a JavaScript event to an anchor, apply a descriptive data attribute and add a handler in your JavaScript instead.
+Use anchors `<a>` for most(*) actionable elements in a module or page. Do not use the JavaScript pseudo-protocol in the href attribute; do not use the onclick attribute. If you need to attach a JavaScript event to an anchor, apply a descriptive data attribute and add a handler in your JavaScript instead.
 
 Poor Example:
 ```html
@@ -271,6 +271,10 @@ Good Example:
 ```html
 <a href="http://www.google.com/" data-hook="external-link">Google</a>
 ```
+
+(*) As a general rule, for actionable elements that link to or reveal additional content (new page, in-page anchor, overlay, popover, tabs), an `<a>` is the appropriate choice. If you are submitting a form, or tying additional UI behavior to an element (zooming a photo, opening a popup menu, sorting a table, etc) use a `<button>`.
+
+Note that a `<button>`'s default type is "submit". When using a `<button>` outside of a form, include the attribute type="button", e.g. `<button type="button">Action</button>`
 
 #### Anchor Targets (aka In-page Anchors)
 Do not use the name attribute on `<a>` tags. Create an in-page anchor by linking to an ID value on the appropriate target. In-page anchor IDs should use a camelCase representation of the heading or name for the content section.
