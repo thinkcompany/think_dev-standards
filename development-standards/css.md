@@ -59,11 +59,7 @@ In cases where legacy browser support is required, work with the design team to 
 
 Think Brownstone will be incorporating Sass as a common CSS development tool. Build Kit deliverables will optionally include Sass if requested by the client.
 
-We will use the .scss syntax for Sass files
-
-http://sass-lang.com/
-
-We won't use vendor mixin libraries (Compass, Bourbon, etc). Instead we will write our own mixins or extract the best of what's useful from a library and include it in our own style sheets.
+See [Sass Authoring Guidelines](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/src/687d257a91c14e161c96d999a89f07a1672b1d52/development-standards/sass.md?at=master) for more information about those standards.
 
 ### Browser Resets (Normalize)
 
