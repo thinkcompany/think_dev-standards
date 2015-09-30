@@ -20,6 +20,10 @@ The site also provides setup and learning materials to help you get started with
 
 We won't use vendor mixin libraries (Compass, Bourbon, etc) unless required by a client/project. It creates an unnecessary dependency. Rather, we'll maintain a library of our own useful mixins and functions that we can pull into projects as needed.
 
+### Vendor Prefixes
+
+Don't write vendor prefixes directly in your Sass rules. Instead, use a build tool such as Autoprefixer to handle it automatically, or use a mixin if Autoprefixer is not an option for the project.
+
 ## Format & Style
 
 ### Formatting for Readability
@@ -216,7 +220,7 @@ When you want to share declarations with multiple, unrelated rulesets (e.g. usin
 
 Organize and name Sass partials using the following guidelines, based on the CSS categories we defined in our CSS Authoring Guidelines. Note that partials should always begin with an underscore - this lets Sass know that the file should not generate a CSS file.
 
-Naming convention:
+### Naming convention for partials
 
 _[category].[partial-name].scss
 
