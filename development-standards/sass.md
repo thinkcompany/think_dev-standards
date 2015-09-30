@@ -27,21 +27,23 @@ Use variables for all common/reusable values such as colors, fonts, spacing and 
 
 Examples:
 
-```css
+```scss
 $color-primary: #336699;
 
-$zModal: 500;
+$z-modal: 500;
 
-$font-primary: helvetica, arial, sans-serif;
+$font-stack: helvetica, arial, sans-serif;
 
 $space-large: 2em;
 ```
 
 #### Mixins & Functions
 
+The main objective of mixins and functions is keeping your code DRY. Make these as simple as possible, sticking to single purpose and avoiding unnecessary complexity.
+
 Document all parameters for mixins and function, and the return value for functions, as follows:
 
-```css
+```scss
 // Brief purpose for the mixin or function, e.g. URL encode a string
 
 // @param {String} $string - string to encode
@@ -55,9 +57,9 @@ Document all parameters for mixins and function, and the return value for functi
 
 #### Naming
 
-Name variables, mixins, and functions similarly to the way classes are named.
+Name variables, mixins, and functions similarly to the way classes are named - lowercase and hyphen-delimited.
 
-```css
+```scss
 $base-font-size: 1rem;
 	
 @mixin breakpoint($size) {
@@ -75,7 +77,7 @@ $base-font-size: 1rem;
 
 We will use the SCSS syntax, which is similar to standard CSS.
 
-```css
+```scss
 a {
 	color: blue;
 	&:hover,
@@ -89,10 +91,8 @@ a {
 
 Quote strings in Sass unless they are intented to be CSS values.
 
-```css
+```scss
 $primary-font: sans-serif;
-
-$font-stack: ('helvetica', 'arial', sans-serif);
 
 background-image: url('/images/photo.jpg');
 ```
@@ -107,7 +107,7 @@ To add a unit to number, multiply the value by 1 unit (25 * 1px = 25px), to remo
 
 Sass maps allow you to define a key/value structure. These are useful for defining collections of related values such as a z-index scale or list of breakpoints.
 
-```css
+```scss
 // define a Sass map
 $z-index: (
 	'modal': 100,
@@ -125,13 +125,16 @@ In practice, define a function to check whether or not a key exists in the map p
 
 ### Extend & Placeholders
 
-When using @extend, it is preferred to extend a placeholder rather than an actual selector. Extending selectors can create bloat in the form of unintended selector generation.
+Use @extend cautiously, and only between closely related selectors. Check the CSS output carefully to ensure that you are not generating unintended selectors.
 
-```css
+When using @extend, it is preferred to extend a placeholder rather than an actual selector. Extending selectors can create bloat in the resulting CSS files. It is also recommended to only use `@extends` 
+
+```scss
 // typical use
 
 .btn {
 	display: inline-block;
+	padding: 1em;
 	border-radius: 3px;
 }
 
@@ -141,9 +144,10 @@ When using @extend, it is preferred to extend a placeholder rather than an actua
 }
 
 // preferred
-
+.btn,
 %btn {
 	display: inline-block;
+	padding: 1em;
 	border-radius: 3px;
 }
 
@@ -157,6 +161,33 @@ When using @extend, it is preferred to extend a placeholder rather than an actua
 
 A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output aheres to the specificity rules defined our CSS Authoring Guidelines documentation.
 
+### Declaration Order
+
+Use the following declaration order inside Sass rules:
+
+1. @extend
+2. @include
+3. Regular declarations
+4. Pseudo-class/elements
+5. Nested selectors
+6. Media queries
+
+```scss
+.module {
+	@extend %module;
+	@include mixin($argument);
+	property: value;
+	&:pseudo {
+		// styles
+	}
+	.nested {
+		// styles
+	}
+	@include bkpt($size) {
+		// styles
+	}
+}
+```
 
 ### Comments
 
@@ -164,7 +195,7 @@ Add comments to any rule that might not be readily understood by another develop
 
 Examples:
 
-```css
+```scss
 /**
  * Use this format for long comments spanning multiple lines,
  * e.g. to describe a module
@@ -224,5 +255,4 @@ _helpers.spacing.scss
 _helpers.width.scss
 _helpers.states.scss
 ```
-
 ### 
