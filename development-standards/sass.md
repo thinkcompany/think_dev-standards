@@ -6,7 +6,7 @@ This document contains Think Brownstone's standards for writing Sass.
 
 Write Sass in the most readable and maintainable way (e.g. as close to regular CSS) as possible while taking advantage of the conveniences that the language provides. Don't introduce unnecessary, hard-to-read complexity just because Sass allows you to.
 
-Even though we are using a preprocessor, the standards and principles written in our CSS Authoring Guidelines still apply with regard to formatting, naming, specificity, and modularity.
+Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/src/2f99262f5306b4f981c353d46fc9459e4f57d465/development-standards/css.md?at=master) still apply with regard to formatting, naming, specificity, and modularity.
 
 View the resulting CSS frequently to ensure the quality meets our standards.
 
@@ -123,37 +123,33 @@ $z-index: (
 
 In practice, define a function to check whether or not a key exists in the map prior to calling the map-get function, then return the value of the matching key.
 
-### Extend & Placeholders
+### Extend
 
-Use @extend cautiously, and only between closely related selectors. Check the CSS output carefully to ensure that you are not generating unintended selectors.
+Use @extend cautiously, and check the CSS output carefully to ensure that you are not generating unintended selectors.
 
-When using @extend, it is preferred to extend a placeholder rather than an actual selector. Extending selectors can create bloat in the resulting CSS files. It is also recommended to only use `@extends` 
+This is particularly true if you extend a class that has nested selectors, because all of the nested classes/elements will also be extended. This should be avoided. (see http://oliverjash.me/2012/09/07/methods-for-modifying-objects-in-oocss.html)
+
+A better way to use @extend, which reduces the chances of bloating your css, is to extend a placeholder `%placeholder` rather than a selector (see http://csswizardry.com/2014/01/extending-silent-classes-in-sass), and extend only closely related rulesets such as the button example below.
+
+When you want to share declarations with multiple, unrelated rulesets, a `mixin` is a better choice.
 
 ```scss
-// typical use
-
-.btn {
-	display: inline-block;
-	padding: 1em;
-	border-radius: 3px;
-}
-
-.btn-primary {
-	@extend btn;
-	background: $primary-color;
-}
-
-// preferred
 .btn,
 %btn {
 	display: inline-block;
 	padding: 1em;
+	background: gray;
 	border-radius: 3px;
 }
 
-.btn-primary {
+.btn--primary {
 	@extend %btn;
-	background: $primary-color;
+	background-color: green;
+}
+
+.btn--secondary {
+	@extend %btn;
+	background-color: blue;
 }
 ```
 
@@ -183,7 +179,7 @@ Use the following declaration order inside Sass rules:
 	.nested {
 		// styles
 	}
-	@include bkpt($size) {
+	@include mq($size) {
 		// styles
 	}
 }
@@ -229,9 +225,13 @@ Media queries should be named and added along with their base rulesets, ordered 
 
 ## Naming & Organization of Sass Partials
 
-Organize and name Sass partials using the following guidelines, based on the styling categories we defined in our CSS Authoring Guidelines (note that partials should always begin with an underscore):
+Organize and name Sass partials using the following guidelines, based on the CSS categories we defined in our CSS Authoring Guidelines. Note that partials should always begin with an underscore - this lets Sass know that the file should not generate a CSS file.
+
+Naming convention:
 
 _[category].[partial-name].scss
+
+Example:
 
 ```scss
 _settings.variables.scss
@@ -239,7 +239,7 @@ _settings.functions.scss
 _settings.mixins.scss
 
 _base.normalize.scss
-_base.universal.scss (box-sizing, etc)
+_base.universals.scss (box-sizing, etc)
 _base.elements.scss (type selectors, elements without classes)
 
 _layout.grid.scss (if needed!)
@@ -255,4 +255,29 @@ _helpers.spacing.scss
 _helpers.width.scss
 _helpers.states.scss
 ```
-### 
+### CSS File Generation
+
+Sass partials will be combined to generate CSS files by importing one or more partials.
+
+Example that will generate a base.css file. 
+
+```scss
+// base.scss
+
+@import 'base.normalize';
+@import 'base.universals';
+@import 'base.elements';
+```  
+
+Note that you do not need to include the underscore or the file extension in the @import. 
+
+All rules should reside in partials. Do not add any rules directly into files that import partials.
+
+If you are using any 3rd party Sass libraries, those should be imported first, e.g.:
+
+```scss
+@import "compass";
+
+@import "base.normalize";
+...
+```
