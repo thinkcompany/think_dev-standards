@@ -128,7 +128,7 @@ This sections covers some of the most commonly used features of Sass and related
 
 ### Nesting
 
-A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output aheres to the specificity rules defined our CSS Authoring Guidelines documentation.
+A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output adheres to the specificity rules defined our CSS Authoring Guidelines documentation.
 
 ### Variables
 
