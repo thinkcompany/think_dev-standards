@@ -170,7 +170,7 @@ Character set should always be specified and must appear first. (This prevents I
 Ensure that Internet Explorer uses the latest supported rendering mode.
 
 ```html
-<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
 ```
 
 #### Viewport Meta Tag
@@ -178,7 +178,7 @@ Ensure that Internet Explorer uses the latest supported rendering mode.
 When implementing responsive web design or a dedicated mobile site, use the following as the default viewport tag:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
 Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent users from zooming the page.
