@@ -36,7 +36,7 @@ We use gulp for development task automtation. Below you'll find a collection of 
 
 Gulp is a utility hosted with `npm`, the nameless package manager (made famous by Node.js).
 
-1. Start by [installing Node](https://www.npmjs.com/package/gulp-strip-debug).
+1. Start by [installing Node](https://thinkbrownstone.atlassian.net/wiki/display/DEV/Node).
 2. `npm` comes with Node. Now you can run `npm install`... in a project directory and Node packages will be installed in a `node_modules` directory.
 3. Run `npm install --global gulp`, which will install Gulp globally so you can use it in any project.
 4. Profit.
