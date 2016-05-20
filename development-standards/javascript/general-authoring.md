@@ -1221,7 +1221,7 @@ var hasAge = Boolean(age);
 
 **Names should be formed from the 26 upper and lower case letters (A .. Z, a .. z), the 10 digits (0 .. 9), and `_` (underscore).** Avoid use of international characters because they may not read well or be understood everywhere. 
 
-Do not use `_` (underscore) as the first character of a name. It is sometimes used to indicate privacy, but it does not actually provide [privacy](http://javascript.crockford.com/private.html). If privacy is important, use the forms that provide private members. Avoid conventions that demonstrate a lack of competence.
+Do not use `_` (underscore) as the first character of a name. It is sometimes used to indicate privacy, but it does not actually provide [privacy](http://javascript.crockford.com/private.html). If privacy is important, use the forms that provide private members.
 
 Avoid single letter names. Be descriptive with your naming.
 
