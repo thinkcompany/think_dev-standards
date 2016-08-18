@@ -90,13 +90,28 @@ Examples:
 .module {
 	margin: 0 0 15em 0;
 	padding: 0;
-	background-image: url(img1.png), url(img2.png);
+	background-image: url("img1.png"), url("img2.png");
 }
 
 .error { color: #f00; }
 ```
 
 Do not indent rules; all rules should be flush with the left margin of the editor.
+
+### Quotes
+
+Always use double quotes for property values.
+
+Examples:
+
+```css
+.module {
+	background-image: url("img1.png");
+}
+.module:before {
+	content: "";
+}
+```
 
 ### Comments
 
@@ -387,7 +402,7 @@ For all of the different icons in the series (i.e. "video", "photo", etc.) you o
 	width: 10px;
 	height: 10px;
 	overflow: hidden;
-	background: transparent url(/layout/images/sprites/standard/base.png) no-repeat 0 0;
+	background: transparent url("/layout/images/sprites/standard/base.png") no-repeat 0 0;
 }
 .icon-video {
 	background-position: 0 -50px;
