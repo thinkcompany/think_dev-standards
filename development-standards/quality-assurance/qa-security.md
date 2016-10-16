@@ -4,7 +4,7 @@ Security is extremely important and something we take very seriously. You should
 
 **Have a dev lead check code against OWASP standards / best practices**
 
-**Remove metadata from SVGs**
+OWASP is a great resource for how to secure code. Have your dev lead look over your code and compare it to their standards and best practices.
 
 **Secure Input and Output handling**
 
@@ -21,3 +21,12 @@ Only people who need access to data, login information, etc should have access t
 **Folder and File Permissions**
 
 Make sure that folders and files have the lowest permissions necessary to run. This will help mitigate remote file inclusions, directory traversal attacks, and jailbreaking.
+
+**Remove Unused Code**
+
+Unused code is still vulnerable code. This is especially true with PHP. Most WordPress, Drupal, and Joomla hacks come from plugins that are deactivated but can still be exploited.
+
+**Remove metadata from SVGs**
+
+
+

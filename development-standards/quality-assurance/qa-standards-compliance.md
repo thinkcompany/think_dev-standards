@@ -11,6 +11,8 @@ Projects we use Git ony will typically use Git Flow. It makes parallel developme
 
 **Follow the conventions of the frameworks / libraries included**
 
+When you are using a framework or library, it is a good practice to follow their standards and conventions. 
+
 **Adhere to client's desired directory structure / file naming conventions**
 
 **Validate CSS / JavaScript / HTML to our team standards**
