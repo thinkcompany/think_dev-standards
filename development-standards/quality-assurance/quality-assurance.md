@@ -10,4 +10,4 @@ This set of documents contain the standards for quality assurance at Think Brown
   1. [Performance](qa-performance.md)
   1. [Security](qa-security.md)
   1. [Standards Compliance](qa-standards-compliance.md)
-  1. [Tools for QA Testing](qa-testing-tools.md)
+  1. [Tools and Resources for QA Testing](qa-testing-tools.md)

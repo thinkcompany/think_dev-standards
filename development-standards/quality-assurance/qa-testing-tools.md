@@ -1,4 +1,4 @@
-#Tools for QA Testing
+#Tools and Resources for QA Testing
 
 ##Accessibility
 

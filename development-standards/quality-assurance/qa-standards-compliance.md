@@ -3,6 +3,8 @@
 
 **Follow Git Flow standards when committing changes**
 
+Projects we use Git ony will typically use Git Flow. It makes parallel development much easier.
+
 **Adhere to TBI continuous code review process**
 
 **Verify all code is DRY-compliant**
