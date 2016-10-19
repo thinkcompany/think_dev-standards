@@ -1,5 +1,7 @@
 #Codebase Integrity QA
 
+Codebase Integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pickup and start coding with.
+
 **Remove unused assets and scripts from the project**
 
 There are certain files that should never be in a repository. Rendered/compiled files, user generated content, and extremely large images and vidoes are a couple examples. 

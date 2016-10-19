@@ -1,5 +1,7 @@
 #Performance QA
 
+No one likes a slow website, in fact a slow website can cost a company a lot of money. Performance tuning is important, and there are a lot of ways you can achieve (or hinder) it. 
+
 **Verify that all images / graphics are optimized**
 
 Media assets can contain a lot of extra metadata and file information that isn't necessary. Use the proper tools to remove that data and compress the file down as much as possible. Raster images may require creative direction to meet visual needs and performance budgets.

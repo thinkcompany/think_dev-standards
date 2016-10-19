@@ -1,5 +1,7 @@
 #Browser Compatibility QA
 
+Browsers sometimes decide to implement different standards and support for new and existing web technologies. It is important to test your application on multiple devices, operating systems, and browsers. This helps to ensure the same experience regardless of the device someone is using.
+
 **Autoprefix CSS**
 
 Using a tool like Autoprefix allows us to use tomorrows CSS today. It works by applying each browsers prefix when necessary, that way you don't have to worry about using obsolete/unecssary prefixes.

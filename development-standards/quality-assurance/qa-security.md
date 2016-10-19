@@ -1,6 +1,6 @@
 #Security QA
 
-Security is extremely important and something we take very seriously. You should be taking steps to provide safeguards against basic hacks like SQL injection, remote file inclusion, XSS (cross site scripting), and CSRF (cross site request forgery).
+Security is extremely important and something we take very seriously. You should be taking steps to provide safeguards against basic hacks like SQL injections, remote file inclusion, XSS (cross site scripting), and CSRF (cross site request forgery).
 
 **Have a dev lead check code against OWASP standards / best practices**
 

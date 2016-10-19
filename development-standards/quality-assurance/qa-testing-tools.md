@@ -1,5 +1,7 @@
 #Tools and Resources for QA Testing
 
+Below is a list of resources to help you conduct quality assurance. If you find a useful tool or link and would like to see it here, clone this repo and submit a pull request.
+
 ##Accessibility
 
 http://pa11y.org
