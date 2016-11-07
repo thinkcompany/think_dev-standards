@@ -13,6 +13,8 @@ https://chrome.google.com/webstore/detail/color-contrast-analyzer/dagdlcijhfbmgk
 http://www.checkmycolours.com/
 https://github.com/jonathantneal/postcss-wcag-contrast
 https://chrome.google.com/webstore/detail/chromevox/kgejglhpjiefppelpmljglcjbhoiplfn
+http://www.freedomscientific.com/Products/Blindness/JAWS
+http://www.nvaccess.org/
 
 ##Browser Compatibility
 
