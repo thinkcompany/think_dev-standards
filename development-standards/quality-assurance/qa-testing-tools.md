@@ -6,6 +6,7 @@ Below is a list of resources to help you conduct quality assurance. If you find 
 
 http://pa11y.org
 https://github.com/dequelabs/axe-core
+https://chrome.google.com/webstore/detail/axe/lhdoppojpmngadmnindnejefpokejbdd?hl=en-US
 http://blog.tenon.io/guest-post-tenon-io-the-ultimate-accessibility-linter-by-joe-watkins/
 http://colororacle.org/
 https://alfasado.net/apps/colortester.html
