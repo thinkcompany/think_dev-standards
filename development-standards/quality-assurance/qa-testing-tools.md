@@ -58,7 +58,6 @@ https://www.owasp.org/index.php/SQL_Injection_Prevention_Cheat_Sheet
 ##Standards Compliance
 
 https://thinkbrownstone.atlassian.net/wiki/display/DEV/Git+Flow
-https://thinkbrownstone.atlassian.net/wiki/display/DEV/Git+Flow
 https://medium.com/@catalinaturlea/how-i-do-code-review-caa0e5828d8e
 https://www.npmjs.com/package/gulp-strip-debug
 https://github.com/dubharmonic/Sublime-W3CValidators
