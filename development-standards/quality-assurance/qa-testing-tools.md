@@ -47,6 +47,7 @@ https://www.npmjs.com/package/gulp-uglify
 https://csstriggers.com/
 https://github.com/dreamzmaster/gulp-sitespeedio
 https://www.webpagetest.org/
+https://cloudfour.com/thinks/our-svg-icon-process/
 
 ##Security
 
