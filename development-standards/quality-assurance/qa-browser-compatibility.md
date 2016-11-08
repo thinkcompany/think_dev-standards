@@ -20,7 +20,9 @@ We like to keep the use of vendor prefixes to a minimum. Using a tool like Autop
 
 [ ] **Visual and functional regression testing**
 
-Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing uses automation to compare changes visually and ensure nothing accidentally breaks. Functional regression testing works similarly by scripting certain interactions a user may perform and making sure the intended functionality occurs. 
+Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
+
+Both visual and functional regression testing can be supported with automation tools to make the process more efficient and repeatable.
 
 [ ] **Document how each browser / OS combination was tested**
 
