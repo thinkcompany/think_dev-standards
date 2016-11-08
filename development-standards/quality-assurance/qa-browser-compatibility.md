@@ -2,20 +2,26 @@
 
 Browsers sometimes decide to implement different standards and support for new and existing web technologies. It is important to test your application on multiple devices, operating systems, and browsers. This helps to ensure the same experience regardless of the device someone is using.
 
-**Autoprefix CSS**
+[ ] **Review the browser support requirements**
 
-Using a tool like Autoprefix allows us to use tomorrows CSS today. It works by applying each browsers prefix when necessary, that way you don't have to worry about using obsolete/unecssary prefixes.
+Make sure the browser/operating system requirements are clearly defined for the project, and follow them when coding and testing. Always test each browser/device/OS combination based on the requirements of the project.
 
-**Use Browserstack to test different platforms/browsers**
+[ ] **Test on native devices when possible**
 
-Browserstack allows us to test a website in multiple device, OS, and browser combinations. You should test each browser/device/OS combination based on the requirements of the project.
+When available, test on native devices with as many of the required browser/operating systems as possible. Testing on real devices is preferred and yields more accurate results than simulators. 
 
-**Visual and functional regression testing**
+[ ] **Use Browserstack to test additional platforms/browsers**
 
-Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing uses automation to compare changes visually and ensure nothing accidentally breaks. Functional regression testing works similarly by making scripting certain interactions a user may perform and making sure the intended functionality occurs. (ToDo: maybe list what tools could be used here.)
+When native device testing isn't possible, [Browserstack](https://www.browserstack.com) allows us to test additional device, OS, and browser combinations. 
 
-**Add automated testing via gulp**
+[ ] **Autoprefix CSS**
 
-**Document how each browser / OS combination was tested**
+We like to keep the use of vendor prefixes to a minimum. Using a tool like Autoprefixer allows us to author our CSS without prefixes, and automatically apply only the prefixes needed based on our browser support requirements for each project. Autoprefixer should be included in the build script with appropriate settings for the project.
+
+[ ] **Visual and functional regression testing**
+
+Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing uses automation to compare changes visually and ensure nothing accidentally breaks. Functional regression testing works similarly by scripting certain interactions a user may perform and making sure the intended functionality occurs. 
+
+[ ] **Document how each browser / OS combination was tested**
 
 It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
