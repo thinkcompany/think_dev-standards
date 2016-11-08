@@ -20,4 +20,4 @@ Again, the [aXe browser extension](https://www.deque.com/products/axe/#aXeExtens
 
 Ensure that the site's content is announced correctly and can be navigated using screen readers. Use NVDA (with Firefox) and/or JAWS (with Internet Explorer) on Windows as the primary tools for this testing. 
 
-[] Ensure that decorative images are not visible to screen readers 
+[ ] Ensure that decorative images are not visible to screen readers 
