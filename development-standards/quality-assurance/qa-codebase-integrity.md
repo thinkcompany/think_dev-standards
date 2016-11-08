@@ -22,6 +22,10 @@ If a project stipulates the need to include preompiled source files, then they s
 
 [ ] **Verify that file/directory structure is clear, FLAT, and consistent**
 
+Make sure files and folders follow standard naming conventions, are consistent, and match the content inside of them.  A `js` folder should only contain javascript files for example, and a file called `modal.js` should only contain JavaScript for a modal. 
+
+Use as few folders as possible to ensure that the application has a flat file structure.
+
 [ ] **Verify that the project README is complete, and current**
 
 Ensure that the project README file is always current and contains all of the information that a developer needs to get up and running. Include things like prequisites, build/installation steps, along with deployment instructions.
