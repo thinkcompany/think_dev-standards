@@ -14,9 +14,9 @@ When handling data that is sent to or from an application, it is important to se
 
 Only keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into Git, remove it from the repositories history.
 
-[ ] **Least priviledged access**
+[ ] **Least privileged access**
 
-Only people who need access to data, login information, etc. should have access to it. Ted from accounting doesn't need the MySQL root password.
+Only people who need access to data, login information, etc. should have access to it. Avoid including MySQL root passwords in company-wide "reply-all" email threads.
 
 [ ] **Folder and File Permissions**
 
