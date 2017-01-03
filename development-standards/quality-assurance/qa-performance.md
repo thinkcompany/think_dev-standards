@@ -38,7 +38,7 @@ Automating performance testing will help identify changes that affect performanc
 
 Testing pages using tools that show key metrics such as Time To First Byte along a visual representation of the page load process and speed, can help identify areas that need further optimization.
 
-These tools can also point out code that causes poor performance by triggering excessive CPU/painting cycles that can have a negative impact on performance.
+These tools can also point out code that causes poor performance by triggering excessive CPU/painting cycles that can have a negative impact on performance. By specifically mentioning/documenting the results in the Pull Request or commit message for the change, the development team will be made aware of the issue, your solution and how much was performance was improved.
 
 [ ] **Choose the most efficient SVG/Icon System approach**
 
