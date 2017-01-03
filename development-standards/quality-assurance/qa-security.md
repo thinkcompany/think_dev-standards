@@ -4,11 +4,11 @@ Security is extremely important and something we take very seriously. You should
 
 [ ] **Have a dev lead check code against OWASP standards / best practices**
 
-OWASP is a great resource for how to secure code. Have your dev lead look over your code and compare it to their standards and best practices.
+[OWASP](https://www.owasp.org/index.php/Main_Page) is a great resource for how to secure code. Have your dev lead look over your code and compare it to their standards and best practices.
 
 [ ] **Secure Input and Output handling**
 
-When handling data that is sent to or from an application, it is important to secure it. This means checking to make sure data that is going into the system is safe, secure, and valid while also ensuring that the data sent from the sytem meets that criteria as well.
+When handling data that is sent to or from an application, it is important to secure it. This means checking to make sure data that is going into the system is safe, secure, and valid while also ensuring that the data sent from the sytem meets that criteria as well. OWASP has guides for [input validation](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) and [data validation](https://www.owasp.org/index.php/Data_Validation).
 
 [ ] **Do not include sensitive environment information or credentials in project documents or codebase**
 
