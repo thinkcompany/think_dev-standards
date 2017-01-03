@@ -30,8 +30,8 @@ Follow our established coding standards (in this repo!).
 
 Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications and lint all JavaScript using our shared ESLint configuration.
 
-HTML and CSS should be linted as well using our stadard tools and linter configurations.
+HTML and CSS should be linted as well using these standard tools and our linter configurations.
 
 **Lint back-end code (using tools like PHP Lint)**
 
-Linting should be also be used for and code written in additional languages, including PHP.
+Linting should be also be used for any code written in additional languages, including PHP.
