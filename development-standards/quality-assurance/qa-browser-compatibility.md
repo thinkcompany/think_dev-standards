@@ -16,9 +16,9 @@ When native device testing isn't possible, [Browserstack](https://www.browsersta
 
 [ ] **Autoprefix CSS**
 
-We like to keep the use of vendor prefixes to a minimum. Using a tool like Autoprefixer allows us to author our CSS without prefixes, and automatically apply only the prefixes needed based on our browser support requirements for each project. Autoprefixer should be included in the build script with appropriate settings for the project.
+We like to keep the use of vendor prefixes to a minimum. Using a tool like Autoprefixer allows us to author our CSS without prefixes, and automatically apply only the prefixes needed based on our browser support requirements for each project. An autoprefixer should be included in the build script with appropriate settings for the project. Reach out to your Dev Lead if it has not yet been included and establish with them a plan to set it up.
 
-[ ] **Visual and functional regression testing**
+[ ] **Run visual and functional regression testing**
 
 Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
 
@@ -27,3 +27,5 @@ Both visual and functional regression testing can be supported with automation t
 [ ] **Document how each browser / OS combination was tested**
 
 It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
+
+When you finish testing each combination, make a comment stating such in the test session. On every QA ticket created, include this information in the description.
