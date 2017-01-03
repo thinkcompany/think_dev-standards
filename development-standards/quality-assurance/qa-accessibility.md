@@ -8,11 +8,11 @@ A user will be able to use their keyboard to navigate through content in a logic
 
 For more information, see [WebAIM's Keyboard Accessibility recommendations](http://webaim.org/techniques/keyboard/)
 
-[ ] **Manual and automated accessibility testing on compiled HTML**
+[ ] **Perform manual and automated accessibility testing on compiled HTML**
 
 The [aXe browser extension](https://www.deque.com/products/axe/#aXeExtensions) for Chrome or Firefox is a good choice for this testing. It is also available as a library that integrates with automated testing scripts.
 
-[ ] **Test color accessibility testing, manual and automated processes**
+[ ] **Perform manual and automated color accessibility testing**
 
 Certain combinations of colors are difficult to see for people with various visual disabilites. Look for obvious instances of this and then use automated process to find the rest.
 

@@ -34,7 +34,7 @@ Use build tools like gulp-sass, Browserify, and Webpack.
 
 Automating performance testing will help identify changes that affect performance during development.
 
-[ ] **Manually test key pages with WebPageTest/Chrome Dev Tools film strip, document before & after results**
+[ ] **Perform manual test on key pages with WebPageTest/Chrome Dev Tools film strip, document before & after results**
 
 Testing pages using tools that show key metrics such as Time To First Byte along a visual representation of the page load process and speed, can help identify areas that need further optimization.
 
