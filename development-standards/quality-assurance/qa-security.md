@@ -14,11 +14,11 @@ When handling data that is sent to or from an application, it is important to se
 
 Only keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into Git, remove it from the repositories history.
 
-[ ] **Least privileged access**
+[ ] **Set least privileged access**
 
 Only people who need access to data, login information, etc. should have access to it. Avoid including MySQL root passwords in company-wide "reply-all" email threads.
 
-[ ] **Folder and File Permissions**
+[ ] **Set minimum folder and file permissions**
 
 Make sure that folders and files have the lowest permissions necessary to run. This will help mitigate remote file inclusions, directory traversal attacks, and jailbreaking.
 
