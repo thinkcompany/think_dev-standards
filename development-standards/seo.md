@@ -92,7 +92,7 @@ Proper use of HTML headings is crucial to not only a well-formed and semanticall
 
 ###Site Logo
 
-The site logo which appears in the header should be marked up as standard text inside of a <div>. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which text-indent is the most reliable.
+The site logo which appears in the header should be marked up as standard text inside of a block-level element. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which text-indent is the most reliable.
 
 Example:
 ```html
@@ -101,7 +101,7 @@ Example:
 
 ###Images
 
-All image elements should contain the alt attribute with a value that describes the image. This value will typically come from a CMS or data feed. Do not specify a title attribute on an image.
+All image elements should contain the `alt` attribute with a value that describes the image. This value will typically come from a CMS or data feed. Do not specify a `title` attribute on an image.
 
 Example:
 ```html
@@ -126,7 +126,7 @@ Each page should contain navigation to all other pages. These pages should be li
 Example:
 ```html
 <ul>
-	<li class="first"><a href="#">1</a></li>
+	<li><a href="#">1</a></li>
     <li><a href="#">2</a></li>
 	<li class="selected">3</li>
 	<li><a href="#">4</a></li>
