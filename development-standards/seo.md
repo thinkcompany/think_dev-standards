@@ -33,23 +33,27 @@ The keywords meta should contain a comma-separated list of keywords that describ
 This meta element provides guidance to a web crawler regarding which content should be indexed. The default value is "index, follow" which will ensure that all pages are indexed and all links are spidered. This value does not need to be specified. This meta tag should only contain content when some other behavior is desired.
 
 This meta element is page-specific, so the site architecture needs to support per-page meta tags. Some of the common values you are likely to see include:
-* noindex: prevents the page from being indexed
-* nofollow: prevents the crawler from indexing links on the page
-* noodp: blocks the Open Directory Project description of the page from being used in the description that appears below the page in the search results
-* noarchive: prevents a cached copy of this page from being available in the search results
-* noydir: prevents the page from being included in Yahoo's index
+* `noindex`: prevents the page from being indexed
+* `nofollow`: prevents the crawler from indexing links on the page
+* `noodp`: blocks the Open Directory Project description of the page from being used in the description that appears below the page in the search results
+* `noarchive`: prevents a cached copy of this page from being available in the search results
+* `noydir`: prevents the page from being included in Yahoo's index
 
 These values should be included in the content attribute and should be separated by a space. These values are case-insensitive, so follow markup standards and use all lowercase letters.
 
 Example:
-	<meta name="robots" content="noodp, noydir" />
+```html
+<meta name="robots" content="noodp, noydir" />
+```
 
 ###Canonical Link
 
-Content management systems may serve the same content at different URLs, but only one URL is the “real” — or "canonical" — page. Use a link element with rel="canonical" to specify the one true page URL for Google.
+Content management systems may serve the same content at different URLs, but only one URL is the "real" or "canonical" page. Use a link element with rel="canonical" to specify the one true page URL for Google.
 
 Example:
-	<link rel="canonical" href="http://www.domain.com/path/page/" />
+```html
+<link rel="canonical" href="http://www.domain.com/path/page/" />
+```
 
 ###Anchors
 
@@ -60,44 +64,56 @@ Anchors should be marked up according to the HTML Coding Guidelines. That is usu
 Anchors should always use a unique, descriptive label. This aids accessibility for all users — especially those using assistive-technology — as well as search engines. Labels such as "click here" and "read more" should be avoided in favor of labels that include some description of the content.
 
 Bad Example:
-	Products & Services <a href="url">more</a>
+```html
+Products & Services <a href="url">more</a>
+```
 
 Good Example:
-	<a href="url">More about Products & Services</a>
+```html
+<a href="url">More about Products & Services</a>
+```
 
 ####NOFOLLOW
 
 The rel attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, rel="nofollow" should be used to prevent spidering of anchors that link to unreleated domains. 
 
 Example:
-	<a href="http://www.yahoo.com" rel="nofollow">Yahoo.com</a>
+```html
+<a href="http://www.yahoo.com" rel="nofollow">Yahoo.com</a>
+```
 
 ###Headings
 
 Proper use of HTML headings is crucial to not only a well-formed and semantically-structured document, but also to the ease with which a web crawler determines the relevance of content to a search query. Headings should follow these guidelines:
 
-* <h1>: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an <h1> on index pages. The <h1> should not be used as a wrapper for the site logo image. Only one <h1> should appear on a page.
-* <h2>: used for top-level headings, typically section or module titles
-* <h3> through <h6>: used as appropriate in a hierarchical manner
+* `<h1>`: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an <h1> on index pages. The `<h1>` should not be used as a wrapper for the site logo image. Only one `<h1>` should appear on a page.
+* `<h2>`: used for top-level headings, typically section or module titles
+* `<h3>` through `<h6>`: used as appropriate in a hierarchical manner
 
 ###Site Logo
 
 The site logo which appears in the header should be marked up as standard text inside of a <div>. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which text-indent is the most reliable.
 
 Example:
-	<div class="logo">Brand or Company Name</div>
+```html
+<div class="logo">Brand or Company Name</div>
+```
 
 ###Images
 
 All image elements should contain the alt attribute with a value that describes the image. This value will typically come from a CMS or data feed. Do not specify a title attribute on an image.
 
 Example:
-	<img src="image.jpg" alt="The Liberty Bell" />
+```html
+<img src="image.jpg" alt="The Liberty Bell" />
+```
 
 In many cases, an image will be displayed directly adjacent to a link or heading which describes the image. When this occurs, it is best to leave the alt attribute blank to prevent screen readers from reading the same text multiple times.
 
 Example:
-	<img src="blah.jpg" alt="" />
+```html
+<img src="blah.jpg" alt="" />
+```
 
 ###Navigation
 
@@ -108,21 +124,22 @@ Navigation should appear in the document source/DOM in its natural place, usuall
 Each page should contain navigation to all other pages. These pages should be linked by numbers presented in an unordered list element.
 
 Example:
-	<ul>
-		<li class="first"><a href="#">1</a></li>
-	    <li><a href="#">2</a></li>
-		<li class="selected">3</li>
-		<li><a href="#">4</a></li>
-		<li><a href="#">5</a></li>
-		<li><a href="#">6</a></li>
-	</ul>
+```html
+<ul>
+	<li class="first"><a href="#">1</a></li>
+    <li><a href="#">2</a></li>
+	<li class="selected">3</li>
+	<li><a href="#">4</a></li>
+	<li><a href="#">5</a></li>
+	<li><a href="#">6</a></li>
+</ul>
+```
 
 The currently selected page (page 3 in the above example) should not be linked. This type of navigation typically renders horizontally with dividers between the numbers.
 
-Example:
-	1 | 2 | 3 | 4 | 5 | 6 
+Example: `1 | 2 | 3 | 4 | 5 | 6`
 
-NOTE: Do not use a vertical bar character ( | ) to separate the numbers. Use the CSS border property to apply the divider.
+NOTE: Do not use a vertical bar character `|` to separate the numbers. Use the CSS border property to apply the divider.
 
 ##Domains and URLs
 
@@ -135,9 +152,11 @@ URLs should be kept as short as possible and should use as few subdirectories as
 This is a text file that lives in the web root of the site and instructs a web crawler about which pages that it should not index. Ensure that experimental or testing pages have an entry in robots.txt.
 
 Example:
+```html
 User-agent: *
 Disallow: /adtest/
 Disallow: /styleguide/
+```
 
 ###Redirects
 
@@ -147,7 +166,9 @@ It may sometimes be necessary to move a page to a new URL, in which case the old
 
 Optimization techniques require that static assets, such as JavaScript, style sheets and images be stored on a content delivery network (CDN) that is referenced via a cookie-less subdomain or alternate domain name. 
 
+```html
 <img src="http://cdn.domain.com/assets/image.jpg" alt="" />
+```
 
 ##Sitemaps
 
