@@ -183,3 +183,4 @@ All sites should contain a sitemap page that links to all of the major section i
 An XML sitemap provides links to every page on a site, including articles and videos. Do not manually create XML sitemaps; most content management systems can produce these either natively or via a plugin. 
 
 XML sitemaps are limited to 50,000 URLs or 10MB. A sufficiently large site must use a sitemap index file that links to individual sitemaps of up to 50,000 URLs each.
+
