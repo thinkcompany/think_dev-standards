@@ -139,13 +139,13 @@ The currently selected page (page 3 in the above example) should not be linked. 
 
 Example: `1 | 2 | 3 | 4 | 5 | 6`
 
-NOTE: Do not use a vertical bar character `|` to separate the numbers. Use the CSS border property to apply the divider.
+NOTE: Do not use a vertical bar (pipe) character `|` to separate the numbers. Use the CSS border property to apply the divider.
 
 ##Domains and URLs
 
 ###Directory Structures
 
-URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). Dynamic pages should contain URLs with semantic, logical categorization of content.
+URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). URLs should be lower-case, with words separated by hyphens, and structured in logical groupings/categorization of content. Dynamically-generated URLs should utilize URL rewriting on the server-side to make URLs easily consumable by search engines.
 
 Bad Example:
 ```html
