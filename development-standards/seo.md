@@ -18,11 +18,11 @@ Special characters, such as a registered trademark symbol, may be used in a titl
 
 ###Meta Elements
 
-There are several meta elements that should be implemented to aid in search engine placement.
+There are several meta elements that should be implemented to aid in search engine placement. The values of the meta element is page-specific, so the site architecture needs to support per-page meta tags.
 
 ####Description
 
-The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and may aid page rank.
+The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and in link descriptions on social sharing sites. The meta description is more important for visitor click-through than page ranking. If no meta decription is provided on a given page, generally search engines will scan the page for the most relevant keywords based on the query, and use the surrounding copy in result pages. 
 
 ####Keywords
 
@@ -48,7 +48,7 @@ Example:
 
 ###Canonical Link
 
-Content management systems may serve the same content at different URLs, but only one URL is the "real" or "canonical" page. Use a link element with rel="canonical" to specify the one true page URL for Google.
+Content management systems may serve the same content at different URLs, but only one URL is the "real" or "canonical" page. Use a link element with `rel="canonical"` to specify the one true page URL for Google.
 
 Example:
 ```html
@@ -75,7 +75,7 @@ Good Example:
 
 ####NOFOLLOW
 
-The rel attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, rel="nofollow" should be used to prevent spidering of anchors that link to unreleated domains. 
+The `rel` attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, `rel="nofollow"` should be used to prevent spidering of anchors that link to unreleated domains. 
 
 Example:
 ```html
@@ -86,13 +86,13 @@ Example:
 
 Proper use of HTML headings is crucial to not only a well-formed and semantically-structured document, but also to the ease with which a web crawler determines the relevance of content to a search query. Headings should follow these guidelines:
 
-* `<h1>`: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an <h1> on index pages. The `<h1>` should not be used as a wrapper for the site logo image. Only one `<h1>` should appear on a page.
+* `<h1>`: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an `<h1>` on index pages. The `<h1>` should not be used as a wrapper for the site logo image. Only one `<h1>` should appear on a page.
 * `<h2>`: used for top-level headings, typically section or module titles
 * `<h3>` through `<h6>`: used as appropriate in a hierarchical manner
 
 ###Site Logo
 
-The site logo which appears in the header should be marked up as standard text inside of a block-level element. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which text-indent is the most reliable.
+The site logo which appears in the header should be marked up as standard text inside of a block-level element. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which `text-indent` is the most reliable.
 
 Example:
 ```html
@@ -108,7 +108,7 @@ Example:
 <img src="image.jpg" alt="The Liberty Bell" />
 ```
 
-In many cases, an image will be displayed directly adjacent to a link or heading which describes the image. When this occurs, it is best to leave the alt attribute blank to prevent screen readers from reading the same text multiple times.
+In many cases, an image will be displayed directly adjacent to a link or heading which describes the image. When this occurs, it is best to leave the `alt` attribute blank to prevent screen readers from reading the same text multiple times.
 
 Example:
 ```html
@@ -148,14 +148,10 @@ NOTE: Do not use a vertical bar (pipe) character `|` to separate the numbers. Us
 URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). URLs should be lower-case, with words separated by hyphens, and structured in logical groupings/categorization of content. Dynamically-generated URLs should utilize URL rewriting on the server-side to make URLs easily consumable by search engines.
 
 Bad Example:
-```html
-www.domain.com/page.php?q=321
-```
+`http://www.domain.com/page.php?q=321`
+
 Good Example:
-Bad Example:
-```html
-www.domain.com/products/product-page/
-```
+`http://www.domain.com/products/product-page/`
 
 
 ###robots.txt
