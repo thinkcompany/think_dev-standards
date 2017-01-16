@@ -145,7 +145,18 @@ NOTE: Do not use a vertical bar character `|` to separate the numbers. Use the C
 
 ###Directory Structures
 
-URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). 
+URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). Dynamic pages should contain URLs with semantic, logical categorization of content.
+
+Bad Example:
+```html
+www.domain.com/page.php?q=321
+```
+Good Example:
+Bad Example:
+```html
+www.domain.com/products/product-page/
+```
+
 
 ###robots.txt
 
