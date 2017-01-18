@@ -26,7 +26,7 @@ Again, the [aXe browser extension](https://www.deque.com/products/axe/#aXeExtens
 
 Ensure that the site's content is announced correctly and can be navigated using screen readers. Use NVDA (with Firefox) and/or JAWS (with Internet Explorer) on Windows as the primary tools for this testing. 
 
-Use VoiceOver doing screen reader testing on a Mac, though NVDA and JAWS on Windows are preferred.
+Use VoiceOver for doing screen reader testing on a Mac, though NVDA and JAWS on Windows are preferred.
 
 [ ] **Ensure appropriate use of ARIA attributes**
 
@@ -48,11 +48,11 @@ When available, test on native devices with as many of the required browser/oper
 
 When native device testing isn't possible, [Browserstack](https://www.browserstack.com) allows us to test additional device, OS, and browser combinations. 
 
-[ ] **Autoprefix CSS**
-
-We like to keep the use of vendor prefixes to a minimum. Using a tool like Autoprefixer allows us to author our CSS without prefixes, and automatically apply only the prefixes needed based on our browser support requirements for each project. An autoprefixer should be included in the build script with appropriate settings for the project. Reach out to your Dev Lead if it has not yet been included and establish with them a plan to set it up.
-
 [ ] **Run visual and functional regression testing**
+
+[ ] **Verify appropriate image formats, according to browser support**
+
+Not all image formats, e.g. WebP, work in all browsers. Make sure that format you are choosing works across the browsers you need to support.
 
 Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
 
@@ -62,7 +62,7 @@ Both visual and functional regression testing can be supported with automation t
 
 It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
 
-When you finish testing each combination, make a comment stating such in the test session. On every QA ticket created, include this information in the description.
+When you finish testing each combination, make a comment stating such in the JIRA test session. On every QA ticket created, include this information in the description.
 
 #Codebase Integrity QA
 
@@ -70,7 +70,7 @@ Codebase Integrity helps keep our repositories and code clean, easy to understan
 
 [ ] **Remove unused assets and scripts from the project**
 
-There are certain files that will never be in a repository. Rendered/compiled files, user generated content, and extremely large images and videos are a couple examples. 
+There are certain files that will never be in a repository. Rendered/compiled files, user generated content, and extremely large images and videos are some examples. 
 
 [ ] **Verify all dependencies are included, and unused dependencies are removed**
 
@@ -103,10 +103,6 @@ No one likes a slow website, in fact a slow website can cost a company a lot of 
 [ ] **Verify that all images/graphics are optimized**
 
 Media assets can contain a lot of extra metadata and file information that isn't necessary. Use the proper tools to remove that data and compress the file down as much as possible. Raster images may require creative direction to meet visual needs and performance budgets.
-
-[ ] **Verify appropriate image formats, according to browser support**
-
-Not all image formats, e.g. WebP, work in all browsers. Make sure that format you are choosing works across the browsers you need to support.
 
 [ ] **Implement CDN (if applicable)**
 
@@ -156,7 +152,7 @@ When handling data that is sent to or from an application, it is important to se
 
 [ ] **Do not include sensitive environment information or credentials in project documents or codebase**
 
-Only keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into Git, remove it from the repositories history.
+Only keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into Git, remove it from the repository's history.
 
 [ ] **Set least privileged access**
 
@@ -208,6 +204,6 @@ Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-v
 
 Lint HTML and CSS as well using these standard tools and our linter configurations.
 
-**Lint back-end code (using tools like PHP Lint)**
+[ ] **Run all code through a linter**
 
-Use a linting process for any code written in additional languages, including PHP.
+Use a linting tool to for any languages included in the project
