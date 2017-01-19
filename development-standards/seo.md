@@ -18,7 +18,7 @@ Special characters, such as a registered trademark symbol, may be used in a titl
 
 ###Meta Elements
 
-There are several meta elements that should be implemented to aid in search engine placement. The values of the meta element is page-specific, so the site architecture needs to support per-page meta tags.
+There are several meta elements that should be implemented to aid in search engine placement. The meta elements are page-specific, so the site architecture needs to support per-page meta tags.
 
 ####Description
 
@@ -145,10 +145,10 @@ NOTE: Do not use a vertical bar (pipe) character `|` to separate the numbers. Us
 
 ###Directory Structures
 
-URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). URLs should be lower-case, with words separated by hyphens, and structured in logical groupings/categorization of content. Dynamically-generated URLs should utilize URL rewriting on the server-side to make URLs easily consumable by search engines.
+URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). URLs should be lower-case, with words separated by hyphens, and structured in logical groupings/categorization of content. Dynamically-generated URLs should utilize URL Rewriting on the server-side to make URLs easily understood by users and search engines.
 
 Bad Example:
-`http://www.domain.com/page.php?q=321`
+`http://www.domain.com/page.php?id=321`
 
 Good Example:
 `http://www.domain.com/products/product-page/`
@@ -156,7 +156,7 @@ Good Example:
 
 ###robots.txt
 
-This is a text file that lives in the web root of the site and instructs a web crawler about which pages that it should not index. Ensure that experimental or testing pages have an entry in robots.txt.
+This is a text file that lives in the web root of the site and instructs a web crawler about which pages that it should not index. Ensure that experimental or testing pages have an entry in `robots.txt`.
 
 Example:
 ```html
@@ -167,7 +167,7 @@ Disallow: /styleguide/
 
 ###Redirects
 
-It may sometimes be necessary to move a page to a new URL, in which case the old URL should redirect to the new URL. This action should be accomplished via the use of a server-side 301 redirect, which will let web crawlers know that the page has moved permanently and that it should index the destination page and not the redirecting page.
+It may sometimes be necessary to move a page to a new URL, in which case the old URL should redirect to the new URL. This action should be accomplished via the use of a server-side HTTP 301 redirect, which will let web crawlers know that the page has moved permanently and that it should index the destination page and not the redirecting page.
 
 ###Content Delivery Networks (CDN)
 
