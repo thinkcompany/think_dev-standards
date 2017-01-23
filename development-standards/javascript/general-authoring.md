@@ -1281,49 +1281,38 @@ var good = new User({
 });
 ```
 
-Use a leading underscore `_` when naming private properties.
-
-```javascript
-// bad
-this.__firstName__ = 'Panda';
-this.firstName_ = 'Panda';
-
-// good
-this._firstName = 'Panda';
-```
-
 To indicate that a variable contains a jQuery object, names should start with a `$`:
 
 ```javascript
 var $email = $("#email");
 ```
 
-When saving a reference to `this` use `_this`.
+If you must reference this, avoid using an alias. Alisases to this are very bug prone.
 
 ```javascript
-// bad
-function() {
-    var self = this;
-    return function() {
-        console.log(self);
-    };
-}
 
-// bad
-function() {
-    var that = this;
-    return function() {
-        console.log(that);
-    };
-}
-
-// good
+// Bad
 function() {
     var _this = this;
     return function() {
         console.log(_this);
     };
 }
+
+//Good: If you can use ES6, use arrow functions to take advantage how it handles lexical scoping
+function() {
+    return () => {
+        console.log(this);
+    };
+}
+
+//Good: If you have can't use ES6
+function() {
+    return function() {
+        console.log(this);
+    }.bind(this);
+}
+
 ```
 
 Name your functions. This is helpful for stack traces.
