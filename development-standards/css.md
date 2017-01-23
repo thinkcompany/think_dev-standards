@@ -172,7 +172,7 @@ Psuedo element selectors should always be prefixed with a single colon.
 
 Poor example:
 ```css
-.bad-example:after {
+.bad-example::after {
 	content: '',
 	display: block;
 	width: 200px;
