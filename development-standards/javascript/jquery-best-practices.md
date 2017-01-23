@@ -40,7 +40,7 @@ Use data attribute selectors over class or ID selectors whenever possible. Altho
 
 ```html
 <div data-selector-name>Select me</div>
-<div data-selector-name='todd'>Select me</div>
+<div data-selector-name="todd">Select me</div>
 ```
 
 ```javascript
@@ -51,7 +51,7 @@ $('[data-selector-name='todd']');
 If performance dictates you must switch to classnames as selectors, use classnames prepended with `js-` to indicate to other authors that it's a functionality hook and not intended to be in the document for styling purposes.
 
 ```html
-<div class='btn js-action'>Click me</div>
+<div class="btn js-action">Click me</div>
 ```
 
 ```javascript
