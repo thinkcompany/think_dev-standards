@@ -1165,10 +1165,10 @@ var totalScore = this.reviewScore + '';
 var totalScore = '' + this.reviewScore;
 
 // bad
-var totalScore = '' + this.reviewScore + ' total score';
+var totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-var totalScore = this.reviewScore + ' total score';
+var totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
