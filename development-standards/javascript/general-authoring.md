@@ -1136,12 +1136,6 @@ var heroes = [
     var name = 'Skywalker';
     return name;
 })();
-
-// good (guards against the function becoming an argument when two files with IIFEs are concatenated)
-;(function() {
-    var name = 'Skywalker';
-    return name;
-})();
 ```
 
 [Read more](http://stackoverflow.com/a/7365214/1712802).
