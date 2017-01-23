@@ -166,6 +166,31 @@ Good examples:
 input[type="text"] {...}
 ```
 
+### Psuedo Element Selectors
+
+Psuedo element selectors should always be prefixed with a single colon. 
+
+Poor example:
+```css
+.bad-example:after {
+	content: '',
+	display: block;
+	width: 200px;
+	height: 1px;
+	background-color: #000;
+}
+```
+Good example:
+```css
+.good-example:after {
+	content: '',
+	display: block;
+	width: 200px;
+	height: 1px;
+	background-color: #000;
+}
+```
+
 ### Properties
 
 #### Declaration Order
