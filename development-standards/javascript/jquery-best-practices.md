@@ -141,7 +141,7 @@ When possible, use a [custom namespace](http://api.jquery.com/event.namespace/) 
 ```javascript
 $("[data-special-link]").on("click.mySpecialClick", myEventHandler); // GOOD
 // Later on, it's easier to unbind just your click event
-$("[data-special-link]").unbind("click.mySpecialClick");
+$("[data-special-link]").off("click.mySpecialClick");
 ```
 
 Use event delegation  when you have to attach same event to multiple elements. Event delegation allows us to attach a single event listener, to a parent element, that will fire for all descendants matching a selector, whether those descendants exist now or are added in the future.
