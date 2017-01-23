@@ -1,10 +1,12 @@
-#SEO Development Standards - DRAFT
+#SEO Development Standards
 
-This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. SEO enhancements also aid in general website accessibility, so there is absolutely no excuse not to implement the guidelines set forth in this document, however any Accessibility Guidelines may override any guidelines set forth for SEO.
+This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. 
+
+SEO enhancements also aid in general website accessibility, so there is absolutely no excuse not to implement the guidelines set forth in this document. However, any [Accessibility Guidelines](accessibility.md) may override any guidelines set forth for SEO.
 
 ##Markup
 
-Developers are expected to write HTML code that conforms to the HTML Coding Guidelines, but they must be extra aware of a subset of HTML elements that are intended to help web crawlers index our sites. This markup is business-critical and should be implemented with the utmost care.
+Developers are expected to write HTML code that conforms to the [HTML Coding Guidelines](html.md), but they must be extra aware of a subset of HTML elements that are intended to help web crawlers index our sites. This markup is business-critical and should be implemented with the utmost care.
 
 ###Title
 
