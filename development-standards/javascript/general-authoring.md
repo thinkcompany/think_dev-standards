@@ -402,7 +402,7 @@ Avoid inline event bindings:
 <button onclick="document.bgColor='lightblue'">Feel Blue</button>
 ```
 
-Avoid binding events to the Window Scroll event or other events that can file multiple times. If you must do so, use [debouncing](https://davidwalsh.name/javascript-debounce-function):
+Avoid binding to events that can fire multiple times. If you must do so, use [debouncing](https://davidwalsh.name/javascript-debounce-function):
 
 ```js 
 //Bad: This is going to fire the event a lot
@@ -413,15 +413,34 @@ window.addEventListener('resize', function() {
 
 //Good: This is using debouncing to only fire every 250ms
 
-var myEfficientFn = debounce(function() {
-	// All the taxing stuff you do
+var windowResizeFn = debounce(function() {
+    console.log('resize');
 }, 250);
 
-window.addEventListener('resize', myEfficientFn);
+window.addEventListener('resize', windowResizeFn);
 
 ```
 
 Always cache the DOM query for the element you are binding to:
+
+```js
+
+// Bad: This will query for the selector everytime
+
+document.getElementById('myDiv').addEventListener('click', function() {
+        console.log('clicked');
+});
+
+// Good: the node is now cached to the $myDiv variable.
+
+var $myDiv = document.getElementById('myDiv');
+
+$myDiv.addEventListener('click', function() {
+        console.log('clicked');
+});
+
+```
+
 
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
