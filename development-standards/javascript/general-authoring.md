@@ -405,13 +405,13 @@ Avoid inline event bindings:
 Avoid binding to events that can fire multiple times. If you must do so, use [debouncing](https://davidwalsh.name/javascript-debounce-function):
 
 ```js 
-//Bad: This is going to fire the event a lot
+// Bad: This is going to fire the event a lot
 
 window.addEventListener('resize', function() {
         console.log('resize');
 });
 
-//Good: This is using debouncing to only fire every 250ms
+// Good: This is using debouncing to only fire every 250ms
 
 var windowResizeFn = debounce(function() {
     console.log('resize');
