@@ -393,6 +393,39 @@ function yup(name, options, args) {
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
+## Event Binding
+
+Avoid inline event bindings:
+
+```html 
+<!-- Bad -->
+<button onclick="document.bgColor='lightblue'">Feel Blue</button>
+```
+
+Avoid binding events to the Window Scroll event or other events that can file multiple times. If you must do so, use [debouncing](https://davidwalsh.name/javascript-debounce-function):
+
+```js 
+//Bad: This is going to fire the event a lot
+
+window.addEventListener('resize', function() {
+        console.log('resize');
+});
+
+//Good: This is using debouncing to only fire every 250ms
+
+var myEfficientFn = debounce(function() {
+	// All the taxing stuff you do
+}, 250);
+
+window.addEventListener('resize', myEfficientFn);
+
+```
+
+Always cache the DOM query for the element you are binding to:
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
 
 ## Properties
 
