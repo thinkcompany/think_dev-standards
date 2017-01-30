@@ -1,6 +1,38 @@
 # Quality Assurance
 
-This set of documents contain the standards for quality assurance at Think Brownstone. There are six primary areas of focus to ensure quality on projects: Accessibility, Browser Compatibility, Codebase Integrity, Performance, Security, and Standards Compliance. It is every developer's responsibilty to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.
+This set of documents contain the standards for quality assurance at Think Brownstone. There are six primary areas of focus to ensure quality on projects: Standards Compliance, Accessibility, Performance, Security, Browser Compatibility, and Codebase Integrity. It is every developer's responsibilty to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.
+
+## Standards Compliance QA
+
+This section ensures that the project adheres to our internal coding standards and code management processes.
+
+[ ] **Verify all code follows the DRY principle**
+
+All code written should comply with the DRY ([don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)) principle.
+
+[ ] **Follow the conventions of the frameworks and libraries included in the project**
+
+When you are using a framework or library, it is a good practice to follow its accepted standards and conventions. 
+
+[ ] **Adhere to the client's desired directory structure and file naming conventions**
+
+Clients may have their own standards for code quality, naming conventions, and directory structure. We need to work within those standards when required.
+
+[ ] **Write HTML/CSS/JavaScript according to our team standards**
+
+Follow our established coding standards documented in this repository. 
+
+[ ] **Document custom functions**
+
+Someone will eventually work with the code you write, so make sure you provide adequate commenting. Function comment blocks, inline comments explaining gotchas, or choices for a solution make everyone's life much easier.
+
+[ ] **Validate HTML/CSS/JavaScript**
+
+Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications.
+
+Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/package/eslint-config-thinkcompany).
+
+Lint HTML and CSS using tools such as [HTMLHint](http://htmlhint.com/) and [CSSLint](http://csslint.net/) along with our linter configurations.
 
 ## Accessibility QA
 
@@ -31,70 +63,6 @@ Use VoiceOver for doing screen reader testing on a Mac, though NVDA and JAWS on 
 [ ] **Ensure appropriate use of ARIA attributes**
 
 Use ARIA attributes as needed to support, but not replace, semantic HTML. ARIA is particularly helpful in support of dynamic content and advanced UI controls. See [Using WAI-ARIA in HTML](https://rawgit.com/w3c/aria-in-html/master/index.html) for more information.
-
-## Browser Compatibility QA
-
-Browsers sometimes decide to implement different standards and support for new and existing web technologies. It is important to test your application on multiple devices, operating systems, and browsers. This helps to ensure the same experience regardless of the device someone is using.
-
-[ ] **Review the browser support requirements**
-
-Make sure the browser/operating system requirements are clearly defined for the project, and follow them when coding and testing. Always test each browser/device/OS combination based on the requirements of the project.
-
-[ ] **Test on native devices when possible**
-
-When available, test on native devices with as many of the required browser/operating systems as possible. Testing on real devices is preferred and yields more accurate results than simulators. 
-
-[ ] **Use Browserstack to test additional platforms/browsers**
-
-When native device testing isn't possible, [Browserstack](https://www.browserstack.com) allows us to test additional device, OS, and browser combinations. 
-
-[ ] **Run visual and functional regression testing**
-
-Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
-
-Both visual and functional regression testing can be supported with automation tools to make the process more efficient and repeatable.
-
-[ ] **Verify appropriate image formats, according to browser support**
-
-Not all image formats, e.g. WebP, work in all browsers. Make sure the format you are choosing works across the browsers you need to support.
-
-[ ] **Document how each browser/OS combination was tested**
-
-It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
-
-When you finish testing each combination, make a comment stating such in the JIRA test session. On every QA ticket created, include this information in the description.
-
-## Codebase Integrity QA
-
-Codebase integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pick up and start coding with.
-
-[ ] **Remove unused assets and scripts from the project**
-
-There are certain files that will never be in a repository. Rendered/compiled files, user generated content, and extremely large images and videos are some examples. 
-
-[ ] **Verify all dependencies are included, and unused dependencies are removed**
-
-If a project cannot run correctly without certain libraries or assets, make sure they are included. Never have a dependency that exists in your local development environment but not in the repository.
-
-Note that we do not store `node_modules` in the repo, only the package.json file that references the modules.
-
-[ ] **Document custom functions**
-
-Someone will eventually work with the code you write, so make sure you provide adequate commenting. Function comment blocks, inline comments explaining gotchas, or choices for a solution make everyone's life much easier.
-
-[ ] **Include pre-compiled source files (Sass/Less) if required**
-
-If a project stipulates the need to include precompiled source files, include them.
-
-[ ] **Verify that file/directory structure is clear, FLAT, and consistent**
-
-Make sure files and folders follow standard naming conventions, are consistent, and match the content inside of them.  A `js` folder will only contain javascript files for example, and a file called `modal.js` will only contain JavaScript for a modal. 
-
-Use as few folders as possible to ensure that the application has a flat file structure.
-
-[ ] **Verify that the project README is complete, and current**
-
-Ensure that the project README file is always current and contains all of the information that a developer needs to get up and running. Include things like prerequisites, build/installation steps, and deployment instructions.
 
 ## Performance QA
 
@@ -172,30 +140,62 @@ Unused code is still vulnerable code. This is especially true with PHP. Most Wor
 
 Metadata will be removed during the image optimization process for SVGs that we create. Any process that allows user SVG uploads should verify that no vulnerabilities are allowed.
 
-## Standards Compliance QA
+## Browser Compatibility QA
 
-This section ensures that the project adheres to our internal coding standards and code management processes.
+Browsers sometimes decide to implement different standards and support for new and existing web technologies. It is important to test your application on multiple devices, operating systems, and browsers. This helps to ensure the same experience regardless of the device someone is using.
 
-[ ] **Verify all code follows the DRY principle**
+[ ] **Review the browser support requirements**
 
-All code written should comply with the DRY ([don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)) principle.
+Make sure the browser/operating system requirements are clearly defined for the project, and follow them when coding and testing. Always test each browser/device/OS combination based on the requirements of the project.
 
-[ ] **Follow the conventions of the frameworks and libraries included in the project**
+[ ] **Test on native devices when possible**
 
-When you are using a framework or library, it is a good practice to follow its accepted standards and conventions. 
+When available, test on native devices with as many of the required browser/operating systems as possible. Testing on real devices is preferred and yields more accurate results than simulators. 
 
-[ ] **Adhere to the client's desired directory structure and file naming conventions**
+[ ] **Use Browserstack to test additional platforms/browsers**
 
-Clients may have their own standards for code quality, naming conventions, and directory structure. We need to work within those standards when required.
+When native device testing isn't possible, [Browserstack](https://www.browserstack.com) allows us to test additional device, OS, and browser combinations. 
 
-[ ] **Write HTML/CSS/JavaScript according to our team standards**
+[ ] **Run visual and functional regression testing**
 
-Follow our established coding standards documented in this repository. 
+Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
 
-[ ] **Validate HTML/CSS/JavaScript**
+Both visual and functional regression testing can be supported with automation tools to make the process more efficient and repeatable.
 
-Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications.
+[ ] **Verify appropriate image formats, according to browser support**
 
-Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/package/eslint-config-thinkcompany).
+Not all image formats, e.g. WebP, work in all browsers. Make sure the format you are choosing works across the browsers you need to support.
 
-Lint HTML and CSS using tools such as [HTMLHint](http://htmlhint.com/) and [CSSLint](http://csslint.net/) along with our linter configurations.
+[ ] **Document how each browser/OS combination was tested**
+
+It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
+
+When you finish testing each combination, make a comment stating such in the JIRA test session. On every QA ticket created, include this information in the description.
+
+## Codebase Integrity QA
+
+Codebase integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pick up and start coding with.
+
+[ ] **Remove unused assets and scripts from the project**
+
+There are certain files that will never be in a repository. Rendered/compiled files, user generated content, and extremely large images and videos are some examples. 
+
+[ ] **Verify all dependencies are included, and unused dependencies are removed**
+
+If a project cannot run correctly without certain libraries or assets, make sure they are included. Never have a dependency that exists in your local development environment but not in the repository.
+
+Note that we do not store `node_modules` in the repo, only the package.json file that references the modules.
+
+[ ] **Include pre-compiled source files (Sass/Less) if required**
+
+If a project stipulates the need to include precompiled source files, include them.
+
+[ ] **Verify that file/directory structure is clear, FLAT, and consistent**
+
+Make sure files and folders follow standard naming conventions, are consistent, and match the content inside of them.  A `js` folder will only contain javascript files for example, and a file called `modal.js` will only contain JavaScript for a modal. 
+
+Use as few folders as possible to ensure that the application has a flat file structure.
+
+[ ] **Verify that the project README is complete, and current**
+
+Ensure that the project README file is always current and contains all of the information that a developer needs to get up and running. Include things like prerequisites, build/installation steps, and deployment instructions.
