@@ -190,11 +190,9 @@ Note that we do not store `node_modules` in the repo, only the package.json file
 
 If a project stipulates the need to include precompiled source files, include them.
 
-[ ] **Verify that file/directory structure is clear, FLAT, and consistent**
+[ ] **Verify that the file/directory structure is clear and consistent**
 
-Make sure files and folders follow standard naming conventions, are consistent, and match the content inside of them.  A `js` folder will only contain javascript files for example, and a file called `modal.js` will only contain JavaScript for a modal. 
-
-Use as few folders as possible to ensure that the application has a flat file structure.
+Make sure files and folders follow standard naming conventions, are consistent, and match the content inside of them.  A `js` folder will only contain javascript files for example, and a file called `modal.js` will only contain JavaScript for a modal.
 
 [ ] **Verify that the project README is complete, and current**
 
