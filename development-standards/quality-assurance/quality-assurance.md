@@ -176,28 +176,26 @@ Metadata will be removed during the image optimization process for SVGs that we 
 
 This section ensures that the project adheres to our internal coding standards and code management processes.
 
-[ ] **Verify all code is DRY-compliant**
+[ ] **Verify all code follows the DRY principle**
 
-Strive to write code as DRY as possible ([Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)).
+All code written should comply with the DRY ([don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)) principle.
 
-[ ] **Follow the conventions of the frameworks/libraries included in the project**
+[ ] **Follow the conventions of the frameworks and libraries included in the project**
 
 When you are using a framework or library, it is a good practice to follow its accepted standards and conventions. 
 
-[ ] **Adhere to client's desired directory structure/file naming conventions**
+[ ] **Adhere to the client's desired directory structure and file naming conventions**
 
-Clients may have their own standards for code quality, conventions, and structure. We need to work within those when required.
+Clients may have their own standards for code quality, naming conventions, and directory structure. We need to work within those standards when required.
 
 [ ] **Write HTML/CSS/JavaScript according to our team standards**
 
-Follow our established coding standards (in this repo!). 
+Follow our established coding standards documented in this repository. 
 
 [ ] **Validate HTML/CSS/JavaScript**
 
-Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications and lint all JavaScript using our shared ESLint configuration.
+Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications.
 
-Lint HTML and CSS as well using these standard tools and our linter configurations.
+Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/package/eslint-config-thinkcompany).
 
-[ ] **Run all code through a linter**
-
-Use a linting tool to for any languages included in the project
+Lint HTML and CSS using tools such as [HTMLHint](http://htmlhint.com/) and [CSSLint](http://csslint.net/) along with our linter configurations.
