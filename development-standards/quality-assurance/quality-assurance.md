@@ -104,6 +104,8 @@ No one likes a slow website. In fact, a slow website can cost a company a lot of
 
 Media assets can contain extra metadata and file information that isn't necessary. Use the proper tools to remove that data and compress the file down as much as possible. Raster images may require creative direction to meet visual needs and performance budgets. 
 
+Whenever possible, image compression should be part of a project's build process to ensure that all files have been optimized. Tools such as [ImageOptim](https://imageoptim.com) for compressing raster images and [SVGO](https://github.com/svg/svgo) for compressing SVG vector files can be integrated into a build process or used on their own.
+
 [ ] **Implement CDN (if applicable)**
 
 If applicable, use a CDN for loading a website's assets. Typically this will be necessary on larger high traffic websites.
