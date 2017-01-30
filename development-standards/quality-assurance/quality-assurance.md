@@ -110,51 +110,51 @@ Whenever possible, image compression should be part of a project's build process
 
 If applicable, use a CDN for loading a website's assets. Typically this will be necessary on larger high traffic websites.
 
-[ ] **Remove unused font weights/character sets from web fonts to conserve bandwidth and eliminate FOUT**
+[ ] **Remove unused font weights and character sets from web fonts to conserve bandwidth and eliminate FOUT**
 
-Large webfont payloads, especially Google Font API calls, can cause flashing of unstyled text. Remove any unused font weights and character sets from their source. 
+Large webfont payloads, especially Google Font API calls, can cause flashing of unstyled text (FOUT). Remove any unused font weights and character sets from their source. 
 
 Also consider [font loading tools](https://github.com/typekit/webfontloader) that provide more control over how webfonts are loaded on the page. 
 
-[ ] **Minimize additional / unused HTTP requests**
+[ ] **Minimize additional or unused HTTP requests**
 
-Browsers can only handle so many requests at a time, the more requests a website has to make, the longer it can take to load. Make sure you aren't requesting unused resources when not necessary. For example, if you are using a WordPress plugin like Gravity Forms, dequeue the scripts it uses except for the page it is called on. 
+Browsers can only handle so many requests at a time; the more requests a website has to make, the longer it can take to load. Make sure you are not requesting resources when they are not needed. For example, if you are using a WordPress plugin like Gravity Forms, dequeue the scripts it uses except for the page it is called on. 
 
 [ ] **Concatenate and minify text-based assets (JavaScript, CSS, etc.)**
 
-To help reduce HTTP calls, use a build tool to concatenate and minify your code. This can be further improved by using a server side compression algorithm like GZIP.
+To help reduce the number and size of HTTP calls, use build tools to concatenate and minify your code. This can be further improved by using a server side compression algorithm like GZIP to reduce file size before being sent to the client.
 
-Use build tools like gulp-sass, Browserify, and Webpack. 
+Use build tools like Sass, Browserify, and Webpack to compile and concatenate source files, and tools like UglifyJS to minify your source code.
 
-[ ] **Run automated performance tests (gulp-louis)**
+[ ] **Run automated performance tests**
 
-Automating performance testing will help identify changes that affect performance during development.
+Automating performance testing done with tools like [Louis](https://github.com/AvraamMavridis/gulp-louis) will help identify changes that affect performance during development.
 
-[ ] **Perform manual test on key pages with WebPageTest/Chrome Dev Tools film strip, document before & after results**
+[ ] **Perform manual tests on key pages with performance testing tools, document before and after results**
 
-Testing pages using tools that show key metrics such as Time To First Byte along a visual representation of the page load process and speed, can help identify areas that need further optimization.
+Performance testing tools that show key metrics such as "time to first byte" along a visual representation of the page load process (e.g. [WebPageTest](https://www.webpagetest.org/), [Google PageSpeed](https://developers.google.com/speed/pagespeed/insights/), Chrome Dev Tools film strip), can help identify areas that need further optimization.
 
-These tools can also point out code that causes poor performance by triggering excessive CPU/painting cycles that can have a negative impact on performance. By specifically mentioning/documenting the results in the Pull Request or commit message for the change, the development team will be made aware of the issue, your solution and how much was performance was improved.
+These tools can also point out code that causes poor performance by triggering excessive CPU/painting cycles that can have a negative impact on performance. By specifically mentioning/documenting the results in the pull request or commit message for the change, the development team will be made aware of the issue, your solution, and how much performance was improved.
 
-[ ] **Choose the most efficient SVG/Icon System approach**
+[ ] **Choose the most efficient SVG icon system approach**
 
-Consider the most appropriate approach for SVG/Icon systems (inline, background, sprites). Project requirements and browser support will influence the approach, but some [SVG Best Practices](https://thinkbrownstone.atlassian.net/wiki/display/DEV/SVG+Best+Practices) are available on our Wiki.
+Consider the most appropriate approach for SVG icon systems (inline, background, sprites). Project requirements and browser support will influence the approach, but some [SVG Best Practices](https://thinkbrownstone.atlassian.net/wiki/display/DEV/SVG+Best+Practices) are available on our Wiki.
 
 ## Security QA
 
-Security is extremely important and something we take very seriously. Take steps to provide safeguards against basic hacks like SQL injections, remote file inclusion, XSS (cross site scripting), and CSRF (cross site request forgery).
+Security is extremely important and something we take very seriously. Take steps to provide safeguards against basic hacks like SQL injections, remote file inclusion, XSS (cross-site scripting), and CSRF (cross-site request forgery).
 
-[ ] **Have a dev lead check code against OWASP standards / best practices**
+[ ] **Have a dev lead check code against OWASP standards and best practices**
 
 [OWASP](https://www.owasp.org/index.php/Main_Page) is a great resource for how to secure code. Have your dev lead look over your code and compare it to their standards and best practices.
 
-[ ] **Secure Input and Output handling**
+[ ] **Secure input and output handling**
 
-When handling data that is sent to or from an application, it is important to secure it. This means checking to make sure data that is going into the system is safe, secure, and valid while also ensuring that the data sent from the system meets that criteria as well. OWASP has guides for [input validation](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) and [data validation](https://www.owasp.org/index.php/Data_Validation).
+When handling data that is sent to or from an application, it is important to secure it. This means checking to make sure data that is going into the system is safe, secure, and valid, while also ensuring that the data sent from the system meets that criteria as well. OWASP has guides for [input validation](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) and [data validation](https://www.owasp.org/index.php/Data_Validation).
 
 [ ] **Do not include sensitive environment information or credentials in project documents or codebase**
 
-Only keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into Git, remove it from the repository's history.
+Keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into version control, remove it from the repository's history.
 
 [ ] **Set least privileged access**
 
@@ -164,13 +164,13 @@ Only people who need access to data, login information, etc. should have access 
 
 Make sure that folders and files have the lowest permissions necessary to run. This will help mitigate remote file inclusions, directory traversal attacks, and jailbreaking.
 
-[ ] **Remove Unused Code**
+[ ] **Remove unused code**
 
 Unused code is still vulnerable code. This is especially true with PHP. Most WordPress, Drupal, and Joomla hacks come from plugins that are deactivated but can still be exploited.
 
 [ ] **Remove metadata from SVGs**
 
-Meta data will be removed during the image optimization process for SVGs that we create. Any process that allows user SVG uploads should verify that no vulnerabilities are allowed.
+Metadata will be removed during the image optimization process for SVGs that we create. Any process that allows user SVG uploads should verify that no vulnerabilities are allowed.
 
 ## Standards Compliance QA
 
