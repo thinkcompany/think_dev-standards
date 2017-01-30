@@ -50,13 +50,13 @@ When native device testing isn't possible, [Browserstack](https://www.browsersta
 
 [ ] **Run visual and functional regression testing**
 
-[ ] **Verify appropriate image formats, according to browser support**
-
-Not all image formats, e.g. WebP, work in all browsers. Make sure that format you are choosing works across the browsers you need to support.
-
 Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
 
 Both visual and functional regression testing can be supported with automation tools to make the process more efficient and repeatable.
+
+[ ] **Verify appropriate image formats, according to browser support**
+
+Not all image formats, e.g. WebP, work in all browsers. Make sure the format you are choosing works across the browsers you need to support.
 
 [ ] **Document how each browser / OS combination was tested**
 
