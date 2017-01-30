@@ -2,7 +2,7 @@
 
 This set of documents contain the standards for quality assurance at Think Brownstone. There are six primary areas of focus to ensure quality on projects: Standards Compliance, Accessibility, Performance, Security, Browser Compatibility, and Codebase Integrity. It is every developer's responsibilty to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.
 
-## Standards Compliance QA
+## Standards Compliance
 
 This section ensures that the project adheres to our internal coding standards and code management processes.
 
@@ -34,7 +34,7 @@ Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/pa
 
 Lint HTML and CSS using tools such as [HTMLHint](http://htmlhint.com/) and [CSSLint](http://csslint.net/) along with our linter configurations.
 
-## Accessibility QA
+## Accessibility
 
 Accessibility allows users with disabilities to use a website by providing better context for the content they are interacting with. That could mean adding alt text to an image so that a screen reader can describe the image to a user or providing closed captioning on a video. 
 
@@ -64,7 +64,7 @@ Use VoiceOver for doing screen reader testing on a Mac, though NVDA and JAWS on 
 
 Use ARIA attributes as needed to support, but not replace, semantic HTML. ARIA is particularly helpful in support of dynamic content and advanced UI controls. See [Using WAI-ARIA in HTML](https://rawgit.com/w3c/aria-in-html/master/index.html) for more information.
 
-## Performance QA
+## Performance
 
 No one likes a slow website. In fact, a slow website can cost a company a lot of money. Performance tuning is important, and there are a lot of ways you can achieve (or hinder) it. 
 
@@ -108,7 +108,7 @@ These tools can also point out code that causes poor performance by triggering e
 
 Consider the most appropriate approach for SVG icon systems (inline, background, sprites). Project requirements and browser support will influence the approach, but some [SVG Best Practices](https://thinkbrownstone.atlassian.net/wiki/display/DEV/SVG+Best+Practices) are available on our Wiki.
 
-## Security QA
+## Security
 
 Security is extremely important and something we take very seriously. Take steps to provide safeguards against basic hacks like SQL injections, remote file inclusion, XSS (cross-site scripting), and CSRF (cross-site request forgery).
 
@@ -140,7 +140,7 @@ Unused code is still vulnerable code. This is especially true with PHP. Most Wor
 
 Metadata will be removed during the image optimization process for SVGs that we create. Any process that allows user SVG uploads should verify that no vulnerabilities are allowed.
 
-## Browser Compatibility QA
+## Browser Compatibility
 
 Browsers sometimes decide to implement different standards and support for new and existing web technologies. It is important to test your application on multiple devices, operating systems, and browsers. This helps to ensure the same experience regardless of the device someone is using.
 
@@ -172,7 +172,7 @@ It is important to document your testing methods. Doing so allows us to account 
 
 When you finish testing each combination, make a comment stating such in the JIRA test session. On every QA ticket created, include this information in the description.
 
-## Codebase Integrity QA
+## Codebase Integrity
 
 Codebase integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pick up and start coding with.
 
