@@ -58,7 +58,7 @@ Both visual and functional regression testing can be supported with automation t
 
 Not all image formats, e.g. WebP, work in all browsers. Make sure the format you are choosing works across the browsers you need to support.
 
-[ ] **Document how each browser / OS combination was tested**
+[ ] **Document how each browser/OS combination was tested**
 
 It is important to document your testing methods. Doing so allows us to account for the changes made and be aware of any other testing that may need to be performed.
 
@@ -66,7 +66,7 @@ When you finish testing each combination, make a comment stating such in the JIR
 
 ## Codebase Integrity QA
 
-Codebase Integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pick up and start coding with.
+Codebase integrity helps keep our repositories and code clean, easy to understand, and dead simple for anyone to pick up and start coding with.
 
 [ ] **Remove unused assets and scripts from the project**
 
@@ -74,13 +74,13 @@ There are certain files that will never be in a repository. Rendered/compiled fi
 
 [ ] **Verify all dependencies are included, and unused dependencies are removed**
 
-If a project cannot run correctly without certain libraries or assets, make sure they are included. Never have a dependency that exists on your local development environment but not in the repository.
+If a project cannot run correctly without certain libraries or assets, make sure they are included. Never have a dependency that exists in your local development environment but not in the repository.
 
 Note that we do not store `node_modules` in the repo, only the package.json file that references the modules.
 
 [ ] **Document custom functions**
 
-Someone will eventually work with the code you write, make sure you provide adequate commenting. Function comment blocks, inline comments explaining gotchas, or choices for a solution make everyone's life much easier.
+Someone will eventually work with the code you write, so make sure you provide adequate commenting. Function comment blocks, inline comments explaining gotchas, or choices for a solution make everyone's life much easier.
 
 [ ] **Include pre-compiled source files (Sass/Less) if required**
 
@@ -94,15 +94,15 @@ Use as few folders as possible to ensure that the application has a flat file st
 
 [ ] **Verify that the project README is complete, and current**
 
-Ensure that the project README file is always current and contains all of the information that a developer needs to get up and running. Include things like prerequisites, build/installation steps, along with deployment instructions.
+Ensure that the project README file is always current and contains all of the information that a developer needs to get up and running. Include things like prerequisites, build/installation steps, and deployment instructions.
 
 ## Performance QA
 
-No one likes a slow website, in fact a slow website can cost a company a lot of money. Performance tuning is important, and there are a lot of ways you can achieve (or hinder) it. 
+No one likes a slow website. In fact, a slow website can cost a company a lot of money. Performance tuning is important, and there are a lot of ways you can achieve (or hinder) it. 
 
 [ ] **Verify that all images/graphics are optimized**
 
-Media assets can contain a lot of extra metadata and file information that isn't necessary. Use the proper tools to remove that data and compress the file down as much as possible. Raster images may require creative direction to meet visual needs and performance budgets.
+Media assets can contain extra metadata and file information that isn't necessary. Use the proper tools to remove that data and compress the file down as much as possible. Raster images may require creative direction to meet visual needs and performance budgets. 
 
 [ ] **Implement CDN (if applicable)**
 
