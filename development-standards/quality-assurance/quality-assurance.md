@@ -14,13 +14,13 @@ For more information, see [WebAIM's Keyboard Accessibility recommendations](http
 
 [ ] **Perform manual and automated accessibility testing on compiled HTML**
 
-The [aXe browser extension](https://www.deque.com/products/axe/#aXeExtensions) for Chrome or Firefox is a good choice for this testing. It is also available as a library that integrates with automated testing scripts.
+The [aXe browser extension](http://www.deque.com/products/axe/) for Chrome or Firefox is a good choice for this testing. It is also available as a library that integrates with automated testing scripts.
 
 [ ] **Perform manual and automated color accessibility testing**
 
-Certain combinations of colors are difficult to see for people with various visual disabilities. Look for obvious instances of this and then use automated process to find the rest.
+Certain combinations of colors are difficult to see for people with various visual disabilities. Look for obvious instances of this and then use automated processes to find the rest.
 
-Again, the [aXe browser extension](https://www.deque.com/products/axe/#aXeExtensions) for Chrome or Firefox is a good choice of tool for color contrast testing.
+Again, the [aXe browser extension](http://www.deque.com/products/axe/) for Chrome or Firefox is a good choice of tool for color contrast testing.
 
 [ ] **Test manually with screen readers**
 
