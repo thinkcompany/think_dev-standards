@@ -176,10 +176,6 @@ Metadata will be removed during the image optimization process for SVGs that we 
 
 This section ensures that the project adheres to our internal coding standards and code management processes.
 
-[ ] **Adhere to code review process**
-
-Part of our git flow process includes using pull requests, and subsequent code reviews, prior to merging code into the main development branch.
-
 [ ] **Verify all code is DRY-compliant**
 
 Strive to write code as DRY as possible ([Don't repeat yourself](https://en.wikipedia.org/wiki/Don't_repeat_yourself)).
