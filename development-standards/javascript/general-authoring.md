@@ -312,9 +312,10 @@ This convention works well with JavaScript because in JavaScript, functions and 
 If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
 
 ```javascript
-    div.onclick = function (e) {
-        return false;
-    };
+    div.addEventListener('click', function(e) {
+        console.log('hello');
+    }, false);
+    
     that = {
         method: function () {
             return this.datum;
