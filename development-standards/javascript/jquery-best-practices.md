@@ -42,9 +42,10 @@ Use data attribute selectors over class or ID selectors whenever possible. Altho
 <div data-selector-name>Select me</div>
 <div data-selector-name="todd">Select me</div>
 ```
+
 ```javascript
 $('[data-selector-name]');
-$('[data-selector-name="todd"]');
+$('[data-selector-name='todd']');
 ```
 
 If performance dictates you must switch to classnames as selectors, use classnames prepended with `js-` to indicate to other authors that it's a functionality hook and not intended to be in the document for styling purposes.
@@ -52,10 +53,10 @@ If performance dictates you must switch to classnames as selectors, use classnam
 ```html
 <div class="btn js-action">Click me</div>
 ```
+
 ```javascript
 $('.js-action');
 ```
-
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
@@ -63,16 +64,18 @@ $('.js-action');
 ## Determine jQuery Objects
 
 Determine if an object is a jQuery object:
+
 ```javascript
 // bad (fast)
-if( obj.jquery ){}
+if ( obj.jquery ){}
 
 // good (slow)
-if( obj instanceof jQuery){}
+if ( obj instanceof jQuery){}
 ```
 
 Prefix jQuery object variables with a `$`.
 The dollar notation on all jQuery-related variables helps us easily distinguish jQuery variables from standard JavaScript variables at a glance.
+
 ```js
 // bad
 var sidebar = $('.sidebar');
@@ -90,6 +93,7 @@ var $this = $(this);
 ## Document Ready
 
 Begin executing statements with jQuery as soon as the DOM is ready:
+
 ```javascript
 // bad
 $(function() {
@@ -109,45 +113,49 @@ Use only one Document Ready handler per page. It makes it easier to debug and ke
 ## Event Bind / Live / Delegate
 
 `.bind()` is deprecated -- use `.on()` to start listening for events:
+
 ```javascript
 // bad
-$( "#members li a" ).bind( "click", function( e ) {} ); 
+$( '#members li a' ).bind( 'click', function( e ) {} ); 
 
 // better
-$( "#members li a" ).click( function( e ) {} ); 
+$( '#members li a' ).click( function( e ) {} ); 
 
 // good
-$( "#members li a" ).on( "click", function( e ) {} ); 
+$( '#members li a' ).on( 'click', function( e ) {} ); 
 ```
 
 Use the `.on()` method in lieu of deprecated `.live()` and `.delegate()` methods:
+
 ```javascript
 // bad, .live() deprecated jQuery 1.7, removed jQuery 1.9
-$( "#members li a" ).live( "click", function( e ) {} );
+$( '#members li a' ).live( 'click', function( e ) {} );
 
 // good
-$( document ).on( "click", "#members li a", function( e ) {} ); 
+$( document ).on( 'click', '#members li a', function( e ) {} ); 
 ```
 
 ```javascript
 // bad, as of jQuery 1.7, .delegate() has been superseded by the .on() method
-$( "#members" ).delegate( "li a", "click", function( e ) {} );
+$( '#members' ).delegate( 'li a', 'click', function( e ) {} );
 
 // good
-$( "#members" ).on( "click", "li a", function( e ) {} ); 
+$( '#members' ).on( 'click', 'li a', function( e ) {} ); 
 ```
 
 When possible, use a [custom namespace](http://api.jquery.com/event.namespace/) for events. It's easier to unbind the exact event that you attached without affecting other events bound to the DOM element.
+
 ```javascript
-$("[data-special-link]").on("click.mySpecialClick", myEventHandler); // GOOD
+$('[data-special-link]').on('click.mySpecialClick', myEventHandler); // GOOD
 // Later on, it's easier to unbind just your click event
-$("[data-special-link]").unbind("click.mySpecialClick");
+$('[data-special-link]').unbind('click.mySpecialClick');
 ```
 
 Use event delegation  when you have to attach same event to multiple elements. Event delegation allows us to attach a single event listener, to a parent element, that will fire for all descendants matching a selector, whether those descendants exist now or are added in the future.
+
 ```javascript
-$("[data-special-list] a").on("click", myClickHandler); // BAD, you are attaching an event to all the links under the list.
-$("[data-special-list]").on("click", "a", myClickHandler); // GOOD, only one event handler is attached to the parent.
+$('[data-special-list] a').on('click', myClickHandler); // BAD, you are attaching an event to all the links under the list.
+$('[data-special-list]').on('click', 'a', myClickHandler); // GOOD, only one event handler is attached to the parent.
 ```
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
@@ -159,24 +167,24 @@ Don't use `return false` to halt the default action of an event:
 
 ```javascript
 // bad
-$(".btn").click(function(event){
+$('.btn').click(function(event){
     // @more: http://fuelyourcoding.com/jquery-events-stop-misusing-return-false/
     return false;
 });
 
 // good
-$(".btn").click(function(event){
+$('.btn').click(function(event){
     event.preventDefault();
 });
 
 // good
-$(".btn").click(function(event){
+$('.btn').click(function(event){
     event.preventDefault();
     event.stopImmediatePropagation()
 });
 
 // good
-$(".btn").click(function(event){
+$('.btn').click(function(event){
     event.stopPropagation();
     event.preventDefault();
     event.stopImmediatePropagation();
@@ -224,6 +232,7 @@ $([data-change-appearance]).show();
 $([data-change-appearance]).addClass('hidden');
 $([data-change-appearance]).removeClass('hidden');
 ```
+
 ```javascript
 // No
 $([data-change-appearance]).css({'color: red, 'font-weight': 'bold'});
@@ -247,13 +256,13 @@ Instead of concatenating request parameters in your URL, send them using the dat
 ```javascript
 // Less readable...
 $.ajax({
-    url: "something.php?param1=test1&param2=test2",
+    url: 'something.php?param1=test1&param2=test2',
     ....
 });
  
 // More readable...
 $.ajax({
-    url: "something.php",
+    url: 'something.php',
     data: { param1: test1, param2: test2 }
 });
 ```
@@ -265,11 +274,11 @@ Sample AJAX template using the Promise interface:
 ```javascript
 var jqxhr = $.ajax({
     url: url,
-    type: "GET", // default is GET but you can use other verbs based on your needs.
+    type: 'GET', // default is GET but you can use other verbs based on your needs.
     cache: true, // default is true, but false for dataType 'script' and 'jsonp', so set it on need basis.
     data: {}, // add your request parameters in the data object.
-    dataType: "json", // specify the dataType for future reference
-    jsonp: "callback", // only specify this to match the name of callback parameter your API is expecting for JSONP requests.
+    dataType: 'json', // specify the dataType for future reference
+    jsonp: 'callback', // only specify this to match the name of callback parameter your API is expecting for JSONP requests.
     statusCode: { // if you want to handle specific error codes, use the status code mapping settings.
         404: handler404,
         500: handler500
@@ -285,6 +294,7 @@ jqxhr.fail(failureHandler);
 ## Element Create
 
 Create an element dynamically:
+
 ```javascript
 // bad
 $('<a/>')  
@@ -309,6 +319,7 @@ $('<a/>', {
 ## Element Exists
 
 Check to see if an element exists:
+
 ```javascript
 // bad
 if ($('#myElement')[0]) {  
@@ -379,6 +390,7 @@ $($sidebar[0]).find('ul');
 ``` 
 ###Event Delegation
 Use `event delegation` with list of elements.
+
 ```html
 <ul>
   <li>list1</li>
@@ -391,13 +403,13 @@ Use `event delegation` with list of elements.
 
 ```javascript
 // bad
-$("ul li").on("click", function() {
-    $(this).text("aha");
+$('ul li').on('click', function() {
+    $(this).text('aha');
 });
 
 // good
-$("ul").on("click", "li", function() {
-    $(this).text("aha");
+$('ul').on('click', 'li', function() {
+    $(this).text('aha');
 });
 ```
 
@@ -405,32 +417,32 @@ $("ul").on("click", "li", function() {
 Always detach any existing element before manipulation and attach it back after manipulating it. [More info](http://learn.jquery.com/performance/detach-elements-before-work-with-them/)
 
 ```javascript
-var $myList = $("[data-my-list]").detach();
+var $myList = $('[data-my-list]').detach();
 //...a lot of complicated things on $myList
-$myList.appendTo("[data-my-list-container]");
+$myList.appendTo('[data-my-list-container]');
 ```
 
 ###Prefer string concatenation or `array.join()` over `.append()`
 [Performance comparison](http://jsperf.com/jquery-append-vs-string-concat)
 ```javascript
 // BAD
-var $myList = $("#list");
+var $myList = $('#list');
 for(var i = 0; i < 10000; i++){
-    $myList.append("<li>"+i+"</li>");
+    $myList.append('<li>'+i+'</li>');
 }
  
 // GOOD
-var $myList = $("#list");
-var list = "";
+var $myList = $('#list');
+var list = '';
 for(var i = 0; i < 10000; i++){
-    list += "<li>"+i+"</li>";
+    list += '<li>'+i+'</li>';
 }
 $myList.html(list);
  
 // EVEN FASTER
 var array = []; 
 for(var i = 0; i < 10000; i++){
-    array[i] = "<li>"+i+"</li>"; 
+    array[i] = '<li>'+i+'</li>'; 
 }
 $myList.html(array.join(''));
 ```
@@ -475,7 +487,8 @@ promise.js
 
 There are some kinds of jQuery plugins:
 
-`$.pluginName( { name:"value" } );` Attach to $ because they did not want to create a global, but just indicate it is jQuery-related functionality. They do not do anything with node lists though. 
+`$.pluginName( { name:'value' } );` Attach to $ because they did not want to create a global, but just indicate it is jQuery-related functionality. They do not do anything with node lists though. 
+
 ```javascript
 // pluginName.js
 
@@ -494,7 +507,8 @@ There are some kinds of jQuery plugins:
 })
 ```
 
-`$(".foo").pluginName( { name:"value" } );` Attach to $.fn because they want to participate in the chained API style when operating with a node list. 
+`$('.foo').pluginName( { name:'value' } );` Attach to $.fn because they want to participate in the chained API style when operating with a node list. 
+
 ```javascript
 // pluginName.js
 
@@ -518,7 +532,8 @@ There are some kinds of jQuery plugins:
 })
 ```
 
-`$.ajax( { dataType:"jsonpi" } );`  custom jQuery ajax request http://api.jquery.com/extending-ajax/
+`$.ajax( { dataType:'jsonpi' } );`  custom jQuery ajax request http://api.jquery.com/extending-ajax/
+
 ```javascript
 // pluginName.js
 
@@ -536,6 +551,7 @@ There are some kinds of jQuery plugins:
 ```
 
 `$( 'div:inline' );`  custom jQuery selector
+
 ```javascript
 // pluginName.js
 
@@ -556,6 +572,7 @@ There are some kinds of jQuery plugins:
 ```
 
 `$( '#element' ).on('cumstomEvent', function(){});`  custom jQuery Event
+
 ```javascript
 // pluginName.js
 
@@ -590,14 +607,15 @@ There are some kinds of jQuery plugins:
     };
 
     // bind custom event
-    $("#element").on("customEventName.myNamespace", function(evt) {});
+    $('#element').on('customEventName.myNamespace', function(evt) {});
     // remove all events under the myNamespace namespace
-    $("#element").off(".myNamespace");
+    $('#element').off('.myNamespace');
 
 })
 ```
 
 `$( 'textarea.foo' ).val();`  custom form element value hook
+
 ```javascript
 // valHooks.js
 
@@ -609,7 +627,7 @@ There are some kinds of jQuery plugins:
 
     $.valHooks.textarea = {
         get: function( elem ) {
-            return elem.value.replace( /\r?\n/g, "\r\n" );
+            return elem.value.replace( /\r?\n/g, '\r\n' );
         }
     };
 
