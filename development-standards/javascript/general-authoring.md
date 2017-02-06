@@ -312,9 +312,10 @@ This convention works well with JavaScript because in JavaScript, functions and 
 If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
 
 ```javascript
-    div.onclick = function (e) {
-        return false;
-    };
+    div.addEventListener('click', function(e) {
+        console.log('hello');
+    }, false);
+    
     that = {
         method: function () {
             return this.datum;
@@ -1136,12 +1137,6 @@ var heroes = [
     var name = 'Skywalker';
     return name;
 })();
-
-// good (guards against the function becoming an argument when two files with IIFEs are concatenated)
-;(function() {
-    var name = 'Skywalker';
-    return name;
-})();
 ```
 
 [Read more](http://stackoverflow.com/a/7365214/1712802).
@@ -1165,10 +1160,10 @@ var totalScore = this.reviewScore + '';
 var totalScore = '' + this.reviewScore;
 
 // bad
-var totalScore = '' + this.reviewScore + ' total score';
+var totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-var totalScore = this.reviewScore + ' total score';
+var totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
