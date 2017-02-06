@@ -6,6 +6,7 @@
   1. [Objects](#markdown-header-objects)
   1. [Arrays](#markdown-header-arrays)
   1. [Strings](#markdown-header-strings)
+  1. [JSON](#markdown-header-json)
   1. [Functions](#markdown-header-functions)
   1. [Properties](#markdown-header-properties)
   1. [Variables](#markdown-header-variables)
@@ -247,6 +248,25 @@ function inbox(messages) {
 ```
 
 
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
+## JSON
+
+A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
+
+```json
+{
+    "id" : 148372,
+    "title" : "Learn Javascript",
+    "tags" : [
+        "javascript", 
+        "programming"
+    ],
+    "in-stock": true,
+    "price": 22.50
+}
+
+```
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
 
