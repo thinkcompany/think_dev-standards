@@ -186,11 +186,17 @@ A third method that can be use to include instructional information from outside
 
 ### Required Fields
 
-Like Instructional Text, making certain form fields "required" is an important way to control user behavior within a form. We add the ```required``` (with no value) attribute to the form control. This is enough in most cases, but occasionally browsers also require ```aria-required="true"``` on the form control.
+Like Instructional Text, making certain form fields "required" is an important way to control user behavior within a form. We add the ```required``` (with no value) attribute to the form control. This is enough in most cases, but occasionally browsers also require ```aria-required="true"``` on the form control. If possible, make it explicit that the field is required with instructional text.
 
 ### Disabled Form Elements
 
+A disabled element needs to be clearly indicated to all users, else it will confuse both a screen reader and/or the user.
+
 ### Validation
+
+The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats, etc. Beyond that with HTML5, input types typicaly have builit in validation methods,
+
+// TODO
 
 ### Error Handling
 
