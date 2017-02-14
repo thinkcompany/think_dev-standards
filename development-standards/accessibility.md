@@ -97,6 +97,20 @@ In order to hide this element from regular users while maintaining it's function
 
 ## Actionable Elements
 
+Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
+
+It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as ```aria-haspopup```, ```aria-expanded```, and ```aria-hidden``` that inform the screen reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu.
+
+    var ariaExpand = function ($trigger, $menu) {
+        $trigger.attr('aria-expanded', 'true');
+        $menu.attr('aria-hidden', 'false');
+    };
+
+    var ariaContract = function ($trigger, $menu) {
+        $trigger.attr('aria-expanded', 'false');
+        $menu.attr('aria-hidden', 'true');
+    };
+
 ### Events
 
 ### Buttons
