@@ -174,9 +174,15 @@ There are additional ways that the details/restrictions of a form can be indicat
 
 A list of rules about input format, password requirements, required inputs and other rules might be made explicit in a list preceding the entire form.
 
-Alternatively, the label might this information for a specific form control:
+Alternatively, the label might include information for a specific form control:
 
     <label for="pw">Password (min. 8 characters)</label><input type="password" id="pw">
+
+A third method that can be use to include instructional information from outside of the label. When using this method, we need the aria-describedby attribute to make explicit the relationship between the instructions and the control.
+
+    <label for="birthday">Expiration date:</label>
+    <input type="text" id="birthday" aria-describedby="date-format">
+    <span id="date-format">MM/YYYY</span>
 
 ### Required Fields
 
