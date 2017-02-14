@@ -74,12 +74,26 @@ It's important to address font-size choices with CSS. Do not use an ```<h5>``` f
     <h3>Apple</h3>
     <p>A round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
 
-
 #### Paragraphs
 
 #### Lists
 
+When creating a list on your page, know that screen readers benefit from well-formatted semantically structured lists using ```ol```, ```ul```, ```dl```, and ```li``` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
+
 #### Skip Navigation
+
+Keyboard and screen reader users start at the beginning of the page and wade through the content sequentially. Sometimes, this means wading through numerous menus, navigation links or other sections before arriving at the main content. For some users, this is a major inconvenience. A "Skip Navigation" link provides the opportunity to bypass all of that and relocate the focus of the assistive technology to the main content of the page.
+
+In content, it might look like:
+
+    <body>
+        <a href="#maincontent">Skip to main content</a>
+        ... 3 Menus, a search bar, etc.
+        <main id="maincontent>
+            <h1>Heading</h1>
+            <p>This is the first paragraph</p>
+
+In order to hide this element from regular users while maintaining it's functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
 
 ## Actionable Elements
 
