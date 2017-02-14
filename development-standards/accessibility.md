@@ -43,6 +43,8 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ### Document Structure & Semantics
 
+Good, semantic structure of your document can be a great asset to accessibility. Page structure informs screen readers of the order through which to present the information on the page, and thus proper semantic page structure will guide the user easily and intuitively through the site.
+
 #### Initial Markup
 
 ##### Language and Localization
@@ -54,6 +56,24 @@ This list covers a great deal of users with disabilities, but there are those wh
 #### Semantics
 
 #### Headings
+
+Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using ```<h1...6>``` tags anywhere on the page, but semantically it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
+
+An ```<h1>``` tags should appear no more than once per page, typically containing a kind of page title. ```<h2>``` tags appear often as the title of a section of the page, like a hero or sidebar.
+
+It's important to address font-size choices with CSS. Do not use an ```<h5>``` for you page title just because it should be smaller.
+
+**Bad**:
+
+**Good**:
+
+    <h1>What People Eat</h1>
+    <p>Information about the food people eat.</p>
+    <h2>Fruit</h2>
+    <p>Sweet and often juicy food that grows on plants</p>
+    <h3>Apple</h3>
+    <p>A round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
+
 
 #### Paragraphs
 
