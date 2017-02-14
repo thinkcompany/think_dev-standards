@@ -111,54 +111,72 @@ Some specific things to make note of when using the alt attribute.
 
 Forms are composed of controls (input, select, textarea), and descriptions/labels of the controls. An accessible form provides a logical, easy to follow user flow which requires grouping of thematically related controls, and associated labels for every individual control or group.
 
-Placeholders attributes are not sufficient substitutes for labels. Screen readers depend on an explicit label in nearly all cases.
+### Labels
+
+As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive ```<label>```, and each ```<fieldset>``` should include a description of the grouping in a ```<legend>``` tag. Placeholder attributes are not sufficient substitutes for labels. Screen readers depend on an explicit label in nearly all cases.
 
 **Bad**:
 
-    <form action="post">
-        <input type="text" placeholder="First Name">
-
-        <label for="fav-food">Favorite Food</label>
-        <label for="avocado"> Avocado Ice Cream </labeL>
-        <input id="avocado" type="radio">
-        <label for="nightshades">Nightshades </labeL>
-        <input id="nightshades" type="radio">
-
-        <input type="text" placeholder="Last Name">
-
-        <input type="number" placeholder="Super Bowl Championships">
-    </form>
+    <input type="text" placeholder="First Name">
+    <input type="text" placeholder="Last Name">
 
 **Good**:
 
-    <form action="post">
-        <label for="first-name">First Name</label>
-        <input id="first-name" type="text" placeholder="Tom...">
-        <label for="last-name">Last Name</label>
-        <input id="last-name" type="text" placeholder="Brady...">
-
-        <fieldset>
-            <legend>Favorite Foods</legend>
-            <label for="avocado-ice-cream">Avocado Ice Cream</label>
-            <input id="avocado-ice-cream" type="radio">
-            <label for="nightshades">Nightshades</label>
-            <input id="nightshades" type="radio">
-        </fieldset>
-
-        <label for="championships">Super Bowl Championships<label>
-        <input id="championships" type="number">
-    </form>
-
-
-### Labels
-
-
+    <label for="first-name">First Name</label>
+    <input id="first-name" type="text" placeholder="Tom...">
+    <label for="last-name">Last Name</label>
+    <input id="last-name" type="text" placeholder="Brady...">
 
 ### Radio Buttons and Checkboxes
 
+Radio buttons and checkboxes are typically thematically grouped, and as such should be nested within a fieldset group. The group should have a descriptive legend.
+
+**Bad**:
+
+    <label for="fav-food">Favorite Food</label>
+    <label for="avocado"> Avocado Ice Cream </labeL>
+    <input id="avocado" type="radio">
+    <label for="nightshades">Nightshades </labeL>
+    <input id="nightshades" type="radio">
+
+
+**Good**:
+
+    <fieldset>
+        <legend>Favorite Foods</legend>
+        <label for="avocado-ice-cream">Avocado Ice Cream</label>
+        <input id="avocado-ice-cream" type="radio">
+        <label for="nightshades">Nightshades</label>
+        <input id="nightshades" type="radio">
+    </fieldset>
+
 ### Select
 
+Select menus should be accompanied by a ```label``` tag, like a simple input should. ```<optgroup>``` tags can be used *like* fieldsets to organize and group thematically related ```<option>```s, which will help improve the overall simplicity of form-flow.
+
+    <label for="movies">Movies</label>
+    <select id="movies">
+        <optgroup label="Comedy">
+            <option value="1">Superbad</option>
+            <option value="5">Shaun of the Dead</option>
+            <option value="7">Zoolander</option>
+        </optgroup>
+        <optgroup label="Horror">
+            <option value="3">Alien</option>
+            <option value="4">Saw II</option>
+            <option value="8">28 Days Later</option>
+        </optgroup>
+    </select>
+
 ### Instructional Form Text
+
+There are additional ways that the details/restrictions of a form can be indicated to the user.
+
+A list of rules about input format, password requirements, required inputs and other rules might be made explicit in a list preceding the entire form.
+
+Alternatively, the label might this information for a specific form control:
+
+    <label for="pw">Password (min. 8 characters)</label><input type="password" id="pw">
 
 ### Required Fields
 
