@@ -20,13 +20,13 @@ Developers should use only those elements and attributes that have semantic valu
 #### Elements
 - `html`, `head`, `title`, `meta`, `body`
 - `script`, `style`, `link`
-- `header`, `footer`, `main`, `section`, `article`, `aside`
+- `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`
 - `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`
 - `ul`, `ol`, `li`
 - `dl`, `dt`, `dd`
 - `a`
 - `em`, `strong`, `ins`, `del`
-- `img`
+- `img`, `figure`, `figcaption`
 - `blockquote`, `cite`, `abbr`
 - `table`, `thead`, `tbody`, `tfoot`, `th`, `tr`, `td`
 - `form`, `fieldset`, `legend`, `label`, `input`, `textarea`, `select`, `button`
