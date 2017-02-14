@@ -109,7 +109,50 @@ Some specific things to make note of when using the alt attribute.
 
 ## Forms
 
+Forms are composed of controls (input, select, textarea), and descriptions/labels of the controls. An accessible form provides a logical, easy to follow user flow which requires grouping of thematically related controls, and associated labels for every individual control or group.
+
+Placeholders attributes are not sufficient substitutes for labels. Screen readers depend on an explicit label in nearly all cases.
+
+**Bad**:
+
+    <form action="post">
+        <input type="text" placeholder="First Name">
+
+        <label for="fav-food">Favorite Food</label>
+        <label for="avocado"> Avocado Ice Cream </labeL>
+        <input id="avocado" type="radio">
+        <label for="nightshades">Nightshades </labeL>
+        <input id="nightshades" type="radio">
+
+        <input type="text" placeholder="Last Name">
+
+        <input type="number" placeholder="Super Bowl Championships">
+    </form>
+
+**Good**:
+
+    <form action="post">
+        <label for="first-name">First Name</label>
+        <input id="first-name" type="text" placeholder="Tom...">
+        <label for="last-name">Last Name</label>
+        <input id="last-name" type="text" placeholder="Brady...">
+
+        <fieldset>
+            <legend>Favorite Foods</legend>
+            <label for="avocado-ice-cream">Avocado Ice Cream</label>
+            <input id="avocado-ice-cream" type="radio">
+            <label for="nightshades">Nightshades</label>
+            <input id="nightshades" type="radio">
+        </fieldset>
+
+        <label for="championships">Super Bowl Championships<label>
+        <input id="championships" type="number">
+    </form>
+
+
 ### Labels
+
+
 
 ### Radio Buttons and Checkboxes
 
