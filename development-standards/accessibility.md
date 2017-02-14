@@ -186,6 +186,8 @@ A third method that can be use to include instructional information from outside
 
 ### Required Fields
 
+Like Instructional Text, making certain form fields "required" is an important way to control user behavior within a form. We add the ```required``` (with no value) and ```aria-required="true"``` attributes to these fields.
+
 ### Disabled Form Elements
 
 ### Validation
