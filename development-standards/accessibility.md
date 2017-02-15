@@ -57,11 +57,11 @@ Good, semantic structure of your document can be a great asset to accessibility.
 
 #### Headings
 
-Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using ```<h1...6>``` tags anywhere on the page, but semantically, it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
+Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using `<h1...6>` tags anywhere on the page, but semantically, it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
 
-An ```<h1>``` tags should appear no more than once per page, typically containing a kind of page title. ```<h2>``` tags appear often as the title of a section of the page, like a hero or sidebar.
+An `<h1>` tags should appear no more than once per page, typically containing a kind of page title. `<h2>` tags appear often as the title of a section of the page, like a hero or sidebar.
 
-It's important to address font-size choices with CSS. Do not use an ```<h5>``` for you page title just because it should be smaller.
+It's important to address font-size choices with CSS. Do not use an `<h5>` for you page title just because it should be smaller.
 
 Furthermore, language in the WCAG 2.0 success criterion for headings revolves around clarity. Headings that are clear and concise help users understand what the content of the page is.
 
@@ -84,9 +84,9 @@ A good guide to this can be found at http://haltersweb.github.io/Accessibility/f
 
 #### Lists
 
-When creating a list on your page, know that screen-readers benefit from well-formatted semantically structured lists using ```ol```, ```ul```, ```dl```, and ```li``` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
+When creating a list on your page, know that screen-readers benefit from well-formatted semantically structured lists using `ol`, `ul`, `dl`, and `li` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
 
-One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot), and these should be wrapped in a ```<nav>```.
+One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot), and these should be wrapped in a `<nav>`.
 
 Good Example:
 
@@ -135,7 +135,7 @@ In order to hide this element from regular users while maintaining it's function
 
 Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
-It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as ```aria-haspopup```, ```aria-expanded```, and ```aria-hidden``` that inform the screen-reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu:
+It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu:
 
     var ariaExpand = function ($trigger, $menu) {
         $trigger.attr('aria-expanded', 'true');
@@ -169,7 +169,7 @@ To make links accessible, they need to have text-based information that clearly 
 
 It's important not to use redundant language like "Link to..." or "Go to..." (the screen reader already declares that it has found a navigation element), or misleading text like "Click here" (implying the user needs to click rather than keyboard navigate).
 
-Like all other text, avoid all-capitalize text content, as the screen reader will read text like letter by letter and is more difficult to read. Text that must appear as capitalized should be styled with CSS's ```text-transform``` property, but typed regularly.
+Like all other text, avoid all-capitalize text content, as the screen reader will read text like letter by letter and is more difficult to read. Text that must appear as capitalized should be styled with CSS's `text-transform` property, but typed regularly.
 
 Avoid including the URL in the link text, as the format of web links will be read letter-by-letter and be extremely difficult to understand.
 
@@ -241,7 +241,7 @@ Some specific things to make note of when using the alt attribute.
 
 - Text included in the image should be included in the alt attribute text.
 
-- A complex graphic, such as a flow chart or graph, will sometimes be accompanied by a real-text description nearby in the HTML markup. If that is the case, make sure the entirety of the information in the picture is provided in the accompanying text and provide an empty string for the alt value ```alt=""```. Otherwise, included supplemental or summarization information in the alt text attribute.
+- A complex graphic, such as a flow chart or graph, will sometimes be accompanied by a real-text description nearby in the HTML markup. If that is the case, make sure the entirety of the information in the picture is provided in the accompanying text and provide an empty string for the alt value `alt=""`. Otherwise, included supplemental or summarization information in the alt text attribute.
 
 - Include the alt attribute with an empty string value for images that are included more as "chrome" or decoration and don't provide information.
 
@@ -255,7 +255,7 @@ Forms are composed of controls (input, select, textarea), and descriptions/label
 
 ### Labels
 
-As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive ```<label>```, and each ```<fieldset>``` should include a description of the grouping in a ```<legend>``` tag. Placeholder attributes are not sufficient substitutes for labels. screen-readers depend on an explicit label in nearly all cases.
+As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive `<label>`, and each `<fieldset>` should include a description of the grouping in a `<legend>` tag. Placeholder attributes are not sufficient substitutes for labels. screen-readers depend on an explicit label in nearly all cases.
 
 **Bad**:
 
@@ -294,7 +294,7 @@ Radio buttons and checkboxes are typically thematically grouped, and as such sho
 
 ### Select
 
-Select menus should be accompanied by a ```label``` tag, like a simple input should. ```<optgroup>``` tags can be used *like* fieldsets to organize and group thematically related ```<option>```s, which will help improve the overall simplicity of form-flow.
+Select menus should be accompanied by a `label` tag, like a simple input should. `<optgroup>` tags can be used *like* fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
 
     <label for="movies">Movies</label>
     <select id="movies">
@@ -328,7 +328,7 @@ A third method that can be use to include instructional information from outside
 
 ### Required Fields
 
-It is common to denote required fields with a different color, asterisk, other visual treatment, but this is insufficient for non-sighted users and those with color blindness. To ensure screen-reader support use the ```aria-required=”true”``` attribute in your form field.  When the form field has focus it will announce “required”. Do **not** use the HTML5 ```required``` attribute.  It is not fully supported by screen-readers and is not easily styled with css.
+It is common to denote required fields with a different color, asterisk, other visual treatment, but this is insufficient for non-sighted users and those with color blindness. To ensure screen-reader support use the `aria-required=”true”` attribute in your form field.  When the form field has focus it will announce “required”. Do **not** use the HTML5 `required` attribute.  It is not fully supported by screen-readers and is not easily styled with css.
 
 Note: You can inject the asterisk as a pseudo-element via CSS to keep the HTML truthful.
 
@@ -348,8 +348,8 @@ CSS
 
 ### Disabled Form Elements
 
-Buttons and form elements that are disabled but still in view must be assigned the ```disabled``` attribute (this is a boolean attribute and takes no assignment).
-Convention regarding disabled elements is to present them as dimmed or grayed out, or otherwise different in appearance to indicate a disabled state.  Disabled elements match the ```:disabled``` pseudo-class for styling purposes. Dimmed/grayed out elements don't need to satisfy color contrast requirements. Disabled elements should not be able to be: clicked, edited, focused, or tabbed onto.
+Buttons and form elements that are disabled but still in view must be assigned the `disabled` attribute (this is a boolean attribute and takes no assignment).
+Convention regarding disabled elements is to present them as dimmed or grayed out, or otherwise different in appearance to indicate a disabled state.  Disabled elements match the `:disabled` pseudo-class for styling purposes. Dimmed/grayed out elements don't need to satisfy color contrast requirements. Disabled elements should not be able to be: clicked, edited, focused, or tabbed onto.
 
 Example
 
@@ -392,7 +392,7 @@ Example:
 
     <input id="date" type="text" aria-invalid=”true” />
 
-Let the user know what the error is. Utilize the form field’s ```aria-describedby``` attribute to tie the form field to the error message.  That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
+Let the user know what the error is. Utilize the form field’s `aria-describedby` attribute to tie the form field to the error message.  That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
 
 Example:
 
@@ -408,7 +408,37 @@ Example (Best):
     <input type="text" id="date" aria-invalid=”true” aria-describedby="dateError" />
     <p id="dateError">Error 2 of 2: please enter a valid date.</p>
 
-## Tables
+## TABLES
+
+Screen readers are capable of navigating data tables that are marked up using the proper accessibility attributes and tags. These include:
+
+- Summary: an attribute that contains a text description of the data in the table. This element does not render.
+- Caption: an element that contains a text description of the data in the table. This element does render, typically as left-justified text inside the boundaries of the table. Can be shifted off-screen via CSS.
+- Scope: attribute that can appear on TH and TD elements to define data as a row or a column. Heading cells should use `scope="col"`. The first cell in each row should use scope="row". These do not render.
+
+Example:
+
+    <table summary="This table describes the Unicode entity codes used to render special characters in an HTML document">
+        <caption>Unicode Entities for Common Special Characters</caption>
+        <thead>
+            <tr>
+                <th scope="col">Character</th>
+                <th scope="col">Entity Code</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td scope="row">Em Dash</td>
+                <td>&#8212;</td>
+            </tr>
+            <tr>
+                <td scope="row">Registered Trademark</td>
+                <td>&#8482;</td>
+            </tr>
+        </tbody>
+    </table>
+
+More complex tables will require the use of header and id attributes.
 
 ## iFrames
 
