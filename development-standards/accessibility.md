@@ -39,6 +39,12 @@ It'd be unwise to purposely exclude up to 20% of users from web experiences. In 
 
 This list covers a great deal of users with disabilities, but there are those who are still not covered. For example, it is difficult to determine the amount of users affected by multiple disabilities such as low motor control *and* blindness.
 
+## Browsers
+
+// TODO
+
+We
+
 ## Web Accessibility
 
 ### Document Structure & Semantics
@@ -54,6 +60,8 @@ Good, semantic structure of your document can be a great asset to accessibility.
 ##### Meta Tags
 
 #### Semantics
+
+Writing good, accessible semantic HTML is akin to writing good instructions for a screen-readers and assistive technologies. Using HTML5 semantic structure tags like `<header>`, `<main>`, `<article>`, `<aside>`, `<footer>` will go a long way to formatting your document in a highly accessible manner. Their presence creates a logical, intuitive order through assistive relationships that screen-readers will recognize. Text semantic tags also should be used when appropriate, but do not register with assistive tools.
 
 #### Headings
 
