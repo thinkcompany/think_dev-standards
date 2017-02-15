@@ -155,9 +155,45 @@ It's also important to make the state of toggle-action elements clear to non-vis
 
 ## Imagery
 
+Image-based content and information play a prominent role in the modern web. The a11y standard expectations are very clear in their expectations for how this information should always be conveyed to screen-reader users: Always provide equivalent alternative text-based sources of the information conveyed.
+
+An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
+
 ### Color and Shape
 
+Color is major factor in meeting WCAG 2.0 compliance on web pages. Low-vision users need contrast, color blind users will be unable to access information conveyed through certain color schemes. A required form field where the requirement is conveyed through a red border is insufficient. Please read the section on required fields and error reporting for more information on this topic.
+
+Shape, and location, are sometimes used to guide a visual users attention on a web page. This is an acceptable practice, so long as those same visual cues are translated in some for screen-reader users.
+
+**Bad**:
+
+    <p>Click the round button for True or the red button for False.</p>
+    <button class="btn-round">Button A</button>
+    <button class="btn-red">Button B</button>
+
+**Good**:
+
+    <p>Click the round button for True or the red button for False.</p>
+    <button class="btn-round">Round Button</button>
+    <button class="btn-red">Red Button</button>
+
+Similarly, a reference to location or relative position is not enough information for screen-readers. A buttons order in markup does not always directly translate to it's visual position on the page. Sequential information, on the other hand, is more accessible for users.
+
+**Bad**:
+
+    <p>Click the left button for True or the right button for False.</p>
+    <button class="btn-round">Button A</button>
+    <button class="btn-red">Button B</button>
+
+**Bad**:
+
+    <p>Click the first button for True or the second button for False.</p>
+    <button class="btn-round">Button A</button>
+    <button class="btn-red">Button B</button>
+
 ### Images
+
+When using images on the web, we need to keep in mind that they cause immediate accessibility pain points for non-visual and low-visual users. All information conveyed or functionality provided through images, need to be offered in the form of Text Alternatives
 
 ### Alt Attribute
 
