@@ -57,22 +57,25 @@ Good, semantic structure of your document can be a great asset to accessibility.
 
 #### Headings
 
-Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using ```<h1...6>``` tags anywhere on the page, but semantically it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
+Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using ```<h1...6>``` tags anywhere on the page, but semantically, it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
 
 An ```<h1>``` tags should appear no more than once per page, typically containing a kind of page title. ```<h2>``` tags appear often as the title of a section of the page, like a hero or sidebar.
 
 It's important to address font-size choices with CSS. Do not use an ```<h5>``` for you page title just because it should be smaller.
 
-**Bad**:
+Furthermore, language in the WCAG 2.0 success criterion for headings revolves around clarity. Headings that are clear and concise help users understand what the content of the page is.
 
-**Good**:
+Example:
 
     <h1>What People Eat</h1>
     <p>Information about the food people eat.</p>
     <h2>Fruit</h2>
     <p>Sweet and often juicy food that grows on plants</p>
     <h3>Apple</h3>
-    <p>A round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
+    <p>A fist-sized round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
+    <h3>Grape/h3>
+    <p>A quarter-sized round fruit that grows in bunches on vines. Thin skin and very juicy.</p>
+
 
 #### Paragraphs
 
