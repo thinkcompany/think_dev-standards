@@ -442,4 +442,35 @@ More complex tables will require the use of header and id attributes.
 
 ## iFrames
 
+iFrames do not have full support from screen-readers and other assistive technologies. In general, avoid iFrames for complex content.
+
+For simple content, they can be acceptable. They fall under the same category as other non-text content, like images, and require equivalent text alternatives. On iframes, that typically comes in the form of a `title` attribute on the `<iframe>` element.
+
 ## Flexbox
+
+Flexbox is a relatively newer tool to the web that carries with it some unique accessibility concerns. The foremost concern at play is the re-ordering of content. The topic of content location/order were touched upon in the Color, Shapes and Location section, but to reiterate: screen-readers follow the sequence of elements the markup, and not the flow on the page. Flexbox simply makes these concerns more valid and good solutions more important to find.
+
+A developer has total control over the order of elements in flexbox containers, making them completely independent of the order in the HTML source. Flexbox should be totally avoided as a way to structure page layout. Imagine the confusion of a screen reader that encounters a page that looks like this:
+
+    <body>
+        <footer>
+            ...
+        </footer>
+        <main>
+            ...
+        </main>
+        <header>
+            ...
+        </header>
+    </body>
+
+where
+
+    body {
+        display; flexbox;
+        flex-direction: column-reverse;
+    }
+
+This is an absurd example, but this page would render totally normally to a visual user with the header appearing above the main content, and main content appearing above the footer. To a screen reader traversing the HTML sequentially, this page make zero sense.
+
+Also, avoid any reference to the sequence, position, or arrangement of the elements in a flexbox container if possible, or else craft them with the utmost care to ensure avoiding confusion for screen-reader users.
