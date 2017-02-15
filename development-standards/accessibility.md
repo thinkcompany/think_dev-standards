@@ -181,11 +181,11 @@ Image-based content and information play a prominent role in the modern web. The
 
 An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
 
-### Color and Shape
+### Color, Shape, Location
 
 Color is major factor in meeting WCAG 2.0 compliance on web pages. Low-vision users need contrast, color blind users will be unable to access information conveyed through certain color schemes. A required form field where the requirement is conveyed through a red border is insufficient. Please read the section on required fields and error reporting for more information on this topic.
 
-Shape, and location, are sometimes used to guide a visual users attention on a web page. This is an acceptable practice, so long as those same visual cues are translated in some for screen-reader users.
+Shape and location are sometimes used to guide a visual users attention on a web page. This is an acceptable practice, so long as those same visual cues are translated in some for screen-reader users.
 
 **Bad**:
 
