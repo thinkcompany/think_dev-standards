@@ -78,11 +78,11 @@ It's important to address font-size choices with CSS. Do not use an ```<h5>``` f
 
 #### Lists
 
-When creating a list on your page, know that screen readers benefit from well-formatted semantically structured lists using ```ol```, ```ul```, ```dl```, and ```li``` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
+When creating a list on your page, know that screen-readers benefit from well-formatted semantically structured lists using ```ol```, ```ul```, ```dl```, and ```li``` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
 
 #### Skip Navigation
 
-Keyboard and screen reader users start at the beginning of the page and wade through the content sequentially. Sometimes, this means wading through numerous menus, navigation links or other sections before arriving at the main content. For some users, this is a major inconvenience. A "Skip Navigation" link provides the opportunity to bypass all of that and relocate the focus of the assistive technology to the main content of the page.
+Keyboard and screen-reader users start at the beginning of the page and wade through the content sequentially. Sometimes, this means wading through numerous menus, navigation links or other sections before arriving at the main content. For some users, this is a major inconvenience. A "Skip Navigation" link provides the opportunity to bypass all of that and relocate the focus of the assistive technology to the main content of the page.
 
 In content, it might look like:
 
@@ -99,7 +99,7 @@ In order to hide this element from regular users while maintaining it's function
 
 Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
-It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as ```aria-haspopup```, ```aria-expanded```, and ```aria-hidden``` that inform the screen reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu.
+It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as ```aria-haspopup```, ```aria-expanded```, and ```aria-hidden``` that inform the screen-reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu:
 
     var ariaExpand = function ($trigger, $menu) {
         $trigger.attr('aria-expanded', 'true');
@@ -151,9 +151,9 @@ Some specific things to make note of when using the alt attribute.
 
 - Include the alt attribute with an empty string value for images that are included more as "chrome" or decoration and don't provide information.
 
-- Avoid starting with "Image of..." or equivalent phrases. Redundancy like this can cause confusion for users relying on screen readers.
+- Avoid starting with "Image of..." or equivalent phrases. Redundancy like this can cause confusion for users relying on screen-readers.
 
-- Don't use line breaks in alt attributes, it can interfere with the proper functioning of screen readers.
+- Don't use line breaks in alt attributes, it can interfere with the proper functioning of screen-readers.
 
 ## Forms
 
@@ -161,7 +161,7 @@ Forms are composed of controls (input, select, textarea), and descriptions/label
 
 ### Labels
 
-As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive ```<label>```, and each ```<fieldset>``` should include a description of the grouping in a ```<legend>``` tag. Placeholder attributes are not sufficient substitutes for labels. Screen readers depend on an explicit label in nearly all cases.
+As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive ```<label>```, and each ```<fieldset>``` should include a description of the grouping in a ```<legend>``` tag. Placeholder attributes are not sufficient substitutes for labels. screen-readers depend on an explicit label in nearly all cases.
 
 **Bad**:
 
