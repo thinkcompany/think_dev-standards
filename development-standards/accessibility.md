@@ -151,6 +151,10 @@ It's also important to make the state of toggle-action elements clear to non-vis
 
 ### Buttons
 
+Buttons should be made with the native HTML `<button>` tag, and not a clickable image, or any other workaround that causes unnecessary confusion for screen-reader users.
+
+Buttons with `type="submit"` should be used to designate the end of a form. Developers sometimes disable these buttons until the form has been adequately filled out, but doing so removes the only indicator that screen-reader users have that the form is ending. Do not do this.
+
 ### Links
 
 To make links accessible, they need to have text-based information that clearly describes their destination. The screen-reader does not announce the link path, so the inner text of the link element should be clear about where the link will take the user.
