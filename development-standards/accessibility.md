@@ -234,11 +234,36 @@ A third method that can be use to include instructional information from outside
 
 ### Required Fields
 
-Like Instructional Text, making certain form fields "required" is an important way to control user behavior within a form. We add the ```required``` (with no value) attribute to the form control. This is enough in most cases, but occasionally browsers also require ```aria-required="true"``` on the form control. If possible, make it explicit that the field is required with instructional text.
+It is common to denote required fields with a different color, asterisk, other visual treatment, but this is insufficient for non-sighted users and those with color blindness. To ensure screen-reader support use the ```aria-required=”true”``` attribute in your form field.  When the form field has focus it will announce “required”. Do **not** use the HTML5 ```required``` attribute.  It is not fully supported by screen-readers and is not easily styled with css.
+
+Note: You can inject the asterisk as a pseudo-element via CSS to keep the HTML truthful.
+
+Examples:
+
+HTML
+
+    <label for="name" class="required-field">Your Name</label>
+    <input type="text" id="name" name="name" aria-required="true" />
+
+CSS
+
+    .required-field:after {
+        content: "\*";
+        color: red;
+    }
 
 ### Disabled Form Elements
 
-A disabled element needs to be clearly indicated to all users, else it will confuse both a screen reader and/or the user.
+Buttons and form elements that are disabled but still in view must be assigned the ```disabled``` attribute (this is a boolean attribute and takes no assignment).
+Convention regarding disabled elements is to present them as dimmed or grayed out, or otherwise different in appearance to indicate a disabled state.  Disabled elements match the ```:disabled``` pseudo-class for styling purposes. Dimmed/grayed out elements don't need to satisfy color contrast requirements. Disabled elements should not be able to be: clicked, edited, focused, or tabbed onto.
+
+Example
+
+    <input type=”text” id=”shippingAddress” disabled />
+
+#### Disabling Submit Buttons
+
+It is not best practice to disable a submit button.  Since disabled form elements must be removed from the tab order and must not be focusable, disabling a submit button can lead to confusion for someone using a screen-reader: there would be no indication to them that the form was concluded.
 
 ### Validation
 
