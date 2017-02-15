@@ -76,8 +76,11 @@ Example:
     <h3>Grape/h3>
     <p>A quarter-sized round fruit that grows in bunches on vines. Thin skin and very juicy.</p>
 
+#### Paragraphs and Text
 
-#### Paragraphs
+In using text on a web page, accessibilities concerns focus on ensuring a high level of visibility for the content. If a text-color and its background do not contrast enough, many users will not be able to read it. Standard text and images of text should have a contrast ratio of 4.5:1. Large scale text (font-size of at least 18 point, or 14 with bold) need only contrast at a 3:1 ratio.
+
+A good guide to this can be found at http://haltersweb.github.io/Accessibility/font-sizing-and-contrast.html, and you can directly test your text & background colors' contrast ratio at http://webaim.org/resources/contrastchecker/.
 
 #### Lists
 
