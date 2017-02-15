@@ -452,6 +452,8 @@ Flexbox is a relatively newer tool to the web that carries with it some unique a
 
 A developer has total control over the order of elements in flexbox containers, making them completely independent of the order in the HTML source. Flexbox should be totally avoided as a way to structure page layout. Imagine the confusion of a screen reader that encounters a page that looks like this:
 
+HTML
+
     <body>
         <footer>
             ...
@@ -464,13 +466,37 @@ A developer has total control over the order of elements in flexbox containers, 
         </header>
     </body>
 
-where
+CSS
 
     body {
         display; flexbox;
         flex-direction: column-reverse;
     }
 
-This is an absurd example, but this page would render totally normally to a visual user with the header appearing above the main content, and main content appearing above the footer. To a screen reader traversing the HTML sequentially, this page make zero sense.
+This is an absurd example that flies in the face of semantics and other rigid standards, but if you'll play along, this page would render totally normally to a visual user with the header appearing above the main content, and main content appearing above the footer. Whereas to a screen reader traversing the HTML sequentially, this page makes zero sense.
 
-Also, avoid any reference to the sequence, position, or arrangement of the elements in a flexbox container if possible, or else craft them with the utmost care to ensure avoiding confusion for screen-reader users.
+This is where the `tabindex` property comes into play. In some cases, it is possible to make the *tab* sequence consistent with the *visual* sequence through this property.
+Example:
+
+HTML
+
+    <section class="flex-container">
+        <button tab-index="3">
+            ...
+        </button>
+        <button tab-index="2">
+            ...
+        </button>
+        <button tab-index="1">
+            ...
+        </button>
+    </body>
+
+CSS
+
+    .flex-container {
+        display; flexbox;
+        flex-direction: column-reverse;
+    }
+
+Also, avoid making reference to the sequence, position, or arrangement of the elements in a flexbox container if possible, or otherwise be sure avoid creating confusion for screen-reader users.
