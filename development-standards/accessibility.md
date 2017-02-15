@@ -86,6 +86,36 @@ A good guide to this can be found at http://haltersweb.github.io/Accessibility/f
 
 When creating a list on your page, know that screen-readers benefit from well-formatted semantically structured lists using ```ol```, ```ul```, ```dl```, and ```li``` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
 
+One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot), and these should be wrapped in a ```<nav>```.
+
+Good Example:
+
+ <nav>
+    <ul class="main-nav">
+        <li><a href="my-account.html">My Account</a></li>
+        <li><a href="shop.html">Shop/Upgrade</a></li>
+        <li><a href="support.html">Support</a></li>
+    <ul>
+</nav>
+
+Bad Example:
+
+    <nav>
+        <ul class="product-ctas">
+            <li><a href="more.html">More Info</a></li>
+            <li><a href="options.html">Other Options</a></li>
+            <li><a href="sign-up.html">Sign Up Now</a></li>
+        <ul>
+    </nav>
+
+Good Example
+
+    <div class="product-ctas">
+        <a href="more.html">More Info</a>
+        <a href="options.html">Other Options</a>
+        <a href="sign-up.html">Sign Up Now</a>
+    </div>
+
 #### Skip Navigation
 
 Keyboard and screen-reader users start at the beginning of the page and wade through the content sequentially. Sometimes, this means wading through numerous menus, navigation links or other sections before arriving at the main content. For some users, this is a major inconvenience. A "Skip Navigation" link provides the opportunity to bypass all of that and relocate the focus of the assistive technology to the main content of the page.
