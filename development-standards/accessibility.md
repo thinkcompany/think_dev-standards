@@ -267,11 +267,52 @@ It is not best practice to disable a submit button.  Since disabled form element
 
 ### Validation
 
-The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats, etc. Beyond that with HTML5, input types typicaly have builit in validation methods,
+Validation is the process of conveying to the user interfacing with inputs that the format of their input needs to be edited in some way to be accepted. The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats, etc. We want actual form validation to be the *safety net*, not the only guidelines.
 
-// TODO
+There is a common web practice nowadays to implement "just-in-time" form validation.  Unfortunately this is a practice that was never vetted with the accessibility community and can cause confusion for those who cannot see. For instance someone who is blind will be unaware of errors appearing after they have left a field if validation happens on blur.
+Error validation should happen only upon submit, not upon keystroke or form element blur.
+Re-validation should also only happen upon submit.
+
+#### Just-in-time Validation
+
+In rare occurrences just-in-time validation is warranted. If validation must happen before submit please review the situation and solution with your project team.
+
+#### Let the user browse the form before validating the fields
+
+The user must be allowed to browse the form without generating errors. For example, if the user tabs from input field to input field, leaving the previous input field(s) should not create inline errors on blur. An empty field should be considered valid until the form is submitted and should not be considered invalid upon blur. However, if a field is not empty but has invalid entry then creating an error upon blur is OK.
 
 ### Error Handling
+
+Error handling is a huge accessibility issue on the web.  Without careful markup a blind or visually-impaired user will be unable to figure out why (or even that) their form submission didn’t complete successfully. Avoiding the issues detailed about just-in-time validation, the following strategy should be strictly followed.
+
+1. Let the user know that there are errors on the page.
+2. Let the user know what the error is.
+3. Let the user know how many errors are on the page.
+
+Let the user know that there are errors on the page. Upon validation:
+
+1. focus should immediately be given to the first form element that contains an error.
+2. aria-invalid=”true” attribute should be assigned to each offending form field.  (Remember to reset it to “false” or remove it completely upon successful revalidation.)
+
+Example:
+
+    <input id="date" type="text" aria-invalid=”true” />
+
+Let the user know what the error is. Utilize the form field’s ```aria-describedby``` attribute to tie the form field to the error message.  That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
+
+Example:
+
+    <label for="name">Your Name</label>
+    <input type="text" id="name" aria-invalid=”true” aria-describedby="nameError" />
+    <p id="nameError">Please only use letters</p>
+
+Let the user know how many errors are on a page. Each error message should be prefaced with its error number relative to the total number of errors.
+
+Example (Best):
+
+    <label for="date">Your Name</label>
+    <input type="text" id="date" aria-invalid=”true” aria-describedby="dateError" />
+    <p id="dateError">Error 2 of 2: please enter a valid date.</p>
 
 ## Tables
 
