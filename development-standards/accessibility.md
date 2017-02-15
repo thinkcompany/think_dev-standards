@@ -153,6 +153,24 @@ It's also important to make the state of toggle-action elements clear to non-vis
 
 ### Links
 
+To make links accessible, they need to have text-based information that clearly describes their destination. The screen-reader does not announce the link path, so the inner text of the link element should be clear about where the link will take the user.
+
+**Bad**:
+
+    <a href="/recipes/all">More</a>
+
+**Good**:
+
+    <a href="/recipes/all">All Recipes</a>
+
+It's important not to use redundant language like "Link to..." or "Go to..." (the screen reader already declares that it has found a navigation element), or misleading text like "Click here" (implying the user needs to click rather than keyboard navigate).
+
+Like all other text, avoid all-capitalize text content, as the screen reader will read text like letter by letter and is more difficult to read. Text that must appear as capitalized should be styled with CSS's ```text-transform``` property, but typed regularly.
+
+Avoid including the URL in the link text, as the format of web links will be read letter-by-letter and be extremely difficult to understand.
+
+The style of link text should also include some property besides color. An underline is typically sufficient.
+
 ## Imagery
 
 Image-based content and information play a prominent role in the modern web. The a11y standard expectations are very clear in their expectations for how this information should always be conveyed to screen-reader users: Always provide equivalent alternative text-based sources of the information conveyed.
