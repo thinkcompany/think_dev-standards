@@ -39,13 +39,13 @@ It'd be unwise to purposely exclude up to 20% of users from web experiences. In 
 
 This list covers a great deal of users with disabilities, but there are those who are still not covered. For example, it is difficult to determine the amount of users affected by multiple disabilities such as low motor control *and* blindness.
 
-## Browsers
+## Web Accessibility
+
+### Browsers
 
 // TODO
 
 We
-
-## Web Accessibility
 
 ### Document Structure & Semantics
 
@@ -55,9 +55,39 @@ Good, semantic structure of your document can be a great asset to accessibility.
 
 ##### Language and Localization
 
+Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language.
+
+    <html lang="en">
+
+When switching languages on the page, make this explicit as well with the `<lang>` attribute.
+
+Example:
+
+    <p> This sentence is in English. </p>
+
+    <p lang="es"> Esta frase es en espa&ntilde;ol. </p> (Spanish)
+
+// TODO: Localization techniques.
+
 ##### Page Titles
 
+The title element is read by screen readers on every page view and ideally should be short and unique.
+
 ##### Meta Tags
+
+There are a couple specific things to keep in mind when address meta tags and accessibility.
+
+1. Do not include a maximum scale in the viewport meta tag. This way, you are restricting the pinch zoom functionality that is crucial for many users to see page content.
+
+**Bad**:
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+**Good**:
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+2.
 
 #### Semantics
 
