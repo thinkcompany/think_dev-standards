@@ -71,15 +71,28 @@ The best way to mitigate these effects is to place each display ad into an ifram
 
 All images in the project should be compressed. This will be one of the biggest performance enhancing things you can do for a website as images can easily be some of the largest files the browser has to load. A page with excess image weight will load slower.
 
-[ImageOptim](https://imageoptim.com/ "ImageOptim") will do this for you.
+[ImageOptim](https://imageoptim.com/ "ImageOptim") will work for PNG, JPEG formats.
 
-### Optimal Image Type
+[SVGO](https://github.com/svg/svgo "SVGO") or [SVG OMG](https://jakearchibald.github.io/svgomg/ "SVG OMG") work for SVGs.
+
+[ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") is an NPM package that can be configured to optimize your projects images programmatically.
+
+### Image Type
 
 Different images perform better depending on what they image is. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
 
 PNG files are not able to be compressed as well as JPEG images (does not allow any *lossy* compression), and thus should be used judiciously. Occasionally, they can be used as a replacement for vector images to display geometric images and text at high resolution and small sizes.
 
+#### Image Sprites
+
+Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader 'svg-sprite-loader'), your set of SVGs can be combined into one.
+
 ### Specify Image Dimensions, Do Not Resize
+
 Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
 
 When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
+
+### Lazy loading
+
+This is a technique used to improve initial load speed by delaying the actual loading of images until they are viewable. By setting empty or invalid `src` attributes on your image tags, you can prevent any initial image asset loading. Then, you must include a script to add event listeners to the DOM, waiting for the user to navigate to parts of the page where the image comes into the window frame, *then* the image is loaded. [CSS Tricks](https://css-tricks.com/snippets/javascript/lazy-loading-images/ 'CSS Trick Lazy Loading') has a good example of one such script.
