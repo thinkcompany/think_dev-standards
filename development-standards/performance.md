@@ -103,17 +103,19 @@ In some cases, responsive design will call for different size/shapes of an image
 
 For background images, use CSS media queries to serve different images at lower sizes.
 
-    .hero {
-        // Smallest image loaded by default.
-        background-image: url("./my_image100x200")
+```css
+.hero {
+    // Smallest image loaded by default.
+    background-image: url("./my_image100x200")
 
-        // First breakpoint, load the medium sized image.
-        @media (min-width: 600px) {
-            background-image: url("./my_image200x400");
-        }
-
-        // Second breakpoint, load the large image.
-        @media (min-width: 1000px) {
-            background-image: url("./my_image400x800");
-        }
+    // First breakpoint, load the medium sized image.
+    @media (min-width: 600px) {
+        background-image: url("./my_image200x400");
     }
+
+    // Second breakpoint, load the large image.
+    @media (min-width: 1000px) {
+        background-image: url("./my_image400x800");
+    }
+}
+```
