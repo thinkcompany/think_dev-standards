@@ -62,15 +62,18 @@ Creating web page that meetings our accessibility criteria starts with including
 
 Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language.
 
-    <html lang="en">
+```html
+<html lang="en">
+```
 
 When switching languages on the page, make this explicit as well with the `<lang>` attribute.
 
 Example:
 
-    <p> This sentence is in English. </p>
-
-    <p lang="es"> Esta frase es en espa&ntilde;ol. </p> (Spanish)
+```html
+<p>This sentence is in English.</p>
+<p lang="es">Esta frase es en espa&ntilde;ol.</p> (Spanish)
+```
 
 ##### Page Titles
 
@@ -84,12 +87,14 @@ There are a couple specific things to keep in mind when address meta tags and ac
 
 **Bad**:
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+```
 **Good**:
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+```
 #### Semantics
 
 Writing good, accessible semantic HTML is akin to writing good instructions for a screen-readers and assistive technologies. Using HTML5 semantic structure tags like `<header>`, `<main>`, `<article>`, `<aside>`, `<footer>` will go a long way to formatting your document in a highly accessible manner. Their presence creates a logical, intuitive order through assistive relationships that screen-readers will recognize. Text semantic tags also should be used when appropriate, but do not register with assistive tools.
@@ -106,18 +111,20 @@ Furthermore, language in the WCAG 2.0 success criterion for headings revolves ar
 
 Example:
 
-    <h1>What People Eat</h1>
-    <p>Information about the food people eat.</p>
-    <h2>Fruit</h2>
-    <p>Sweet and often juicy food that grows on plants</p>
-    <h3>Apple</h3>
-    <p>A fist-sized round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
-    <h3>Grape/h3>
-    <p>A quarter-sized round fruit that grows in bunches on vines. Thin skin and very juicy.</p>
+```html
+<h1>What People Eat</h1>
+<p>Information about the food people eat.</p>
+<h2>Fruit</h2>
+<p>Sweet and often juicy food that grows on plants</p>
+<h3>Apple</h3>
+<p>A fist-sized round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
+<h3>Grape/h3>
+<p>A quarter-sized round fruit that grows in bunches on vines. Thin skin and very juicy.</p>
+```
 
 #### Paragraphs and Text
 
-In using text on a web page, accessibilities concerns focus on ensuring a high level of visibility for the content. If a text-color and its background do not contrast enough, many users will not be able to read it. Standard text and images of text should have a contrast ratio of 4.5:1. Large scale text (font-size of at least 18 point, or 14 with bold) need only contrast at a 3:1 ratio.
+Visibility is the main subject of text accessiblity. If a text-color and its background do not contrast enough, many users will not be able to read it. Standard text and images of text should have a contrast ratio of 4.5:1. Large scale text (font-size of at least 18 point, or 14 with bold) need only contrast at a 3:1 ratio.
 
 A good guide to this can be found at [Halters Web](http://haltersweb.github.io/Accessibility/font-sizing-and-contrast.html), and you can directly test your text & background colors' contrast ratio at [Web Aim Contrast Checker](http://webaim.org/resources/contrastchecker/).
 
@@ -129,31 +136,37 @@ One or two navigation link lists on a page should be a guiding principal (i.e. a
 
 Good Example:
 
- <nav>
+```html
+<nav>
     <ul class="main-nav">
         <li><a href="my-account.html">My Account</a></li>
         <li><a href="shop.html">Shop/Upgrade</a></li>
         <li><a href="support.html">Support</a></li>
     <ul>
 </nav>
+```
 
 Bad Example:
 
-    <nav>
-        <ul class="product-ctas">
-            <li><a href="more.html">More Info</a></li>
-            <li><a href="options.html">Other Options</a></li>
-            <li><a href="sign-up.html">Sign Up Now</a></li>
-        <ul>
-    </nav>
+```html
+<nav>
+    <ul class="product-ctas">
+        <li><a href="more.html">More Info</a></li>
+        <li><a href="options.html">Other Options</a></li>
+        <li><a href="sign-up.html">Sign Up Now</a></li>
+    <ul>
+</nav>
+```
 
 Good Example
 
-    <div class="product-ctas">
-        <a href="more.html">More Info</a>
-        <a href="options.html">Other Options</a>
-        <a href="sign-up.html">Sign Up Now</a>
-    </div>
+```html
+<div class="product-ctas">
+    <a href="more.html">More Info</a>
+    <a href="options.html">Other Options</a>
+    <a href="sign-up.html">Sign Up Now</a>
+</div>
+```
 
 #### Skip Navigation
 
@@ -161,12 +174,14 @@ Keyboard and screen-reader users start at the beginning of the page and wade thr
 
 In content, it might look like:
 
-    <body>
-        <a href="#maincontent">Skip to main content</a>
-        ... 3 Menus, a search bar, etc.
-        <main id="maincontent">
-            <h1>Heading</h1>
-            <p>This is the first paragraph</p>
+```html
+<body>
+    <a href="#maincontent">Skip to main content</a>
+    ... 3 Menus, a search bar, etc.
+    <main id="maincontent">
+        <h1>Heading</h1>
+        <p>This is the first paragraph</p>
+```
 
 In order to hide this element from regular users while maintaining it's functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
 
@@ -174,12 +189,15 @@ It is *vital* the target container of your skip link has `tabindex` property set
 
 It is also best practice to include the `role="main"` attribute and value to the target container. This attribute is read by the screen-reader to provide an extra layer of semantics to a keyboard user, indicating that they landed where they expected to on the page (at the main content).
 
-    <body>
-        <a href="#maincontent">Skip to main content</a>
-        ... 3 Menus, a search bar, etc.
-        <main id="maincontent" role="main" tabindex="-1">
-            <h1>Heading</h1>
-            <p>This is the first paragraph</p>
+
+```html
+<body>
+    <a href="#maincontent">Skip to main content</a>
+    ... 3 Menus, a search bar, etc.
+    <main id="maincontent" role="main" tabindex="-1">
+        <h1>Heading</h1>
+        <p>This is the first paragraph</p>
+```
 
 
 ## Actionable Elements
@@ -188,15 +206,17 @@ Any element on the page that you can interact with using the mouse should obviou
 
 It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu:
 
-    var ariaExpand = function ($trigger, $menu) {
-        $trigger.attr('aria-expanded', 'true');
-        $menu.attr('aria-hidden', 'false');
-    };
+```javascript
+var ariaExpand = function ($trigger, $menu) {
+    $trigger.attr('aria-expanded', 'true');
+    $menu.attr('aria-hidden', 'false');
+};
 
-    var ariaContract = function ($trigger, $menu) {
-        $trigger.attr('aria-expanded', 'false');
-        $menu.attr('aria-hidden', 'true');
-    };
+var ariaContract = function ($trigger, $menu) {
+    $trigger.attr('aria-expanded', 'false');
+    $menu.attr('aria-hidden', 'true');
+};
+```
 
 ### Events
 
@@ -212,11 +232,15 @@ To make links accessible, they need to have text-based information that clearly 
 
 **Bad**:
 
-    <a href="/recipes/all">More</a>
+```html
+<a href="/recipes/all">More</a>
+```
 
 **Good**:
 
-    <a href="/recipes/all">All Recipes</a>
+```html
+<a href="/recipes/all">All Recipes</a>
+```
 
 It's important not to use redundant language like "Link to..." or "Go to..." (the screen reader already declares that it has found a navigation element), or misleading text like "Click here" (implying the user needs to click rather than keyboard navigate).
 
@@ -240,29 +264,37 @@ Shape and location are sometimes used to guide a visual users attention on a web
 
 **Bad**:
 
-    <p>Click the round button for True or the red button for False.</p>
-    <button class="btn-round">Button A</button>
-    <button class="btn-red">Button B</button>
+```html
+<p>Click the round button for True or the red button for False.</p>
+<button class="btn-round">Button A</button>
+<button class="btn-red">Button B</button>
+```
 
 **Good**:
 
-    <p>Click the round button for True or the red button for False.</p>
-    <button class="btn-round">Round Button</button>
-    <button class="btn-red">Red Button</button>
+```html
+<p>Click the round button for True or the red button for False.</p>
+<button class="btn-round">Round Button</button>
+<button class="btn-red">Red Button</button>
+```
 
 Similarly, a reference to location or relative position is not enough information for screen-readers. A buttons order in markup does not always directly translate to it's visual position on the page. Sequential information, on the other hand, is more accessible for users.
 
 **Bad**:
 
-    <p>Click the left button for True or the right button for False.</p>
-    <button class="btn-round">Button A</button>
-    <button class="btn-red">Button B</button>
+```html
+<p>Click the left button for True or the right button for False.</p>
+<button class="btn-round">Button A</button>
+<button class="btn-red">Button B</button>
+```
 
 **Bad**:
 
-    <p>Click the first button for True or the second button for False.</p>
-    <button class="btn-round">Button A</button>
-    <button class="btn-red">Button B</button>
+```html
+<p>Click the first button for True or the second button for False.</p>
+<button class="btn-round">Button A</button>
+<button class="btn-red">Button B</button>
+```
 
 ### Images
 
@@ -276,15 +308,19 @@ Rather than a description of the image itself, the alt attribute provides a desc
 
 **Bad**:
 
-    <a href="#home">
-        <img src="ThinkCompanyLogo.png" alt="Image of thought bubble company logo" />
-    </a>
+```html
+<a href="#home">
+    <img src="ThinkCompanyLogo.png" alt="Image of thought bubble company logo" />
+</a>
+```
 
 **Good**:
 
-    <a href="#home">
-        <img src="ThinkCompanyLogo.png" alt="thinkcompany.com homepage" />
-    </a>
+```html
+<a href="#home">
+    <img src="ThinkCompanyLogo.png" alt="thinkcompany.com homepage" />
+</a>
+```
 
 Some specific things to make note of when using the alt attribute.
 
@@ -310,15 +346,19 @@ As stated in the overview, labels are important to guiding users through a form.
 
 **Bad**:
 
-    <input type="text" placeholder="First Name">
-    <input type="text" placeholder="Last Name">
+```html
+<input type="text" placeholder="First Name">
+<input type="text" placeholder="Last Name">
+```
 
 **Good**:
 
-    <label for="first-name">First Name</label>
-    <input id="first-name" type="text" placeholder="Tom...">
-    <label for="last-name">Last Name</label>
-    <input id="last-name" type="text" placeholder="Brady...">
+```html
+<label for="first-name">First Name</label>
+<input id="first-name" type="text" placeholder="Tom...">
+<label for="last-name">Last Name</label>
+<input id="last-name" type="text" placeholder="Brady...">
+```
 
 ### Radio Buttons and Checkboxes
 
@@ -326,40 +366,45 @@ Radio buttons and checkboxes are typically thematically grouped, and as such sho
 
 **Bad**:
 
-    <label for="fav-food">Favorite Food</label>
-    <label for="avocado"> Avocado Ice Cream </labeL>
-    <input id="avocado" type="radio">
-    <label for="nightshades">Nightshades </labeL>
-    <input id="nightshades" type="radio">
-
+```html
+<label for="fav-food">Favorite Food</label>
+<label for="avocado"> Avocado Ice Cream </labeL>
+<input id="avocado" type="radio">
+<label for="nightshades">Nightshades </labeL>
+<input id="nightshades" type="radio">
+```
 
 **Good**:
 
-    <fieldset>
-        <legend>Favorite Foods</legend>
-        <label for="avocado-ice-cream">Avocado Ice Cream</label>
-        <input id="avocado-ice-cream" type="radio">
-        <label for="nightshades">Nightshades</label>
-        <input id="nightshades" type="radio">
-    </fieldset>
+```html
+<fieldset>
+    <legend>Favorite Foods</legend>
+    <label for="avocado-ice-cream">Avocado Ice Cream</label>
+    <input id="avocado-ice-cream" type="radio">
+    <label for="nightshades">Nightshades</label>
+    <input id="nightshades" type="radio">
+</fieldset>
+```
 
 ### Select
 
 Select menus should be accompanied by a `label` tag, like a simple input should. `<optgroup>` tags can be used *like* fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
 
-    <label for="movies">Movies</label>
-    <select id="movies">
-        <optgroup label="Comedy">
-            <option value="1">Superbad</option>
-            <option value="5">Shaun of the Dead</option>
-            <option value="7">Zoolander</option>
-        </optgroup>
-        <optgroup label="Horror">
-            <option value="3">Alien</option>
-            <option value="4">Saw II</option>
-            <option value="8">28 Days Later</option>
-        </optgroup>
-    </select>
+```html
+<label for="movies">Movies</label>
+<select id="movies">
+    <optgroup label="Comedy">
+        <option value="1">Superbad</option>
+        <option value="5">Shaun of the Dead</option>
+        <option value="7">Zoolander</option>
+    </optgroup>
+    <optgroup label="Horror">
+        <option value="3">Alien</option>
+        <option value="4">Saw II</option>
+        <option value="8">28 Days Later</option>
+    </optgroup>
+</select>
+```
 
 ### Instructional Form Text
 
@@ -369,13 +414,17 @@ A list of rules about input format, password requirements, required inputs and o
 
 Alternatively, the label might include information for a specific form control:
 
-    <label for="pw">Password (min. 8 characters)</label><input type="password" id="pw">
+```html
+<label for="pw">Password (min. 8 characters)</label><input type="password" id="pw">
+```
 
 A third method that can be use to include instructional information from outside of the label. When using this method, we need the aria-describedby attribute to make explicit the relationship between the instructions and the control.
 
-    <label for="birthday">Expiration date:</label>
-    <input type="text" id="birthday" aria-describedby="date-format">
-    <span id="date-format">MM/YYYY</span>
+```html
+<label for="birthday">Expiration date:</label>
+<input type="text" id="birthday" aria-describedby="date-format">
+<span id="date-format">MM/YYYY</span>
+```
 
 ### Required Fields
 
@@ -387,15 +436,19 @@ Examples:
 
 HTML
 
-    <label for="name" class="required-field">Your Name</label>
-    <input type="text" id="name" name="name" aria-required="true" />
+```html
+<label for="name" class="required-field">Your Name</label>
+<input type="text" id="name" name="name" aria-required="true" />
+```
 
 CSS
 
-    .required-field:after {
-        content: "\*";
-        color: red;
-    }
+```css
+.required-field:after {
+    content: "\*";
+    color: red;
+}
+```
 
 ### Disabled Form Elements
 
@@ -404,7 +457,9 @@ Convention regarding disabled elements is to present them as dimmed or grayed ou
 
 Example
 
-    <input type=”text” id=”shippingAddress” disabled />
+```html
+<input type=”text” id=”shippingAddress” disabled />
+```
 
 #### Disabling Submit Buttons
 
@@ -441,23 +496,29 @@ Let the user know that there are errors on the page. Upon validation:
 
 Example:
 
-    <input id="date" type="text" aria-invalid=”true” />
+```html
+<input id="date" type="text" aria-invalid=”true” />
+```
 
 Let the user know what the error is. Utilize the form field’s `aria-describedby` attribute to tie the form field to the error message.  That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
 
 Example:
 
-    <label for="name">Your Name</label>
-    <input type="text" id="name" aria-invalid=”true” aria-describedby="nameError" />
-    <p id="nameError">Please only use letters</p>
+```html
+<label for="name">Your Name</label>
+<input type="text" id="name" aria-invalid=”true” aria-describedby="nameError" />
+<p id="nameError">Please only use letters</p>
+```
 
 Let the user know how many errors are on a page. Each error message should be prefaced with its error number relative to the total number of errors.
 
 Example (Best):
 
-    <label for="date">Your Name</label>
-    <input type="text" id="date" aria-invalid=”true” aria-describedby="dateError" />
-    <p id="dateError">Error 2 of 2: please enter a valid date.</p>
+```html
+<label for="date">Your Name</label>
+<input type="text" id="date" aria-invalid=”true” aria-describedby="dateError" />
+<p id="dateError">Error 2 of 2: please enter a valid date.</p>
+```
 
 ## TABLES
 
@@ -469,25 +530,27 @@ Screen readers are capable of navigating data tables that are marked up using th
 
 Example:
 
-    <table summary="This table describes the Unicode entity codes used to render special characters in an HTML document">
-        <caption>Unicode Entities for Common Special Characters</caption>
-        <thead>
-            <tr>
-                <th scope="col">Character</th>
-                <th scope="col">Entity Code</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td scope="row">Em Dash</td>
-                <td>&#8212;</td>
-            </tr>
-            <tr>
-                <td scope="row">Registered Trademark</td>
-                <td>&#8482;</td>
-            </tr>
-        </tbody>
-    </table>
+```html
+<table summary="This table describes the Unicode entity codes used to render special characters in an HTML document">
+    <caption>Unicode Entities for Common Special Characters</caption>
+    <thead>
+        <tr>
+            <th scope="col">Character</th>
+            <th scope="col">Entity Code</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td scope="row">Em Dash</td>
+            <td>&#8212;</td>
+        </tr>
+        <tr>
+            <td scope="row">Registered Trademark</td>
+            <td>&#8482;</td>
+        </tr>
+    </tbody>
+</table>
+```
 
 More complex tables will require the use of header and id attributes.
 
@@ -505,24 +568,28 @@ A developer has total control over the order of elements in flexbox containers, 
 
 HTML
 
-    <body>
-        <footer>
-            ...
-        </footer>
-        <main>
-            ...
-        </main>
-        <header>
-            ...
-        </header>
-    </body>
+```html
+<body>
+    <footer>
+        ...
+    </footer>
+    <main>
+        ...
+    </main>
+    <header>
+        ...
+    </header>
+</body>
+```
 
 CSS
 
-    body {
-        display; flexbox;
-        flex-direction: column-reverse;
-    }
+```css
+body {
+    display; flexbox;
+    flex-direction: column-reverse;
+}
+```
 
 This is an absurd example that flies in the face of semantics and other rigid standards, but if you'll play along, this page would render totally normally to a visual user with the header appearing above the main content, and main content appearing above the footer. Whereas to a screen reader traversing the HTML sequentially, this page makes zero sense.
 
@@ -531,23 +598,27 @@ Example:
 
 HTML
 
-    <section class="flex-container">
-        <button tab-index="3">
-            ...
-        </button>
-        <button tab-index="2">
-            ...
-        </button>
-        <button tab-index="1">
-            ...
-        </button>
-    </body>
+```html
+<section class="flex-container">
+    <button tab-index="3">
+        ...
+    </button>
+    <button tab-index="2">
+        ...
+    </button>
+    <button tab-index="1">
+        ...
+    </button>
+</body>
+```
 
 CSS
 
-    .flex-container {
-        display; flexbox;
-        flex-direction: column-reverse;
-    }
+```css
+.flex-container {
+    display; flexbox;
+    flex-direction: column-reverse;
+}
+```
 
 Also, avoid making reference to the sequence, position, or arrangement of the elements in a flexbox container if possible, or otherwise be sure avoid creating confusion for screen-reader users.
