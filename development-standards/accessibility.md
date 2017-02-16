@@ -41,11 +41,9 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ## Web Accessibility
 
-### Browsers
+### Support
 
-// TODO
-
-We
+Our [current list](https://thinkbrownstone.atlassian.net/wiki/display/DEV/Accessibility+Guidelines+and+Documentation) of expected supported assistive tools and browsers.
 
 ### Document Structure & Semantics
 
@@ -89,7 +87,7 @@ There are a couple specific things to keep in mind when address meta tags and ac
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-2.
+// TODO: Did not find great information here. What other metadata supports our accessible goals.
 
 #### Semantics
 
@@ -175,12 +173,12 @@ It is *vital* the target container of your skip link has `tabindex` property set
 
 It is also best practice to include the `role="main"` attribute and value to the target container. This attribute is read by the screen-reader to provide an extra layer of semantics to a keyboard user, indicating that they landed where they expected to on the page (at the main content).
 
-<body>
-    <a href="#maincontent">Skip to main content</a>
-    ... 3 Menus, a search bar, etc.
-    <main id="maincontent" role="main" tabindex="-1">
-        <h1>Heading</h1>
-        <p>This is the first paragraph</p>
+    <body>
+        <a href="#maincontent">Skip to main content</a>
+        ... 3 Menus, a search bar, etc.
+        <main id="maincontent" role="main" tabindex="-1">
+            <h1>Heading</h1>
+            <p>This is the first paragraph</p>
 
 
 ## Actionable Elements
