@@ -43,7 +43,12 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ### Support
 
-Our [current list](https://thinkbrownstone.atlassian.net/wiki/display/DEV/Accessibility+Guidelines+and+Documentation) of expected supported assistive tools and browsers.
+Our current list of expected supported assistive tools and browsers.
+
+- NVDA + Windows
+- JAWS + Windows
+- VoiceOver (iOS)
+- TalkBack (Android)
 
 ### Document Structure & Semantics
 
