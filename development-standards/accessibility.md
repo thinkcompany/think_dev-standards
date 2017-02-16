@@ -53,6 +53,8 @@ Good, semantic structure of your document can be a great asset to accessibility.
 
 #### Initial Markup
 
+Creating web page that meetings our accessibility criteria starts with including important information about the document you are writing in the head.
+
 ##### Language and Localization
 
 Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language.
