@@ -1,8 +1,4 @@
 # Performance Development Standards
-
-## Minimize Page Load Time
-
-### Reduce HTTP requests
 Each individual element on a web page generates an HTTP request which adds its own network latency, download time and render time. The most crucial optimization for any web site is to reduce or limit the number of total HTTP requests. There are several ways to accomplish this, the most common of which is to combine CSS, JS and images into as few files as possible.
 
 ### Serve external assets from a content delivery network (CDN) with a cookie-less domain
@@ -40,10 +36,10 @@ These files will be served in the "exploded" view during local development, but 
 
   * is this needed in http/2?
 
-## Minify JavaScript File
+### Minify JavaScript File
 Use a resource compressor — such as the one included in YUI — to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
 
-## Import JavaScript at the Bottom of the Page
+### Import JavaScript at the Bottom of the Page
 Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element. 
 
 This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
