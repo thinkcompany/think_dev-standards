@@ -18,23 +18,12 @@ URL redirects with status codes 301 or 302 are not cached by any browser and sho
 
 An often overlooked redirect occurs when a user requests a URL without a trailing slash, such as domain.com/about. This URL usually redirects to domain.com/about/. This redirect adds extra latency and processing time to the request, so whenever possible both URLs should serve the actual page.
 
-## AJAX
-
-### Make Requests Cacheable
-Ensure that AJAX requests are subject to the same web caching rules as full web pages. For instance, if a standard document is cached for 15 minutes, then AJAX requests on that page should also be cached for 15 minutes.
-
-### Use GET
-Using GET instead of POST saves a small amount of bandwidth by sending one packet instead of two.
-
-
 ## JavaScript
 
 ### Concatenate JavaScript Files
 Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts. 
 
 These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources.
-
-  * is this needed in http/2?
 
 ### Minify JavaScript File
 Use a resource compressor — such as the one included in YUI — to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
@@ -43,6 +32,15 @@ Use a resource compressor — such as the one included in YUI — to compress an
 Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element. 
 
 This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
+
+### Load Dynamic Content Asynchronously 
+Many sites with dynamic displays contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded asynchronously via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
+
+### Make Requests Cacheable
+Ensure that HTTP requests loaded via JavaScript are subject to the same web caching rules as full web pages. For instance, if a standard document is cached for 15 minutes, then all JavaScript requests on that page should also be cached for 15 minutes.
+
+### Use GET
+Using GET instead of POST saves a small amount of bandwidth by sending one packet instead of two.
 
 ## HTML
 
@@ -61,9 +59,6 @@ The same goes for CSS, always place styles in the external style sheet and do no
 Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
 
 When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
-
-## Load Content via AJAX
-Many sites with dynamic displays (carousels, tabs) contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
 
 ## Third Party Code
 
