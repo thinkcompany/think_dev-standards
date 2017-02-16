@@ -163,11 +163,23 @@ In content, it might look like:
     <body>
         <a href="#maincontent">Skip to main content</a>
         ... 3 Menus, a search bar, etc.
-        <main id="maincontent>
+        <main id="maincontent">
             <h1>Heading</h1>
             <p>This is the first paragraph</p>
 
 In order to hide this element from regular users while maintaining it's functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
+
+It is *vital* the target container of your skip link has `tabindex` property set to -1. This prevent unwanted behavior on the page by setting focus to the target element.
+
+It is also best practice to include the `role="main"` attribute and value to the target container. This attribute is read by the screen-reader to provide an extra layer of semantics to a keyboard user, indicating that they landed where they expected to on the page (at the main content).
+
+<body>
+    <a href="#maincontent">Skip to main content</a>
+    ... 3 Menus, a search bar, etc.
+    <main id="maincontent" role="main" tabindex="-1">
+        <h1>Heading</h1>
+        <p>This is the first paragraph</p>
+
 
 ## Actionable Elements
 
