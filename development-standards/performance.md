@@ -60,6 +60,33 @@ Images are inline elements and content must flow around them. Embedding the imag
 
 When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
 
+## Fonts
+
+### Minimize the number of Fonts being used
+Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire fontface.
+
+### Use Compressed Font File Types
+The WOFF format is pre-compressed and works in all modern browsers. If you need to use TTF or EOT formats, make sure you are compressing the font files with GZIP when delivering the fonts.
+
+### Include local() & format() Directives in a @font-face Declaration
+When you the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
+
+Your declaration should look something like this:
+
+```css 
+    @font-face {
+        font-family: 'Font Name';
+        font-weight: 400;
+        src: local('Awesome Font Italic'),
+        url('/fonts/awesome-i.woff2') format('woff2'), 
+        url('/fonts/awesome-i.woff') format('woff'),
+        url('/fonts/awesome-i.ttf') format('truetype'),
+        url('/fonts/awesome-i.eot') format('embedded-opentype');
+    }
+```
+
+Including these directives prevents the browser from downloading unused resources and improve page performance.
+
 ## Third Party Code
 
 ### async / loader script
