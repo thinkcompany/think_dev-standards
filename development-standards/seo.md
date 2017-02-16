@@ -1,10 +1,12 @@
-#SEO Development Standards - DRAFT
+#SEO Development Standards
 
-This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. SEO enhancements also aid in general website accessibility, so there is absolutely no excuse not to implement the guidelines set forth in this document, however any Accessibility Guidelines may override any guidelines set forth for SEO.
+This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. 
+
+SEO enhancements also aid in general website accessibility, so there is absolutely no excuse not to implement the guidelines set forth in this document. However, any [Accessibility Guidelines](accessibility.md) may override any guidelines set forth for SEO.
 
 ##Markup
 
-Developers are expected to write HTML code that conforms to the HTML Coding Guidelines, but they must be extra aware of a subset of HTML elements that are intended to help web crawlers index our sites. This markup is business-critical and should be implemented with the utmost care.
+Developers are expected to write HTML code that conforms to the [HTML Coding Guidelines](html.md), but they must be extra aware of a subset of HTML elements that are intended to help web crawlers index our sites. This markup is business-critical and should be implemented with the utmost care.
 
 ###Title
 
@@ -18,11 +20,11 @@ Special characters, such as a registered trademark symbol, may be used in a titl
 
 ###Meta Elements
 
-There are several meta elements that should be implemented to aid in search engine placement.
+There are several meta elements that should be implemented to aid in search engine placement. The meta elements are page-specific, so the site architecture needs to support per-page meta tags.
 
 ####Description
 
-The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and may aid page rank.
+The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and in link descriptions on social sharing sites. The meta description is more important for visitor click-through than page ranking. If no meta decription is provided on a given page, generally search engines will scan the page for the most relevant keywords based on the query, and use the surrounding copy in result pages. 
 
 ####Keywords
 
@@ -48,7 +50,7 @@ Example:
 
 ###Canonical Link
 
-Content management systems may serve the same content at different URLs, but only one URL is the "real" or "canonical" page. Use a link element with rel="canonical" to specify the one true page URL for Google.
+Content management systems may serve the same content at different URLs, but only one URL is the "real" or "canonical" page. Use a link element with `rel="canonical"` to specify the one true page URL for Google.
 
 Example:
 ```html
@@ -75,7 +77,7 @@ Good Example:
 
 ####NOFOLLOW
 
-The rel attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, rel="nofollow" should be used to prevent spidering of anchors that link to unreleated domains. 
+The `rel` attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, `rel="nofollow"` should be used to prevent spidering of anchors that link to unreleated domains. 
 
 Example:
 ```html
@@ -86,13 +88,13 @@ Example:
 
 Proper use of HTML headings is crucial to not only a well-formed and semantically-structured document, but also to the ease with which a web crawler determines the relevance of content to a search query. Headings should follow these guidelines:
 
-* `<h1>`: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an <h1> on index pages. The `<h1>` should not be used as a wrapper for the site logo image. Only one `<h1>` should appear on a page.
+* `<h1>`: should be used for the top-level heading text on a page. On article pages, this will typically be the article title. It may be more difficult to discern an `<h1>` on index pages. The `<h1>` should not be used as a wrapper for the site logo image. Only one `<h1>` should appear on a page.
 * `<h2>`: used for top-level headings, typically section or module titles
 * `<h3>` through `<h6>`: used as appropriate in a hierarchical manner
 
 ###Site Logo
 
-The site logo which appears in the header should be marked up as standard text inside of a block-level element. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which text-indent is the most reliable.
+The site logo which appears in the header should be marked up as standard text inside of a block-level element. The graphic should appear as a background image as part of a sprite. The element should contain descriptive text which can be shifted offscreen using various CSS methods, of which `text-indent` is the most reliable.
 
 Example:
 ```html
@@ -108,7 +110,7 @@ Example:
 <img src="image.jpg" alt="The Liberty Bell" />
 ```
 
-In many cases, an image will be displayed directly adjacent to a link or heading which describes the image. When this occurs, it is best to leave the alt attribute blank to prevent screen readers from reading the same text multiple times.
+In many cases, an image will be displayed directly adjacent to a link or heading which describes the image. When this occurs, it is best to leave the `alt` attribute blank to prevent screen readers from reading the same text multiple times.
 
 Example:
 ```html
@@ -139,17 +141,24 @@ The currently selected page (page 3 in the above example) should not be linked. 
 
 Example: `1 | 2 | 3 | 4 | 5 | 6`
 
-NOTE: Do not use a vertical bar character `|` to separate the numbers. Use the CSS border property to apply the divider.
+NOTE: Do not use a vertical bar (pipe) character `|` to separate the numbers. Use the CSS border property to apply the divider.
 
 ##Domains and URLs
 
 ###Directory Structures
 
-URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). 
+URLs should be kept as short as possible and should use as few subdirectories as possible (a maximum of four subdirectories). URLs should be lower-case, with words separated by hyphens, and structured in logical groupings/categorization of content. Dynamically-generated URLs should utilize URL Rewriting on the server-side to make URLs easily understood by users and search engines.
+
+Bad Example:
+`http://www.domain.com/page.php?id=321`
+
+Good Example:
+`http://www.domain.com/products/product-page/`
+
 
 ###robots.txt
 
-This is a text file that lives in the web root of the site and instructs a web crawler about which pages that it should not index. Ensure that experimental or testing pages have an entry in robots.txt.
+This is a text file that lives in the web root of the site and instructs a web crawler about which pages that it should not index. Ensure that experimental or testing pages have an entry in `robots.txt`.
 
 Example:
 ```html
@@ -160,7 +169,7 @@ Disallow: /styleguide/
 
 ###Redirects
 
-It may sometimes be necessary to move a page to a new URL, in which case the old URL should redirect to the new URL. This action should be accomplished via the use of a server-side 301 redirect, which will let web crawlers know that the page has moved permanently and that it should index the destination page and not the redirecting page.
+It may sometimes be necessary to move a page to a new URL, in which case the old URL should redirect to the new URL. This action should be accomplished via the use of a server-side HTTP 301 redirect, which will let web crawlers know that the page has moved permanently and that it should index the destination page and not the redirecting page.
 
 ###Content Delivery Networks (CDN)
 

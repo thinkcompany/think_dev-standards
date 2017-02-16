@@ -6,6 +6,7 @@
   1. [Objects](#markdown-header-objects)
   1. [Arrays](#markdown-header-arrays)
   1. [Strings](#markdown-header-strings)
+  1. [JSON](#markdown-header-json)
   1. [Functions](#markdown-header-functions)
   1. [Properties](#markdown-header-properties)
   1. [Variables](#markdown-header-variables)
@@ -249,6 +250,25 @@ function inbox(messages) {
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
+## JSON
+
+A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
+
+```json
+{
+    "id" : 148372,
+    "title" : "Learn Javascript",
+    "tags" : [
+        "javascript", 
+        "programming"
+    ],
+    "in-stock": true,
+    "price": 22.50
+}
+
+```
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
 
 ## Functions
 
@@ -312,9 +332,10 @@ This convention works well with JavaScript because in JavaScript, functions and 
 If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
 
 ```javascript
-    div.onclick = function (e) {
-        return false;
-    };
+    div.addEventListener('click', function(e) {
+        console.log('hello');
+    }, false);
+    
     that = {
         method: function () {
             return this.datum;
@@ -1136,12 +1157,6 @@ var heroes = [
     var name = 'Skywalker';
     return name;
 })();
-
-// good (guards against the function becoming an argument when two files with IIFEs are concatenated)
-;(function() {
-    var name = 'Skywalker';
-    return name;
-})();
 ```
 
 [Read more](http://stackoverflow.com/a/7365214/1712802).
@@ -1165,10 +1180,10 @@ var totalScore = this.reviewScore + '';
 var totalScore = '' + this.reviewScore;
 
 // bad
-var totalScore = '' + this.reviewScore + ' total score';
+var totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-var totalScore = this.reviewScore + ' total score';
+var totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
