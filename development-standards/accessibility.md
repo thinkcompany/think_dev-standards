@@ -204,7 +204,7 @@ It is also best practice to include the `role="main"` attribute and value to the
 
 Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
-It's also important to make the state of toggle-action elements clear to non-visual users. Our friend ARIA comes in handy here, offering attributes such as `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page. These are boolean attributes, that should be updated as the user interacts with them. For example, alongside toggling classes on my UI, I would also call these helper functions for a dropdown menu:
+It's also important to make the state of toggle-action elements clear to non-visual users. Aria attributes `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page are used in these cases. These are boolean attributes that should be updated as the user interacts with them. When the UI state is updated, so should the aria-state be updated with helper functions like these:
 
 ```javascript
 var ariaExpand = function ($trigger, $menu) {
@@ -288,7 +288,7 @@ Similarly, a reference to location or relative position is not enough informatio
 <button class="btn-red">Button B</button>
 ```
 
-**Bad**:
+**Good**:
 
 ```html
 <p>Click the first button for True or the second button for False.</p>
