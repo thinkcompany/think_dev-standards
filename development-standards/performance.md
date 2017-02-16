@@ -81,7 +81,7 @@ All images in the project should be compressed. This will be one of the biggest 
 
 Different images perform better depending on what they image is. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
 
-PNG files are not able to be compressed as well as JPEG images (does not allow any *lossy* compression), and thus should be used judiciously. Occasionally, they can be used as a replacement for vector images to display geometric images and text at high resolution and small sizes.
+PNG files are not as compress-able as JPEG images. They do not allow any *lossy* compression. They should be used judiciously, in cases where the unique features of increased image quality and support for transparent backgrounds, etc. are required.
 
 #### Image Sprites
 
@@ -96,3 +96,24 @@ When implementing a responsive design, let the CSS control the image size rather
 ### Lazy loading
 
 This is a technique used to improve initial load speed by delaying the actual loading of images until they are viewable. By setting empty or invalid `src` attributes on your image tags, you can prevent any initial image asset loading. Then, you must include a script to add event listeners to the DOM, waiting for the user to navigate to parts of the page where the image comes into the window frame, *then* the image is loaded. [CSS Tricks](https://css-tricks.com/snippets/javascript/lazy-loading-images/ 'CSS Trick Lazy Loading') has a good example of one such script.
+
+### Mobile
+
+In some cases, responsive design will call for different size/shapes of an image at different breakpoints. To deliver this with the best performance, we should avoid always serving the same image simply redrawn at the right size. On low-bandwidth devices, loading a huge desktop sized image so that it fits on a mobile screen is a huge waste of page-weight.
+
+For background images, use CSS media queries to serve different images at lower sizes.
+
+    .hero {
+        // Smallest image loaded by default.
+        background-image: url("./my_image100x200")
+
+        // First breakpoint, load the medium sized image.
+        @media (min-width: 600px) {
+            background-image: url("./my_image200x400");
+        }
+
+        // Second breakpoint, load the large image.
+        @media (min-width: 1000px) {
+            background-image: url("./my_image400x800");
+        }
+    }
