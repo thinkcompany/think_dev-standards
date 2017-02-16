@@ -1,4 +1,4 @@
-# Accessibility Development Standards [DRAFT]
+# Accessibility Development Standards
 
 This document defines the best practices for producing websites that are accessible to the widest possible audience of web users.
 
@@ -67,8 +67,6 @@ Example:
 
     <p lang="es"> Esta frase es en espa&ntilde;ol. </p> (Spanish)
 
-// TODO: Localization techniques.
-
 ##### Page Titles
 
 The title element is read by screen readers on every page view and ideally should be short and unique.
@@ -86,8 +84,6 @@ There are a couple specific things to keep in mind when address meta tags and ac
 **Good**:
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-// TODO: Did not find great information here. What other metadata supports our accessible goals.
 
 #### Semantics
 
@@ -118,7 +114,7 @@ Example:
 
 In using text on a web page, accessibilities concerns focus on ensuring a high level of visibility for the content. If a text-color and its background do not contrast enough, many users will not be able to read it. Standard text and images of text should have a contrast ratio of 4.5:1. Large scale text (font-size of at least 18 point, or 14 with bold) need only contrast at a 3:1 ratio.
 
-A good guide to this can be found at http://haltersweb.github.io/Accessibility/font-sizing-and-contrast.html, and you can directly test your text & background colors' contrast ratio at http://webaim.org/resources/contrastchecker/.
+A good guide to this can be found at [Halters Web](http://haltersweb.github.io/Accessibility/font-sizing-and-contrast.html), and you can directly test your text & background colors' contrast ratio at [Web Aim Contrast Checker](http://webaim.org/resources/contrastchecker/).
 
 #### Lists
 
