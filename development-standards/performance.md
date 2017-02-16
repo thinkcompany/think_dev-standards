@@ -14,14 +14,14 @@ All text assets — JavaScript and style sheets — should be compressed with GZ
 DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. Yahoo! recommends between two and four unique host names per site.
 
 ### Avoid Redirects
-URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided. 
+URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided.
 
 An often overlooked redirect occurs when a user requests a URL without a trailing slash, such as domain.com/about. This URL usually redirects to domain.com/about/. This redirect adds extra latency and processing time to the request, so whenever possible both URLs should serve the actual page.
 
 ## JavaScript
 
 ### Concatenate JavaScript Files
-Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts. 
+Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts.
 
 These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources.
 
@@ -29,11 +29,11 @@ These files will be served in the "exploded" view during local development, but 
 Use a resource compressor — such as the one included in YUI — to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
 
 ### Import JavaScript at the Bottom of the Page
-Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element. 
+Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element.
 
 This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
 
-### Load Dynamic Content Asynchronously 
+### Load Dynamic Content Asynchronously
 Many sites with dynamic displays contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded asynchronously via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
 
 ### Make Requests Cacheable
@@ -55,11 +55,6 @@ All scripts should be moved to the external JavaScript library. This increases c
 
 The same goes for CSS, always place styles in the external style sheet and do not use inline styles.
 
-## Specify Image Dimensions, Do Not Resize
-Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
-
-When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
-
 ## Third Party Code
 
 ### async / loader script
@@ -69,3 +64,22 @@ A web browser will block while downloading a JavaScript file at the bottom of th
 Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
 
 The best way to mitigate these effects is to place each display ad into an iframe. The iframe will allow the ad requests to be processed in parallel to the web page without interfering with is performance. An ad that fails to load in an iframe may delay the onLoad or onDomReady events and prevent JavaScript loading, but the HTML documents will be completely styled and interactive.
+
+## Images
+
+### Optimization
+
+All images in the project should be compressed. This will be one of the biggest performance enhancing things you can do for a website as images can easily be some of the largest files the browser has to load. A page with excess image weight will load slower.
+
+[ImageOptim](https://imageoptim.com/ "ImageOptim") will do this for you.
+
+### Optimal Image Type
+
+Different images perform better depending on what they image is. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
+
+PNG files are not able to be compressed as well as JPEG images (does not allow any *lossy* compression), and thus should be used judiciously. Occasionally, they can be used as a replacement for vector images to display geometric images and text at high resolution and small sizes.
+
+### Specify Image Dimensions, Do Not Resize
+Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
+
+When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
