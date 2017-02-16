@@ -248,7 +248,7 @@ Like all other text, avoid all-capitalize text content, as the screen reader wil
 
 Avoid including the URL in the link text, as the format of web links will be read letter-by-letter and be extremely difficult to understand.
 
-The style of link text should also include some property besides color. An underline is typically sufficient.
+The style of link text should also include some property besides color to increase visibility for low-vision, or color blind users. An underline is typically sufficient.
 
 ## Imagery
 
