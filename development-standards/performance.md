@@ -14,7 +14,7 @@ Compress all text assets — JavaScript and style sheets — with GZIP. It can c
 DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. [Yahoo!](https://developer.yahoo.com/performance/rules.html#dns_lookups) recommends between two and four unique host names per site.
 
 ### Avoid Redirects
-URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided. 
+URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided.
 
 An often overlooked redirect occurs when a user requests a URL without a trailing slash, such as domain.com/about. This URL usually redirects to domain.com/about/. This redirect adds extra latency and processing time to the request, so whenever possible both URLs should serve the actual page.
 
@@ -29,11 +29,11 @@ These files will be served in the "exploded" view during local development, but 
 Use a resource compressor to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
 
 ### Import JavaScript at the Bottom of the Page
-Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element. 
+Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element.
 
 This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
 
-### Load Dynamic Content Asynchronously 
+### Load Dynamic Content Asynchronously
 Many sites with dynamic displays contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded asynchronously via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
 
 ### Make Requests Cacheable
@@ -93,3 +93,58 @@ A web browser will block while downloading a JavaScript file at the bottom of th
 Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
 
 The best way to mitigate these effects is to place each display ad into an iframe. The iframe will allow the ad requests to be processed in parallel to the web page without interfering with is performance. An ad that fails to load in an iframe may delay the onLoad or onDomReady events and prevent JavaScript loading, but the HTML documents will be completely styled and interactive.
+
+## Images
+
+### Optimization
+
+All images in the project should be compressed. This will be one of the biggest performance enhancing things you can do for a website as images can easily be some of the largest files the browser has to load. A page with excess image weight will load slower.
+
+[ImageOptim](https://imageoptim.com/ "ImageOptim") will work for PNG, JPEG formats.
+
+[SVGO](https://github.com/svg/svgo "SVGO") or [SVG OMG](https://jakearchibald.github.io/svgomg/ "SVG OMG") work for SVGs.
+
+[ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") is an NPM package that can be configured to optimize your projects images programmatically.
+
+### Image Type
+
+Different images perform better depending on what they image is. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
+
+PNG files are not as compress-able as JPEG images. They do not allow any *lossy* compression. They should be used judiciously, in cases where the unique features of increased image quality and support for transparent backgrounds, etc. are required.
+
+#### Image Sprites
+
+Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader 'svg-sprite-loader'), your set of SVGs can be combined into one.
+
+### Specify Image Dimensions, Do Not Resize
+
+Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
+
+When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
+
+### Lazy loading
+
+This is a technique used to improve initial load speed by delaying the actual loading of images until they are viewable. By setting empty or invalid `src` attributes on your image tags, you can prevent any initial image asset loading. Then, you must include a script to add event listeners to the DOM, waiting for the user to navigate to parts of the page where the image comes into the window frame, *then* the image is loaded. [CSS Tricks](https://css-tricks.com/snippets/javascript/lazy-loading-images/ 'CSS Trick Lazy Loading') has a good example of one such script.
+
+### Mobile
+
+In some cases, responsive design will call for different size/shapes of an image at different breakpoints. To deliver this with the best performance, we should avoid always serving the same image simply redrawn at the right size. On low-bandwidth devices, loading a huge desktop sized image so that it fits on a mobile screen is a huge waste of page-weight.
+
+For background images, use CSS media queries to serve different images at lower sizes.
+
+```css
+.hero {
+    // Smallest image loaded by default.
+    background-image: url("./my_image100x200")
+
+    // First breakpoint, load the medium sized image.
+    @media (min-width: 600px) {
+        background-image: url("./my_image200x400");
+    }
+
+    // Second breakpoint, load the large image.
+    @media (min-width: 1000px) {
+        background-image: url("./my_image400x800");
+    }
+}
+```
