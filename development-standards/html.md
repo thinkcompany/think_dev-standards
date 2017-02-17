@@ -20,13 +20,13 @@ Developers should use only those elements and attributes that have semantic valu
 #### Elements
 - `html`, `head`, `title`, `meta`, `body`
 - `script`, `style`, `link`
-- `header`, `footer`, `main`, `section`, `article`, `aside`
+- `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`
 - `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`
 - `ul`, `ol`, `li`
 - `dl`, `dt`, `dd`
 - `a`
 - `em`, `strong`, `ins`, `del`
-- `img`
+- `img`, `figure`, `figcaption`
 - `blockquote`, `cite`, `abbr`
 - `table`, `thead`, `tbody`, `tfoot`, `th`, `tr`, `td`
 - `form`, `fieldset`, `legend`, `label`, `input`, `textarea`, `select`, `button`
@@ -44,6 +44,8 @@ Developers should use only those elements and attributes that have semantic valu
 - custom data attributes (`data-*`)
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript) to achieve the desired result.
+
+*NOTE:* The following elements do not work on older browsers: `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
 
 ## Format & Style
 
