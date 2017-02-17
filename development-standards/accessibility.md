@@ -208,6 +208,8 @@ var ariaContract = function ($trigger, $menu) {
 
 ### Events
 
+Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is oftentimes visual and driven by mouse activity, or events. HTML provides handlers for these events, but also provides equivalent handlers for keyboard events. When creating events, developers should make use of both to meet accessibility requirements.
+
 ### Buttons
 
 Buttons should be made with the native HTML `<button>` tag, and not a clickable image, or any other workaround that causes unnecessary confusion for screen-reader users.
