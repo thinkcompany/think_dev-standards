@@ -41,6 +41,16 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ## Web Accessibility
 
+### Keyboard Accessibility
+
+A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward through certain elements on the page, sometimes the arrows are used for navigation, they can interact with elements with the enter button and spacebar. Keyboard users should receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
+
+#### Focus States
+
+To tab onto an element with is to give that element **focus**. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable `focus` state on a component for when keyboard users arrive at the component, similar `hover` state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
+
+Other aspects of keyboard navigation are touched on in more depth below are tab order, hiding and showing elements, and skip navigation.
+
 ### Support
 
 Our current list of expected supported assistive tools and browsers.
