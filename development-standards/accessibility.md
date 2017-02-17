@@ -134,7 +134,17 @@ When creating a list on your page, know that screen-readers benefit from well-fo
 
 One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot), and these should be wrapped in a `<nav>`.
 
-Good Example:
+**Bad**:
+
+```html
+<div class="product-ctas">
+    <a href="more.html">More Info</a>
+    <a href="options.html">Other Options</a>
+    <a href="sign-up.html">Sign Up Now</a>
+</div>
+```
+
+**Good**:
 
 ```html
 <nav>
@@ -144,28 +154,6 @@ Good Example:
         <li><a href="support.html">Support</a></li>
     <ul>
 </nav>
-```
-
-Bad Example:
-
-```html
-<nav>
-    <ul class="product-ctas">
-        <li><a href="more.html">More Info</a></li>
-        <li><a href="options.html">Other Options</a></li>
-        <li><a href="sign-up.html">Sign Up Now</a></li>
-    <ul>
-</nav>
-```
-
-Good Example
-
-```html
-<div class="product-ctas">
-    <a href="more.html">More Info</a>
-    <a href="options.html">Other Options</a>
-    <a href="sign-up.html">Sign Up Now</a>
-</div>
 ```
 
 #### Skip Navigation
