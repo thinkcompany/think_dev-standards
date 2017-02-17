@@ -220,6 +220,10 @@ var ariaContract = function ($trigger, $menu) {
 
 Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is often visual and driven by mouse activity, or events. Avoid relying only on mouse events like mouseover and click to fire JavaScript functions. Bind equivalent keyboard events to those functions, such as focus and keypress, to make JS functionality available to users without a mouse.
 
+Most major browsers and assistive technologies bridge the potential accessibility gap caused by `onClick` event by also triggering their callback on spacebar and enter key presses. While helpful, this does not work in every single case, especially on elements like text, divs or table cells that are not typically actionable. Even when given an `tabindex` attribute or explicitly given focus by a script. This is why we expect to also need to bind keyboard and focus activity alongside mouse and hover.
+
+The `onDblClick` event handler is associated with the double click of a mouse on a selected HTML element. There is no device independent or keyboard equivalent to `onDblClick`, so it must be avoided.
+
 Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per our JavaScript standards, `data-*` attributes should be used as selectors.
 
 **Bad**:
