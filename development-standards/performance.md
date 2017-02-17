@@ -8,10 +8,10 @@ Always serve JavaScript, CSS and chrome images from a CDN, which distributes the
 Most of the visits to a web site are by visitors with a "primed cache", which means that the user has visited the site before and is viewing additional content. It is crucial to ensure that these page views make use of the users local cache to retrieve JavaScript, CSS and images instead of retrieving them from the server. These assets should have an expiration date of at least one month from the request time.
 
 ### Compress assets with GZIP
-All text assets — JavaScript and style sheets — should be compressed with GZIP. It can compress these files by 70% or more and it is universally supported. There's no excuse not to do this.
+Compress all text assets — JavaScript and style sheets — with GZIP. It can compress these files by 70% or more and it is universally supported.
 
 ### Reduce DNS Lookups
-DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. Yahoo! recommends between two and four unique host names per site.
+DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. [Yahoo!](https://developer.yahoo.com/performance/rules.html#dns_lookups) recommends between two and four unique host names per site.
 
 ### Avoid Redirects
 URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided. 
@@ -21,12 +21,12 @@ An often overlooked redirect occurs when a user requests a URL without a trailin
 ## JavaScript
 
 ### Concatenate JavaScript Files
-Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts. 
+Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts. Use frameworks like [webpack](http://webpack.github.io/) and [Browserify](http://browserify.org/) to handle bundling your javascript files.
 
-These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources.
+These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources. 
 
-### Minify JavaScript File
-Use a resource compressor — such as the one included in YUI — to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
+### Minify JavaScript Files
+Use a resource compressor to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
 
 ### Import JavaScript at the Bottom of the Page
 Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element. 
@@ -46,9 +46,6 @@ Using GET instead of POST saves a small amount of bandwidth by sending one packe
 
 ### Valid Markup
 The first priority for a web developer should be to write markup that validates. This is a best practice that crosses many aspects of web development and should be relatively straightforward to achieve (with maybe the exception of third-party code). A browser does less work when parsing valid code and can avoid "interpreting" broken code. This also ensures that validation can be used as part of the troubleshooting process: if the page doesn't validate, there's something wrong in the system that should be fixed.
-
-### page-level wrapper
-Web pages often have a DIV that surrounds all page content, usually for the purposes of centering the design. This technique can prevent "flushing" and can slow down rendering by a small amount, so it is better to remove it and use CSS to center the individual container DIVs.
 
 ### Avoid Inline Styles and Scripts
 All scripts should be moved to the external JavaScript library. This increases code reuse and keeps the markup clean. Inline event handlers (i.e. onClick) should never be used; always attach JavaScript functions via DOM scripting methods. The exception is scripts included via conditional comments for particular browsers; these should be embedded in the markup.
