@@ -515,27 +515,24 @@ superPower = new SuperPower();
 var superPower = new SuperPower();
 ```
 
-Use one `var` declaration per variable.
-It's easier to add new variable declarations this way, and you never have
-to worry about swapping out a `;` for a `,` or introducing punctuation-only
-diffs.
+Variables can be defined one per line or sequentially. If declaring sequentially, `var` declarations should be placed on their own line, and indented. Project teams should agree on a declaration format and follow it consistently throughout the lifecycle of the application.
 
 ```javascript
 // bad
-var items = getItems(),
-    goSportsTeam = true,
-    dragonball = 'z';
-
-// bad
-// (compare to above, and try to spot the mistake)
-var items = getItems(),
-    goSportsTeam = true;
-    dragonball = 'z';
+var width, length, height, depth;
 
 // good
-var items = getItems();
-var goSportsTeam = true;
-var dragonball = 'z';
+var width, 
+    height, 
+    length,
+    depth;
+
+// good
+var width;
+var height;
+var length;
+var depth;
+
 ```
 
 Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
