@@ -442,7 +442,7 @@ superPower = new SuperPower();
 var superPower = new SuperPower();
 ```
 
-Variables can be defined on their own line or sequentially. Sequential `var` declarations should be placed on their own line, and indented. 
+Variables can be defined one per line or sequentially. If declaring sequentially, `var` declarations should be placed on their own line, and indented. Project teams should agree on a declaration format and follow it consistently throughout the lifecycle of the application.
 
 ```javascript
 // bad
