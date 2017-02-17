@@ -1306,7 +1306,7 @@ function() {
     };
 }
 
-//Good: If you have can't use ES6
+//Good: If ES6 is not available, revert to a traditional function declaration structure
 function() {
     return function() {
         console.log(this);
