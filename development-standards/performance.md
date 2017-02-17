@@ -47,23 +47,30 @@ Using GET instead of POST saves a small amount of bandwidth by sending one packe
 ### Valid Markup
 The first priority for a web developer should be to write markup that validates. This is a best practice that crosses many aspects of web development and should be relatively straightforward to achieve (with maybe the exception of third-party code). A browser does less work when parsing valid code and can avoid "interpreting" broken code. This also ensures that validation can be used as part of the troubleshooting process: if the page doesn't validate, there's something wrong in the system that should be fixed.
 
+You can use a tool like [W3C's Markup Validation Service](https://validator.w3.org/) to validate your markup.
+
 ### Avoid Inline Styles and Scripts
 All scripts should be moved to the external JavaScript library. This increases code reuse and keeps the markup clean. Inline event handlers (i.e. onClick) should never be used; always attach JavaScript functions via DOM scripting methods. The exception is scripts included via conditional comments for particular browsers; these should be embedded in the markup.
 
 The same goes for CSS, always place styles in the external style sheet and do not use inline styles.
 
-## Specify Image Dimensions, Do Not Resize
-Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
+BAD
+```html
+<div style="background-color: #000;" onclick="event"></div>
+```
 
-When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
+GOOD
+```html
+<div class="my-div" data-click-target></div>
+```
 
 ## Fonts
 
-### Minimize the number of Fonts being used
-Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire fontface.
+### Minimize the Number of Fonts Being Used
+Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire fontface. Libraries like [Google Fonts](https://fonts.google.com/) and [Adobe Typekit](https://typekit.com/) allow you to import the exact font weights and styles you need. [Web Font Loader](https://github.com/typekit/webfontloader) is a helpful tool for importing the exact font styles you want from multiple sources, including local fonts.
 
 ### Use Compressed Font File Types
-The WOFF format is pre-compressed and works in all modern browsers. If you need to use TTF or EOT formats, make sure you are compressing the font files with GZIP when delivering the fonts.
+The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to are compressing the font files with GZIP when delivering the fonts.
 
 ### Include local() & format() Directives in a @font-face Declaration
 When you the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
@@ -119,6 +126,12 @@ Combining SVG assets into one reduces the number of assets loaded. Using a tool 
 ### Specify Image Dimensions, Do Not Resize
 
 Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
+
+BAD
+`<img src="placehold.it/500x500" width="100" height="100">`
+
+GOOD 
+`<img src="placehold.it/500x500" width="500" height="500">`
 
 When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
 
