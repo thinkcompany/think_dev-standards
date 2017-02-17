@@ -43,13 +43,13 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ### Keyboard Accessibility
 
-A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward through certain elements on the page, sometimes the arrows are used for navigation, they can interact with elements with the enter button and spacebar. Keyboard users should receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
+A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation.s Users can interact with elements with the enter button and spacebar. Keyboard users should receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
 
 #### Focus States
 
-To tab onto an element with is to give that element **focus**. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable `focus` state on a component for when keyboard users arrive at the component, similar `hover` state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
+To arrive at an element with keyboard navigation is to give that element a *focus* state. When an element has *focus*, it is the only element that will respond to enter/spacebar keypresses. It is important that the user knows which element has focus at all times, so they know which element they are currently able to interact with, and position of their focused element on the page. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable focus state on a component for when keyboard users arrive at the component, similar hover state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
 
-Other aspects of keyboard navigation are touched on in more depth below are tab order, hiding and showing elements, and skip navigation.
+Keyboard navigation concerns permeate many aspects of our accessibility guidelines. Other sections in this document will contain further details including the tab order, toggling element visibility, and navigation skip patterns.
 
 ### Support
 
@@ -218,7 +218,7 @@ var ariaContract = function ($trigger, $menu) {
 
 ### Events
 
-Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is oftentimes visual and driven by mouse activity, or events. HTML provides handlers for these events, but also provides equivalent handlers for keyboard events. When creating events, developers should make use of both to meet accessibility requirements.
+Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is often visual and driven by mouse activity, or events. Avoid relying only on mouse events like mouseover and click to fire JavaScript functions. Bind equivalent keyboard events to those functions, such as focus and keypress, to make JS functionality available to users without a mouse.
 
 Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per our JavaScript standards, `data-*` attributes should be used as selectors.
 
