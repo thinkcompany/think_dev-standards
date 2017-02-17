@@ -414,6 +414,58 @@ function yup(name, options, args) {
 
 **[⬆ back to top](#markdown-header-table-of-contents)**
 
+## Event Binding
+
+Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript seperate from HTML. Inline bindings can also lead to very hard to track bugs.
+
+```html 
+<!-- Bad -->
+<button onclick="document.bgColor='lightblue'">Feel Blue</button>
+```
+
+Avoid binding to events that can fire multiple times. Some events like resizing the window, or scrolling can fire a large amount of events in a very short amount of time, causing overall performance to degrade. If you need to attach a function to an event like scrolling or window resizing, use [debouncing](https://davidwalsh.name/javascript-debounce-function). This will cut down on the number of times the event fires.
+
+```js 
+// Bad: This is going to fire thousands of times within a few seconds. 
+
+window.addEventListener('resize', function() {
+        console.log('resize');
+});
+
+// Good: This is using debouncing to only fire every 250ms
+
+var windowResizeFn = debounce(function() {
+    console.log('resize');
+}, 250);
+
+window.addEventListener('resize', windowResizeFn);
+
+```
+
+Always cache the DOM query for the element you are binding to. This creates a memory refrence to the DOM nodes, which significantly speeds up execution time.
+
+```js
+
+// Bad: This will query for the selector everytime, in a complex document that could take some time.
+
+document.getElementById('myDiv').addEventListener('click', function() {
+        console.log('clicked');
+});
+
+// Good: the node is now cached to the $myDiv variable. Instead of traversing the DOM to find myDiv, it will use the node reference in memory to locate it.
+
+var $myDiv = document.getElementById('myDiv');
+
+$myDiv.addEventListener('click', function() {
+        console.log('clicked');
+});
+
+```
+
+
+
+**[⬆ back to top](#markdown-header-table-of-contents)**
+
 
 ## Properties
 
