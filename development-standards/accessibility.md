@@ -210,6 +210,26 @@ var ariaContract = function ($trigger, $menu) {
 
 Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is oftentimes visual and driven by mouse activity, or events. HTML provides handlers for these events, but also provides equivalent handlers for keyboard events. When creating events, developers should make use of both to meet accessibility requirements.
 
+Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per our JavaScript standards, `data-*` attributes should be used as selectors.
+
+**Bad**:
+
+```html
+<div onclick="JavaScript:myFunction()">Open Menu</div>
+```
+
+**Good**:
+
+HTML
+```html
+<button class="namespace" data-component="click-me">Open Menu</button>
+```
+
+JavaScript
+```javascript
+$('[data-component="click-me"]').on('click.namespace keypress.namespace', cb);
+```
+
 ### Buttons
 
 Buttons should be made with the native HTML `<button>` tag, and not a clickable image, or any other workaround that causes unnecessary confusion for screen-reader users.
