@@ -127,6 +127,8 @@ All images in the project should be compressed. This will be one of the biggest 
 
 [ImageOptim](https://imageoptim.com/ "ImageOptim") will work for PNG, JPEG formats.
 
+[Optimage](http://getoptimage.com/ "Optimage") works for PNG, JPEG, SVG and GIF formats.
+
 [SVGO](https://github.com/svg/svgo "SVGO") or [SVG OMG](https://jakearchibald.github.io/svgomg/ "SVG OMG") work for SVGs.
 
 [ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") is an NPM package that can be configured to optimize your projects images programmatically.
