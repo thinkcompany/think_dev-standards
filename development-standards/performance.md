@@ -33,6 +33,26 @@ Web browsers stop processing a web page while they are downloading, parsing and 
 
 This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
 
+BAD
+```html
+    <head>
+        <script type="text/javascript" src="main.js"/>
+    </head>
+    <body>
+        ...
+    </body>
+```
+
+
+GOOD 
+```html
+    <body>
+        ...
+        <footer></footer>
+        <script type="text/javascript" src="main.js"/>
+    </body>
+```
+
 ### Load Dynamic Content Asynchronously
 Many sites with dynamic displays contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded asynchronously via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
 
@@ -50,9 +70,7 @@ The first priority for a web developer should be to write markup that validates.
 You can use a tool like [W3C's Markup Validation Service](https://validator.w3.org/) to validate your markup.
 
 ### Avoid Inline Styles and Scripts
-All scripts should be moved to the external JavaScript library. This increases code reuse and keeps the markup clean. Inline event handlers (i.e. onClick) should never be used; always attach JavaScript functions via DOM scripting methods. The exception is scripts included via conditional comments for particular browsers; these should be embedded in the markup.
-
-The same goes for CSS, always place styles in the external style sheet and do not use inline styles.
+All scripts and styles should be moved to an external source. This increases code reuse and keeps the markup clean. Inline event handlers (i.e. onClick) should never be used; always attach JavaScript functions via DOM scripting methods. The exception is scripts included via conditional comments for particular browsers; these should be embedded in the markup.
 
 BAD
 ```html
@@ -89,7 +107,7 @@ Your declaration should look something like this:
     }
 ```
 
-Including these directives prevents the browser from downloading unused resources and improve page performance.
+Including these directives prevents the browser from downloading unused resources and improves page performance.
 
 ## Third Party Code
 
@@ -161,3 +179,21 @@ For background images, use CSS media queries to serve different images at lower 
     }
 }
 ```
+
+## Testing Performance
+When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site and a slow page load is penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want more detailed break down of your page performance, you can use free, online tools to measure your performance. Below are a few of these resources. 
+
+### Chrome Timeline
+The Timeline tool in Chrome inspector allows you to record and analyze every event that occurs during page load. [Google Developers](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool) is a great resource for learning how to use the Timeline Tool.
+
+### Webpagetest
+[webpagetest.org](https://www.webpagetest.org/) is another tool that records and analyzes page performance. This tool also gives you a report card that grades you on individual performance measures, such as using a CDN and compressing images, and gives you detailed information about where you can improve performance. 
+
+### Yellow Lab Tools
+Similar to Webpagetest, [Yellow Lab Tools](http://yellowlab.tools/) gives you a report card with detailed information about improving page performance in specific areas. Yellow Lab Tools gives especially detailed information about bad CSS patterns that could affect performances, like 
+
+### Louis for Automated Testing
+[Louis](https://github.com/AvraamMavridis/gulp-louis) is gulp plugin a good tool for measuring and fixing performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.
+
+
+### 
