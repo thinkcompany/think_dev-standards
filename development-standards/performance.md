@@ -141,6 +141,41 @@ PNG files are not as compress-able as JPEG images. They do not allow any *lossy*
 
 Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader 'svg-sprite-loader'), your set of SVGs can be combined into one.
 
+#### Progressive JPEG
+Typically, JPEG images load top-to-bottom so the full image appears slowly as it loads. With Progressive JPEG files, the whole image loads at once, starting in low quality and gradually become the full quality image. While this doesn't load the image any faster or decrease the file size, it gives the appearance of faster loading to the user. [Yahoo](https://yuiblog.com/blog/2008/12/05/imageopt-4/) has a blog post with more information about progressive JPEG files.
+
+Medium and Facebook use a use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
+
+#### WebP Images
+WebP is an image format that can be used as an alternative for PNG and JPEG images at a fraction of the file size. It has [minimal browser support](http://caniuse.com/#feat=webp), but where it is supported, it can significantly decrease file size. You should include WebP images on projects where a lot of the traffic comes from supported browsers. 
+
+The best way to incorporate a WebP image in HTML is using the picture element with a fallback option. To incorporate a WebP image via CSS, use modernizr to add the class `no-webp` or `webp` to the page body, then load the image dependant on that class.
+
+HTML WebP image: 
+```html
+<picture>
+    <source srcset="./image_1.webp" type="image/webp">
+    <source srcset="./image_1.jpg" type="image/jpeg"> 
+    <img src="./image_1.jpg" alt="Alt Text!">
+</picture>
+```
+
+CSS WebP image:
+```css
+.webp .masthead {
+    background-image: url('./image_1.webp');
+}
+
+.no-webp .masthead {
+    background-image: url('./image_1.jpg');
+}
+```
+
+You can create WebP files using the [ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") NPM package mentioned above to optimize images.
+
+[CSS Tricks](https://css-tricks.com/using-webp-images/ "CSS Tricks") has more detailed information about the WebP image format.
+
+
 ### Specify Image Dimensions, Do Not Resize
 
 Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
@@ -181,7 +216,7 @@ For background images, use CSS media queries to serve different images at lower 
 ```
 
 ## Testing Performance
-When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site and a slow page load is penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want more detailed break down of your page performance, you can use free, online tools to measure your performance. Below are a few of these resources. 
+When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site. A slow page load is also penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want more detailed break down of your page performance, you can use free, online tools to measure your performance. Below are a few of these resources. 
 
 ### Chrome Timeline
 The Timeline tool in Chrome inspector allows you to record and analyze every event that occurs during page load. [Google Developers](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool) is a great resource for learning how to use the Timeline Tool.
@@ -192,8 +227,5 @@ The Timeline tool in Chrome inspector allows you to record and analyze every eve
 ### Yellow Lab Tools
 Similar to Webpagetest, [Yellow Lab Tools](http://yellowlab.tools/) gives you a report card with detailed information about improving page performance in specific areas. Yellow Lab Tools gives especially detailed information about bad CSS patterns that could affect performances, like 
 
-### Louis for Automated Testing
-[Louis](https://github.com/AvraamMavridis/gulp-louis) is gulp plugin a good tool for measuring and fixing performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.
-
-
-### 
+### Louis for Gulp
+[Louis](https://github.com/AvraamMavridis/gulp-louis) is gulp plugin a good tool for measuring performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.
