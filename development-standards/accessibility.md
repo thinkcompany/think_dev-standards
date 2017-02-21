@@ -94,17 +94,21 @@ The title element is read by screen readers on every page view and ideally shoul
 There are a couple specific things to keep in mind when address meta tags and accessibility.
 
 1. Do not include a maximum scale in the viewport meta tag. This way, you are restricting the pinch zoom functionality that is crucial for many users to see page content.
+2. Do not prevent user scalable in the viewport meta tag
+3. Include a character encoding meta tag to alert assistive devices of the character set being used.
 
 **Bad**:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 ```
 **Good**:
 
 ```html
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
 ```
+
 #### Semantics
 
 Writing good, accessible semantic HTML is akin to writing good instructions for a screen-readers and assistive technologies. Using HTML5 semantic structure tags like `<header>`, `<main>`, `<article>`, `<aside>`, `<footer>` will go a long way to formatting your document in a highly accessible manner. Their presence creates a logical, intuitive order through assistive relationships that screen-readers will recognize. Text semantic tags also should be used when appropriate, but do not register with assistive tools.
