@@ -70,7 +70,7 @@ Creating web page that meetings our accessibility criteria starts with including
 
 ##### Language and Localization
 
-Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language.
+Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language. If you are unable to update the language value when the language changes due to framework constraints, it is better to leave the language attribute altogether.
 
 ```html
 <html lang="en">
