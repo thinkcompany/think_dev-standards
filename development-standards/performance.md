@@ -189,7 +189,7 @@ In some cases, responsive design will call for different size/shapes of an image
 
 For background images, use CSS media queries to serve different images at lower sizes.
 
-```css
+```sass
 .hero {
     // Smallest image loaded by default.
     background-image: url("./my_image100x200")
