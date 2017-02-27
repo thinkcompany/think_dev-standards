@@ -187,7 +187,7 @@ This is a technique used to improve initial load speed by delaying the actual lo
 
 In some cases, responsive design will call for different size/shapes of an image at different breakpoints. To deliver this with the best performance, we should avoid always serving the same image simply redrawn at the right size. On low-bandwidth devices, loading a huge desktop sized image so that it fits on a mobile screen is a huge waste of page-weight.
 
-For background images, use CSS media queries to serve different images at lower sizes.
+For background images, use CSS media queries to serve different images at lower sizes. The example below uses SASS to demonstrate this technique.
 
 ```sass
 .hero {
