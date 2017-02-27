@@ -88,7 +88,7 @@ GOOD
 Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire fontface. Libraries like [Google Fonts](https://fonts.google.com/) and [Adobe Typekit](https://typekit.com/) allow you to import the exact font weights and styles you need. [Web Font Loader](https://github.com/typekit/webfontloader) is a helpful tool for importing the exact font styles you want from multiple sources, including local fonts.
 
 ### Use Compressed Font File Types
-The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to are compressing the font files with GZIP when delivering the fonts.
+The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to compressing the font files with GZIP when delivering the fonts.
 
 ### Include local() & format() Directives in a @font-face Declaration
 When you the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
@@ -112,7 +112,7 @@ Including these directives prevents the browser from downloading unused resource
 ## Third Party Code
 
 ### async / loader script
-A web browser will block while downloading a JavaScript file at the bottom of the page that is called via a SCRIPT element. To further speed up JS processing, load the JavaScript library asynchronously by including a small loader script at the bottom of the page that then imports the rest of the code. This technique was developed by Yahoo and is a part of their YUI library. Read a description of the technique here.
+A web browser will block while downloading a JavaScript file at the bottom of the page that is called via a SCRIPT element. To further speed up JS processing, load the JavaScript library asynchronously by including a small loader script at the bottom of the page that then imports the rest of the code.
 
 ### Third Party Ads
 Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
@@ -135,7 +135,7 @@ All images in the project should be compressed. This will be one of the biggest 
 
 ### Image Type
 
-Different images perform better depending on what they image is. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
+Different images perform better depending on what type of graphic you are using. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
 
 PNG files are not as compress-able as JPEG images. They do not allow any *lossy* compression. They should be used judiciously, in cases where the unique features of increased image quality and support for transparent backgrounds, etc. are required.
 
@@ -144,14 +144,14 @@ PNG files are not as compress-able as JPEG images. They do not allow any *lossy*
 Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader 'svg-sprite-loader'), your set of SVGs can be combined into one.
 
 #### Progressive JPEG
-Typically, JPEG images load top-to-bottom so the full image appears slowly as it loads. With Progressive JPEG files, the whole image loads at once, starting in low quality and gradually become the full quality image. While this doesn't load the image any faster or decrease the file size, it gives the appearance of faster loading to the user. [Yahoo](https://yuiblog.com/blog/2008/12/05/imageopt-4/) has a blog post with more information about progressive JPEG files.
+Typically, JPEG images load top-to-bottom so the full image appears slowly as it loads. With Progressive JPEG files, the whole image loads at once, starting in low quality and gradually becoming the full quality image. While this doesn't load the image any faster or decrease the file size, it gives the appearance of faster loading to the user. [Yahoo](https://yuiblog.com/blog/2008/12/05/imageopt-4/) has a blog post with more information about progressive JPEG files.
 
 Medium and Facebook use a use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
 
 #### WebP Images
 WebP is an image format that can be used as an alternative for PNG and JPEG images at a fraction of the file size. It has [minimal browser support](http://caniuse.com/#feat=webp), but where it is supported, it can significantly decrease file size. You should include WebP images on projects where a lot of the traffic comes from supported browsers. 
 
-The best way to incorporate a WebP image in HTML is using the picture element with a fallback option. To incorporate a WebP image via CSS, use modernizr to add the class `no-webp` or `webp` to the page body, then load the image dependant on that class.
+The best way to incorporate a WebP image in HTML is using the picture element with a fallback option.
 
 HTML WebP image: 
 ```html
@@ -160,17 +160,6 @@ HTML WebP image:
     <source srcset="./image_1.jpg" type="image/jpeg"> 
     <img src="./image_1.jpg" alt="Alt Text!">
 </picture>
-```
-
-CSS WebP image:
-```css
-.webp .masthead {
-    background-image: url('./image_1.webp');
-}
-
-.no-webp .masthead {
-    background-image: url('./image_1.jpg');
-}
 ```
 
 You can create WebP files using the [ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") NPM package mentioned above to optimize images.
