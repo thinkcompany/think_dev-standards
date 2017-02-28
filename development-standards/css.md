@@ -108,7 +108,7 @@ Examples:
 .module {
 	background-image: url("img1.png");
 }
-.module:before {
+.module::before {
 	content: "";
 }
 ```
@@ -272,7 +272,7 @@ html {
   box-sizing: border-box;
 }
 
-*, *:before, *:after {
+*, *::before, *::after {
   box-sizing: inherit;
 }
 ```
