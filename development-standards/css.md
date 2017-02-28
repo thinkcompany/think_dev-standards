@@ -166,28 +166,44 @@ Good examples:
 input[type="text"] {...}
 ```
 
-### Psuedo Element Selectors
+### Pseudo-Element and Pseudo-Class Selectors
 
-Psuedo element selectors should always be prefixed with a single colon. 
+Pseudo-elements are phantom elements of the page that can be styled like HTML elements, but are created in CSS and do not exist in the DOM. Pseudo-classes, on the other hand, are phantom states or attributes of a DOM element that can be styled with CSS.
+
+Examples of pseudo-elements:
+* `::before`
+* `::after`
+* `::first-letter`
+* `::first-line`
+
+Examples of pseudo-classes:
+* `:link`, `:visited`, `:hover`, `:active`, `:focus`
+* `:enabled`, `:disabled`, `:checked`
+* `:first-child`, `:nth-child(n)`, `:nth-last-child(n)`, `:nth-of-type(n)`, `:nth-last-of-type(n)`, `:last-child`, `:first-of-type`, `:last-of-type`, `:only-child`, `:only-of-type`, `:root`, `:empty`
+* `:not(x)`, `:target`, `:lang(language)`
+
+
+Pseudo-elements should use a double-colon and pseudo-classes should use a single-colon in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if you need support an older browser, you should use single-colons for both pseudo-elements and pseudo-classes.
 
 Poor example:
 ```css
-.bad-example::after {
-	content: '',
-	display: block;
-	width: 200px;
-	height: 1px;
-	background-color: #000;
+.pseudo-element:after {
+	...
 }
+
+.pseudo-class::hover {
+	...
+}
+
 ```
 Good example:
 ```css
-.good-example:after {
-	content: '',
-	display: block;
-	width: 200px;
-	height: 1px;
-	background-color: #000;
+.pseudo-element::after {
+	...
+}
+
+.pseudo-class:hover {
+	...
 }
 ```
 
