@@ -119,7 +119,7 @@ Proper heading hierarchies are crucial to highly accessible document structure &
 
 An `<h1>` tags should appear no more than once per page, typically containing a kind of page title. `<h2>` tags appear often as the title of a section of the page, like a hero or sidebar.
 
-It's important to address font-size choices with CSS. Do not use an `<h5>` for you page title just because it should be smaller.
+It's important to address font-size choices with CSS. Do not use an `<h5>` for your page title just because it should be smaller.
 
 Furthermore, language in the WCAG 2.0 success criterion for headings revolves around clarity. Headings that are clear and concise help users understand what the content of the page is.
 
@@ -240,7 +240,7 @@ Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per 
 
 HTML
 ```html
-<button class="namespace" data-component="click-me">Open Menu</button>
+<button data-component="click-me">Open Menu</button>
 ```
 
 JavaScript
@@ -280,13 +280,13 @@ The style of link text should also include some property besides color to increa
 
 ## Imagery
 
-Image-based content and information play a prominent role in the modern web. The a11y standard expectations are very clear in their expectations for how this information should always be conveyed to screen-reader users: Always provide equivalent alternative text-based sources of the information conveyed.
+Image-based content and information play a prominent role in the modern web. The accessibility standard expectations are very clear in their expectations for how this information should always be delivered to screen-reader users: always provide equivalent alternative text-based sources of the information conveyed.
 
 An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
 
 ### Color, Shape, Location
 
-Color is major factor in meeting WCAG 2.0 compliance on web pages. Low-vision users need contrast, color blind users will be unable to access information conveyed through certain color schemes. A required form field where the requirement is conveyed through a red border is insufficient. Please read the section on required fields and error reporting for more information on this topic.
+Color is major factor in meeting WCAG 2.0 compliance on web pages. Low-vision users need proper color contrast. Color blind users will be unable to access information conveyed through certain color schemes. A required form field where the requirement is conveyed through a red border is insufficient. Please read the section on required fields and error reporting for more information on this topic.
 
 Shape and location are sometimes used to guide a visual users attention on a web page. This is an acceptable practice, so long as those same visual cues are translated in some for screen-reader users.
 
@@ -326,7 +326,7 @@ Similarly, a reference to location or relative position is not enough informatio
 
 ### Images
 
-When using images on the web, we need to keep in mind that they cause immediate accessibility pain points for non-visual and low-visual users. All information conveyed or functionality provided through images, need to be offered in the form of Text Alternatives
+When using images on the web, we need to keep in mind that they cause immediate accessibility pain points for non-visual and low-visual users. All information conveyed or functionality provided through images needs to be offered in the form of text alternatives.
 
 ### Alt Attribute
 
