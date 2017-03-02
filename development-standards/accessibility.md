@@ -14,7 +14,7 @@ http://www.w3.org/TR/WCAG20/
 
 ### ARIA
 
-Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages.  
+Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages.  ARIA should not be used by default. ARIA attributes should be applied only when proper HTML, CSS, and JS do not meet a screen reader user's needs. You should be judicious when deciding the proper Aria implementation to use. Using an ARIA attribute outside of its specification will cause problems for screen readers. For example, ARIA tooltips do not receive focus or have an actionable element in them. Thus, if you intend to create an actionable tooltip, you should not apply `role="tooltip"` but instead find a role that better fits the purpose of the UI element.
 
 http://www.w3.org/WAI/intro/aria.php
 
@@ -306,22 +306,22 @@ Shape and location are sometimes used to guide a visual users attention on a web
 <button class="btn-red">Red Button</button>
 ```
 
-Similarly, a reference to location or relative position is not enough information for screen-readers. A buttons order in markup does not always directly translate to it's visual position on the page. Sequential information, on the other hand, is more accessible for users.
+Similarly, a reference to location or relative position is not enough information for screen-readers. Do not reference visual location in instructional text--words like "left", "right", "top", and "bottom" are not helpful to users with screen readers. Instead, use more concrete positioning language like "after the last section" or "at the end of the form."
 
 **Bad**:
 
 ```html
-<p>Click the left button for True or the right button for False.</p>
-<button class="btn-round">Button A</button>
-<button class="btn-red">Button B</button>
+<p>Click the bottom button to continue.</p>
+<section>Example section</section>
+<button class="btn-red">Button</button>
 ```
 
 **Good**:
 
 ```html
-<p>Click the first button for True or the second button for False.</p>
-<button class="btn-round">Button A</button>
-<button class="btn-red">Button B</button>
+<p>Click the button after the last section to continue.</p>
+<section>Example section</section>
+<button class="btn-red">Button</button>
 ```
 
 ### Images
