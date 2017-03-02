@@ -36,7 +36,7 @@ This method also ensures that scripts do not attempt to manipulate DOM elements 
 BAD
 ```html
     <head>
-        <script type="text/javascript" src="main.js"/>
+        <script type="text/javascript" src="main.js"></script>
     </head>
     <body>
         ...
@@ -49,7 +49,7 @@ GOOD
     <body>
         ...
         <footer></footer>
-        <script type="text/javascript" src="main.js"/>
+        <script type="text/javascript" src="main.js"></script>
     </body>
 ```
 
@@ -111,8 +111,12 @@ Including these directives prevents the browser from downloading unused resource
 
 ## Third Party Code
 
-### async / loader script
-A web browser will block while downloading a JavaScript file at the bottom of the page that is called via a SCRIPT element. To further speed up JS processing, load the JavaScript library asynchronously by including a small loader script at the bottom of the page that then imports the rest of the code.
+### async script
+A web browser will block while downloading a JavaScript file at the bottom of the page that is called via a SCRIPT element. To further speed up JS processing, add the `async` attribute to the script element. This will further ensure that the page will not block when the script is loading.
+
+```html
+<script type="text/javascript" src="js/main.js" async></script>
+```
 
 ### Third Party Ads
 Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
@@ -137,7 +141,7 @@ All images in the project should be compressed. This will be one of the biggest 
 
 Different images perform better depending on what type of graphic you are using. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
 
-PNG files are not as compress-able as JPEG images. They do not allow any *lossy* compression. They should be used judiciously, in cases where the unique features of increased image quality and support for transparent backgrounds, etc. are required.
+PNG files are not as compressable as JPEG images. You should choose the best format based on an individual use-case. For example, the PNG format can be used if you need transparency, but should not be used for photographic images.
 
 #### Image Sprites
 
