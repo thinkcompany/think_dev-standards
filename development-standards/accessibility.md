@@ -45,7 +45,7 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation.s Users can interact with elements with the enter button and spacebar. Keyboard users should receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
 
-#### Focus States
+#### Visual Focus States
 
 To arrive at an element with keyboard navigation is to give that element a *focus* state. When an element has *focus*, it is the only element that will respond to enter/spacebar keypresses. It is important that the user knows which element has focus at all times, so they know which element they are currently able to interact with, and position of their focused element on the page. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable focus state on a component for when keyboard users arrive at the component, similar hover state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
 
@@ -202,7 +202,7 @@ It is also best practice to include the `role="main"` attribute and value to the
 ```
 
 
-## Actionable Elements
+### Actionable Elements
 
 Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
@@ -220,7 +220,7 @@ var ariaContract = function ($trigger, $menu) {
 };
 ```
 
-### Events
+#### Events
 
 Events on the web page serve to increase dynamic behavior of web pages. Dynamic behavior does not always translate well to assistive technology because the behavior is often visual and driven by mouse activity, or events. Avoid relying only on mouse events like mouseover and click to fire JavaScript functions. Bind equivalent keyboard events to those functions, such as focus and keypress, to make JS functionality available to users without a mouse.
 
@@ -248,13 +248,13 @@ JavaScript
 $('[data-component="click-me"]').on('click.namespace keypress.namespace', cb);
 ```
 
-### Buttons
+#### Buttons
 
 Buttons should be made with the native HTML `<button>` tag, and not a clickable image, or any other workaround that causes unnecessary confusion for screen-reader users.
 
 Buttons with `type="submit"` should be used to designate the end of a form. Developers sometimes disable these buttons until the form has been adequately filled out, but doing so removes the only indicator that screen-reader users have that the form is ending. Do not do this.
 
-### Links
+#### Links
 
 To make links accessible, they need to have text-based information that clearly describes their destination. The screen-reader does not announce the link path, so the inner text of the link element should be clear about where the link will take the user.
 
@@ -278,13 +278,13 @@ Avoid including the URL in the link text, as the format of web links will be rea
 
 The style of link text should also include some property besides color to increase visibility for low-vision, or color blind users. An underline is typically sufficient.
 
-## Imagery
+### Imagery
 
 Image-based content and information play a prominent role in the modern web. The accessibility standard expectations are very clear in their expectations for how this information should always be delivered to screen-reader users: always provide equivalent alternative text-based sources of the information conveyed.
 
 An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
 
-### Color, Shape, Location
+#### Color, Shape, Location
 
 Color is major factor in meeting WCAG 2.0 compliance on web pages. Low-vision users need proper color contrast. Color blind users will be unable to access information conveyed through certain color schemes. A required form field where the requirement is conveyed through a red border is insufficient. Please read the section on required fields and error reporting for more information on this topic.
 
@@ -324,7 +324,7 @@ Similarly, a reference to location or relative position is not enough informatio
 <button class="btn-red">Button</button>
 ```
 
-### Images
+#### Images
 
 When using images on the web, we need to keep in mind that they cause immediate accessibility pain points for non-visual and low-visual users. All information conveyed or functionality provided through images needs to be offered in the form of text alternatives.
 
@@ -364,7 +364,7 @@ Some specific things to make note of when using the alt attribute.
 
 - Don't use line breaks in alt attributes, it can interfere with the proper functioning of screen-readers.
 
-## Forms
+### Forms
 
 Forms are composed of controls (input, select, textarea), and descriptions/labels of the controls. An accessible form provides a logical, easy to follow user flow which requires grouping of thematically related controls, and associated labels for every individual control or group.
 
@@ -548,7 +548,7 @@ Example (Best):
 <p id="dateError">Error 2 of 2: please enter a valid date.</p>
 ```
 
-## TABLES
+### Tables
 
 Screen readers are capable of navigating data tables that are marked up using the proper accessibility attributes and tags. These include:
 
@@ -582,13 +582,13 @@ Example:
 
 More complex tables will require the use of header and id attributes.
 
-## iFrames
+### iFrames
 
 iFrames do not have full support from screen-readers and other assistive technologies. In general, avoid iFrames for complex content.
 
 For simple content, they can be acceptable. They fall under the same category as other non-text content, like images, and require equivalent text alternatives. On iframes, that typically comes in the form of a `title` attribute on the `<iframe>` element.
 
-## Flexbox
+### Flexbox
 
 Flexbox is a relatively newer tool to the web that carries with it some unique accessibility concerns. The foremost concern at play is the re-ordering of content. The topic of content location/order were touched upon in the Color, Shapes and Location section, but to reiterate: screen-readers follow the sequence of elements the markup, and not the flow on the page. Flexbox simply makes these concerns more valid and good solutions more important to find.
 
