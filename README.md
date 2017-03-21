@@ -1,4 +1,4 @@
-[Think Brownstone](http://thinkbrownstone.com) is an experience design consultancy located in Philadelphia, PA. We have a fantastic team of designers and developers focused on providing beautiful, user-centered, accessible digital products.
+[Think Company](http://thinkcompany.com) is an experience design consultancy located in Philadelphia, PA. We have a fantastic team of designers and developers focused on providing beautiful, user-centered, accessible digital products.
 
 Navigate to our development process and standards folders to read about the approach and practices that make us successful through build and delivery.
 
