@@ -14,7 +14,7 @@ http://www.w3.org/TR/WCAG20/
 
 ### ARIA
 
-Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages.  ARIA should not be used by default. ARIA attributes should be applied only when proper HTML, CSS, and JS do not meet a screen reader user's needs. You should be judicious when deciding the proper Aria implementation to use. Using an ARIA attribute outside of its specification will cause problems for screen readers. For example, ARIA tooltips do not receive focus or have an actionable element in them. Thus, if you intend to create an actionable tooltip, you should not apply `role="tooltip"` but instead find a role that better fits the purpose of the UI element.
+Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages.  ARIA should not be used by default. ARIA attributes should be applied only when proper HTML, CSS, and JS do not meet a screen reader user's needs. You should be judicious when deciding the proper ARIA implementation to use. Using an ARIA attribute outside of its specification will cause problems for screen readers. For example, ARIA tooltips do not receive focus or have an actionable element in them. Thus, if you intend to create an actionable tooltip, you should not apply `role="tooltip"` but instead find a role that better fits the purpose of the UI element.
 
 http://www.w3.org/WAI/intro/aria.php
 
@@ -206,7 +206,7 @@ It is also best practice to include the `role="main"` attribute and value to the
 
 Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
-It's also important to make the state of toggle-action elements clear to non-visual users. Aria attributes `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page are used in these cases. These are boolean attributes that should be updated as the user interacts with them. When the UI state is updated, so should the aria-state be updated with helper functions like these:
+It's also important to make the state of toggle-action elements clear to non-visual users. ARIA attributes `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page are used in these cases. These are boolean attributes that should be updated as the user interacts with them. When the UI state is updated, so should the aria-state be updated with helper functions like these:
 
 ```javascript
 var ariaExpand = function ($trigger, $menu) {
