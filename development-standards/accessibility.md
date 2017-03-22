@@ -650,3 +650,102 @@ CSS
 ```
 
 Also, avoid making reference to the sequence, position, or arrangement of the elements in a flexbox container if possible, or otherwise be sure avoid creating confusion for screen-reader users.
+
+## Accessible Email Requirements
+Most email accessibility standards would automatically be covered by Web Accessibility Standards. Yet, there are some important differences between the two. Those differences are covered below.
+
+### Multiple Versions
+
+Use a multi-part MIME to send a plain-text version along with the HTML version. Do not use rich text in the plain-text version.
+
+Whenever possible, offer a link to a web version of your HTML email. The web version must follow the Web Accessibility Standards which are more rigid than these email rules. (i.e. using relative font sizing)
+
+### Subject
+
+Always use a descriptive subject line for the email.
+
+###  Reading Order
+
+Make sure your reading order is logical and the HTML follows the visual layout.
+
+### Tab Order
+
+Make sure your tab order is also logical, sequential, and follows the visual layout.
+
+### Fonts
+
+Use san-serif fonts rather than serif fonts.
+
+Minimum font size should be 14px. This is the minimum size for all regular content. The minimum size for small print* should be no less than 12px.
+
+Unfortunately, using relative font sizes is nearly impossible since they would be relative to the client definitions and not your own. If it's possible to use rems or ems without breaking the experience, that is preferable.
+
+Web alternative versions of the email must use relative font sizing.
+
+_*Small print is for footers, copyrights, terms & conditions, etc._
+
+### Contrast
+
+Identical to the web, text (be it HTML text or text in an image) must have a minimum contrast ratio of at least 4.5:1 unless:
+* It is large-scale or bold text. Large scale/bold text ratio must be at least 3:1
+* It is inactive (i.e. a disabled button) or decorative
+* It is part of a logo or brand.
+
+Beware of:
+* defining a color that's positioned in front of an image. Remember that images often don't render in an email client unless you opt in. That text must also pass against the background if the image is turned off.
+* photographic or variegated backgrounds. Test color contrast at the point of minimum contrast difference.
+* text inside of an image. Image text must also pass minimum standards.
+  You can use the following site to check color contrast for WCAG AA compliance: http://webaim.org/resources/contrastchecker/
+
+### Alt Text
+
+All image tags must have a descriptive alt attribute. Do not use null alt attributes for email.
+If an image has text on the graphic, the alt attribute must be verbatim to the text on the graphic.
+
+### HTML Text
+
+The majority of the email should be HTML text and not text in images. The beginning of the email should not begin whose dimensions would push the content below "the fold." When images fail to render, the recipient will see large empty areas, rather than content which may be confusing to some people.
+
+### Text Alignment
+
+Text should be left aligned. Stay away from centered or right-aligned text. Do not use justified text which can cause white spaces between words and letters. These "rivers of white" can be especially problematic for those with dyslexia.
+
+### Paragraphs
+
+Use correct paragraph markup when creating blocks of text. Wrap paragraphs in the `<p>` element rather than simply adding text to table cells. Do not simulate paragraphs with line breaks (`<br />`).
+
+### Headings
+
+All emails must contain one and only one `<h1>` tag.
+All other heading tags must follow logical sequence. For example, don't jump to an `<h3>` after an `<h1>`.
+Do not assign a heading tag to content that is not a true heading or subheading. Large bold text does not necessarily equate to a heading. Think semantically.
+
+### Links
+
+All links must contain meaningful content. Do not use link text such as "click here" or "edit". As on the web, this would create confusion for a person who brings up a links list or who navigates quickly by links.
+
+### Visual Focus State
+
+Any time an actionable item is in focus it must show that focus, usually with an outline. Do not turn visual focus cues off. Make sure the focus state is not too subtle.
+
+### Target Size
+
+Make sure your buttons and other actionable elements are large enough and include an inactive space around the target.
+
+Minimum target size is 9mm x 9mm.
+
+### Tables
+
+Table layout is necessary in emails due to Outlook's rendering engine. Therefore follow these rules when using tables for layout:
+* Use tables only when absolutely necessary. Try not to use tables for the entire email.
+* Only use the `<table>`, `<tr>`, and `<td>` tags. Do not use `<tbody>`, `<th>`, `<col>`, etc.
+* Assign the role="presentation" attribute to the table tag. This prevents the table semantics from being read out to the screen reader when used for layout. It will need to be repeated for nested tables.
+* Do not use tables to format signatures.
+* Use relative widths for table and table cell.
+
+### Mobile and Media Queries
+
+Use media queries for screens <= 600px and apply the following styles:
+
+Text for mobile <= 600px must be at least 16px. The "small print" for mobile should be 14px.
+
