@@ -132,7 +132,7 @@ When appropriate, use structural elements to create a grid of "columns" that con
 
 ## Coding Practices
 
-This section outlines Think Brownstone's standard practices for composing HTML documents.
+This section outlines Think Company's standard practices for composing HTML documents.
 
 ### Doctype
 

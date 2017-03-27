@@ -57,9 +57,9 @@ In cases where legacy browser support is required, work with the design team to 
 
 ### Preprocessors
 
-Think Brownstone will be incorporating Sass as a common CSS development tool. Build Kit deliverables will optionally include Sass if requested by the client.
+Think Company will be incorporating Sass as a common CSS development tool. Build Kit deliverables will optionally include Sass if requested by the client.
 
-See [Sass Authoring Guidelines](https://bitbucket.org/thinkbrownstone/tbi_dev-standards/src/687d257a91c14e161c96d999a89f07a1672b1d52/development-standards/sass.md?at=master) for more information about those standards.
+See [Sass Authoring Guidelines](https://bitbucket.org/thinkcompany/think_dev-standards/src/687d257a91c14e161c96d999a89f07a1672b1d52/development-standards/sass.md?at=master) for more information about those standards.
 
 ### Browser Resets (Normalize)
 
@@ -67,7 +67,7 @@ Use the latest copy of normalize.css as the starter CSS for any project. Do not 
 
 http://necolas.github.io/normalize.css/
 
-Use other open source libraries at the client's request, or after discussion with the Think Brownstone UI Development team.
+Use other open source libraries at the client's request, or after discussion with the Think Company UI Development team.
 
 ## Format & Style
 
