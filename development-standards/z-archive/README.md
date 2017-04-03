@@ -2,12 +2,12 @@
 
 ## Introduction
 
-At Think Brownstone we've standardized around modular CSS with [Sass (Syntactically Awesome Style Sheets)](http://sass-lang.com/), focused on the approaches outlined in [Scalable and Modular Architecture for CSS (herein SMACSS)](https://smacss.com/), and peppered with some [Block, Element, Modifier (herein BEM)](http://bem.info/
+At Think Company we've standardized around modular CSS with [Sass (Syntactically Awesome Style Sheets)](http://sass-lang.com/), focused on the approaches outlined in [Scalable and Modular Architecture for CSS (herein SMACSS)](https://smacss.com/), and peppered with some [Block, Element, Modifier (herein BEM)](http://bem.info/
 ) methodology.
 
 ### Sass vs. LESS
 
-You may be wondering why we've chosen Sass at Think Brownstone. Sass provides the same functionality of LESS, but adds more advanced features. Along with that, The [development community around Sass](https://github.com/sass/sass) is more active than [that of Less](https://github.com/less/less.js).
+You may be wondering why we've chosen Sass at Think Company. Sass provides the same functionality of LESS, but adds more advanced features. Along with that, The [development community around Sass](https://github.com/sass/sass) is more active than [that of Less](https://github.com/less/less.js).
 
 Here's [a great article](http://css-tricks.com/sass-vs-less/) from Chris Coyier about the nuances of Sass vs. LESS.
 
