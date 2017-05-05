@@ -30,9 +30,11 @@ Someone will eventually work with the code you write, so make sure you provide a
 
 Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications.
 
-Lint HTML and CSS using tools such as [HTMLHint](http://htmlhint.com/) and [CSSLint](http://csslint.net/) along with our linter configurations.
+Lint HTML ([HTMLHint](http://htmlhint.com/)), and Sass ([Sass Lint](https://github.com/sasstools/sass-lint/)) or CSS ([CSSLint](http://csslint.net/)) to check for adherence to Think Company development standards and naming conventions. 
 
 Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/package/eslint-config-thinkcompany).
+
+These tools are bundled with each project and can be run using NPM-based task runners. If you are running a task that watches your project directory, it will lint your code each time you save a file. You can also configure your text editor to give you more immediate feedback against these linters.
 
 ## Accessibility
 
