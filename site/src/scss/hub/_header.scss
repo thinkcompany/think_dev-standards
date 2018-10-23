@@ -1,0 +1,27 @@
+.hub-util-header {
+    background-color: $eastern-blue;
+    padding: 0 1.25em;
+}
+
+.think-logo {
+    color: $white;
+}
+
+.think-logo-top {
+    width: 90px;
+    height: 30px;
+}
+
+
+.logout-link {
+    color: $white;
+}
+
+.hub-util-header-inner {
+    align-items: center;
+    display: flex;
+    height: 60px;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: $max-width;
+}

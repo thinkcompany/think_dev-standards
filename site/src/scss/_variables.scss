@@ -1,0 +1,26 @@
+// General
+$base-pixels: 16px;
+$max-width: 1400px;
+
+// Think Colors
+$eastern-blue: #289fac;
+$eastern-blue-dark: darken($eastern-blue, 10%);
+
+// UI Colors
+$white: #fff;
+$black: #000;
+$mineshaft: #333;
+$spicy-pink: #856c6c;
+$silver: #ccc;
+$concrete: #f2f2f2;
+
+// Fonts
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+$font-size-h1: 2em;
+$font-size-h2: 2em;
+$font-size-h3: 1em;
+$font-size-h4: 1.25em;
+
+// Breakpoints
+$breakpoint-ipad-portrait: 64em;
+$breakpoint-device-narrow: 29.688em;

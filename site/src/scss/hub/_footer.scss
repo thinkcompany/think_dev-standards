@@ -1,0 +1,30 @@
+// Think Footer
+.hub-footer {
+    background-color: $black;
+    padding-top: 1.875em;
+    width: 100%;
+}
+
+.think-icon {
+    background-repeat: no-repeat;
+    display: block;
+    flex: 0 0 60px;
+    margin-top: 1.375em;
+    margin-right: 1.25em;
+}
+
+.think-logo-footer {
+    display: block;
+    height: 50px;
+    margin: 0 auto 1.75em;
+    width: 150px;
+}
+
+.hub-copyright {
+    align-items: center;
+    background-color: $spicy-pink;
+    color: $white;
+    display: flex;
+    height: 62px;
+    justify-content: center;
+}
