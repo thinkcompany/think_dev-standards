@@ -209,31 +209,6 @@ Good example:
 
 ### Properties
 
-#### Declaration Order
-
-Always specify CSS properties in the following order. This enhances readability and helps compression algorithms.
-
-This order also helps troubleshooting efforts by placing the most commonly problematic properties at the beginning.
-
-* z-index
-* position (and top, bottom, left, right)
-* float / clear
-* display
-* overflow
-* width / height
-* margin
-* border
-* padding
-* background
-* color
-* font
-* list
-* line
-* text
-* letter
-
-Tools such as CSScomb can be used to assist with checking/automating this rule.
-
 #### Shorthand
 
 Always use the shorthand version of a property. When using the cascade to overwrite a rule with a more specific one, use the shorthand version on the main rule and the expanded version in the superseding rule.
