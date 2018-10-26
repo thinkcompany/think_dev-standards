@@ -45,7 +45,7 @@ Only use elements and attributes that have semantic value, or are commonly used 
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript) to achieve the desired result.
 
-*NOTE:* The following elements do not work on older browsers: `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
+*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
 
 ## Format & Style
 
