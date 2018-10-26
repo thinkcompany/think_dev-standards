@@ -25,7 +25,7 @@ Style sheets may not validate due to unsupported properties, such as:
 * CSS3 selectors and rules (i.e. text-shadow or border-radius)
 * vendor-specific prefixes for new CSS features (i.e. –moz, -webkit, or -ms)
 
-Syntax or parsing errors are not acceptable and must be fixed. Lint warnings should be reviewed to ensure poor programming practices are avoided.
+Syntax or parsing errors are not acceptable and must be fixed. Review all link warnings to ensure poor programming practices are avoided.
 
 ### Approved Properties
 
@@ -75,14 +75,14 @@ Use other open source libraries at the client's request, or after discussion wit
 
 Each rule in a CSS file will occupy multiple lines, unless the rule contains a single declaration. For readability, place each property on its own line and indent to standard spacing (one tab space).
 
-Spaces should be used between:
+Use spaces between:
 
 * a rule's final selector and the opening curly brace of the declaration
 * each value in a declaration
 * a declaration's colon and value
 * after a comma, in comma-separated property values
 
-There should be no space between a declaration's value and the closing semicolon.
+Do not leave a space between a declaration's value and the closing semicolon.
 
 Examples:
 
@@ -96,7 +96,7 @@ Examples:
 .error { color: #f00; }
 ```
 
-Do not indent rules; all rules should be flush with the left margin of the editor.
+Do not indent rules; all rules must be flush with the left margin of the editor.
 
 ### Quotes
 
@@ -142,7 +142,7 @@ Examples:
 
 Aside from a base style sheet, which will specify default styles for HTML element types, most selectors should be composed by referencing class names. Attribute selectors may also be used, especially with form controls. Using IDs in selectors is highly discouraged.
 
-Class names should follow the HTML coding practices: Assign names to objects based on the function they fulfill rather than what they look like. Names should be a single lowercase word. In cases where a longer description is needed, separate words using hyphens.
+Follow the HTML coding practices when creating class names: Assign names to objects based on the function they fulfill rather than what they look like. Create names using a single lowercase word. In cases where a longer description is needed, separate words using hyphens.
 
 Refrain from over-qualifying selectors (e.g. body.class) and chaining classes (i.e. .module.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only be as specific as you need to be in composing a selector.
 
@@ -183,7 +183,7 @@ Examples of pseudo-classes:
 * `:not(x)`, `:target`, `:lang(language)`
 
 
-Pseudo-elements should use a double-colon and pseudo-classes should use a single-colon in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if you need support an older browser, you should use single-colons for both pseudo-elements and pseudo-classes.
+Use a double-colon for pseudo-elements and use a single-colon for pseudo-classes in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if you need support an older browser, use single-colons for both pseudo-elements and pseudo-classes.
 
 Poor example:
 ```css
@@ -277,7 +277,7 @@ html {
 }
 ```
 
-* Relative units should be used whenever possible to maintain a flexible layout. 
+* Use relative units whenever possible to maintain a flexible layout. 
 * In responsive and fluid layouts, use % for container widths.
 * Use em units for margin and padding values.
 
@@ -326,7 +326,7 @@ Use hexadecimal notation (lowercase) to define colors without alpha-transparency
 
 Unless coding a responsive design, set image dimensions using the width and height attributes of the IMG tag in the HTML source. If this is not possible (i.e. you do not have access to the appropriate template file) then set the dimensions using the CSS width and height properties.
 
-Set image presentation attributes using CSS. Always remove the border from images nested inside anchors. By default, this rule should be specified in the base CSS file.
+Set image presentation attributes using CSS. Always remove the border from images nested inside anchors. By default, specify this rule in the base CSS file.
 
 
 ```css
@@ -375,7 +375,7 @@ Lists, for example, often won't need a class for each list item. Instead, class 
 
 ### Grouping Styles
 
-Styles applying to a particular module should be grouped into a single rule. Do not specify a selector multiple times and spread out properties across multiple rules.
+Group styles applying to a particular module into a single rule. Do not specify a selector multiple times and spread out properties across multiple rules.
 
 Poor Example:
 
@@ -404,7 +404,7 @@ Good Example:
 
 ### Media Queries
 
-When using Sass, add media queries along with their base rulesets, ordered from smallest to largest. Otherwise, media queries should be placed in separate files.
+When using Sass, add media queries along with their base rulesets, ordered from smallest to largest. Otherwise, place media queries in separate files.
 
 Sass example:
 
@@ -479,7 +479,7 @@ Do not link to an external style sheet for hack rules unless there are major lay
 
 Always link style sheets in the HEAD of an HTML document, before any JavaScript or favicon references. Never use inline styles. Never insert a STYLE tag into the BODY of an HTML document.
 
-Style sheets should be concatenated and minified in production code, and aim for the fewest number of style sheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after it reaches 30, and the browser will not report an error, making debugging difficult.
+Concatenate and minify style sheets in production code, and aim for the fewest number of style sheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after it reaches 30, and the browser will not report an error, making debugging difficult.
 
 Note also that Internet Explorer 9 and below are limited to 4095 selectors per style sheet. If you are hitting that limit, consider a tool such as Bless (blesscss.com) to split you selectors across multiple style sheets.
 
@@ -514,7 +514,7 @@ Use data attributes such as data-hook="something", data-component="component-nam
 
 ### Style sheet organization
 
-Global files must be included first so that they may be overwritten by more specific styles. Style sheets referenced by conditional comments (usually browser-specific files) should be included last.
+Global files must be included first so that they may be overwritten by more specific styles. Include style sheets referenced by conditional comments (usually browser-specific files) last.
 
 We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS). 
 
@@ -525,11 +525,11 @@ We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architec
 * **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
 * **Helpers:** generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
 
-Note regarding state rules: general rules that are globally applicable, such as .is-visually-hidden, should be included in the helpers layer. State classes should be prefixed with "is-" or "has-".
+Note regarding state rules: include general rules that are globally applicable, such as .is-visually-hidden, in the helpers layer. Prefix state classes with "is-" or "has-".
 
 ### Modules
 
-Modules are the discrete and/or reusable components of the UI. Each discrete module should be styled by a separate style sheet (or Sass partial), and module selectors should always be namespaced to avoid conflicts with other modules.
+Modules are the discrete and/or reusable components of the UI. Style each discrete module with a separate style sheet (or Sass partial), and always namespace module selectors to avoid conflicts with other modules.
 
 ```css
 .module
@@ -538,13 +538,13 @@ Modules are the discrete and/or reusable components of the UI. Each discrete mod
 }
 ```
 
-A developer should be able to edit a module style sheet without introducing bugs into other parts of the site.
+Following these standards allows other developers to edit a module style sheet without introducing bugs into other parts of the site.
 
 #### Module Structure
 
 A simple module, such as a button, may require only a single element. Complex modules, e.g. a modal dialog, may be made up of one or more subcomponents.
 
-Subcomponents should be named as follows: [module]-[subcomponent].
+Name subcomponents as follows: [module]-[subcomponent].
 
 HTML:
 
@@ -591,7 +591,7 @@ Guidelines:
 * Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
 * Avoid chaining selectors when possible
 * Avoid location-specific selectors
-* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but should not be styled.
+* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but do not style them.
 
 Poor example:
 
