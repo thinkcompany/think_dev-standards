@@ -185,7 +185,7 @@ In content, it might look like:
         <p>This is the first paragraph</p>
 ```
 
-In order to hide this element from regular users while maintaining it's functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
+In order to hide this element from regular users while maintaining its functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
 
 It is *vital* the target container of your skip link has `tabindex` property set to -1. This prevent unwanted behavior on the page by setting focus to the target element.
 
