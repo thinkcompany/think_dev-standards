@@ -86,6 +86,18 @@ Do not leave a space between a declaration's value and the closing semicolon.
 
 Examples:
 
+Poor example:
+
+```css
+.module{
+	margin:0 0 15em 0;
+	padding:0 ;
+	background-image: url("img1.png"), url("img2.png");}
+.error{color: #f00;}
+```
+
+Good example:
+
 ```css
 .module {
 	margin: 0 0 15em 0;
@@ -213,7 +225,20 @@ Good example:
 
 Always use the shorthand version of a property. When using the cascade to overwrite a rule with a more specific one, use the shorthand version on the main rule and the expanded version in the superseding rule.
 
-Example:
+Poor example:
+
+```css
+.example {
+	margin: 5em 2em 10em 2em;
+}
+
+.example--alt {
+	margin: 5em 2em 20em 2em;
+}
+```
+
+Good example:
+
 ```css
 .example {
 	margin: 5em 2em 10em 2em;
@@ -483,7 +508,7 @@ Developers may use JavaScript to add inline styles to an element only when the v
 
 #### Binding
 
-Use data attributes such as data-hook="something", data-component="component-name") for JavaScript hooks, rather than binding to classes or IDs. 
+Use data attributes such as data-hook="something", data-component="component-name" for JavaScript hooks, rather than binding to classes or IDs. 
 
 ## Organization & Architectural Principles
 
@@ -522,6 +547,18 @@ A simple module, such as a button, may require only a single element. Complex mo
 Name subcomponents as follows: [module]-[subcomponent].
 
 HTML:
+
+Poor Example:
+
+```html
+<div class="modal">
+	<div class="header">...</div>
+	<div class="main">...</div>
+	<div class="footer">...</div>
+</div>
+```
+
+Good Example:
 
 ```html
 <div class="modal">
@@ -586,7 +623,7 @@ Good example (CSS for our general module pattern):
 .module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having to create a modifier for every subcomponent of a modified module */
 ```
 
-State example:
+Good State example:
 
 ```css
 .module.is-visibile {} /* chaining/higher specificity makes sense with states as they are temporary, only applied given specific conditions, and you want to ensure that the styles are applied */
