@@ -43,7 +43,7 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ### Keyboard Accessibility
 
-A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation. Users can interact with elements with the enter button and spacebar. Design and developing so that keyboard users receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
+A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation. Users can interact with elements with the enter button and spacebar. Design and develop so that keyboard users receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
 
 #### Visual Focus States
 
@@ -93,7 +93,7 @@ The title element is read by screen readers on every page view. Make the title s
 
 There are a couple specific things to keep in mind when address meta tags and accessibility.
 
-1. Do not include a maximum scale in the viewport meta tag. Otherwise you are restricting the pinch zoom functionality that is crucial for many users to see page content.
+1. Do not include a maximum scale in the viewport meta tag. You would be restricting the pinch zoom functionality that is crucial for many users to see page content.
 2. Do not prevent user scalable in the viewport meta tag
 3. Include a character encoding meta tag to alert assistive devices of the character set being used.
 
