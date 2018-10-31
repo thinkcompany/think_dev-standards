@@ -14,7 +14,7 @@ http://www.w3.org/TR/WCAG20/
 
 ### ARIA
 
-Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages.  ARIA should not be used by default. ARIA attributes should be applied only when proper HTML, CSS, and JS do not meet a screen reader user's needs. You should be judicious when deciding the proper ARIA implementation to use. Using an ARIA attribute outside of its specification will cause problems for screen readers. For example, ARIA tooltips do not receive focus or have an actionable element in them. Thus, if you intend to create an actionable tooltip, you should not apply `role="tooltip"` but instead find a role that better fits the purpose of the UI element.
+Whereas WCAG efforts focus on the content found on pages, ARIA (Accessible Rich Internet Application Markup) is an effort to add accessibility to the navigation/use of dynamic or advanced user interfaces sometimes used on web pages. Do not use ARIA by default. Apply ARIA attributes only when proper HTML, CSS, and JS do not meet a screen reader user's needs. Be judicious when deciding the proper ARIA implementation to use. Using an ARIA attribute outside of its specification will cause problems for screen readers. For example, ARIA tooltips do not receive focus or have an actionable element in them. Thus, if you intend to create an actionable tooltip, do not apply `role="tooltip"` but instead find a role that better fits the purpose of the UI element.
 
 http://www.w3.org/WAI/intro/aria.php
 
@@ -43,7 +43,7 @@ This list covers a great deal of users with disabilities, but there are those wh
 
 ### Keyboard Accessibility
 
-A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation.s Users can interact with elements with the enter button and spacebar. Keyboard users should receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
+A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation. Users can interact with elements with the enter button and spacebar. Design and developing so that keyboard users receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
 
 #### Visual Focus States
 
@@ -66,7 +66,7 @@ Good, semantic structure of your document can be a great asset to accessibility.
 
 #### Initial Markup
 
-Creating web page that meetings our accessibility criteria starts with including important information about the document you are writing in the head.
+Creating web pages that meet our accessibility criteria starts with including important information about the document you are writing in the head.
 
 ##### Language and Localization
 
@@ -87,13 +87,13 @@ Example:
 
 ##### Page Titles
 
-The title element is read by screen readers on every page view and ideally should be short and unique.
+The title element is read by screen readers on every page view. Make the title short and unique.
 
 ##### Meta Tags
 
 There are a couple specific things to keep in mind when address meta tags and accessibility.
 
-1. Do not include a maximum scale in the viewport meta tag. This way, you are restricting the pinch zoom functionality that is crucial for many users to see page content.
+1. Do not include a maximum scale in the viewport meta tag. Otherwise you are restricting the pinch zoom functionality that is crucial for many users to see page content.
 2. Do not prevent user scalable in the viewport meta tag
 3. Include a character encoding meta tag to alert assistive devices of the character set being used.
 
@@ -117,7 +117,7 @@ Writing good, accessible semantic HTML is akin to writing good instructions for 
 
 Proper heading hierarchies are crucial to highly accessible document structure & semantics. HTML5 allows using `<h1...6>` tags anywhere on the page, but semantically, it's important to adhere to principles of consistency and clarity to direct accessibility tools on the page.
 
-An `<h1>` tags should appear no more than once per page, typically containing a kind of page title. `<h2>` tags appear often as the title of a section of the page, like a hero or sidebar.
+An `<h1>` tag will typically contain a kind of page title. Do not use more than one `<h1>` tag per page. `<h2>` tags appear often as the title of a section of the page, like a hero or sidebar.
 
 It's important to address font-size choices with CSS. Do not use an `<h5>` for your page title just because it should be smaller.
 
@@ -146,7 +146,7 @@ A good guide to this can be found at [Halters Web](http://haltersweb.github.io/A
 
 When creating a list on your page, know that screen-readers benefit from well-formatted semantically structured lists using `ol`, `ul`, `dl`, and `li` tags. These semantics create the assistive relationships between elements on the page that accessibility tools depend on to present information coherently.
 
-One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot), and these should be wrapped in a `<nav>`.
+One or two navigation link lists on a page should be a guiding principal (i.e. at the top and in the foot). Wrap these in a `<nav>` element.
 
 **Bad**:
 
@@ -204,9 +204,9 @@ It is also best practice to include the `role="main"` attribute and value to the
 
 ### Actionable Elements
 
-Any element on the page that you can interact with using the mouse should obviously also support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
+Any element on the page that you can interact with using the mouse must support keyboard interactions as well. Buttons, links, inputs, etc. Typically, these elements will be designed with mouse users in mind, with on-hover styles, bright colors or box shadows or blinking cursors to indicate potential actionable elements. Keep in mind that keyboard users need to know where their current focus is. That normally means using the same styles for the focus state and the hover state.
 
-It's also important to make the state of toggle-action elements clear to non-visual users. ARIA attributes `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page are used in these cases. These are boolean attributes that should be updated as the user interacts with them. When the UI state is updated, so should the aria-state be updated with helper functions like these:
+It's also important to make the state of toggle-action elements clear to non-visual users. ARIA attributes `aria-haspopup`, `aria-expanded`, and `aria-hidden` that inform the screen-reader about the state of actionable elements on the page are used in these cases. These are boolean attributes that must be updated as the user interacts with them. When the UI state is updated, the aria-state will also be updated with helper functions like these:
 
 ```javascript
 var ariaExpand = function ($trigger, $menu) {
@@ -228,7 +228,7 @@ Most major browsers and assistive technologies bridge the potential accessibilit
 
 The `onDblClick` event handler is associated with the double click of a mouse on a selected HTML element. There is no device independent or keyboard equivalent to `onDblClick`, so it must be avoided.
 
-Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per our JavaScript standards, `data-*` attributes should be used as selectors.
+Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per our JavaScript standards, use `data-*` attributes as selectors.
 
 **Bad**:
 
@@ -252,7 +252,7 @@ $('[data-component="click-me"]').on('click.namespace keypress.namespace', cb);
 
 Buttons should be made with the native HTML `<button>` tag, and not a clickable image, or any other workaround that causes unnecessary confusion for screen-reader users.
 
-Buttons with `type="submit"` should be used to designate the end of a form. Developers sometimes disable these buttons until the form has been adequately filled out, but doing so removes the only indicator that screen-reader users have that the form is ending. Do not do this.
+Use buttons with `type="submit"` to designate the end of a form. Developers sometimes disable these buttons until the form has been adequately filled out, but doing so removes the only indicator that screen-reader users have that the form is ending. Do not do this.
 
 #### Links
 
@@ -272,15 +272,15 @@ To make links accessible, they need to have text-based information that clearly 
 
 It's important not to use redundant language like "Link to..." or "Go to..." (the screen reader already declares that it has found a navigation element), or misleading text like "Click here" (implying the user needs to click rather than keyboard navigate).
 
-Like all other text, avoid all-capitalize text content, as the screen reader will read text like letter by letter and is more difficult to read. Text that must appear as capitalized should be styled with CSS's `text-transform` property, but typed regularly.
+Like all other text, avoid all-capitalize text content, as the screen reader will read text like letter by letter and is more difficult to read. Style text that must appear as capitalized with CSS's `text-transform` property, but type it regularly in the HTML.
 
 Avoid including the URL in the link text, as the format of web links will be read letter-by-letter and be extremely difficult to understand.
 
-The style of link text should also include some property besides color to increase visibility for low-vision, or color blind users. An underline is typically sufficient.
+Style link text with some property besides color to increase visibility for low-vision, or color blind users. An underline is typically sufficient.
 
 ### Imagery
 
-Image-based content and information play a prominent role in the modern web. The accessibility standard expectations are very clear in their expectations for how this information should always be delivered to screen-reader users: always provide equivalent alternative text-based sources of the information conveyed.
+Image-based content and information play a prominent role in the modern web. The accessibility standard expectations are very clear in their expectations for how this information should be delivered to screen-reader users: always provide equivalent alternative text-based sources of the information conveyed.
 
 An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
 
@@ -332,7 +332,7 @@ When using images on the web, we need to keep in mind that they cause immediate 
 
 The "alt" attribute on image content is an important part of meeting WCAG 2.0 compliance for providing text alternatives for non-text information. This is necessary because most tools used to translate web content into other consumable forms rely on text-based information.
 
-Rather than a description of the image itself, the alt attribute provides a description of the *purpose* of the image; what *information* it provides provide to a user who can see it, hover over it with the mouse, etc. For example, an image used as a navigation link should provide an alt attribute value that describes the destination of the link.
+Rather than a description of the image itself, the alt attribute provides a description of the *purpose* of the image; what *information* it provides to a user who can see it, hover over it with the mouse, etc. For example, an image used as a navigation link must provide an alt attribute value that describes the destination of the link.
 
 **Bad**:
 
@@ -354,7 +354,7 @@ Some specific things to make note of when using the alt attribute.
 
 - Describe the purpose of the image, rather than the image itself.
 
-- Text included in the image should be included in the alt attribute text.
+- Include text included in the image in the alt attribute text.
 
 - A complex graphic, such as a flow chart or graph, will sometimes be accompanied by a real-text description nearby in the HTML markup. If that is the case, make sure the entirety of the information in the picture is provided in the accompanying text and provide an empty string for the alt value `alt=""`. Otherwise, included supplemental or summarization information in the alt text attribute.
 
@@ -370,7 +370,7 @@ Forms are composed of controls (input, select, textarea), and descriptions/label
 
 ### Labels
 
-As stated in the overview, labels are important to guiding users through a form. Each form control should accompanied by a descriptive `<label>`, and each `<fieldset>` should include a description of the grouping in a `<legend>` tag. Placeholder attributes are not sufficient substitutes for labels. screen-readers depend on an explicit label in nearly all cases.
+As stated in the overview, labels are important to guiding users through a form. Each form control must be accompanied by a descriptive `<label>`, and each `<fieldset>` must include a description of the grouping in a `<legend>` tag. Placeholder attributes are not sufficient substitutes for labels. screen-readers depend on an explicit label in nearly all cases.
 
 **Bad**:
 
@@ -390,7 +390,7 @@ As stated in the overview, labels are important to guiding users through a form.
 
 ### Radio Buttons and Checkboxes
 
-Radio buttons and checkboxes are typically thematically grouped, and as such should be nested within a fieldset group. The group should have a descriptive legend.
+Radio buttons and checkboxes are typically thematically grouped, and as such should be nested within a fieldset group. The group needs a descriptive legend.
 
 **Bad**:
 
@@ -416,7 +416,7 @@ Radio buttons and checkboxes are typically thematically grouped, and as such sho
 
 ### Select
 
-Select menus should be accompanied by a `label` tag, like a simple input should. `<optgroup>` tags can be used *like* fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
+Select menus must be accompanied by a `label` tag, similar to a simple input. `<optgroup>` tags can be used *like* fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
 
 ```html
 <label for="movies">Movies</label>
@@ -456,7 +456,7 @@ A third method that can be use to include instructional information from outside
 
 ### Required Fields
 
-It is common to denote required fields with a different color, asterisk, other visual treatment, but this is insufficient for non-sighted users and those with color blindness. To ensure screen-reader support use the `aria-required=”true”` attribute in your form field.  When the form field has focus it will announce “required”. Do **not** use the HTML5 `required` attribute.  It is not fully supported by screen-readers and is not easily styled with css.
+It is common to denote required fields with a different color, asterisk, other visual treatment, but this is insufficient for non-sighted users and those with color blindness. To ensure screen-reader support use the `aria-required=”true”` attribute in your form field. When the form field has focus it will announce “required”. Do **not** use the HTML5 `required` attribute. It is not fully supported by screen-readers and is not easily styled with css.
 
 Note: You can inject the asterisk as a pseudo-element via CSS to keep the HTML truthful.
 
@@ -481,7 +481,7 @@ CSS
 ### Disabled Form Elements
 
 Buttons and form elements that are disabled but still in view must be assigned the `disabled` attribute (this is a boolean attribute and takes no assignment).
-Convention regarding disabled elements is to present them as dimmed or grayed out, or otherwise different in appearance to indicate a disabled state.  Disabled elements match the `:disabled` pseudo-class for styling purposes. Dimmed/grayed out elements don't need to satisfy color contrast requirements. Disabled elements should not be able to be: clicked, edited, focused, or tabbed onto.
+Convention regarding disabled elements is to present them as dimmed or grayed out, or otherwise different in appearance to indicate a disabled state. Disabled elements match the `:disabled` pseudo-class for styling purposes. Dimmed/grayed out elements don't need to satisfy color contrast requirements. Disabled elements will not be able to be: clicked, edited, focused, or tabbed onto.
 
 Example
 
@@ -491,13 +491,13 @@ Example
 
 #### Disabling Submit Buttons
 
-It is not best practice to disable a submit button.  Since disabled form elements must be removed from the tab order and must not be focusable, disabling a submit button can lead to confusion for someone using a screen-reader: there would be no indication to them that the form was concluded.
+It is not best practice to disable a submit button. Since disabled form elements must be removed from the tab order and must not be focusable, disabling a submit button can lead to confusion for someone using a screen-reader: there would be no indication to them that the form was concluded.
 
 ### Validation
 
 Validation is the process of conveying to the user interfacing with inputs that the format of their input needs to be edited in some way to be accepted. The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats, etc. We want actual form validation to be the *safety net*, not the only guidelines.
 
-There is a common web practice nowadays to implement "just-in-time" form validation.  Unfortunately this is a practice that was never vetted with the accessibility community and can cause confusion for those who cannot see. For instance someone who is blind will be unaware of errors appearing after they have left a field if validation happens on blur.
+There is a common web practice nowadays to implement "just-in-time" form validation. Unfortunately this is a practice that was never vetted with the accessibility community and can cause confusion for those who cannot see. For instance someone who is blind will be unaware of errors appearing after they have left a field if validation happens on blur.
 Error validation should happen only upon submit, not upon keystroke or form element blur.
 Re-validation should also only happen upon submit.
 
@@ -507,11 +507,11 @@ In rare occurrences just-in-time validation is warranted. If validation must hap
 
 #### Let the user browse the form before validating the fields
 
-The user must be allowed to browse the form without generating errors. For example, if the user tabs from input field to input field, leaving the previous input field(s) should not create inline errors on blur. An empty field should be considered valid until the form is submitted and should not be considered invalid upon blur. However, if a field is not empty but has invalid entry then creating an error upon blur is OK.
+The user must be allowed to browse the form without generating errors. For example, if the user tabs from input field to input field, leaving the previous input field(s) will not create inline errors on blur. An empty field will be considered valid until the form is submitted and will not be considered invalid upon blur. However, if a field is not empty but has invalid entry then creating an error upon blur is OK.
 
 ### Error Handling
 
-Error handling is a huge accessibility issue on the web.  Without careful markup a blind or visually-impaired user will be unable to figure out why (or even that) their form submission didn’t complete successfully. Avoiding the issues detailed about just-in-time validation, the following strategy should be strictly followed.
+Error handling is a huge accessibility issue on the web. Without careful markup a blind or visually-impaired user will be unable to figure out why (or even that) their form submission didn’t complete successfully. Avoiding the issues detailed about just-in-time validation, strictly adhere to the following strategy.
 
 1. Let the user know that there are errors on the page.
 2. Let the user know what the error is.
@@ -519,8 +519,8 @@ Error handling is a huge accessibility issue on the web.  Without careful markup
 
 Let the user know that there are errors on the page. Upon validation:
 
-1. focus should immediately be given to the first form element that contains an error.
-2. aria-invalid=”true” attribute should be assigned to each offending form field.  (Remember to reset it to “false” or remove it completely upon successful revalidation.)
+1. Give focus immediately to the first form element that contains an error.
+2. aria-invalid=”true” attribute must be assigned to each offending form field. (Remember to reset it to “false” or remove it completely upon successful revalidation.)
 
 Example:
 
@@ -528,7 +528,7 @@ Example:
 <input id="date" type="text" aria-invalid=”true” />
 ```
 
-Let the user know what the error is. Utilize the form field’s `aria-describedby` attribute to tie the form field to the error message.  That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
+Let the user know what the error is. Utilize the form field’s `aria-describedby` attribute to tie the form field to the error message. That way, when the offending form field has focus the error message will be announced. Do not use multiple labels assigned to the same input field to handle error text.
 
 Example:
 
@@ -538,7 +538,7 @@ Example:
 <p id="nameError">Please only use letters</p>
 ```
 
-Let the user know how many errors are on a page. Each error message should be prefaced with its error number relative to the total number of errors.
+Let the user know how many errors are on a page. Preface each error message with its error number relative to the total number of errors.
 
 Example (Best):
 
@@ -554,7 +554,7 @@ Screen readers are capable of navigating data tables that are marked up using th
 
 - Summary: an attribute that contains a text description of the data in the table. This element does not render.
 - Caption: an element that contains a text description of the data in the table. This element does render, typically as left-justified text inside the boundaries of the table. Can be shifted off-screen via CSS.
-- Scope: attribute that can appear on TH and TD elements to define data as a row or a column. Heading cells should use `scope="col"`. The first cell in each row should use scope="row". These do not render.
+- Scope: attribute that can appear on TH and TD elements to define data as a row or a column. Use `scope="col"` for heading cells. Use scope="row" for the first cell in each row. These do not render.
 
 Example:
 
@@ -592,7 +592,7 @@ For simple content, they can be acceptable. They fall under the same category as
 
 Flexbox is a relatively newer tool to the web that carries with it some unique accessibility concerns. The foremost concern at play is the re-ordering of content. The topic of content location/order were touched upon in the Color, Shapes and Location section, but to reiterate: screen-readers follow the sequence of elements the markup, and not the flow on the page. Flexbox simply makes these concerns more valid and good solutions more important to find.
 
-A developer has total control over the order of elements in flexbox containers, making them completely independent of the order in the HTML source. Flexbox should be totally avoided as a way to structure page layout. Imagine the confusion of a screen reader that encounters a page that looks like this:
+A developer has total control over the order of elements in flexbox containers, making them completely independent of the order in the HTML source. Avoid flexbox as a way to structure page layout. Imagine the confusion of a screen reader that encounters a page that looks like this:
 
 HTML
 
@@ -676,7 +676,7 @@ Make sure your tab order is also logical, sequential, and follows the visual lay
 
 Use san-serif fonts rather than serif fonts.
 
-Minimum font size should be 14px. This is the minimum size for all regular content. The minimum size for small print* should be no less than 12px.
+Do not make minimum font size smaller than 14px. This is the minimum size for all regular content. Do not make minimum size for small print* smaller than than 12px.
 
 Unfortunately, using relative font sizes is nearly impossible since they would be relative to the client definitions and not your own. If it's possible to use rems or ems without breaking the experience, that is preferable.
 
@@ -704,11 +704,11 @@ If an image has text on the graphic, the alt attribute must be verbatim to the t
 
 ### HTML Text
 
-The majority of the email should be HTML text and not text in images. The beginning of the email should not begin whose dimensions would push the content below "the fold." When images fail to render, the recipient will see large empty areas, rather than content which may be confusing to some people.
+Favor HTML over text images for the majority of the email. Do not begin the content of the email below "the fold". If there is only an image above "the fold" and the image(s) fail to render, the recipient will see large empty areas, rather than content which may be confusing to some people.
 
 ### Text Alignment
 
-Text should be left aligned. Stay away from centered or right-aligned text. Do not use justified text which can cause white spaces between words and letters. These "rivers of white" can be especially problematic for those with dyslexia.
+Left align text. Stay away from centered or right-aligned text. Do not use justified text which can cause white spaces between words and letters. These "rivers of white" can be especially problematic for those with dyslexia.
 
 ### Paragraphs
 
@@ -747,5 +747,5 @@ Table layout is necessary in emails due to Outlook's rendering engine. Therefore
 
 Use media queries for screens <= 600px and apply the following styles:
 
-Text for mobile <= 600px must be at least 16px. The "small print" for mobile should be 14px.
+Text for mobile <= 600px must be at least 16px. The "small print" for mobile must be at least 14px.
 
