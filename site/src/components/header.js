@@ -3,8 +3,8 @@ import { Link } from 'gatsby'
 import '../scss/main.scss';
 
 const Header = ({ siteTitle }) => (
-  <div className='hub-util-header'>
-    <div className='hub-util-header-inner'>
+  <div className='tds-util-header'>
+    <div className='tds-util-header-inner'>
       <div class="svg-logo-think think-logo-top">
         <span class="visually-hidden">Think Company</span>
       </div>
