@@ -11,8 +11,8 @@ All of our JavaScript code is sent directly to the public. It should always be o
 
 ##Table of Contents
 
-  1. [General Authoring](general-authoring.md)
-  1. [jQuery Best Practices](jquery-best-practices.md)
-  1. [Structuring Large Client-side Applications](large-applications.md)
+  1. [General Authoring](/javascript/general/)
+  1. [jQuery Best Practices](/javascript/jquery/)
+  1. [Structuring Large Client-side Applications](/javascript/large-applications)
   1. MVC Frameworks (coming soon)
-  1. [Resources](resources.md)
+  1. [Resources](/javascript/resources/)

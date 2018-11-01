@@ -1,5 +1,5 @@
 ---
-path: "/general"
+path: "/javascript/general/"
 date: "2018-10-23"
 title: "General JS Development Standards"
 ---
