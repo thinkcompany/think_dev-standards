@@ -1,3 +1,9 @@
+---
+path: "/general"
+date: "2018-10-23"
+title: "General JS Development Standards"
+---
+
 #General Authoring Guidelines
 
 ## Table of Contents

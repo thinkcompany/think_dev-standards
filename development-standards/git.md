@@ -1,3 +1,9 @@
+---
+path: "/git"
+date: "2018-11-01"
+title: "GIT Development Standards"
+---
+
 # Git Style Guide
 
 This is a Git Style Guide inspired by [*How to Get Your Change Into the Linux

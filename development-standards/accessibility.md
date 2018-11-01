@@ -1,3 +1,9 @@
+---
+path: "/accssibility"
+date: "2018-11-01"
+title: "Accessibility Development Standards"
+---
+
 # Accessibility Development Standards
 
 This document defines the best practices for producing websites that are accessible to the widest possible audience of web users.

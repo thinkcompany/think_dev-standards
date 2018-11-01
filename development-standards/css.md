@@ -1,3 +1,9 @@
+---
+path: "/css"
+date: "2018-11-01"
+title: "CSS Development Standards"
+---
+
 # CSS Authoring Guidelines
 
 ## Programming Principles

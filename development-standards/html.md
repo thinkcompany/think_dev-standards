@@ -1,3 +1,9 @@
+---
+path: "/html"
+date: "2018-11-01"
+title: "HTML Development Standards"
+---
+
 # HTML Development Standards
 
 ## Programming Principles

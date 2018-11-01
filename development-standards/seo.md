@@ -1,3 +1,9 @@
+---
+path: "/seo"
+date: "2018-11-01"
+title: "SEO Development Standards"
+---
+
 # SEO Development Standards
 
 This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. 

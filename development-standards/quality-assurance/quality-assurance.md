@@ -1,3 +1,9 @@
+---
+path: "/quality-assurance/qa"
+date: "2018-11-01"
+title: "Quality Assurance Development Standards"
+---
+
 # Quality Assurance
 
 This set of documents contain the standards for quality assurance at Think Company. There are six primary areas of focus to ensure quality on projects: Standards Compliance, Accessibility, Browser Compatibility, Performance, Security, and Codebase Integrity. It is every developer's responsibilty to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.

@@ -1,3 +1,9 @@
+---
+path: "/resources"
+date: "2018-10-23"
+title: "Resources"
+---
+
 #Resources
 
 ## Style Guides

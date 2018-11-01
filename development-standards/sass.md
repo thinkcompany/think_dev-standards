@@ -1,3 +1,9 @@
+---
+path: "/sass"
+date: "2018-11-01"
+title: "Sass Development Standards"
+---
+
 # Sass Authoring Guidelines
 
 This document contains Think Company's standards for writing Sass.

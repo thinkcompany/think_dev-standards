@@ -1,3 +1,9 @@
+---
+path: "/performance"
+date: "2018-11-01"
+title: "Performance Development Standards"
+---
+
 # Performance Development Standards
 Each individual element on a web page generates an HTTP request which adds its own network latency, download time and render time. The most crucial optimization for any web site is to reduce or limit the number of total HTTP requests. There are several ways to accomplish this, the most common of which is to combine CSS, JS and images into as few files as possible.
 

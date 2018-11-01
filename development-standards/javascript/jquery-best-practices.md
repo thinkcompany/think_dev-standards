@@ -1,3 +1,9 @@
+---
+path: "/jquery"
+date: "2018-11-01"
+title: "JQuery Development Standards"
+---
+
 #jQuery Best Practices
 
 ## Table of Contents

@@ -1,3 +1,9 @@
+---
+path: "/js-standards"
+date: "2018-10-23"
+title: "JS Development Standards"
+---
+
 #Javascript Development Standards
 This document is largely based on Douglas Crockford's [Code Conventions for JavaScript](http://javascript.crockford.com/code.html). Changes have been made where necessary to merge it with the standards typically used in jQuery code. When changes were not necessary, Douglas Crockford's own words were left untouched.
 
