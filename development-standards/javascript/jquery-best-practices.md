@@ -8,19 +8,19 @@ title: "JQuery Development Standards"
 
 ## Table of Contents
 
-  1. [Loading jQuery](#markdown-header-loading-jquery)
-  1. [Selectors](#markdown-header-selectors)
-  1. [Determine jQuery Objects](#markdown-header-determine-jquery-objects)
-  1. [Document Ready](#markdown-header-document-ready)
-  1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
-  1. [Event Prevent](#markdown-header-event-prevent)
-  1. [Method Chains](#markdown-header-method-chains)
-  1. [Manipulating Element Appearance](#markdown-header-manipulating-element-appearance)
-  1. [AJAX](#markdown-header-ajax)
-  1. [Element Create](#markdown-header-element-create)
-  1. [Element Exists](#markdown-header-element-exists)
-  1. [Performance](#markdown-header-performance)
-  1. [Plugins](#markdown-header-plugins)
+  1. [Loading jQuery](#loading-jquery)
+  1. [Selectors](#selectors)
+  1. [Determine jQuery Objects](#determine-jquery-objects)
+  1. [Document Ready](#document-ready)
+  1. [Event Bind / Live / Delegate](#event-bind-live-delegate)
+  1. [Event Prevent](#event-prevent)
+  1. [Method Chains](#method-chains)
+  1. [Manipulating Element Appearance](#manipulating-element-appearance)
+  1. [AJAX](#ajax)
+  1. [Element Create](#element-create)
+  1. [Element Exists](#element-exists)
+  1. [Performance](#performance)
+  1. [Plugins](#plugins)
 
 ## Loading jQuery
 
@@ -38,7 +38,7 @@ Don't load jQuery using a CDN link - always include it locally in your project. 
   - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Selectors
@@ -64,7 +64,7 @@ If performance dictates you must switch to classnames as selectors, use classnam
 $('.js-action');
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Determine jQuery Objects
@@ -93,7 +93,7 @@ var $this = $(this);
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Document Ready
@@ -113,7 +113,7 @@ $(document).ready(function() {
 ```
 Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Event Bind / Live / Delegate
@@ -165,7 +165,7 @@ $('[data-special-list] a').on('click', myClickHandler); // BAD, you are attachin
 $('[data-special-list]').on('click', 'a', myClickHandler); // GOOD, only one event handler is attached to the parent.
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Event Prevent
@@ -199,7 +199,7 @@ $('.btn').click(function(event){
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Method Chains
@@ -220,7 +220,7 @@ $('#items')
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Manipulating Element Appearance
@@ -249,7 +249,7 @@ $([data-change-appearance]).addClass('urgent');
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## AJAX
@@ -295,7 +295,7 @@ jqxhr.done(successHandler);
 jqxhr.fail(failureHandler);
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Element Create
@@ -320,7 +320,7 @@ $('<a/>', {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Element Exists
@@ -340,7 +340,7 @@ if ($('#myElement').length) {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Performance
@@ -454,7 +454,7 @@ for(var i = 0; i < 10000; i++){
 $myList.html(array.join(''));
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
 
 
 ## Plugins
@@ -642,4 +642,4 @@ There are some kinds of jQuery plugins:
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
+**[⬆ back to top](#table-of-contents)**
