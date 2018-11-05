@@ -8,6 +8,29 @@ title: "Sass Development Standards"
 
 This document contains Think Company's standards for writing Sass.
 
+## Table of Contents
+
+ - [Programming Principles](#programming-principles)
+ - [Versions & References](#versions--references)
+ - [Tools & Libraries](#tools--libraries)
+ - [Vendor Prefixes](#vendor-prefixes)
+ - [Format & Style](#format--style)
+  * [Formatting for Readability](#formatting-for-readability)
+  * [Declaration Order](#declaration-order)
+	* [Media Queries](#media-queries)
+	* [Comments](#comments)
+	* [Naming](#naming)
+	* [Sass Language Features](#sass-language-features)
+		+ [Nesting](#nesting)
+		+ [Variables](#variables)
+		+ [Mixins & Functions](#mixins--functions)
+		+ [Maps](#maps)
+		+ [Extend](#extend)
+	* [Naming & Organization of Sass Partials](#naming--organization-of-sass-partials)
+		+ [Naming convention for partials](#naming-convention-for-partials)
+		+ [Partial Headers](#partial-headers)
+		+ [CSS File Generation](#css-file-generation)
+
 ## Programming Principles
 
 Write Sass in the most readable and maintainable way (e.g. as close to regular CSS) as possible while taking advantage of the conveniences that the language provides. Don't introduce unnecessary, hard-to-read complexity just because Sass allows you to.

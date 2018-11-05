@@ -6,6 +6,50 @@ title: "CSS Development Standards"
 
 # CSS Authoring Guidelines
 
+## Table of Contents
+
+ - [Programming Principles](#programming-principles)
+ - [Versions, Validation, & Linting](#versions-validations--linting)
+ - [Errors & Warnings](#errors--warnings)
+ - [Approved Properties](#approved-properties)
+ - [Disallowed Properties & Values](#disallowed-properties--values)
+ - [Tools & Libraries](#tools--libraries)
+	* [Preprocessors](#preprocessors)
+  * [Browser Resets](#browser-resets-normalize)
+ - [Format & Style](#format--style)
+  * [Formatting for Readability](#formatting-for-readability)
+  * [Quotes](#quotes)
+	* [Comments](#comments)
+	* [Selectors](#selectors)
+	* [Pseudo-Element and Pseudo-Class Selectors](#pseudo-element-and-pseudo-class-selectors)
+	* [Properties](#properties)
+		+ [Declaration Order](#declaration-order)
+		+ [Shorthand](#shorthand)
+		+ [Line-height](#line-height)
+		+ [Vendor Prefixes](#vendor-prefixes)
+		+ [Box Model & Layout Dimensions](#box-model--layout-dimensions)
+		+ [Flow, Floats, & Positioning](#flow-floats--positioning)
+		+ [Fonts](#fonts)
+		+ [Colors](#colors)
+		+ [Images](#images)
+		+ [Anchors](#anchors)
+- [Coding Practices](#coding-practices)
+  * [Grouping Styles](#grouping-styles)
+	* [Media Queries](#media-queries)
+	* [Using Sprites](#using-sprites)
+	* [Hack Strategy](#hack-strategy)
+	* [Integration](#integration)
+		+ [Integrating CSS with HTML](#integrating-css-with-html)
+		+ [Integrating CSS with JavaScript](#integrating-css-with-javascript)
+		+ [Binding](#binding)
+- [Organization & Architectural Principles](#organization--architectural-principles)
+	* [Style sheet organization](#style-sheet-organization)
+	* [Modules](#modules)
+		+ [Module Structure](#module-structure)
+		+ [Module Modifiers](#module-modifiers)
+	* [Specificity](#specificity)
+ 
+
 ## Programming Principles
 
 "Styles change but style doesn't." Leverage the cascade and inheritance, write efficient selectors, remain in normal flow as often as possible, and hack for older browsers as little as possible.

@@ -8,19 +8,19 @@ title: "JQuery Development Standards"
 
 ## Table of Contents
 
-  1. [Loading jQuery](#loading-jquery)
-  1. [Selectors](#selectors)
-  1. [Determine jQuery Objects](#determine-jquery-objects)
-  1. [Document Ready](#document-ready)
-  1. [Event Bind / Live / Delegate](#event-bind-live-delegate)
-  1. [Event Prevent](#event-prevent)
-  1. [Method Chains](#method-chains)
-  1. [Manipulating Element Appearance](#manipulating-element-appearance)
-  1. [AJAX](#ajax)
-  1. [Element Create](#element-create)
-  1. [Element Exists](#element-exists)
-  1. [Performance](#performance)
-  1. [Plugins](#plugins)
+  - [Loading jQuery](#loading-jquery)
+  - [Selectors](#selectors)
+  - [Determine jQuery Objects](#determine-jquery-objects)
+  - [Document Ready](#document-ready)
+  - [Event Bind / Live / Delegate](#event-bind-live-delegate)
+  - [Event Prevent](#event-prevent)
+  - [Method Chains](#method-chains)
+  - [Manipulating Element Appearance](#manipulating-element-appearance)
+  - [AJAX](#ajax)
+  - [Element Create](#element-create)
+  - [Element Exists](#element-exists)
+  - [Performance](#performance)
+  - [Plugins](#plugins)
 
 ## Loading jQuery
 

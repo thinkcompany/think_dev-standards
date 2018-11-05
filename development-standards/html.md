@@ -6,6 +6,47 @@ title: "HTML Development Standards"
 
 # HTML Development Standards
 
+## Table of Contents
+
+ - [Programming Principles](#programming-principles)
+ - [Versions & Validation](#versions--validation)
+ - [Allowed Elements & Attributes](#allowed-elements--attributes)
+    * [Elements](#elements)
+    * [Attributes](#attributes)
+ - [Format & Style](#format--stle)
+ - [Formatting for Readability](#formatting-for-readability)
+ - [Module-based Markup](#module-based-markup)
+ - [Classes, IDs, & Custom Data Attributes](#classes-ids--custom-data-attributes)
+ - [Attribute Order](#attribute-order)
+ - [Page Layouts](#programming-principles)
+ - [Coding Practices](#coding-practices)
+    * [Doctype](#doctype)
+    * [HTML](#html)
+    * [Head](#head)
+        + [Meta](#meta)
+        + [Charset Meta Tag](#charset-meta-tag)
+        + [Http-equiv Meta Tag](#http-equiv-meta-tag)
+        + [Viewport Meta Tag](#viewport-meta-tag)
+        + [Importing CSS](#importing-css)
+        + [Conditional Comments](#conditional-comments)
+        + [Importing JavaScript](#importing-javascript)
+    * [Content Markup](#content-markup)
+        + [Headings](#headings)
+        + [Text Content](#text-content)
+        + [Lists](#lists)
+        + [Links](#links)
+        + [Anchor Targets](#anchor-targets-aka-in-page-anchors)
+        + [Link Titles](#link-titles)
+        + [Images](#images)
+        + [Tables](#tables)
+        + [Forms](#forms)
+        + [Fieldset](#fieldset)
+        + [Label](#label)
+        + [Form Fields](#form-fields)
+        + [Checkboxes & Radio Buttons](#checkboxes--radio-buttons)
+        + [Buttons](#buttons)
+
+
 ## Programming Principles
 A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
 
