@@ -6,6 +6,8 @@ title: "GIT Development Standards"
 
 # Git Style Guide
 
+This document contains Think Company's standards for using Git.
+
 This is a Git Style Guide inspired by [*How to Get Your Change Into the Linux
 Kernel*](https://www.kernel.org/doc/Documentation/SubmittingPatches),
 the [git man pages](http://git-scm.com/doc) and various practices popular

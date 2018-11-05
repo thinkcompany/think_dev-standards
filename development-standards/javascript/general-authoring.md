@@ -6,6 +6,8 @@ title: "General JS Development Standards"
 
 #General Authoring Guidelines
 
+This document contains Think Company's standards for writing JavaScript.
+
 ## Table of Contents
 
   - [Types](#types)

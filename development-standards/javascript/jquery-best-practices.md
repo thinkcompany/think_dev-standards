@@ -6,6 +6,8 @@ title: "JQuery Development Standards"
 
 #jQuery Best Practices
 
+This document contains Think Company's standards for writing JQuery.
+
 ## Table of Contents
 
   - [Loading jQuery](#loading-jquery)

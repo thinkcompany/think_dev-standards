@@ -6,6 +6,8 @@ title: "HTML Development Standards"
 
 # HTML Development Standards
 
+This document contains Think Company's standards for writing HTML.
+
 ## Table of Contents
 
  - [Programming Principles](#programming-principles)

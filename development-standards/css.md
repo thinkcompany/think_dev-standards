@@ -6,6 +6,8 @@ title: "CSS Development Standards"
 
 # CSS Authoring Guidelines
 
+This document contains Think Company's standards for writing CSS.
+
 ## Table of Contents
 
  - [Programming Principles](#programming-principles)
