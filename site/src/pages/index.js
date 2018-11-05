@@ -22,16 +22,13 @@ const IndexPage = () => (
       </li>
       <ul>
         <li>
-          <Link to="/general/">General JS Authoring</Link>
+          <Link to="/javascript/general/">General JS Authoring</Link>
         </li>
         <li>
-          <Link to="/jquery/">JQuery Best Practices</Link>
+          <Link to="/javascript/jquery/">JQuery Best Practices</Link>
         </li>
         <li>
-          <Link to="/largeapps/">Structuring Large Client-side Applications</Link>
-        </li>
-        <li>
-          <Link to="/resources/">Resources</Link>
+          <Link to="/javascript/resources/">Resources</Link>
         </li>
       </ul>
       <li><Link to="/accessibility">Accessibility Standards</Link></li>
