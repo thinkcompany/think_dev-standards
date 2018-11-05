@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Think Development Standards',
+    title: 'Think Company Development Standards',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -24,7 +24,12 @@ module.exports = {
         name: "markdown-pages",
       },
     },
-    `gatsby-transformer-remark`,
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [`gatsby-remark-autolink-headers`],
+      },
+    },
     `gatsby-plugin-sass`
   ],
 }
