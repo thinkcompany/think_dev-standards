@@ -6,11 +6,12 @@ const Nav = () => (
   <div>
     <Link
       to="/"
-      style={{
-        color: 'black',
-        textDecoration: 'none',
-      }}
+      className="tds-nav"
     > Home </Link>
+    <Link
+      to="#table-of-contents"
+      className="tds-nav2"
+    > Top </Link>
   </div>
 )
 

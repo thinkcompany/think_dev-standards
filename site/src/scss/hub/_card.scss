@@ -1,4 +1,4 @@
-.hub-card {
+.tds-card {
     align-items: center;
     background-color: $white;
     border: 1px solid $silver;
@@ -33,7 +33,7 @@
 }
 
 @supports (display: grid) {
-    .hub-card {
+    .tds-card {
         width: auto;
 
         &:not(:last-child) {
@@ -42,16 +42,16 @@
     }
 }
 
-.hub-think-card {
+.tds-think-card {
     align-items: flex-start;
     background-color: transparent;
-    border-color: $spicy-pink;
+    border-color: $color-gray2;
     color: $white;
     padding-bottom: 0;
     padding-top: 0;
 }
 
-.hub-card-image-frame {
+.tds-card-image-frame {
     border-radius: 50%;
     display: inline-block;
     height: 70px;
@@ -63,7 +63,7 @@
 
 
 
-.hub-contact-cards {
+.tds-contact-cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -72,14 +72,14 @@
         flex-direction: row;
     }
 
-    .hub-card {
+    .tds-card {
 
         @include narrower-than($breakpoint-device-narrow) {
             align-items: center;
             flex-direction: column;
         }
 
-        .hub-card-image-frame {
+        .tds-card-image-frame {
 
             @include narrower-than($breakpoint-device-narrow) {
                 margin-bottom: 0.938em;
@@ -87,7 +87,7 @@
             }
         }
 
-        .hub-card-content {
+        .tds-card-content {
             @include narrower-than($breakpoint-device-narrow) {
                 text-align: center;
             }
@@ -98,7 +98,7 @@
 
 @supports (display: grid) {
 
-    .hub-contact-cards {
+    .tds-contact-cards {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-row-gap: 0;
@@ -111,7 +111,7 @@
 }
 
 
-.hub-think-cards {
+.tds-think-cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -127,7 +127,7 @@
 }
 
 @supports (display: grid) {
-    .hub-think-cards {
+    .tds-think-cards {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-row-gap: 0;
@@ -139,7 +139,7 @@
     }
 }
 
-.hub-think-card-body {
+.tds-think-card-body {
     margin-bottom: 1.375em;
     margin-top: 1.375em;
 
