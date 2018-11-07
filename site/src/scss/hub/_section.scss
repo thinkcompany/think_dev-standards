@@ -1,10 +1,10 @@
 .hub-section {
-    margin: 0 auto 1.875em;
+    margin: 1em auto 1.875em;
     max-width: $max-width;
     width: 90%;
 
     @include wider-than($breakpoint-ipad-portrait) {
-        margin: 0 auto 4.375em;
+        margin: 1em auto 4.375em;
         width: 85%;
     }
 }
