@@ -3,10 +3,10 @@ import { Link } from 'gatsby'
 import '../scss/main.scss';
 
 const Header = () => (
-  <div className='tds-util-header'>
-    <div className='tds-util-header-inner'>
+  <div className="tds-header">
+    <div className="tds-header-inner">
       <Link to="/">
-        <div className="svg-logo-think think-logo-top">
+        <div className="tds-header-logo-think">
           <span className="visually-hidden">Think Company</span>
         </div>
       </Link>
