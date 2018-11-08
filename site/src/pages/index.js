@@ -32,11 +32,7 @@ const IndexPage = () => (
         </li>
       </ul>
       <li><Link to="/accessibility">Accessibility Standards</Link></li>
-      <li>Quality Assurance</li>
-      <ul>
-        <li><Link to="/automated-testing/">Automated Testing Standards</Link></li>
-        <li><Link to="/quality-assurance/qa/">Quality Assurance</Link></li>
-      </ul>
+      <li><Link to="/quality-assurance/qa/">Quality Assurance</Link></li>
       <li><Link to="/git/">Git Standards</Link></li>
       <li><Link to="/performance/">Performance Standards</Link></li>
       <li><Link to="/seo/">SEO Standards</Link></li>
