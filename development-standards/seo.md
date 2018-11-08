@@ -6,6 +6,28 @@ title: "SEO Development Standards"
 
 # SEO Development Standards
 
+This document contains Think Company's standards for SEO practices.
+
+## Table of Contents
+
+ - [Markup](#markup)
+	- [Title](#title)
+	- [Meta Elements](#meta-elements)
+	- [Canonical Link](#canonical-link)
+	- [Anchors](#anchors)
+	- [Headings](#headings)
+	- [Site Logo](#site-logo)
+	- [Images](#images)
+	- [Navigation](#navigation)
+ - [Domains and URLs](#domains-and-urls)
+	- [Directory Structures](#directory-structures)
+	- [robots.txt](#robotstxt)
+	- [Redirects](#redirects)
+	- [Content Delivery Networks](#content-delivery-networks-cdn)
+- [Sitemaps](#sitemaps)
+	- [HTML Sitemaps](#html-sitemaps)
+	- [XML Sitemap](#xml-sitemap)
+
 This document defines the standard practices for optimizing web pages for search engines. Developers must first ensure that they are building web pages according to the Web Optimization Guidelines, as search engines favor sites when determining search query relevancy. 
 
 SEO enhancements also aid in general website accessibility, so there is absolutely no excuse not to implement the guidelines set forth in this document. However, any [Accessibility Guidelines](accessibility.md) may override any guidelines set forth for SEO.

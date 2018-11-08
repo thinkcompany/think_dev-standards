@@ -25,15 +25,15 @@ This document contains Think Company's standards for writing HTML.
     * [Doctype](#doctype)
     * [HTML](#html)
     * [Head](#head)
-        + [Meta](#meta)
+        <!-- + [Meta](#meta)
         + [Charset Meta Tag](#charset-meta-tag)
         + [Http-equiv Meta Tag](#http-equiv-meta-tag)
         + [Viewport Meta Tag](#viewport-meta-tag)
         + [Importing CSS](#importing-css)
         + [Conditional Comments](#conditional-comments)
-        + [Importing JavaScript](#importing-javascript)
+        + [Importing JavaScript](#importing-javascript) -->
     * [Content Markup](#content-markup)
-        + [Headings](#headings)
+        <!-- + [Headings](#headings)
         + [Text Content](#text-content)
         + [Lists](#lists)
         + [Links](#links)
@@ -46,7 +46,7 @@ This document contains Think Company's standards for writing HTML.
         + [Label](#label)
         + [Form Fields](#form-fields)
         + [Checkboxes & Radio Buttons](#checkboxes--radio-buttons)
-        + [Buttons](#buttons)
+        + [Buttons](#buttons) -->
 
 
 ## Programming Principles
