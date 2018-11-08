@@ -1,5 +1,5 @@
 ---
-path: "/css"
+path: "/styles/css/"
 date: "2018-11-01"
 title: "CSS Development Standards"
 ---
@@ -660,11 +660,14 @@ Good example (CSS for our general module pattern):
 .module {}
 .module-subcomponent {}
 .module--modifier {}
-.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having to create a modifier for every subcomponent of a modified module */
+.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having 
+to create a modifier for every subcomponent of a modified module */
 ```
 
 State example:
 
 ```css
-.module.is-visibile {} /* chaining/higher specificity makes sense with states as they are temporary, only applied given specific conditions, and you want to ensure that the styles are applied */
+.module.is-visibile {} /* chaining/higher specificity makes sense
+ with states as they are temporary, only applied given specific 
+ conditions, and you want to ensure that the styles are applied */
 ```

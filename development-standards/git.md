@@ -1,5 +1,5 @@
 ---
-path: "/git"
+path: "/git/"
 date: "2018-11-01"
 title: "GIT Development Standards"
 ---

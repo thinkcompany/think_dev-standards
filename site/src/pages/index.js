@@ -14,8 +14,8 @@ const IndexPage = () => (
       <li><Link to="/html/">HTML Standards</Link></li>
       <li>Style Sheets</li>
       <ul>
-        <li><Link to="/css/">CSS Standards</Link></li>
-        <li><Link to="/sass/">Sass Standards</Link></li>
+        <li><Link to="/styles/css/">CSS Standards</Link></li>
+        <li><Link to="/styles/sass/">Sass Standards</Link></li>
       </ul>
       <li>
         <Link to="/js-standards/">JavaScript Standards</Link>
@@ -31,7 +31,7 @@ const IndexPage = () => (
           <Link to="/javascript/resources/">Resources</Link>
         </li>
       </ul>
-      <li><Link to="/accessibility">Accessibility Standards</Link></li>
+      <li><Link to="/accessibility/">Accessibility Standards</Link></li>
       <li><Link to="/quality-assurance/qa/">Quality Assurance</Link></li>
       <li><Link to="/git/">Git Standards</Link></li>
       <li><Link to="/performance/">Performance Standards</Link></li>

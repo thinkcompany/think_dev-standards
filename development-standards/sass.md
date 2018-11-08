@@ -1,5 +1,5 @@
 ---
-path: "/sass"
+path: "/styles/sass/"
 date: "2018-11-01"
 title: "Sass Development Standards"
 ---
@@ -35,7 +35,7 @@ This document contains Think Company's standards for writing Sass.
 
 Write Sass in the most readable and maintainable way (e.g. as close to regular CSS) as possible while taking advantage of the conveniences that the language provides. Don't introduce unnecessary, hard-to-read complexity just because Sass allows you to.
 
-Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](https://bitbucket.org/thinkcompany/think_dev-standards/src/2f99262f5306b4f981c353d46fc9459e4f57d465/development-standards/css.md?at=master) still apply with regard to formatting, naming, specificity, and modularity.
+Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](/styles/css/) still apply with regard to formatting, naming, specificity, and modularity.
 
 View the resulting CSS frequently to ensure the quality meets our standards.
 
