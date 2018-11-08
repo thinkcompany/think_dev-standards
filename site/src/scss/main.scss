@@ -10,11 +10,8 @@
 // Global Helpers
 @import "helpers";
 
-// Think Project Hub specific styles
-@import "hub/index";
-
-// Client specific theming
-@import "gatsby/index";
+// Think Dev Standards specific styles
+@import "tds/index";
 
 // Code Highlighting
 @import "prism.css";

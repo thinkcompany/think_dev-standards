@@ -31,7 +31,7 @@ a {
     color: $color-teal;
     transition: color 0.2s ease-in-out;
 
-    &.hub-btn {
+    &.tds-btn {
         display: inline-block;
     }
 
@@ -39,7 +39,7 @@ a {
         color: $eastern-blue-dark;
     }
 
-    &.hub-coming-soon {
+    &.tds-coming-soon {
         color: $spicy-pink;
         text-decoration: none;
         cursor: text;

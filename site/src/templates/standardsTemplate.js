@@ -16,8 +16,8 @@ export default function Template({
     <div>
       <Header />
       <Nav />
-      <section className="hub-section">
-        <div className="hub-section-heading">
+      <section className="tds-section">
+        <div className="tds-section-heading">
           <div
             className="blog-post-content"
             dangerouslySetInnerHTML={{ __html: html }}

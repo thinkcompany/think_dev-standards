@@ -1,16 +1,16 @@
-.hub-contact-section {
+.tds-contact-section {
     background-color: $concrete;
     padding-bottom: 1.563em;
     padding-top: 3.125em;
 
-    .hub-section-heading {
+    .tds-section-heading {
         border: 0;
         margin-bottom: 3.125em;
         text-align: center;
     }
 }
 
-.hub-contacts {
+.tds-contacts {
     margin: 0 auto;
     max-width: $max-width;
     width: 90%;
@@ -20,7 +20,7 @@
     }
 }
 
-.hub-contact-cards {
+.tds-contact-cards {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -29,14 +29,14 @@
         flex-direction: row;
     }
 
-    .hub-card {
+    .tds-card {
 
         @include narrower-than($breakpoint-device-narrow) {
             align-items: center;
             flex-direction: column;
         }
 
-        .hub-card-image-frame {
+        .tds-card-image-frame {
 
             @include narrower-than($breakpoint-device-narrow) {
                 margin-bottom: 0.938em;
@@ -44,7 +44,7 @@
             }
         }
 
-        .hub-card-content {
+        .tds-card-content {
             @include narrower-than($breakpoint-device-narrow) {
                 text-align: center;
             }
@@ -55,7 +55,7 @@
 
 @supports (display: grid) {
 
-    .hub-contact-cards {
+    .tds-contact-cards {
         display: grid;
         grid-template-columns: repeat(1, 1fr);
         grid-row-gap: 0;

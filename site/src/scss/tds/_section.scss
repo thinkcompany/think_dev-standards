@@ -1,4 +1,4 @@
-.hub-section {
+.tds-section {
     margin: 1em auto 1.875em;
     max-width: $max-width;
     width: 90%;
@@ -9,7 +9,7 @@
     }
 }
 
-.hub-section-heading {
+.tds-section-heading {
     border-bottom: 2px solid $silver;
     margin-bottom: 1.875em;
 
@@ -26,7 +26,7 @@
     }
 }
 
-.hub-entries {
+.tds-entries {
     width: 100%;
 
     &::after {
@@ -37,7 +37,7 @@
 }
 
 @supports (display: grid) {
-    .hub-entries {
+    .tds-entries {
         display: grid;
         grid-area: entries;
         grid-template-columns: repeat(1, 1fr);
@@ -51,11 +51,11 @@
     }
 }
 
-.hub-entry {
+.tds-entry {
 
     margin-bottom: 2.5em;
 
-    .hub-entry-img-frame {
+    .tds-entry-img-frame {
         background-color: $concrete;
         border: 1px solid $silver;
         border-radius: 8px;
@@ -63,7 +63,7 @@
         margin-bottom: 1.25em;
     }
 
-    .hub-entry-link {
+    .tds-entry-link {
         display: block;
         margin-bottom: 0.625em;
     }
@@ -108,7 +108,7 @@
 
 @supports (display: grid) {
 
-    .hub-entry {
+    .tds-entry {
         margin-bottom: 0;
         width: auto;
 
