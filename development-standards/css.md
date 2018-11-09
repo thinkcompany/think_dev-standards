@@ -16,8 +16,6 @@ This document contains Think Company's standards for writing CSS.
  - [Approved Properties](#approved-properties)
  - [Disallowed Properties & Values](#disallowed-properties--values)
  - [Tools & Libraries](#tools--libraries)
-	* [Preprocessors](#preprocessors)
-  * [Browser Resets](#browser-resets-normalize)
  - [Format & Style](#format--style)
   * [Formatting for Readability](#formatting-for-readability)
   * [Quotes](#quotes)
@@ -41,14 +39,9 @@ This document contains Think Company's standards for writing CSS.
 	* [Using Sprites](#using-sprites)
 	* [Hack Strategy](#hack-strategy)
 	* [Integration](#integration)
-		+ [Integrating CSS with HTML](#integrating-css-with-html)
-		+ [Integrating CSS with JavaScript](#integrating-css-with-javascript)
-		+ [Binding](#binding)
 - [Organization & Architectural Principles](#organization--architectural-principles)
 	* [Style sheet organization](#style-sheet-organization)
 	* [Modules](#modules)
-		+ [Module Structure](#module-structure)
-		+ [Module Modifiers](#module-modifiers)
 	* [Specificity](#specificity)
  
 

@@ -25,29 +25,7 @@ This document contains Think Company's standards for writing HTML.
     * [Doctype](#doctype)
     * [HTML](#html)
     * [Head](#head)
-        <!-- + [Meta](#meta)
-        + [Charset Meta Tag](#charset-meta-tag)
-        + [Http-equiv Meta Tag](#http-equiv-meta-tag)
-        + [Viewport Meta Tag](#viewport-meta-tag)
-        + [Importing CSS](#importing-css)
-        + [Conditional Comments](#conditional-comments)
-        + [Importing JavaScript](#importing-javascript) -->
     * [Content Markup](#content-markup)
-        <!-- + [Headings](#headings)
-        + [Text Content](#text-content)
-        + [Lists](#lists)
-        + [Links](#links)
-        + [Anchor Targets](#anchor-targets-aka-in-page-anchors)
-        + [Link Titles](#link-titles)
-        + [Images](#images)
-        + [Tables](#tables)
-        + [Forms](#forms)
-        + [Fieldset](#fieldset)
-        + [Label](#label)
-        + [Form Fields](#form-fields)
-        + [Checkboxes & Radio Buttons](#checkboxes--radio-buttons)
-        + [Buttons](#buttons) -->
-
 
 ## Programming Principles
 A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
