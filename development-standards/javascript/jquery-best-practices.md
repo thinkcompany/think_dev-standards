@@ -40,9 +40,6 @@ Don't load jQuery using a CDN link - always include it locally in your project. 
   - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
 
 
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Selectors
 Use data attribute selectors over class or ID selectors whenever possible. Although the performance of class/ID selectors are [markedly better](http://jsperf.com/jquery-data-attribute-selector-vs-class-selector), we anticipate that faster browser Javascript engine speeds will eventually bring relative parity to alternate DOM crawling methods. Using data selectors whenever the slower performance can be tolerated will allow authors to reserve class attributes for styles only, and the style and the functionality of the page can have true separation in this way.
 
@@ -65,9 +62,6 @@ If performance dictates you must switch to classnames as selectors, use classnam
 ```javascript
 $('.js-action');
 ```
-
-**[⬆ back to top](#table-of-contents)**
-
 
 ## Determine jQuery Objects
 
@@ -95,9 +89,6 @@ var $this = $(this);
 ```
 
 
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Document Ready
 
 Begin executing statements with jQuery as soon as the DOM is ready:
@@ -114,8 +105,6 @@ $(document).ready(function() {
 });
 ```
 Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
-
-**[⬆ back to top](#table-of-contents)**
 
 
 ## Event Bind / Live / Delegate
@@ -167,8 +156,6 @@ $('[data-special-list] a').on('click', myClickHandler); // BAD, you are attachin
 $('[data-special-list]').on('click', 'a', myClickHandler); // GOOD, only one event handler is attached to the parent.
 ```
 
-**[⬆ back to top](#table-of-contents)**
-
 
 ## Event Prevent
 
@@ -201,9 +188,6 @@ $('.btn').click(function(event){
 ```
 
 
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Method Chains
 Use indentation when making long method chains, and avoid more than 6 methods chained. 
 Less method chains, more friendly debugging. 
@@ -220,9 +204,6 @@ $('#items')
 .find('.open')
   .updateCount();
 ```
-
-
-**[⬆ back to top](#table-of-contents)**
 
 
 ## Manipulating Element Appearance
@@ -249,9 +230,6 @@ $([data-change-appearance]).css({'color: red, 'font-weight': 'bold'});
 // Yes
 $([data-change-appearance]).addClass('urgent');
 ```
-
-
-**[⬆ back to top](#table-of-contents)**
 
 
 ## AJAX
@@ -297,9 +275,6 @@ jqxhr.done(successHandler);
 jqxhr.fail(failureHandler);
 ```
 
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Element Create
 
 Create an element dynamically:
@@ -322,9 +297,6 @@ $('<a/>', {
 ```
 
 
-**[⬆ back to top](#table-of-contents)**
-
-
 ## Element Exists
 
 Check to see if an element exists:
@@ -340,9 +312,6 @@ if ($('#myElement').length) {
     // balabala... 
 }
 ```
-
-
-**[⬆ back to top](#table-of-contents)**
 
 
 ## Performance
@@ -455,9 +424,6 @@ for(var i = 0; i < 10000; i++){
 }
 $myList.html(array.join(''));
 ```
-
-**[⬆ back to top](#table-of-contents)**
-
 
 ## Plugins
 
@@ -642,6 +608,3 @@ There are some kinds of jQuery plugins:
 
 })
 ```
-
-
-**[⬆ back to top](#table-of-contents)**
