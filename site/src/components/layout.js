@@ -30,13 +30,7 @@ const Layout = ({ children }) => (
           <html lang="en" />
         </Helmet>
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '3rem 1.0875rem 1.45rem',
-          }}
-        >
+        <div className="blog-post-content">
           {children}
         </div>
         <Footer />
