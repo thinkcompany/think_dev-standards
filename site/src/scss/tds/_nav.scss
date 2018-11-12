@@ -1,0 +1,32 @@
+.tds-nav {
+  font-family: sans-serif;
+  background: $color-primary-blue;
+  padding: 0.5em;
+  margin-top: 4em;
+  margin-left: -2.5em;
+  border-radius: 6px;
+  width: 100px;
+  z-index: 100;
+  position: fixed;
+  -webkit-transform: rotate(90deg);
+  -moz-transform: rotate(90deg);
+  -o-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+  text-align: center;
+  letter-spacing: 2px;
+  font-size: 0.9em;
+  color: $white;
+  text-decoration: none;
+
+  &:hover {
+    color: $color-primary-blue;
+    background: $white;
+    border: 2px solid $color-primary-blue;
+    transition: 1s;
+  }
+}
+
+.tds-nav--top {
+  margin-top: 12em;
+}

@@ -1,26 +1,35 @@
+---
+path: "/javascript/general/"
+date: "2018-10-23"
+title: "General JS Development Standards"
+---
+
 #General Authoring Guidelines
+
+This document contains Think Company's standards for writing JavaScript.
 
 ## Table of Contents
 
-  1. [Types](#markdown-header-types)
-  1. [Objects](#markdown-header-objects)
-  1. [Arrays](#markdown-header-arrays)
-  1. [Strings](#markdown-header-strings)
-  1. [JSON](#markdown-header-json)
-  1. [Functions](#markdown-header-functions)
-  1. [Properties](#markdown-header-properties)
-  1. [Variables](#markdown-header-variables)
-  1. [Comparison Operators & Equality](#markdown-header-comparison-operators--equality)
-  1. [Blocks](#markdown-header-blocks)
-  1. [Comments](#markdown-header-comments)
-  1. [Whitespace](#markdown-header-whitespace)
-  1. [Commas](#markdown-header-commas)
-  1. [Semicolons](#markdown-header-semicolons)
-  1. [Type Casting & Coercion](#markdown-header-type-casting--coercion)
-  1. [Naming Conventions](#markdown-header-naming-conventions)
-  1. [Constructors](#markdown-header-constructors)
-  1. [Performance](#markdown-header-performance)
-  1. [Miscellaneous](#markdown-header-miscellaneous)
+  - [Types](#types)
+  - [Objects](#objects)
+  - [Arrays](#arrays)
+  - [Strings](#strings)
+  - [JSON](#json)
+  - [Functions](#functions)
+  - [Event Binding](#event-binding)
+  - [Properties](#properties)
+  - [Variables](#variables)
+  - [Comparison Operators & Equality](#comparison-operators--equality)
+  - [Blocks](#blocks)
+  - [Comments](#comments)
+  - [Whitespace](#whitespace)
+  - [Commas](#commas)
+  - [Semicolons](#semicolons)
+  - [Type Casting & Coercion](#type-casting--coercion)
+  - [Naming Conventions](#naming-conventions)
+  - [Constructors](#constructors)
+  - [Performance](#performance)
+  - [Miscellaneous](#miscellaneous)
 
 ##Types
 
@@ -54,9 +63,6 @@ bar[0] = 9;
 
 console.log(foo[0], bar[0]); // => 9, 9
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Objects
@@ -105,10 +111,6 @@ var superman = {
     type: 'alien'
 };
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Arrays
 
@@ -161,9 +163,6 @@ function trigger() {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Strings
 
 Use single quotes `''` for strings.
@@ -184,7 +183,7 @@ var fullName = 'Bob ' + this.lastName;
 
 Strings longer than 80 characters should be written across multiple lines using string concatenation.
 
-Note: If overused, long strings with concatenation could impact performance. [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+Note: If overused, long strings with concatenation could impact performance: [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
 
 ```javascript
 // bad
@@ -248,8 +247,6 @@ function inbox(messages) {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 ## JSON
 
 A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
@@ -267,8 +264,6 @@ A value can be a string in double quotes, or a number, or true or false or null,
 }
 
 ```
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Functions
 
@@ -411,9 +406,6 @@ function yup(name, options, args) {
 }
 ```
 
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 ## Event Binding
 
 Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript seperate from HTML. Inline bindings can also lead to very hard to track bugs.
@@ -463,10 +455,6 @@ $myDiv.addEventListener('click', function() {
 ```
 
 
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Properties
 
 Use dot notation when accessing properties.
@@ -498,9 +486,6 @@ function getProp(prop) {
 
 var isJedi = getProp('jedi');
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Variables
@@ -626,9 +611,6 @@ function() {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Comparison Operators & Equality
 
 Use `===` and `!==` over `==` and `!=`.
@@ -673,9 +655,6 @@ if (collection.length) {
 ```
 
 For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Blocks
@@ -829,9 +808,6 @@ Use of the `continue` statement should be limited since it can obscure control f
 The `with` statement should not be used. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Comments
 
 **Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments should be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Inappropriate language should never be used. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
@@ -933,9 +909,6 @@ function Calculator() {
     return this;
 }
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Whitespace
@@ -1120,10 +1093,6 @@ var obj = {
 return obj;
 ```
 
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Commas
 
 Leading commas: **No, please.**
@@ -1187,9 +1156,6 @@ var heroes = [
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Semicolons
 
 **[Yes, have some.](https://www.youtube.com/watch?v=pdMGPvODN44)**
@@ -1209,9 +1175,6 @@ var heroes = [
 ```
 
 [Read more](http://stackoverflow.com/a/7365214/1712802).
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Type Casting & Coercion
@@ -1276,10 +1239,6 @@ var hasAge = !!age;
 // good
 var hasAge = Boolean(age);
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Naming Conventions
 
@@ -1414,10 +1373,6 @@ var CheckBox = require('./check_box');
 var CheckBox = require('./CheckBox');
 ```
 
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Constructors
 
 Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!
@@ -1482,10 +1437,6 @@ luke.jump()
     .setHeight(20);
 ```
 
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Performance
 
   - [On Layout & Web Performance](http://kellegous.com/j/2013/01/26/layout-performance/)
@@ -1495,9 +1446,6 @@ luke.jump()
   - [jQuery Find vs Context, Selector](http://jsperf.com/jquery-find-vs-context-sel/13)
   - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Miscellaneous
@@ -1541,6 +1489,3 @@ The `eval` function is the most misused feature of JavaScript. Avoid it.
 `eval` has aliases. Do not use the `Function` constructor. Do not pass strings to `setTimeout` or `setInterval`.
 
 Most uses of `eval` involve the developer generating some code on the fly to include a variable's value in the source. This is inefficient and can be avoided with some simple refactoring. When you're tempted to use `eval` in this way, stop and consider alternative implementations that will be more readable and maintainable in the future.
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**

@@ -1,4 +1,31 @@
+---
+path: "/html/"
+date: "2018-11-01"
+title: "HTML Development Standards"
+---
+
 # HTML Development Standards
+
+This document contains Think Company's standards for writing HTML.
+
+## Table of Contents
+
+ - [Programming Principles](#programming-principles)
+ - [Versions & Validation](#versions--validation)
+ - [Allowed Elements & Attributes](#allowed-elements--attributes)
+    * [Elements](#elements)
+    * [Attributes](#attributes)
+ - [Format & Style](#format--stle)
+ - [Formatting for Readability](#formatting-for-readability)
+ - [Module-based Markup](#module-based-markup)
+ - [Classes, IDs, & Custom Data Attributes](#classes-ids--custom-data-attributes)
+ - [Attribute Order](#attribute-order)
+ - [Page Layouts](#programming-principles)
+ - [Coding Practices](#coding-practices)
+    * [Doctype](#doctype)
+    * [HTML](#html)
+    * [Head](#head)
+    * [Content Markup](#content-markup)
 
 ## Programming Principles
 A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
@@ -43,7 +70,7 @@ Developers should use only those elements and attributes that have semantic valu
 - `placeholder` and other HTML5 form attributes/attribute values 
 - custom data attributes (`data-*`)
 
-Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](css.md), or [JavaScript](javascript) to achieve the desired result.
+Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
 *NOTE:* The following elements do not work on older browsers: `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
 
@@ -454,4 +481,4 @@ Good Example:
 <button type="submit">Submit</button>
 ```
 
-*NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the <button> element is not supported.
+*NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the `<button>` element is not supported.
