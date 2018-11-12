@@ -6,7 +6,7 @@ pipelines:
         caches:
           - node
         script: # Modify the commands below to build your repository.
-          - npm install
+          - npm install --unsafe-perm
 
   branches:
     staging: 
@@ -15,7 +15,7 @@ pipelines:
             - node
           deployment: test
           script:
-            - npm install
+            - npm install --unsafe-perm
             - npm run build
             - npm run deploy:staging
             - echo "Completed deployment for $BITBUCKET_BRANCH"
@@ -25,7 +25,7 @@ pipelines:
             - node
           deployment: production
           script:
-            - npm install
+            - npm install --unsafe-perm
             - npm run build
             - npm run deploy:production
             - echo "Completed deployment for $BITBUCKET_BRANCH"            
