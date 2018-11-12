@@ -1,0 +1,21 @@
+{
+  "name": "think_dev-standards",
+  "version": "1.0.0",
+  "description": "The Think Company team's development standards",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "postinstall": "cd site && npm install",
+    "build": "cd site && npm run build",
+    "deploy:staging": "./bin/deploy-staging.sh",
+    "deploy:production": "./bin/deploy-production.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@bitbucket.org/thinkcompany/think_dev-standards.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/thinkcompany/think_dev-standards#readme"
+}

@@ -1,0 +1,31 @@
+image: thinkcompany/docker-node-deploy:0.2.0
+
+pipelines:
+  default:
+    - step:
+        caches:
+          - node
+        script: # Modify the commands below to build your repository.
+          - npm install
+
+  branches:
+    staging: 
+      - step: 
+          caches:
+            - node
+          deployment: test
+          script:
+            - npm install
+            - npm run build
+            - npm run deploy:staging
+            - echo "Completed deployment for $BITBUCKET_BRANCH"
+    master: 
+      - step: 
+          caches:
+            - node
+          deployment: production
+          script:
+            - npm install
+            - npm run build
+            - npm run deploy:production
+            - echo "Completed deployment for $BITBUCKET_BRANCH"            
