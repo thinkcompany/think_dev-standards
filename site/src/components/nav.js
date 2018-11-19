@@ -5,7 +5,7 @@ import '../scss/main.scss';
 class Nav extends Component {
 
   getURL() {
-    return window.location.pathname + '#table-of-contents';
+    return typeof window !== 'undefined' && window.location.pathname + '#table-of-contents';
   }
 
   render() {
