@@ -211,7 +211,7 @@ Use conditional comments in the `<head>` to include IE browser version specific 
 
 #### Importing JavaScript
 
-JavaScript files may be included in the `<head>` of an HTML document but for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag. 
+JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag. 
 
 ```html
 <script src="/js/lib/jquery.js"></script>
