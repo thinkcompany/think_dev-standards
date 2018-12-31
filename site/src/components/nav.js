@@ -4,12 +4,22 @@ import '../scss/main.scss';
 
 class Nav extends Component {
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      TOCurl: '/',
+    };
+  }
+
+  componentDidMount() {
+    this.getURL();
+  }
+
   getURL() {
-    return window.location.pathname + '#table-of-contents';
+    this.setState({ TOCurl: window.location.pathname + '#table-of-contents' })
   }
 
   render() {
-    var createTOCLink = this.getURL();
     return (
       <nav>
         <Link
@@ -17,7 +27,7 @@ class Nav extends Component {
           className="tds-nav tds-nav--home"
         > Home </Link>
         <Link
-          to={createTOCLink}
+          to={this.state.TOCurl}
           className="tds-nav tds-nav--top"
         > Top </Link>
       </nav>
