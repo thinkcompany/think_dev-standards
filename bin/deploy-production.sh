@@ -1,1 +1,1 @@
-rsync --rsync-path="sudo -u www-data rsync" -az -vv --no-p --no-g --chmod=ugo=rwX -O -e 'ssh -p 22' ./public/ codeship@146.20.39.201:/var/www/html/standards/public_html
+rsync --rsync-path="sudo -u www-data rsync" -az -vv --no-p --no-g --chmod=ugo=rwX -O -e 'ssh -p 22' ./site/public/ codeship@146.20.39.201:/var/www/html/standards/public_html
