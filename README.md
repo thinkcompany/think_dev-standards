@@ -4,7 +4,7 @@
 ## Codebase
 This repository contains the standards, in Markdown, by which Think Company developers write outstanding technical products for our clients. You can find them in the `content` directory.
 
-In the `site` directory, developers are also able to use Gatsby to consume those documents and generate a static HTML + CSS website.
+In the `site` directory, developers are also able to use [Gatsby](https://www.gatsbyjs.org/) to consume those documents and generate a static HTML + CSS website.
 
 ## Requirements
 To make updates to the static version of our docs site, you'll need to:
@@ -21,7 +21,7 @@ To make updates to the static version of our docs site, you'll need to:
 
 ## Environments
 - Production: [http://standards.dev.thinkcompany.com](http://standards.dev.thinkcompany.com)
-- Staging: [http://standards-staging.dev.thinkcompany.com](http://standards-staging.dev.thinkcompany.com)
+- Staging (password protected): [http://standards-staging.dev.thinkcompany.com](http://standards-staging.dev.thinkcompany.com)
 
 ### Deployments
 This project uses Bitbucket Pipelines for automatic deployments to [http://standards.dev.thinkcompany.com](http://standards.dev.thinkcompany.com) and [http://standards-staging.dev.thinkcompany.com](http://standards-staging.dev.thinkcompany.com).
