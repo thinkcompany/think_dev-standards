@@ -181,7 +181,7 @@ var fullName = "Bob " + this.lastName;
 var fullName = 'Bob ' + this.lastName;
 ```
 
-Strings longer than 80 characters should be written across multiple lines using string concatenation.
+Use multiple lines for strings longer than 80 characters using string concatenation.
 
 Note: If overused, long strings with concatenation could impact performance: [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
 
@@ -287,7 +287,7 @@ var named = function named() {
 ```
 **Declare all functions before they are used.** Inner functions should follow the var statement. This helps make it clear what variables are included in its scope.
 
-There should be no space between the name of a function and the `(` (left parenthesis) of its parameter list. There should be one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
+Do not use a space between the name of a function and the `(` (left parenthesis) of its parameter list. Use one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
 
 ```javascript
     function outer(c, d) {
@@ -339,9 +339,9 @@ If a function literal is anonymous, there should be one space between the word f
     };
 ```
 
-Use of global functions should be minimized. If your code contains functions that are only useful to the module, then those functions should be encapsulated in an immediately executed anonymous function with the rest of the module's code.
+Minimize the use of global functions. If your code contains functions that are only useful to the module, then encapsulate those functions in an immediately executed anonymous function with the rest of the module's code.
 
-When a function is to be invoked immediately, the entire invocation expression should be wrapped in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
+When a function is to be invoked immediately, wrap the entire invocation expression in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
 
 ```javascript
 var collection = (function () {
@@ -500,7 +500,7 @@ superPower = new SuperPower();
 var superPower = new SuperPower();
 ```
 
-Variables can be defined one per line or sequentially. If declaring sequentially, `var` declarations should be placed on their own line, and indented. Project teams should agree on a declaration format and follow it consistently throughout the lifecycle of the application.
+Variables can be defined one per line or sequentially. If declaring sequentially, place `var` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
 
 ```javascript
 // bad
@@ -545,7 +545,7 @@ var i;
 
 Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
 
-Use of global variables should be minimized. Do not use implied global variables.
+Minimize the use of global variables. Do not use implied global variables.
   
 Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues. 
 
@@ -705,7 +705,7 @@ if (test) {
 }
 ```
 
-The `if` class of statements should have the following form:
+Use the following format for an `if` statement:
 
 ```javascript
     if (condition) {
@@ -726,7 +726,7 @@ The `if` class of statements should have the following form:
         // statements
     }
 ```
-A `for` class of statements should have the following form:
+Use the following format for a `for` statement:
 
 ```javascript
 
@@ -741,9 +741,9 @@ A `for` class of statements should have the following form:
     }
 ```
 
-The first form should be used with arrays and with loops of a predeterminable number of iterations.
+Use the first example of the for loop with arrays and with loops of a predeterminable number of iterations.
 
-The second form should only be used with objects. Be aware that members that are added to the prototype of the object will be included in the enumeration. It is wise to program defensively by using the `hasOwnProperty` method to distinguish the true members of the object:
+Only use the second form with objects. Be aware that members that are added to the prototype of the object will be included in the enumeration. It is wise to program defensively by using the `hasOwnProperty` method to distinguish the true members of the object:
 
 ```javascript
     for (variable in object) {
@@ -753,14 +753,14 @@ The second form should only be used with objects. Be aware that members that are
     }
 ```
 
-A `while` statement should have the following form:
+Use the following format for a `while` statement:
 
 ```javascript
     while (condition) {
         // statements
     }
 ```
-A `do` statement should have the following form:
+Use the following format for a `do` statement:
 
 ```javascript
     do {
@@ -770,7 +770,7 @@ A `do` statement should have the following form:
 
 Unlike the other compound statements, the do statement always ends with a `;` (semicolon).
 
-A switch statement should have the following form:
+Use the following format for a `switch` statement:
 
 ```javascript
     switch (expression) {
@@ -785,7 +785,7 @@ Each `case` is aligned with the `switch`. This avoids over-indentation.
 
 Each group of statements (except the `default`) should end with `break`, `return`, or `throw`. If your intention is to fall though into the next case, it must be indicated with a comment in place of the `break`.
 
-The `try` class of statements should have the following form:
+Use the following format for a `try` statement:
 
 ```javascript
     try {
@@ -803,14 +803,14 @@ The `try` class of statements should have the following form:
     }
 ```
 
-Use of the `continue` statement should be limited since it can obscure control flow in a function. It is best used at the start of a loop to handle pre-conditions. This technique reduces excessive indentation.
+Limit the use of the `continue` statement since it can obscure control flow in a function. It is best used at the start of a loop to handle pre-conditions. This technique reduces excessive indentation.
 
-The `with` statement should not be used. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
+Do not use the `with` statement. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
 
 
 ## Comments
 
-**Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments should be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Inappropriate language should never be used. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
+**Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments must be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Never use inappropriate language. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
 
 It is important that comments be kept up-to-date. Erroneous comments can make programs even harder to read and understand.
 
@@ -959,7 +959,7 @@ dog.set('attr', {
 });
 ```
 
-Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Place no space before the argument list in function calls and declarations.
+Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Do not place a space before the argument list in function calls and declarations.
 
 ```javascript
 // bad
@@ -1282,7 +1282,7 @@ function this_is_my_function() {}
 
 ```
 
-Use PascalCase when naming constructors or classes. Constructor functions which must be used with the [new](http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/) prefix should start with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is not used, so the capitalization convention is the only defense we have.
+Use PascalCase when naming constructors or classes. Start constructor functions, which must be used with the [new](http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/) prefix, with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is not used, so the capitalization convention is the only defense we have.
 
 ```javascript
 // bad
@@ -1304,7 +1304,7 @@ var good = new User({
 });
 ```
 
-To indicate that a variable contains a jQuery object, names should start with a `$`:
+To indicate that a variable contains a jQuery object, start names with a `$`:
 
 ```javascript
 var $email = $("#email");
@@ -1352,7 +1352,7 @@ var log = function log(msg) {
 };
 ```
 
-**Note:** IE8 and below exhibit some quirks with named function expressions.  See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
+**Note:** IE8 and below exhibit some quirks with named function expressions. See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
 
 If your file exports a single class, your filename should be exactly the name of the class.
 ```javascript

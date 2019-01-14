@@ -42,7 +42,7 @@ Use the W3C validator to check your markup. Limited errors may be ignored, read 
 [W3C Validator](http://validator.w3.org/)
 
 ### Allowed Elements & Attributes
-Developers should use only those elements and attributes that have semantic value, or are commonly used to structure markup for styling or interaction. This includes the following elements:
+Only use elements and attributes that have semantic value, or are commonly used to structure markup for styling or interaction. This includes the following elements:
 
 #### Elements
 - `html`, `head`, `title`, `meta`, `body`
@@ -72,7 +72,7 @@ Developers should use only those elements and attributes that have semantic valu
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
-*NOTE:* The following elements do not work on older browsers: `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
+*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
 
 ## Format & Style
 
@@ -118,7 +118,7 @@ Example module:
 </div>
 ```
 
-Modules are generally wrapped in DIV tags, to give the overall object a class name that can be referenced by CSS. CSS and JavaScript deliverables are often paired with a module and should be equally reusable.
+Modules are generally wrapped in DIV tags, to give the overall object a class name that can be referenced by CSS. CSS and JavaScript deliverables are often paired with a module and are equally reusable.
 
 To support the goal of maximum reusability of modules, refrain from using IDs on any piece of markup in a module. One exception to this is form controls, where an ID must be used on the form field in order to explicitly pair a label to it. 
 
@@ -127,7 +127,7 @@ To support the goal of maximum reusability of modules, refrain from using IDs on
 Class names are the preferred method for linking styles to markup. Custom data (data-*) attributes are the preferred hooks for behavior (JavaScript). Only use IDs on objects which are unique within the entire site or when commonly prescribed (in-page anchors). Avoid the use of IDs on module elements (i.e. buttons, links, list items), since these objects are likely to appear multiple times in a single page and can cause both validation and back-end issues. 
 
 Assign names to objects based on the function they fulfill rather than what they look like. For example, a navbar will always provide a menu of links regardless of whether it is horizontal or vertical, or whether it is placed at the top or bottom of a page. 
-Names should be a single lowercase word. In cases where a longer description is needed, separate words using hyphens. Do not use camel case and do not use underscores.
+Create names using a single lowercase word. In cases where a longer description is needed, separate words using hyphens. Do not use camel case and do not use underscores.
 
 ```html
 <div class="header-sitewide">
@@ -155,7 +155,7 @@ Example:
 
 Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location. 
 
-When appropriate, use structural elements to create a grid of "columns" that contain the core content of the page. Classes should be used so that these grids can be used multiple times per page if necessary.
+When appropriate, use structural elements to create a grid of "columns" that contain the core content of the page. Use classes so that these grids can be used multiple times per page if necessary.
 
 ## Coding Practices
 
@@ -180,7 +180,7 @@ Use the appropriate language code for the page. For instance, use "es" for Spani
 
 ### Head
 
-The `<head>` element is always required and should immediately follow the opening <html> tag.
+The `<head>` element is always required and immediately follows the opening <html> tag.
 
 #### Meta 
 
@@ -188,7 +188,7 @@ One or more `<meta>` elements may be nested in the document head.
 
 #### Charset Meta Tag
 
-Character set should always be specified and must appear first. (This prevents IE from re-parsing the page, if it appears too late.) The current standard for character encoding is UTF-8. The HTML5 meta charset tag may be used in XHTML documents (validation errors may be ignored) as all browsers support this.
+Always specify the character set; it must appear first. (This prevents IE from re-parsing the page, if it appears too late.) The current standard for character encoding is UTF-8. The HTML5 meta charset tag may be used in XHTML documents (validation errors may be ignored) as all browsers support this.
 
 ```html
 <meta charset="utf-8" />
@@ -238,7 +238,7 @@ Use conditional comments in the `<head>` to include IE browser version specific 
 
 #### Importing JavaScript
 
-JavaScript files may be included in the `<head>` of an HTML document but for optimal performance developers should place scripts at the bottom of a page, just inside the closing `</body>` tag. 
+JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag. 
 
 ```html
 <script src="/js/lib/jquery.js"></script>
@@ -252,14 +252,14 @@ Use headings to denote important passages of text and to build a semantic conten
 
 Headings must appear in logical order, beginning with `<h1>`. For instance, an `<h4>` cannot appear in the document before an `<h3>`.
 
-Headings should never be used for subtitles or subheadlines. The `hgroup` concept that was once part of the HTML5 specification is invalid, in part because it is detrimental to accessibility.
+Never use headings as subtitles or subheadlines. The `hgroup` concept that was once part of the HTML5 specification is invalid, in part because it is detrimental to accessibility.
 
 ```html
 <h2>Getting Started</h2>
 <p> ... </p>
 ```
 
-Headings should be used consistently on a page and throughout a site. Here are some guidelines for proper heading use:
+Use headings consistently on a page and throughout a site. Here are some guidelines for proper heading use:
 
 - `<h1>`: used for the page title or top-most heading for the main content within a page (may be shifted off-screen if visual display is not necessary)
 - `<h2>`: used for top-level headings, typically section or module titles
@@ -267,11 +267,11 @@ Headings should be used consistently on a page and throughout a site. Here are s
 
 #### Text Content
 
-Non-heading text content should be marked up using the appropriate semantic element. 
+Mark up non-heading text with the appropriate semantic element. 
 
 Most non-heading, non-list, prose content should be marked up using `<p>`. Do not use the `<br>` tag to create the appearance of paragraphs. Always format text using CSS: do not write content in all capital or lowercase letters (unless a brand name or trademark), do not use special characters such as `&nbsp;` to add whitespace, etc.
 
-Some words or passages may need additional formatting. The following elements should be used in these cases:
+Some words or passages may need additional formatting. Use the following elements in these cases:
 - `<strong>`: use to add emphasis to words; typically renders as bold text (inline)
 - `<em>`: use to add emphasis to words; typically renders as italic text (inline)
 - `<q>`: use to specify a quotation; typically renders as italic text (inline)
@@ -306,7 +306,7 @@ Good Example:
 Note that a `<button>`'s default type is "submit". When using a `<button>` outside of a form, include the attribute type="button", e.g. `<button type="button">Action</button>`
 
 #### Anchor Targets (aka In-page Anchors)
-Do not use the name attribute on `<a>` tags. Create an in-page anchor by linking to an ID value on the appropriate target. In-page anchor IDs should use a camelCase representation of the heading or name for the content section.
+Do not use the name attribute on `<a>` tags. Create an in-page anchor by linking to an ID value on the appropriate target. When creating in-page anchor IDs, use a camelCase representation of the heading or name for the content section.
 
 Poor Example:
 ```html
@@ -344,7 +344,7 @@ This will produce a visible tooltip in most browsers. Make sure you repeat the l
 
 Use the `<img>` tag to include a content image. Do not use `<img>` to include design ("chrome") graphics; load and apply those images via CSS instead.
 
-Unless coding a responsive design, the dimensions of an image should be specified using the width and height attributes. This will aid the browser in calculating page layout. 
+Unless coding a responsive design, specify the the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout. 
 
 Always specify an alt attribute that describes the image. If a design element is loaded via HTML, use a blank alt attribute value rather than no alt attribute.
 
@@ -405,7 +405,7 @@ The `<form>` element must include action and method attributes. When choosing th
 - GET: form data is encoded by the browser and appended to the URL; typically used for retrieving data
 - POST: form data appears in a message body which in encrypted over HTTPS; typically used for sending or storing data
 
-Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) should always come first, regardless of visual order. 
+Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) will always come first, regardless of visual order. 
 
 
 #### Fieldset
@@ -435,7 +435,7 @@ All form fields (`input`, `textarea`, `select`) must have a corresponding label 
 Labels must always be present. If a design does not contain visible labels, use CSS to shift them off screen. Do not ever omit them.
 
 #### Form Fields
-Wrapping form fields and their corresponding labels in `<p>` tags is considered good practice, but a `<div>` with an appropriate class is fine as well. Instructional or help text related to a form field (i.e. optional, required, etc.) should be included as part of the label; to style this text separately from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
+Wrapping form fields and their corresponding labels in `<p>` tags is considered good practice, but a `<div>` with an appropriate class is fine as well. Include instructional or help text related to a form field (i.e. optional, required, etc.) as part of the label; to style this text separately from the label, wrap it in a `span`. If form fields require positioning, wrap the field in a `span` as well.
 
 ```html
 <p>
@@ -444,7 +444,7 @@ Wrapping form fields and their corresponding labels in `<p>` tags is considered 
 </p>
 ```
 
-Refrain from complicated CSS styling of form inputs so as not to override default cues of the browser or operating system. When styling inputs, ensure selectors are specific to type=text so as not to affect other types. Hidden input fields should be grouped at the top or bottom of a `<form>`, to ensure that they do not interfere with any visual rendering.
+Refrain from complicated CSS styling of form inputs so as not to override default cues of the browser or operating system. When styling inputs, ensure selectors are specific to type=text so as not to affect other types. Group hidden input fields at the top or bottom of a `<form>`, to ensure that they do not interfere with any visual rendering.
 
 #### Checkboxes & Radio Buttons
 Group sets of checkboxes and radio buttons using the `<fieldset>` element. The `<legend>` provides a text label for the group, since the `<label>` is required for each individual input.
