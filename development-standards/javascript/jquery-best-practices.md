@@ -1,20 +1,28 @@
+---
+path: "/javascript/jquery/"
+date: "2018-11-01"
+title: "JQuery Development Standards"
+---
+
 #jQuery Best Practices
+
+This document contains Think Company's standards for writing JQuery.
 
 ## Table of Contents
 
-  1. [Loading jQuery](#markdown-header-loading-jquery)
-  1. [Selectors](#markdown-header-selectors)
-  1. [Determine jQuery Objects](#markdown-header-determine-jquery-objects)
-  1. [Document Ready](#markdown-header-document-ready)
-  1. [Event Bind / Live / Delegate](#markdown-header-event-bind-live-delegate)
-  1. [Event Prevent](#markdown-header-event-prevent)
-  1. [Method Chains](#markdown-header-method-chains)
-  1. [Manipulating Element Appearance](#markdown-header-manipulating-element-appearance)
-  1. [AJAX](#markdown-header-ajax)
-  1. [Element Create](#markdown-header-element-create)
-  1. [Element Exists](#markdown-header-element-exists)
-  1. [Performance](#markdown-header-performance)
-  1. [Plugins](#markdown-header-plugins)
+  - [Loading jQuery](#loading-jquery)
+  - [Selectors](#selectors)
+  - [Determine jQuery Objects](#determine-jquery-objects)
+  - [Document Ready](#document-ready)
+  - [Event Bind / Live / Delegate](#event-bind-live-delegate)
+  - [Event Prevent](#event-prevent)
+  - [Method Chains](#method-chains)
+  - [Manipulating Element Appearance](#manipulating-element-appearance)
+  - [AJAX](#ajax)
+  - [Element Create](#element-create)
+  - [Element Exists](#element-exists)
+  - [Performance](#performance)
+  - [Plugins](#plugins)
 
 ## Loading jQuery
 
@@ -30,9 +38,6 @@ Don't load jQuery using a CDN link - always include it locally in your project. 
   - If you are using other libraries like Prototype, MooTools, Zepto etc. that uses `$` sign as well, try not to use `$` for calling jQuery functions and instead use `jQuery` simply. You can return control of `$` back to the other library with a call to `$.noConflict()`. However:
   - In general, try to use only one DOM manipulation / Ajax wrapper library in your application at a time. And, keep in mind:
   - [You Might Not Need jQuery](http://youmightnotneedjquery.com/)
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Selectors
@@ -57,9 +62,6 @@ If performance dictates you must switch to classnames as selectors, use classnam
 ```javascript
 $('.js-action');
 ```
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Determine jQuery Objects
 
@@ -87,9 +89,6 @@ var $this = $(this);
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Document Ready
 
 Begin executing statements with jQuery as soon as the DOM is ready:
@@ -106,8 +105,6 @@ $(document).ready(function() {
 });
 ```
 Use only one Document Ready handler per page. It makes it easier to debug and keep track of the behavior flow.
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Event Bind / Live / Delegate
@@ -159,8 +156,6 @@ $('[data-special-list] a').on('click', myClickHandler); // BAD, you are attachin
 $('[data-special-list]').on('click', 'a', myClickHandler); // GOOD, only one event handler is attached to the parent.
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Event Prevent
 
@@ -193,9 +188,6 @@ $('.btn').click(function(event){
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Method Chains
 Use indentation when making long method chains, and avoid more than 6 methods chained. 
 Less method chains, more friendly debugging. 
@@ -212,9 +204,6 @@ $('#items')
 .find('.open')
   .updateCount();
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Manipulating Element Appearance
@@ -241,9 +230,6 @@ $([data-change-appearance]).css({'color: red, 'font-weight': 'bold'});
 // Yes
 $([data-change-appearance]).addClass('urgent');
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## AJAX
@@ -289,9 +275,6 @@ jqxhr.done(successHandler);
 jqxhr.fail(failureHandler);
 ```
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Element Create
 
 Create an element dynamically:
@@ -314,9 +297,6 @@ $('<a/>', {
 ```
 
 
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
-
 ## Element Exists
 
 Check to see if an element exists:
@@ -332,9 +312,6 @@ if ($('#myElement').length) {
     // balabala... 
 }
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
 
 
 ## Performance
@@ -366,7 +343,7 @@ function setSidebar() {
 ```
 
 ###Context-Specific Selection
-For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > .ul')`. [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
+For DOM queries use Cascading `$('.sidebar ul')` or parent > child `$('.sidebar > .ul')`: [jsPerf](http://jsperf.com/jquery-find-vs-context-sel/16)
 
 Use `find` with scoped jQuery object queries. (Performance note in IE7/8: using .find in these browsers can slow to a crawl ([double-digit operations per second](http://jsperf.com/jquery-find-vs-context-sel/16)) depending on how many child elements are being crawled for matches.)
 
@@ -447,9 +424,6 @@ for(var i = 0; i < 10000; i++){
 }
 $myList.html(array.join(''));
 ```
-
-**[⬆ back to top](#markdown-header-table-of-contents)**
-
 
 ## Plugins
 
@@ -634,6 +608,3 @@ There are some kinds of jQuery plugins:
 
 })
 ```
-
-
-**[⬆ back to top](#markdown-header-table-of-contents)**

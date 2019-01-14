@@ -1,0 +1,30 @@
+.tds-header {
+    background-color: $black;
+    padding: 0 1.25em;
+    height: 14em;
+
+    @include narrower-than($breakpoint-device-narrow) {
+        height: 8em;
+    }
+}
+
+.tds-header-inner {
+    height: 100%;
+    padding: 2em 0;
+    text-align: center;
+}
+
+.tds-header-logo-think {
+    // margin: 0 auto;
+    height: 11em;
+    width: 30em;
+    background-image: url($svg-logo-tc);
+    background-repeat: no-repeat;
+    background-size: 30em;
+    display: inline-block;
+
+    @include narrower-than($breakpoint-device-narrow) {
+        background-size: 12em;
+        width: 14em;
+    }
+}

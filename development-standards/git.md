@@ -1,4 +1,20 @@
+---
+path: "/git/"
+date: "2018-11-01"
+title: "GIT Development Standards"
+---
+
 # Git Style Guide
+
+This document contains Think Company's standards for using Git.
+
+## Table of contents
+
+- [Branches](#branches)
+- [Commits](#commits)
+  - [Messages](#messages)
+- [Merging](#merging)
+- [Misc.](#misc)
 
 This is a Git Style Guide inspired by [*How to Get Your Change Into the Linux
 Kernel*](https://www.kernel.org/doc/Documentation/SubmittingPatches),
@@ -8,32 +24,34 @@ among the community. Forked from: [agis-/git-style-guide](https://github.com/agi
 If you feel like contributing, please do so! Fork the project and open a pull
 request.
 
-# Table of contents
-
-1. [Branches](#branches)
-2. [Commits](#commits)
-  1. [Messages](#messages)
-3. [Merging](#merging)
-4. [Misc.](#misc)
-
 ## Branches
 
-* Choose *short* and *descriptive* names:
+* Identify branches by features (new development) or fixes (refactoring)
+* Choose *short* and *descriptive* names
 
+Bad Example (too vague):   
   ```shell
-  # good
-  $ git checkout -b feature/oauth-migration
+  $ git checkout -b feature/login_fix
+  ```
 
-  # bad - too vague
-  $ git checkout -b fix/login_fix
+Good Example:
+  ```shell
+  $ git checkout -b feature/oauth-migration
   ```
 
 * Identifiers from corresponding tickets in an external service (eg. a GitHub
-  issue) are also good candidates for use in branch names. For example:
+  issue) are also good candidates for use in branch names. It's even better if you include a short descriptive name 
+  that identifies what you're working on. For example:
 
+Good Example:
   ```shell
   # GitHub issue #15
   $ git checkout -b fix/issue-15
+  ```
+Better Example:
+  ```shell
+    # GitHub issue #15
+    $ git checkout -b fix/issue-15-nav-dropdown
   ```
 
 * Use *dashes* to separate words.
@@ -132,11 +150,12 @@ request.
 * If your branch includes more than one commit, do not merge with a
   fast-forward:
 
+Good Example (ensure that a merge commit is created):
   ```shell
-  # good - ensures that a merge commit is created
   $ git merge --no-ff my-branch
-
-  # bad
+  ```
+Bad Example:
+  ```shell
   $ git merge my-branch
   ```
 

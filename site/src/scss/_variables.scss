@@ -1,0 +1,39 @@
+// General
+$base-pixels: 16px;
+$max-width: 1400px;
+
+// Think Colors
+$eastern-blue: #289fac;
+$eastern-blue-dark: darken($eastern-blue, 10%);
+
+$color-primary-blue: #0e49b8;
+$color-pending-yellow: #d7ab00;
+$color-cinnabar-red: #e04737;
+$color-limerick-green: #97b92b;
+$color-orange: #f29a00;
+$color-lilac-purple: #905fba;
+$color-teal: #289fac;
+
+$color-gray1: #3c3c3c;
+$color-gray2: #6c6c6c;
+$color-gray3: #a9a9a9;
+$color-gray4: #f6f6f6;
+
+// UI Colors
+$white: #fff;
+$black: #000;
+$mineshaft: #333;
+$spicy-pink: #856c6c;
+$silver: #ccc;
+$concrete: #f2f2f2;
+
+// Fonts
+$font-stack: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Noto Sans", "Ubuntu", "Droid Sans", "Helvetica Neue", sans-serif;
+$font-size-h1: 2em;
+$font-size-h2: 2em;
+$font-size-h3: 1em;
+$font-size-h4: 1.25em;
+
+// Breakpoints
+$breakpoint-ipad-portrait: 64em;
+$breakpoint-device-narrow: 29.688em;

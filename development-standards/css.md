@@ -1,4 +1,49 @@
+---
+path: "/styles/css/"
+date: "2018-11-01"
+title: "CSS Development Standards"
+---
+
 # CSS Authoring Guidelines
+
+This document contains Think Company's standards for writing CSS.
+
+## Table of Contents
+
+ - [Programming Principles](#programming-principles)
+ - [Versions, Validation, & Linting](#versions-validations--linting)
+ - [Errors & Warnings](#errors--warnings)
+ - [Approved Properties](#approved-properties)
+ - [Disallowed Properties & Values](#disallowed-properties--values)
+ - [Tools & Libraries](#tools--libraries)
+ - [Format & Style](#format--style)
+  * [Formatting for Readability](#formatting-for-readability)
+  * [Quotes](#quotes)
+	* [Comments](#comments)
+	* [Selectors](#selectors)
+	* [Pseudo-Element and Pseudo-Class Selectors](#pseudo-element-and-pseudo-class-selectors)
+	* [Properties](#properties)
+		+ [Declaration Order](#declaration-order)
+		+ [Shorthand](#shorthand)
+		+ [Line-height](#line-height)
+		+ [Vendor Prefixes](#vendor-prefixes)
+		+ [Box Model & Layout Dimensions](#box-model--layout-dimensions)
+		+ [Flow, Floats, & Positioning](#flow-floats--positioning)
+		+ [Fonts](#fonts)
+		+ [Colors](#colors)
+		+ [Images](#images)
+		+ [Anchors](#anchors)
+- [Coding Practices](#coding-practices)
+  * [Grouping Styles](#grouping-styles)
+	* [Media Queries](#media-queries)
+	* [Using Sprites](#using-sprites)
+	* [Hack Strategy](#hack-strategy)
+	* [Integration](#integration)
+- [Organization & Architectural Principles](#organization--architectural-principles)
+	* [Style sheet organization](#style-sheet-organization)
+	* [Modules](#modules)
+	* [Specificity](#specificity)
+ 
 
 ## Programming Principles
 
@@ -620,11 +665,14 @@ Good example (CSS for our general module pattern):
 .module {}
 .module-subcomponent {}
 .module--modifier {}
-.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having to create a modifier for every subcomponent of a modified module */
+.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having 
+to create a modifier for every subcomponent of a modified module */
 ```
 
 Good State example:
 
 ```css
-.module.is-visibile {} /* chaining/higher specificity makes sense with states as they are temporary, only applied given specific conditions, and you want to ensure that the styles are applied */
+.module.is-visibile {} /* chaining/higher specificity makes sense
+ with states as they are temporary, only applied given specific 
+ conditions, and you want to ensure that the styles are applied */
 ```
