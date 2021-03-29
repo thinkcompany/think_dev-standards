@@ -8,9 +8,7 @@
   "scripts": {
     "start": "cd site && npm start",
     "postinstall": "cd site && npm install",
-    "build": "cd site && npm run build",
-    "deploy:staging": "./bin/deploy-staging.sh",
-    "deploy:production": "./bin/deploy-production.sh"
+    "build": "cd site && npm run build"
   },
   "repository": {
     "type": "git",
