@@ -14,9 +14,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@bitbucket.org/thinkcompany/think_dev-standards.git"
+    "url": "git+ssh://git@github.com:thinkcompany/think_dev-standards.git"
   },
   "author": "",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/thinkcompany/think_dev-standards#readme"
+  "homepage": "https://github.com/thinkcompany/think_dev-standards/blob/main/README.md"
 }
