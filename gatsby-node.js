@@ -6,24 +6,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        blogPosts: allMdx(
-          filter: { frontmatter: { area: { eq: "Blog" } } }
-          sort: { fields: [frontmatter___date], order: DESC }
-          limit: 1000
-        ) {
-          edges {
-            node {
-              fields {
-                slug
-              }
-              frontmatter {
-                title
-                area
-                section
-              }
-            }
-          }
-        }
         getstarted: allMdx(
           filter: { frontmatter: { area: { eq: "Get Started" } } }
         ) {
@@ -145,28 +127,6 @@ exports.createPages = async ({ graphql, actions }) => {
   if (result.errors) {
     throw result.errors;
   }
-
-  //This section loops through all the markdown data for Blog content.
-  //It creates pages for that content using the blog-post.js template
-  const blogPosts = result.data.blogPosts.edges;
-  const blogPost = path.resolve(`./src/templates/blog-post.js`);
-
-  blogPosts.forEach((post, index) => {
-    const previous =
-      index === blogPosts.length - 1 ? null : blogPosts[index + 1].node;
-    const next = index === 0 ? null : blogPosts[index - 1].node;
-    createPage({
-      path: post.node.fields.slug,
-      component: blogPost,
-      context: {
-        slug: post.node.fields.slug,
-        previous,
-        next,
-        area: "Blog",
-        title: "Blog",
-      },
-    });
-  });
 
   //This section loops through all the markdown data for Community, UI Library, and Get Started content.
   //It creates pages for that content using the landing.js template
