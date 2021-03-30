@@ -62,6 +62,25 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        automatedtesting: allMdx(
+          filter: { frontmatter: { area: { eq: "Automated Testing" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
         uilibrary: allMdx(
           filter: { frontmatter: { area: { eq: "UI Library" } } }
         ) {
@@ -153,6 +172,7 @@ exports.createPages = async ({ graphql, actions }) => {
   //It creates pages for that content using the landing.js template
   const getStartedPosts = result.data.getstarted.edges;
   const accessibilityPosts = result.data.accessibility.edges;
+  const automatedTestingPosts = result.data.automatedtesting.edges;
   const communityPosts = result.data.community.edges;
   const uilibraryPosts = result.data.uilibrary.edges;
   const contributingPosts = result.data.contributing.edges;
@@ -180,6 +200,19 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "Accessibility",
         title: "Accessibility",
+      },
+    });
+  });
+
+  //Automated Testing content
+  automatedTestingPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "Automated Testing",
+        title: "Automated Testing",
       },
     });
   });
