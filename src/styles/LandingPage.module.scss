@@ -1,0 +1,19 @@
+@import "theme";
+
+.contentWrapper {
+  max-width: 1100px;
+  margin: 32px auto 24px;
+}
+
+.TwoColumnGrid {
+  display: grid;
+  grid-template-columns: 280px auto;
+  grid-gap: 64px;
+  align-items: top;
+  h1 {
+    margin-top: 0;
+  }
+  .PageContent {
+    max-width: 760px;
+  }
+}

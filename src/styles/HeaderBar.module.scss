@@ -1,0 +1,38 @@
+@import "theme";
+
+.headerBarContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 16px 0;
+}
+
+.headerTitleContent {
+  display: grid;
+  grid-template-columns: 32px auto;
+  grid-gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.headerIcon {
+  img {
+    border-radius: 4px;
+    width: 32px;
+  }
+}
+
+h1.header {
+  margin: 0;
+  @include type-display-small;
+}
+
+a.mainHeaderLink {
+  text-decoration: none;
+  // @include type-body-small;
+  color: $color-foreground-primary;
+}
+
+a.headerNavLink {
+  @include type-body-default;
+  color: $color-tint-blue-primary;
+}

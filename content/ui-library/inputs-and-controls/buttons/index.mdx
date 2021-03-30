@@ -1,0 +1,220 @@
+---
+title: Buttons
+date: "2020-06-08T23:46:37.121Z"
+area: UI Library
+section: 3. Inputs & Controls
+description: ""
+---
+
+Buttons direct users to take action within an app. Buttons come in many forms and styles and help guide a user in completing a task or navigating an experience.
+
+<a
+  href="https://standard-library-react.thinkcompany.dev/?path=/story/controls-button--button"
+  target="_blank"
+>
+  View Buttons in Storybook
+</a>
+
+---
+
+## When to Use Buttons
+
+Buttons should be used when one or more actions need to be taken or a user needs to be directed to another location within the application. The different types of buttons can be used on any hierarchy group.
+
+### Text Buttons
+
+- Used when an action is straightforward and doesn't need a supporting icon
+
+### Icon + Text Buttons
+
+- Used when a visual indicator will help clarify the action described in the label
+
+### Icon Only Buttons
+
+- These should only be used to align with a platform pattern. There are certain icons that are naturally understood by a user of the platform and don't require a text label to be understood.
+
+---
+
+## How it Works
+
+Because there are often many buttons on a single screen or page, hierarchy is important to know what buttons are most useful in a situation.
+
+### Primary
+
+Generally there should only be one primary button per screen and/or component at a time. This is reserved for the most relevant and important action to take.
+
+_Example labels: Save, Submit, Create_
+
+### Secondary
+
+If there is more than one button on the page, every button after the primary button will be styled as secondary.
+
+_Example labels: Edit, Add, Cancel_
+
+### Danger
+
+Danger buttons are meant for destructive actions that cannot be recovered.
+
+#### When not to use Danger Buttons
+
+- Don't use danger buttons for basic “cancel” actions.
+- Don't use danger buttons for non-destructive actions.
+- Don't use multiple danger buttons within a single page, component, or modal.
+
+_Example labels: Delete, Remove_
+
+---
+
+## Visual Details
+
+### Sizes
+
+There are three sizes for buttons: large, medium and small.
+
+#### Large
+
+##### Primary
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 16-24       |
+| Spacing between Icon & Text | Inline 8           |
+| Type Size                   | Body Small Bold    |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Blue Primary  |
+| Border                      | None               |
+
+##### Secondary
+
+| Attribute                   | Value                         |
+| --------------------------- | ----------------------------- |
+| Spacing                     | Squish 16-24                  |
+| Spacing between Icon & Text | Inline 8                      |
+| Type Size                   | Body Small Bold               |
+| Type & Icon Color           | Tint Blue Primary             |
+| Background Color            | Background Primary            |
+| Border                      | 1px Solid Foreground Tertiary |
+
+##### Destroy
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 16-24       |
+| Spacing between Icon & Text | Inline 8           |
+| Type Size                   | Body Small Bold    |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Red Primary   |
+| Border                      | None               |
+
+#### Medium
+
+##### Primary
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 8-16        |
+| Spacing between Icon & Text | Inline 8           |
+| Type Size                   | Body Small Bold    |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Blue Primary  |
+| Border                      | None               |
+
+##### Secondary
+
+| Attribute                   | Value                         |
+| --------------------------- | ----------------------------- |
+| Spacing                     | Squish 8-16                   |
+| Spacing between Icon & Text | Inline 8                      |
+| Type Size                   | Body Small Bold               |
+| Type & Icon Color           | Tint Blue Primary             |
+| Background Color            | Background Primary            |
+| Border                      | 1px Solid Foreground Tertiary |
+
+##### Destroy
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 8-16        |
+| Spacing between Icon & Text | Inline 8           |
+| Type Size                   | Body Small Bold    |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Red Primary   |
+| Border                      | None               |
+
+#### Small
+
+##### Primary
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 4-8         |
+| Spacing between Icon & Text | Inline 4           |
+| Type Size                   | Body XSmall Bold   |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Blue Primary  |
+| Border                      | None               |
+
+##### Secondary
+
+| Attribute                   | Value                         |
+| --------------------------- | ----------------------------- |
+| Spacing                     | Squish 4-8                    |
+| Spacing between Icon & Text | Inline 4                      |
+| Type Size                   | Body XSmall Bold              |
+| Type & Icon Color           | Tint Blue Primary             |
+| Background Color            | Background Primary            |
+| Border                      | 1px Solid Foreground Tertiary |
+
+##### Destroy
+
+| Attribute                   | Value              |
+| --------------------------- | ------------------ |
+| Spacing                     | Squish 4-8         |
+| Spacing between Icon & Text | Inline 4           |
+| Type Size                   | Body XSmall Bold   |
+| Type & Icon Color           | Foreground On Tint |
+| Background Color            | Tint Red Primary   |
+| Border                      | None               |
+
+---
+
+## Layout
+
+### Stacked Buttons
+
+- Primary buttons should be furthest to the top when stacked with secondary button(s) or text links.
+
+### Inline Buttons
+
+- Primary buttons should be furthest to the right when used inline with secondary buttons.
+
+---
+
+## States
+
+### Primary
+
+| State    | Background Color  |
+| -------- | ----------------- |
+| Default  | Tint Blue Primary |
+| Hover    | Darken by 5%      |
+| Active   | Darken by 10%     |
+| Disabled | Opacity at 40%    |
+
+### Secondary
+
+| State    | Background Color   |
+| -------- | ------------------ |
+| Default  | Background Primary |
+| Hover    | Darken by 5%       |
+| Active   | Darken by 10%      |
+| Disabled | Opacity at 40%     |
+
+### Destroy
+
+| State    | Background Color |
+| -------- | ---------------- |
+| Default  | Tint Red Primary |
+| Hover    | Darken by 5%     |
+| Active   | Darken by 10%    |
+| Disabled | Opacity at 40%   |

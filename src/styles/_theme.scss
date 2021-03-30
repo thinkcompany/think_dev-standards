@@ -1,0 +1,275 @@
+@import "functions";
+/* ----------------------------------------------*\
+     COLORS
+\*---------------------------------------------- */
+//Tints
+$color-tint-blue-primary: #4640ed;
+$color-tint-blue-secondary: #ededfa;
+$color-tint-green-primary: #77d59d;
+$color-tint-green-secondary: #e4f6eb;
+$color-tint-red-primary: #d5403c;
+$color-tint-red-secondary: #fbe3e2;
+$color-tint-orange-primary: #ffaf62;
+$color-tint-orange-secondary: #faecde;
+
+//Backgrounds
+$color-background-primary: #ffffff;
+$color-background-secondary: #eeeff3;
+$color-background-tertiary: #dee0e8;
+
+//Foregrounds
+$color-foreground-primary: #333333;
+$color-foreground-secondary: #666666;
+$color-foreground-tertiary: #939ab4;
+$color-foreground-on-tint: #ffffff;
+
+/* ----------------------------------------------*\
+     TYPOGRAPHY
+\*---------------------------------------------- */
+
+@import url("https://fonts.googleapis.com/css?family=Crimson+Pro:400,400i,600,600i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,300i,900,900i&display=swap");
+
+$font-size-10: rem(10);
+$font-size-12: rem(12);
+$font-size-14: rem(14);
+$font-size-16: rem(16);
+$font-size-24: rem(24);
+$font-size-32: rem(32);
+$font-size-40: rem(40);
+
+$font-weight-200: 200;
+$font-weight-500: 500;
+$font-weight-900: 900;
+
+$font-stack-system: system, -apple-system, ".SFNSText-Regular", "San Francisco",
+  "Roboto", "Segoe UI", "Helvetica Neue", "Lucida Grande", sans-serif;
+$font-stack-serif: "Crimson Pro", serif;
+$font-stack-sans: "Roboto", sans-serif;
+
+/* ----------------------------------------------*\
+     Compositional mixins
+\*---------------------------------------------- */
+
+// The base style for all fonts. Accepts an optional font color parameter
+@mixin type-base-style($font-color: $color-foreground-primary) {
+  color: $font-color;
+  font-family: $font-stack-system;
+  font-size: $font-size-16;
+  line-height: 1.5;
+}
+
+/* ----------------------------------------------*\
+     Styling mixins
+\*---------------------------------------------- */
+@mixin type-style-bold {
+  font-weight: $font-weight-900;
+}
+
+/* ----------------------------------------------*\
+    Type mixins
+\*---------------------------------------------- */
+@mixin type-display-large($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-40;
+  line-height: 1.2;
+}
+
+@mixin type-display-medium($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-32;
+  line-height: 1.2;
+}
+
+@mixin type-display-small($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-24;
+  line-height: 1.3;
+}
+
+@mixin type-body-default($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+}
+
+@mixin type-body-small($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-14;
+}
+
+@mixin type-body-xsmall($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-12;
+}
+
+@mixin type-body-tiny($font-color: $color-foreground-primary) {
+  @include type-base-style($font-color);
+  font-size: $font-size-10;
+}
+
+.type-display--large {
+  @include type-display-large;
+}
+
+.type-display--medium {
+  @include type-display-medium;
+}
+
+.type-display--small {
+  @include type-display-small;
+}
+
+.type-body--default {
+  @include type-body-default;
+}
+
+.type-body--small {
+  @include type-body-small;
+}
+
+.type-body--xsmall {
+  @include type-body-xsmall;
+}
+
+.type-body--tiny {
+  @include type-body-tiny;
+}
+
+.type-style--bold {
+  @include type-style-bold;
+}
+
+/* ----------------------------------------------*\
+     BASE STYLES
+\*---------------------------------------------- */
+
+body {
+  @include type-body-default;
+  background-color: $color-background-secondary;
+}
+
+a {
+  color: $color-tint-blue-primary;
+}
+
+.footer {
+  @include type-body-tiny;
+}
+
+p {
+  @include type-body-default;
+  color: $color-foreground-primary;
+}
+
+ul,
+ol {
+  @include type-body-default;
+  color: $color-foreground-primary;
+  li {
+    margin-bottom: 4px;
+  }
+}
+
+h1 {
+  @include type-display-large;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+h2 {
+  @include type-display-medium;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+h3 {
+  @include type-display-small;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+h4 {
+  @include type-body-default;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+h5 {
+  @include type-body-default;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+h6 {
+  @include type-body-default;
+  @include type-style-bold;
+  color: $color-foreground-primary;
+}
+
+hr {
+  border: 1px solid $color-background-tertiary;
+  margin: 64px 0;
+}
+
+blockquote {
+  background: $color-background-secondary;
+  border-left: 5px solid $color-tint-blue-primary;
+  margin: 1.5em 10px;
+  padding: 0px 10px;
+}
+
+table {
+  margin-left: 0;
+  margin-right: 0;
+  margin-top: 0;
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-right: 0;
+  padding-top: 0;
+  margin-bottom: 1.45rem;
+  font-size: 1rem;
+  line-height: 1.45rem;
+  border-collapse: collapse;
+  border: 1px solid $color-background-tertiary;
+  width: 100%;
+  thead {
+    background-color: $color-background-primary;
+    tr {
+      text-align: left;
+      border-bottom: 1px solid $color-background-tertiary;
+      th {
+        padding: 8px;
+        border-right: 1px solid $color-background-tertiary;
+      }
+    }
+    tr:first-child {
+      background-color: $color-background-secondary;
+    }
+  }
+  tbody {
+    tr {
+      border-bottom: 1px solid $color-background-tertiary;
+      td {
+        padding: 8px;
+        background-color: $color-background-primary;
+        border-right: 1px solid $color-background-tertiary;
+      }
+      td:last-child {
+        border-right: none;
+      }
+    }
+    tr:first-child {
+      background-color: $color-background-secondary;
+    }
+  }
+}
+
+iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  font-size: $font-size-14;
+}

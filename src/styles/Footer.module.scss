@@ -1,0 +1,27 @@
+@import "theme";
+
+.footerContainer {
+  max-width: 1200px;
+  margin: 64px auto 0;
+  //   padding: 16px 0;
+  box-shadow: 0 -0.5px 0px $color-background-tertiary;
+  //   background-color: $color-background-secondary;
+  padding: 64px 0;
+}
+
+.footerContainerContent {
+  text-align: center;
+  //   color: $color-white;
+  .logo {
+    width: 140px;
+    fill: $color-tint-blue-primary;
+  }
+  p {
+    @include type-body-xsmall;
+    margin-bottom: 8px;
+  }
+  p.copyright {
+    @include type-body-tiny;
+    margin-bottom: 0;
+  }
+}

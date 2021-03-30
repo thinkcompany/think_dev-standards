@@ -1,0 +1,29 @@
+@import "theme";
+
+.heroContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  border-radius: 20px;
+  background-color: $color-tint-blue-primary;
+  display: grid;
+  grid-template-columns: auto;
+  grid-gap: 16px;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroContainerContent {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  h1 {
+    margin-bottom: 24px;
+    color: $color-foreground-on-tint;
+  }
+  p {
+    color: $color-foreground-on-tint;
+    margin-bottom: 0;
+    font-size: 24px;
+    line-height: 1.4;
+  }
+}
