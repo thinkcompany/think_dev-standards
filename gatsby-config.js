@@ -1,9 +1,9 @@
 module.exports = {
   siteMetadata: {
-    title: `Storefront Starter`,
+    title: `Think Company Front-End Web Development Standards`,
     author: `Think Company`,
-    description: `A starter storefront for design system work`,
-    siteUrl: `https://thinkcompany.com`,
+    description: `This site describes our in-house front-end web development standards.`,
+    siteUrl: `https://standards.thinkcompany.dev`,
     social: {
       twitter: `thinkcompany`,
     },
@@ -234,7 +234,7 @@ module.exports = {
               }
             `,
             output: "/rss.xml",
-            title: "Think Company Starter Storefront",
+            title: "Think Company Front-End Web Development Standards",
             // optional configuration to insert feed reference in pages:
             // if `string` is used, it will be used to create RegExp and then test if pathname of
             // current page satisfied this regular expression;
