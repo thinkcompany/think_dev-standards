@@ -84,7 +84,7 @@ class HomePage extends React.Component {
               <p>Red, green, refactor, repeat</p>
             </div>
           </Link>
-          <Link to="/get-started/overview/about/" className={styles.linkCard}>
+          <Link to="/javascript/" className={styles.linkCard}>
             <div className={styles.LandingPageCard}>
               <div className={styles.iconContainer}>
                 <svg
@@ -103,8 +103,8 @@ class HomePage extends React.Component {
                   ></path>
                 </svg>
               </div>
-              <h3>Get Started</h3>
-              <p>Get up and running quickly</p>
+              <h3>Javascript</h3>
+              <p>Javascript coding standards</p>
             </div>
           </Link>
           <Link
@@ -169,27 +169,6 @@ export const pageQuery = graphql`
     site {
       siteMetadata {
         title
-      }
-    }
-    getstarted: allMdx(
-      filter: {
-        frontmatter: { area: { eq: "home" }, section: { eq: "get-started" } }
-      }
-    ) {
-      edges {
-        node {
-          excerpt
-          fields {
-            slug
-          }
-          frontmatter {
-            date(formatString: "MMMM DD, YYYY")
-            title
-            section
-            description
-            area
-          }
-        }
       }
     }
     community: allMdx(

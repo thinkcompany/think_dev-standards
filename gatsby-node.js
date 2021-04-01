@@ -6,25 +6,6 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
-        getstarted: allMdx(
-          filter: { frontmatter: { area: { eq: "Get Started" } } }
-        ) {
-          edges {
-            node {
-              excerpt
-              fields {
-                slug
-              }
-              frontmatter {
-                date(formatString: "MMMM DD, YYYY")
-                title
-                section
-                description
-                area
-              }
-            }
-          }
-        }
         accessibility: allMdx(
           filter: { frontmatter: { area: { eq: "Accessibility" } } }
         ) {
@@ -65,6 +46,25 @@ exports.createPages = async ({ graphql, actions }) => {
         }
         css: allMdx(
           filter: { frontmatter: { area: { eq: "CSS" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
+        javascript: allMdx(
+          filter: { frontmatter: { area: { eq: "Javascript" } } }
         ) {
           edges {
             node {
@@ -149,27 +149,14 @@ exports.createPages = async ({ graphql, actions }) => {
 
   //This section loops through all the markdown data for Community, UI Library, and Get Started content.
   //It creates pages for that content using the landing.js template
-  const getStartedPosts = result.data.getstarted.edges;
   const accessibilityPosts = result.data.accessibility.edges;
   const automatedTestingPosts = result.data.automatedtesting.edges;
   const cssPosts = result.data.css.edges;
   const communityPosts = result.data.community.edges;
+  const javascriptPosts = result.data.javascript.edges;
   const uilibraryPosts = result.data.uilibrary.edges;
   const contributingPosts = result.data.contributing.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
-
-  //Get Started content
-  getStartedPosts.forEach((post) => {
-    createPage({
-      path: post.node.fields.slug,
-      component: landingPage,
-      context: {
-        slug: post.node.fields.slug,
-        area: "Get Started",
-        title: "Get Started",
-      },
-    });
-  });
 
   //Accessibility content
   accessibilityPosts.forEach((post) => {
@@ -206,6 +193,19 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "CSS",
         title: "CSS",
+      },
+    });
+  });
+
+  //Javascript content
+  javascriptPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "Javascript",
+        title: "Javascript",
       },
     });
   });

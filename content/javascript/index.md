@@ -1,7 +1,9 @@
 ---
-path: "/js-standards"
-date: "2018-10-23"
-title: "JS Development Standards"
+title: Javascript
+date: "2021-04-01T23:46:37.121Z"
+area: Javascript
+section: 1. Overview
+description: ""
 ---
 
 #Javascript Development Standards

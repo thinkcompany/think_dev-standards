@@ -1,7 +1,9 @@
 ---
-path: "/javascript/jquery/"
-date: "2018-11-01"
-title: "JQuery Development Standards"
+title: JQuery
+date: "2021-04-01T23:46:37.121Z"
+area: Javascript
+section: 4. JQuery
+description: ""
 ---
 
 #jQuery Best Practices

@@ -1,7 +1,9 @@
 ---
-path: "/javascript/general/"
-date: "2018-10-23"
-title: "General JS Development Standards"
+title: Authoring Guidelines
+date: "2021-04-01T23:46:37.121Z"
+area: Javascript
+section: 2. Authoring Guidelines
+description: ""
 ---
 
 #General Authoring Guidelines
