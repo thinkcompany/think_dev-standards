@@ -1,10 +1,8 @@
 import React from "react";
 import { graphql } from "gatsby";
 import Layout from "../components/layout";
-import getStartedHeroImage from "../../content/assets/get-started-hero.jpg";
-import uiLibraryHeroImage from "../../content/assets/ui-library-hero.jpg";
-import communityHeroImage from "../../content/assets/community-hero.jpg";
-import contributingHeroImage from "../../content/assets/contributing-hero.jpg";
+import fooHeroImage from "../../content/assets/hero-01.jpg";
+import barHeroImage from "../../content/assets/hero-02.jpg";
 import styles from "../styles/LandingPage.module.scss";
 import SideNav from "../components/SideNav";
 import HeroBlockLanding from "../components/HeroBlockLanding";
@@ -18,14 +16,10 @@ class LandingPage extends React.Component {
     const post = data.mdx;
     let heroImage;
 
-    if (this.props.pageContext.title === "Get Started") {
-      heroImage = getStartedHeroImage;
-    } else if (this.props.pageContext.title === "UI Library") {
-      heroImage = uiLibraryHeroImage;
-    } else if (this.props.pageContext.title === "Community") {
-      heroImage = communityHeroImage;
-    } else if (this.props.pageContext.title === "Contributing Guide") {
-      heroImage = contributingHeroImage;
+    if (this.props.pageContext.title === "Foo") {
+      heroImage = fooHeroImage;
+    } else if (this.props.pageContext.title === "Bar") {
+      heroImage = barHeroImage;
     }
 
     return (

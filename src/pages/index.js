@@ -1,6 +1,6 @@
 import React from "react";
 import { Link, graphql } from "gatsby";
-import heroImage from "../../content/assets/home-hero.jpg";
+import heroImage from "../../content/assets/hero-04.jpg";
 import Layout from "../components/layout";
 import styles from "../styles/HomePage.module.scss";
 import HeroBlock from "../components/HeroBlock";
