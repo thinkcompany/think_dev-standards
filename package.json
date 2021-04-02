@@ -1,11 +1,11 @@
 {
-  "name": "think-storefront-starter",
+  "name": "think-dev-standards",
   "private": true,
-  "description": "A starter storefront for Think Company powered by Gatsby and Markdown",
+  "description": "Front-end development standards for Think Company, powered by Gatsby and Markdown",
   "version": "0.1.0",
   "author": "Think Company",
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://thinkcompany.atlassian.net/browse/THINKDOCS"
   },
   "dependencies": {
     "@mdx-js/mdx": "^1.6.5",
