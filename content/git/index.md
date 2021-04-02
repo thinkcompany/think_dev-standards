@@ -1,8 +1,8 @@
 ---
-title: Git Style Guide
-date: "2021-04-01T23:46:37.121Z"
+title: Git Development Practices
+date: "2021-04-02T23:46:37.121Z"
 area: Git
-section: ""
+section: 1. Branches
 description: ""
 ---
 
