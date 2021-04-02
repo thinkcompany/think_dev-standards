@@ -131,7 +131,7 @@ class HomePage extends React.Component {
             </div>
           </Link>
           <Link
-            to="/ui-library/overview/accessibility/"
+            to="#"
             className={styles.linkCard}
           >
             <div className={styles.LandingPageCard}>
@@ -152,11 +152,11 @@ class HomePage extends React.Component {
                   ></path>
                 </svg>
               </div>
-              <h3>UI Library</h3>
-              <p>Styles, components, and patterns</p>
+              <h3>Dolorem Ipsum</h3>
+              <p>Dolorem ipsum dolor sit amet</p>
             </div>
           </Link>
-          <Link to="/community/contribute/" className={styles.linkCard}>
+          <Link to="#" className={styles.linkCard}>
             <div className={styles.LandingPageCard}>
               <div className={styles.iconContainer}>
                 <svg
@@ -175,8 +175,8 @@ class HomePage extends React.Component {
                   ></path>
                 </svg>
               </div>
-              <h3>Community</h3>
-              <p>Get involved and evolve the system</p>
+              <h3>Lorem Ipsum</h3>
+              <p>Dolorum ipsom dolor sit amet</p>
             </div>
           </Link>
         </div>
