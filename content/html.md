@@ -180,7 +180,7 @@ Use the appropriate language code for the page. For instance, use "es" for Spani
 
 ### Head
 
-The `<head>` element is always required and immediately follows the opening <html> tag.
+The `<head>` element is always required and immediately follows the opening `<html>` tag.
 
 #### Meta 
 
