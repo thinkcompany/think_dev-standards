@@ -1,10 +1,10 @@
 ---
-path: "/html/"
-date: "2018-11-01"
-title: "HTML Development Standards"
+title: HTML Development Standards
+date: "2020-06-08T23:46:37.121Z"
+area: HTML
+section: 1. Progamming Principles
+description: ""
 ---
-
-# HTML Development Standards
 
 This document contains Think Company's standards for writing HTML.
 

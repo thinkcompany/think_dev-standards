@@ -63,6 +63,25 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        html: allMdx(
+          filter: { frontmatter: { area: { eq: "HTML" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
         javascript: allMdx(
           filter: { frontmatter: { area: { eq: "Javascript" } } }
         ) {
@@ -154,6 +173,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const cssPosts = result.data.css.edges;
   const communityPosts = result.data.community.edges;
   const javascriptPosts = result.data.javascript.edges;
+  const htmlPosts = result.data.html.edges;
   const uilibraryPosts = result.data.uilibrary.edges;
   const contributingPosts = result.data.contributing.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
@@ -193,6 +213,19 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "CSS",
         title: "CSS",
+      },
+    });
+  });
+
+  //HTML content
+  htmlPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "HTML",
+        title: "HTML",
       },
     });
   });
