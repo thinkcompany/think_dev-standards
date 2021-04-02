@@ -63,6 +63,25 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        git: allMdx(
+          filter: { frontmatter: { area: { eq: "Git" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
         html: allMdx(
           filter: { frontmatter: { area: { eq: "HTML" } } }
         ) {
@@ -114,8 +133,9 @@ exports.createPages = async ({ graphql, actions }) => {
   const accessibilityPosts = result.data.accessibility.edges;
   const automatedTestingPosts = result.data.automatedtesting.edges;
   const cssPosts = result.data.css.edges;
-  const javascriptPosts = result.data.javascript.edges;
+  const gitPosts = result.data.git.edges;
   const htmlPosts = result.data.html.edges;
+  const javascriptPosts = result.data.javascript.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
 
   //Accessibility content
@@ -153,6 +173,19 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "CSS",
         title: "CSS",
+      },
+    });
+  });
+
+  //Git content
+  gitPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "Git",
+        title: "Git",
       },
     });
   });

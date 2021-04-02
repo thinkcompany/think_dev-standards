@@ -1,10 +1,10 @@
 ---
-path: "/git/"
-date: "2018-11-01"
-title: "GIT Development Standards"
+title: Git Style Guide
+date: "2021-04-01T23:46:37.121Z"
+area: Git
+section: ""
+description: ""
 ---
-
-# Git Style Guide
 
 This document contains Think Company's standards for using Git.
 
