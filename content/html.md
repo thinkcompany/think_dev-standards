@@ -123,7 +123,7 @@ Modules are generally wrapped in DIV tags, to give the overall object a class na
 To support the goal of maximum reusability of modules, refrain from using IDs on any piece of markup in a module. One exception to this is form controls, where an ID must be used on the form field in order to explicitly pair a label to it. 
 
 ### Classes, IDs, & Custom Data Attributes
-
+ 
 Class names are the preferred method for linking styles to markup. Custom data (data-*) attributes are the preferred hooks for behavior (JavaScript). Only use IDs on objects which are unique within the entire site or when commonly prescribed (in-page anchors). Avoid the use of IDs on module elements (i.e. buttons, links, list items), since these objects are likely to appear multiple times in a single page and can cause both validation and back-end issues. 
 
 Assign names to objects based on the function they fulfill rather than what they look like. For example, a navbar will always provide a menu of links regardless of whether it is horizontal or vertical, or whether it is placed at the top or bottom of a page. 
@@ -248,7 +248,7 @@ JavaScript files may be included in the `<head>` of an HTML document but, for op
 
 #### Headings
 
-Use headings to denote important passages of text and to build a semantic content outline. Do not use a <div> or a <p> where a heading would be more appropriate.
+Use headings to denote important passages of text and to build a semantic content outline. Do not use a `<div>` or a `<p>` where a heading would be more appropriate.
 
 Headings must appear in logical order, beginning with `<h1>`. For instance, an `<h4>` cannot appear in the document before an `<h3>`.
 
