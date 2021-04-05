@@ -120,6 +120,25 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        qualityassurance: allMdx(
+          filter: { frontmatter: { area: { eq: "Quality Assurance" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
       }
     `
   );
@@ -136,6 +155,7 @@ exports.createPages = async ({ graphql, actions }) => {
   const gitPosts = result.data.git.edges;
   const htmlPosts = result.data.html.edges;
   const javascriptPosts = result.data.javascript.edges;
+  const qualityAssurancePosts = result.data.qualityassurance.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
 
   //Accessibility content
@@ -212,6 +232,19 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "Javascript",
         title: "Javascript",
+      },
+    });
+  });
+
+  //Quality Assurance content
+  qualityAssurancePosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "Quality Assurance",
+        title: "Quality Assurance",
       },
     });
   });

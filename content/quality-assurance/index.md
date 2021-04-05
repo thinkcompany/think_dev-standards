@@ -1,10 +1,10 @@
 ---
-path: "/quality-assurance/qa"
-date: "2018-11-01"
-title: "Quality Assurance Development Standards"
+title: Quality Assurance
+date: "2021-04-02T23:46:37.121Z"
+area: Quality Assurance
+section: 1. Standards Compliance
+description: ""
 ---
-
-# Quality Assurance
 
 This document contains Think Company's standards for quality assurance when authoring code.
 
