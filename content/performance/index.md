@@ -1,10 +1,10 @@
 ---
-path: "/performance/"
-date: "2018-11-01"
-title: "Performance Development Standards"
+title: Performance
+date: "2021-04-01T23:46:37.121Z"
+area: Performance
+section: 1. Overview
+description: ""
 ---
-
-# Performance Development Standards
 
 This document contains Think Company's standards for addressing performance.
 

@@ -1,7 +1,9 @@
 ---
-path: "/seo/"
-date: "2018-11-01"
-title: "SEO Development Standards"
+title: SEO Guidelines
+date: "2021-04-01T23:46:37.121Z"
+area: SEO
+section: 1. Overview
+description: ""
 ---
 
 # SEO Development Standards

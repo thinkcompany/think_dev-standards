@@ -1,12 +1,10 @@
 ---
-path: "/styles/sass/"
-date: "2018-11-01"
-title: "Sass Development Standards"
+title: SASS Authoring Guidelines
+date: "2021-04-01T23:46:37.121Z"
+area: SASS
+section: 1. Overview
+description: ""
 ---
-
-# Sass Authoring Guidelines
-
-This document contains Think Company's standards for writing Sass.
 
 ## Table of Contents
 

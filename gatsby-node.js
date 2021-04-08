@@ -120,8 +120,65 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
+        performance: allMdx(
+          filter: { frontmatter: { area: { eq: "Performance" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
         qualityassurance: allMdx(
           filter: { frontmatter: { area: { eq: "Quality Assurance" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
+        sass: allMdx(
+          filter: { frontmatter: { area: { eq: "SASS" } } }
+        ) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
+        seo: allMdx(
+          filter: { frontmatter: { area: { eq: "SEO" } } }
         ) {
           edges {
             node {
@@ -155,7 +212,10 @@ exports.createPages = async ({ graphql, actions }) => {
   const gitPosts = result.data.git.edges;
   const htmlPosts = result.data.html.edges;
   const javascriptPosts = result.data.javascript.edges;
+  const performancePosts = result.data.performance.edges;
   const qualityAssurancePosts = result.data.qualityassurance.edges;
+  const sassPosts = result.data.sass.edges;
+  const seoPosts = result.data.seo.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
 
   //Accessibility content
@@ -236,6 +296,19 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 
+  //Performance content
+  performancePosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "Performance",
+        title: "Performance",
+      },
+    });
+  });
+
   //Quality Assurance content
   qualityAssurancePosts.forEach((post) => {
     createPage({
@@ -245,6 +318,32 @@ exports.createPages = async ({ graphql, actions }) => {
         slug: post.node.fields.slug,
         area: "Quality Assurance",
         title: "Quality Assurance",
+      },
+    });
+  });
+
+  //SASS content
+  sassPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "SASS",
+        title: "SASS",
+      },
+    });
+  });
+
+  //SEO content
+  seoPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "SEO",
+        title: "SEO",
       },
     });
   });
