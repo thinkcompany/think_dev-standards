@@ -6,7 +6,7 @@ section: 2. Authoring Guidelines
 description: ""
 ---
 
-#General Authoring Guidelines
+# General Authoring Guidelines
 
 This document contains Think Company's standards for writing JavaScript.
 
@@ -33,7 +33,7 @@ This document contains Think Company's standards for writing JavaScript.
   - [Performance](#performance)
   - [Miscellaneous](#miscellaneous)
 
-##Types
+## Types
 
 **Primitives**: When you access a primitive type you work directly on its value.
 
