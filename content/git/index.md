@@ -104,12 +104,13 @@ Better Example:
   *logical changes* in one commit. For example, if a patch fixes a bug and
   optimizes the performance of a feature, split it into two separate commits.
 
-* Don't split a single *logical change* into several commits. For example,
-  the implementation of a feature and the corresponding tests should be in the
-  same commit.
+* Commit *early* and *often*. Small, self-contained commits are easier to understand
+  and revert when something goes wrong.
 
-* Commit *early* and *often*. Small, self-contained commits are easier to
-  understand and revert when something goes wrong.
+* That being said, try not to split a single *logical change* into multiple commits
+  that will not function independently. If further consolidation of commits is
+  desired before merging into the main branch, use git rebase or git merge to
+  squash commits.
 
 * Commits should be ordered *logically*. For example, if *commit X* depends
   on changes done in *commit Y*, then *commit Y* should come before *commit X*.
@@ -120,19 +121,18 @@ Better Example:
 
 ### Messages
 
-* Use the editor or a git GUI (e.g. [SourceTree](https://www.sourcetreeapp.com/) and [GitKraken](https://www.gitkraken.com/)), not the terminal, when writing a commit message:
+* A commit message should be succinct and clearly describe the changes that are
+  being made. Avoid non-informative, ambiguous wording such as "changes" or "fix".
+  Use additional lines in the commit message body to provide additional details,
+  and any reference IDs for related work tickets.
 
   ```shell
   # good
-  $ git commit
+  $ git commit -m "feat(header): add new brand logo"
 
   # bad
-  $ git commit -m "Quick fix"
+  $ git commit -m "Changes to the header"
   ```
-
-  Committing from the terminal encourages a mindset of having to fit everything
-  in a single line which can result in non-informative, ambiguous commit
-  messages.
 
 * If a *commit A* depends on another *commit B*, the dependency should be
   stated in the message of *commit A*. Use the commit's hash when referring to
