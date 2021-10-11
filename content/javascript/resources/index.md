@@ -2,16 +2,13 @@
 title: Resources
 date: "2021-04-01T23:46:37.121Z"
 area: Javascript
-section: 3. Resources
+section: 5. Resources
 description: ""
 ---
-
-#Resources
 
 ## Style Guides
   * [airbnb/javascript](https://github.com/airbnb/javascript)
   * [yuanyan/pragmatic-jquery](https://github.com/yuanyan/pragmatic-jquery)
-
 
 ## Articles
   * [Douglas Crockford - Code Conventions for the Javascript Programming Language](http://javascript.crockford.com/code.html)
