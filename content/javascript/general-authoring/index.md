@@ -171,47 +171,47 @@ Use single quotes `''` for strings.
 
 ```javascript
 // bad
-var name = "Bob Parr";
+const name = "Bob Parr";
 
-// good
-var name = 'Bob Parr';
+const fullName = "Bob " + this.lastName;
 
-// bad
-var fullName = "Bob " + this.lastName;
-
-// good
-var fullName = 'Bob ' + this.lastName;
-```
-
-Use multiple lines for strings longer than 80 characters using string concatenation.
-
-Note: If overused, long strings with concatenation could impact performance: [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
-
-```javascript
-// bad
-var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-
-// bad
-var errorMessage = 'This is a super long error that was thrown because \
-of Batman. When you stop to think about how Batman had anything to do \
-with this, you would get nowhere \
-fast.';
-
-// good
 var errorMessage = 'This is a super long error that was thrown because ' +
     'of Batman. When you stop to think about how Batman had anything to do ' +
     'with this, you would get nowhere fast.';
+
+// good
+const fullName = `Bob ${this.lastName}`;
+
+const name = 'Bob Parr';
+
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+
 ```
 
-When programmatically building up a string, use `Array#join` instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
+When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 
 ```javascript
-var items;
-var messages;
-var length;
-var i;
 
-messages = [{
+const firstName = 'Mary'
+const lastName = 'Wind'
+
+// bad 
+const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.'
+
+// good
+const fullName = `My first name is ${firstName} and my last name is ${lastName}.`
+
+```
+
+
+When programmatically building up a string, use `Array#join` instead of string concatenation. 
+
+```javascript
+let items;
+let length;
+let i;
+
+const messages = [{
     state: 'success',
     message: 'This one worked.'
 }, {
@@ -241,7 +241,7 @@ function inbox(messages) {
 
   for (i = 0; i < length; i++) {
       // use direct assignment in this case because we're micro-optimizing.
-      items[i] = '<li>' + messages[i].message + '</li>';
+      items[i] = `<li>${messages[i].message}</li>`;
   }
 
   return '<ul>' + items.join('') + '</ul>';
