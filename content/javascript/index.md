@@ -13,6 +13,5 @@ All of our JavaScript code is sent directly to the public. It should always be o
 ## Table of Contents
 
   1. [Authoring Guidelines](/javascript/general-authoring/)
-  1. [Large Application Development Standards](/javascript/large-applications/)
-  1. [Resources](/javascript/resources/)
-  1. [jQuery](/javascript/jquery-best-practices/)
+  2. [Resources](/javascript/resources/)
+  
