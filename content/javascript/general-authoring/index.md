@@ -184,9 +184,11 @@ const fullName = "Bob " + this.lastName;
 const fullName = 'Bob ' + this.lastName;
 ```
 
-Use multiple lines for strings longer than 80 characters using string concatenation.
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
-Note: If overused, long strings with concatenation could impact performance: [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
+```
+
+When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 
 ```javascript
 // bad
@@ -204,7 +206,8 @@ const errorMessage = 'This is a super long error that was thrown because ' +
     'with this, you would get nowhere fast.';
 ```
 
-When programmatically building up a string, use `Array#join` instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
+
+When programmatically building up a string, use `Array#join` instead of string concatenation. 
 
 ```javascript
 let items;
@@ -212,7 +215,7 @@ let messages;
 let length;
 let i;
 
-messages = [{
+const messages = [{
     state: 'success',
     message: 'This one worked.'
 }, {
@@ -242,7 +245,7 @@ function inbox(messages) {
 
   for (i = 0; i < length; i++) {
       // use direct assignment in this case because we're micro-optimizing.
-      items[i] = '<li>' + messages[i].message + '</li>';
+      items[i] = `<li>${messages[i].message}</li>`;
   }
 
   return '<ul>' + items.join('') + '</ul>';
