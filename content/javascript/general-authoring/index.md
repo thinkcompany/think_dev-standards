@@ -1480,18 +1480,6 @@ intended? Avoid constructs that cannot easily be determined to be correct.
 It is almost always better to use the `===` and `!==` operators. The `==` and `!=` operators do type coercion. In particular, do not use `==` to compare against falsy values.
 
 
-###CONFUSING PLUSES AND MINUSES
-Be careful to not follow a `+` with `+` or `++`. This pattern can be confusing. Insert parenthesis between them to make your intention clear.
-```javascript
-    total = subtotal + +myInput.value;
-```
-is better written as
-```javascript
-    total = subtotal + (+myInput.value);
-```
-so that the `+ +` is not misread as `++`.
-
-
 ###`EVAL` IS EVIL
 The `eval` function is the most misused feature of JavaScript. Avoid it.
 
