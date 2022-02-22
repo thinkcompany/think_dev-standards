@@ -208,6 +208,7 @@ When programmatically building up a string, use `Array#join` instead of string c
 
 ```javascript
 let items;
+
 let length;
 let i;
 
@@ -1471,18 +1472,6 @@ intended? Avoid constructs that cannot easily be determined to be correct.
 
 ###`===` AND `!==` OPERATORS.
 It is almost always better to use the `===` and `!==` operators. The `==` and `!=` operators do type coercion. In particular, do not use `==` to compare against falsy values.
-
-
-###CONFUSING PLUSES AND MINUSES
-Be careful to not follow a `+` with `+` or `++`. This pattern can be confusing. Insert parenthesis between them to make your intention clear.
-```javascript
-    total = subtotal + +myInput.value;
-```
-is better written as
-```javascript
-    total = subtotal + (+myInput.value);
-```
-so that the `+ +` is not misread as `++`.
 
 
 ###`EVAL` IS EVIL
