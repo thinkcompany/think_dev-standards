@@ -46,7 +46,7 @@ This document contains Think Company's standards for writing JavaScript.
 
 ```javascript
 const foo = 1;
-let bar = foo;
+const bar = foo;
 
 bar = 9;
 
@@ -90,7 +90,11 @@ const superman = {
 };
 
 // good
+<<<<<<< HEAD
 const superman = {
+=======
+let superman = {
+>>>>>>> 700211c (Change var to let and const in code examples)
     defaults: { clark: 'kent' },
     hidden: true
 };
@@ -448,7 +452,7 @@ const $myDiv = document.getElementById('myDiv');
 $myDiv.addEventListener('click', function() {
         console.log('clicked');
 });
-
+s
 ```
 
 
