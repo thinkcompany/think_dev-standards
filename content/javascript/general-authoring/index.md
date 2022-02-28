@@ -44,8 +44,8 @@ This document contains Think Company's standards for writing JavaScript.
 + `undefined`
 
 ```javascript
-var foo = 1;
-var bar = foo;
+const foo = 1;
+const bar = foo;
 
 bar = 9;
 
@@ -58,8 +58,8 @@ console.log(foo, bar); // => 1, 9
 + `function`
 
 ```javascript
-var foo = [1, 2];
-var bar = foo;
+const foo = [1, 2];
+const bar = foo;
 
 bar[0] = 9;
 
@@ -76,7 +76,7 @@ Use the literal syntax for object creation.
 var item = new Object();
 
 // good
-var item = {};
+let item = {};
 ```
 
 Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
@@ -89,7 +89,7 @@ var superman = {
 };
 
 // good
-var superman = {
+let superman = {
     defaults: { clark: 'kent' },
     hidden: true
 };
@@ -109,7 +109,7 @@ var superman = {
 };
 
 // good
-var superman = {
+let superman = {
     type: 'alien'
 };
 ```
@@ -123,13 +123,13 @@ Use the literal syntax for array creation.
 var items = new Array();
 
 // good
-var items = [];
+let items = [];
 ```
 
 Use `Array#push` instead of direct assignment to add items to an array.
 
 ```javascript
-var someStack = [];
+let someStack = [];
 
 
 // bad
@@ -142,9 +142,9 @@ someStack.push('abracadabra');
 When you need to copy an array use `Array#slice`. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
 ```javascript
-var len = items.length;
-var itemsCopy = [];
-var i;
+let len = items.length;
+let itemsCopy = [];
+let i;
 
 // bad
 for (i = 0; i < len; i++) {
@@ -159,7 +159,7 @@ To convert an array-like object to an array, use `Array#slice`.
 
 ```javascript
 function trigger() {
-    var args = Array.prototype.slice.call(arguments);
+    let args = Array.prototype.slice.call(arguments);
     ...
 }
 ```
@@ -171,16 +171,16 @@ Use single quotes `''` for strings.
 
 ```javascript
 // bad
-var name = "Bob Parr";
+let name = "Bob Parr";
 
 // good
-var name = 'Bob Parr';
+let name = 'Bob Parr';
 
 // bad
-var fullName = "Bob " + this.lastName;
+let fullName = "Bob " + this.lastName;
 
 // good
-var fullName = 'Bob ' + this.lastName;
+let fullName = 'Bob ' + this.lastName;
 ```
 
 Use multiple lines for strings longer than 80 characters using string concatenation.
@@ -206,10 +206,10 @@ var errorMessage = 'This is a super long error that was thrown because ' +
 When programmatically building up a string, use `Array#join` instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
 
 ```javascript
-var items;
-var messages;
-var length;
-var i;
+let items;
+let messages;
+let length;
+let i;
 
 messages = [{
     state: 'success',
@@ -273,12 +273,12 @@ Function expressions:
 
 ```javascript
 // anonymous function expression
-var anonymous = function() {
+let anonymous = function() {
     return true;
 };
 
 // named function expression
-var named = function named() {
+let named = function named() {
     return true;
 };
 
@@ -293,7 +293,7 @@ Do not use a space between the name of a function and the `(` (left parenthesis)
 
 ```javascript
     function outer(c, d) {
-        var e = c * d;
+       let e = c * d;
         function inner(a, b) {
             return (e * a) + b;
         }
@@ -305,11 +305,11 @@ This convention works well with JavaScript because in JavaScript, functions and 
 
 ```javascript
     function getElementsByClassName(className) {
-        var results = [];
+        let results = [];
         walkTheDOM(document.body, function (node) {
-            var a;                  // array of class names
-            var c = node.className; // the node's classname
-            var i;                  // loop counter
+            let a;                  // array of class names
+            let c = node.className; // the node's classname
+            let i;                  // loop counter
 // If the node has a class name, then split it into a list of simple names.
 // If any of them match the requested name, then append the node to the set of results.
             if (c) {
@@ -346,17 +346,17 @@ Minimize the use of global functions. If your code contains functions that are o
 When a function is to be invoked immediately, wrap the entire invocation expression in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
 
 ```javascript
-var collection = (function () {
-    var keys = [], values = [];
+const collection = (function () {
+   let keys = [], values = [];
     return {
         get: function (key) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at >= 0) {
                 return value[at];
             }
         },
         set: function (key, value) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at < 0) {
                 at = keys.length;
             }
@@ -364,7 +364,7 @@ var collection = (function () {
             value[at] = value;
         },
         remove: function (key) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at >= 0) {
                 keys.splice(at, 1);
                 value.splice(at, 1);
@@ -386,7 +386,7 @@ if (currentUser) {
 }
 
 // good
-var test;
+let test;
 if (currentUser) {
     test = function test() {
         console.log('Yup.');
@@ -428,7 +428,7 @@ window.addEventListener('resize', function() {
 
 // Good: This is using debouncing to only fire every 250ms
 
-var windowResizeFn = debounce(function() {
+const windowResizeFn = debounce(function() {
     console.log('resize');
 }, 250);
 
@@ -448,12 +448,12 @@ document.getElementById('myDiv').addEventListener('click', function() {
 
 // Good: the node is now cached to the $myDiv variable. Instead of traversing the DOM to find myDiv, it will use the node reference in memory to locate it.
 
-var $myDiv = document.getElementById('myDiv');
+const $myDiv = document.getElementById('myDiv');
 
 $myDiv.addEventListener('click', function() {
         console.log('clicked');
 });
-
+s
 ```
 
 
@@ -462,22 +462,22 @@ $myDiv.addEventListener('click', function() {
 Use dot notation when accessing properties.
 
 ```javascript
-var luke = {
+let luke = {
     jedi: true,
     age: 28
 };
 
 // bad
-var isJedi = luke['jedi'];
+let isJedi = luke['jedi'];
 
 // good
-var isJedi = luke.jedi;
+let isJedi = luke.jedi;
 ```
 
 Use subscript notation `[]` when accessing properties with a variable.
 
 ```javascript
-var luke = {
+let luke = {
     jedi: true,
     age: 28
 };
@@ -486,7 +486,7 @@ function getProp(prop) {
     return luke[prop];
 }
 
-var isJedi = getProp('jedi');
+let isJedi = getProp('jedi');
 ```
 
 
