@@ -425,7 +425,19 @@ When to use them
 - DOM-level methods (setTimeout, setInterval, addEventListener)
 - Non-method functions
 - Named functions (treat them as variables)
+    ``` javascript
+    let difference = (a, b) => a - b;
+    ```
 - Common usages `.filter` and `.map`
+
+    ```javascript
+    let numbers = [5, 6, 13, 0, 1, 18, 23];
+    let = numbers.filter(x => x > 12);
+    // [13, 18, 23]
+
+    let salesTax = numbers.map(x => x * .05);
+    // [.05,  .03, .65, 0, .05, .09, 1.15]
+```
 
 When not to use them
 - methods
