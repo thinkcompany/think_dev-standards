@@ -408,6 +408,58 @@ function yup(name, options, args) {
 }
 ```
 
+### Arrow Functions
+
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+
+Arrow Functions were introduced in ES6. They are compact way of writing functions. 
+
+``` javascript
+
+// Traditional Anonymous Function
+function (a){
+  return a + 100;
+}
+
+// Arrow function with one arguement
+a => a + 100;
+
+```
+
+When to use them
+- DOM-level methods (setTimeout, setInterval, addEventListener)
+- Non-method functions
+- Named functions (treat them as variables)
+- Common usages `.filter` and `.map`
+
+When not to use them
+- methods
+- in Call, apply or bind methods
+- as constructors
+- when the keyword `yeild` is required
+
+
+In arrow functions `this` is determined by the lexical scope (surrounding scope)
+
+``` javascript
+const printNames = {
+  intro: 'The user\'s name is',
+  users: ["Sarah", "Malcom", "Jesse", "Joe"],
+
+  usersLog() {
+    this.users.forEach((user) => {
+      console.log(this.intro, user)
+    })
+  },
+}
+
+printNames.usersLog();
+
+```  
+
+
+
+
 ## Event Binding
 
 Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript seperate from HTML. Inline bindings can also lead to very hard to track bugs.
