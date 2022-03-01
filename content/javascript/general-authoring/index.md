@@ -416,50 +416,50 @@ function (a){
   return a + 100;
 }
 
-// Arrow function with one arguement
+// Arrow function with one argument
 a => a + 100;
 
 ```
 
-When to use them
-- DOM-level methods (setTimeout, setInterval, addEventListener)
-- Non-method functions
-- Named functions (treat them as variables)
-    ``` javascript
-    let difference = (a, b) => a - b;
-    ```
-- Common usages `.filter` and `.map`
+When to use them:
+* DOM-level methods (setTimeout, setInterval, addEventListener)
+* Non-method functions
+* Named functions (treat them as variables)
+* Common usages `.filter` and `.map`
 
-    ```javascript
-    let numbers = [5, 6, 13, 0, 1, 18, 23];
-    let = numbers.filter(x => x > 12);
-    // [13, 18, 23]
+```javascript
+// named functions
+let difference = (a, b) => a - b;
 
-    let salesTax = numbers.map(x => x * .05);
-    // [.05,  .03, .65, 0, .05, .09, 1.15]
+// filter and map examples
+let numbers = [5, 6, 13, 0, 1, 18, 23];
+let = numbers.filter(x => x > 12);
+// [13, 18, 23]
+
+let salesTax = numbers.map(x => x * .05);
+// [.05,  .03, .65, 0, .05, .09, 1.15]
 ```
 
-When not to use them
-- methods
-- in Call, apply or bind methods
-- as constructors
-- when the keyword `yeild` is required
+When not to use them:
+* methods
+* in Call, apply or bind methods
+* as constructors
+* when `yield` is required
 
 
-In arrow functions `this` is determined by the lexical scope (surrounding scope)
+In arrow functions `this` is determined by the lexical scope
 
-``` javascript
+```javascript
+
 const printNames = {
   intro: 'The user\'s name is',
   users: ["Sarah", "Malcom", "Jesse", "Joe"],
-
   usersLog() {
     this.users.forEach((user) => {
       console.log(this.intro, user)
     })
   },
 }
-
 printNames.usersLog();
 
 ```  
