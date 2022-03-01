@@ -73,7 +73,7 @@ Use the literal syntax for object creation.
 
 ```javascript
 // bad
-var item = new Object();
+let item = new Object();
 
 // good
 let item = {};
@@ -83,7 +83,7 @@ Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work 
 
 ```javascript
 // bad
-var superman = {
+let superman = {
     default: { clark: 'kent' },
     private: true
 };
@@ -99,12 +99,12 @@ Use readable synonyms in place of reserved words.
 
 ```javascript
 // bad
-var superman = {
+let superman = {
     class: 'alien'
 };
 
 // bad
-var superman = {
+let superman = {
     klass: 'alien'
 };
 
@@ -120,7 +120,7 @@ Use the literal syntax for array creation.
 
 ```javascript
 // bad
-var items = new Array();
+let items = new Array();
 
 // good
 let items = [];
@@ -189,16 +189,16 @@ Note: If overused, long strings with concatenation could impact performance: [js
 
 ```javascript
 // bad
-var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+let errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
 // bad
-var errorMessage = 'This is a super long error that was thrown because \
+let errorMessage = 'This is a super long error that was thrown because \
 of Batman. When you stop to think about how Batman had anything to do \
 with this, you would get nowhere \
 fast.';
 
 // good
-var errorMessage = 'This is a super long error that was thrown because ' +
+let errorMessage = 'This is a super long error that was thrown because ' +
     'of Batman. When you stop to think about how Batman had anything to do ' +
     'with this, you would get nowhere fast.';
 ```
@@ -287,7 +287,7 @@ let named = function named() {
     console.log('Welcome to the Internet. Please follow me.');
 })();
 ```
-**Declare all functions before they are used.** Inner functions should follow the var statement. This helps make it clear what variables are included in its scope.
+**Declare all functions before they are used.** Inner functions should follow the let statement. This helps make it clear what variables are included in its scope.
 
 Do not use a space between the name of a function and the `(` (left parenthesis) of its parameter list. Use one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
 
@@ -326,7 +326,7 @@ This convention works well with JavaScript because in JavaScript, functions and 
     }
 ```
 
-If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
+If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is function, which is an incorrect reading.
 
 ```javascript
     div.addEventListener('click', function(e) {
@@ -492,33 +492,33 @@ let isJedi = getProp('jedi');
 
 ## Variables
 
-Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace.
+Always use `let` or `const` to declare variables. Use `let` for variables that need to mutable. Be sure to declare `let` at the top of the scope in which they are used.  The preference is to use `const` when possible. A variable declare with  `const` is immutable ( with exceptions of object and array properties. [Read More](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)) 
 
 ```javascript
 // bad
 superPower = new SuperPower();
 
 // good
-var superPower = new SuperPower();
+let superPower = new SuperPower();
 ```
 
-Variables can be defined one per line or sequentially. If declaring sequentially, place `var` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
+Variables can be defined one per line or sequentially. If declaring sequentially, place `let` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
 
 ```javascript
 // bad
-var width, length, height, depth;
+let width, length, height, depth;
 
 // good
-var width, 
+let width, 
     height, 
     length,
     depth;
 
 // good
-var width;
-var height;
-var length;
-var depth;
+let width;
+let height;
+let length;
+let depth;
 
 ```
 
@@ -526,23 +526,23 @@ Declare unassigned variables last. This is helpful when later on you might need 
 
 ```javascript
 // bad
-var i, len, dragonball,
+let i, len, dragonball,
     items = getItems(),
     goSportsTeam = true;
 
 // bad
-var i;
-var items = getItems();
-var dragonball;
-var goSportsTeam = true;
-var len;
+let i;
+let items = getItems();
+let dragonball;
+let goSportsTeam = true;
+let len;
 
 // good
-var items = getItems();
-var goSportsTeam = true;
-var dragonball;
-var length;
-var i;
+let items = getItems();
+let goSportsTeam = true;
+let dragonball;
+let length;
+let i;
 ```
 
 Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
@@ -559,7 +559,7 @@ function() {
 
     //..other stuff..
 
-    var name = getName();
+    let name = getName();
 
     if (name === 'test') {
         return false;
@@ -570,7 +570,7 @@ function() {
 
 // good
 function() {
-    var name = getName();
+    let name = getName();
 
     test();
     console.log('doing stuff..');
@@ -586,7 +586,7 @@ function() {
 
 // bad - unnessary function call
 function() {
-    var name = getName();
+    let name = getName();
 
     if (!arguments.length) {
         return false;
@@ -599,7 +599,7 @@ function() {
 
 // good
 function() {
-    var name;
+    let name;
 
     if (!arguments.length) {
         return false;
@@ -860,17 +860,17 @@ Use `//` for single line comments. Place single line comments on a newline above
 
 ```javascript
 // bad
-var active = true;  // is current tab
+let active = true;  // is current tab
 
 // good
 // is current tab
-var active = true;
+let active = true;
 
 // bad
 function getType() {
     console.log('fetching type...');
     // set the default type to 'no type'
-    var type = this._type || 'no type';
+    let type = this._type || 'no type';
 
     return type;
 }
@@ -880,7 +880,7 @@ function getType() {
     console.log('fetching type...');
 
     // set the default type to 'no type'
-    var type = this._type || 'no type';
+    let type = this._type || 'no type';
 
     return type;
 }
@@ -921,17 +921,17 @@ Use soft tabs set to 4 spaces. ([Stack Overflow: Soft tabs or hard tabs?](http:/
 ```javascript
 // no
 function() {
-∙∙var name;
+∙∙let name;
 }
 
 // no
 function() {
-∙var name;
+∙let name;
 }
 
 // yeah
 function() {
-∙∙∙∙var name;
+∙∙∙∙let name;
 }
 ```
 
@@ -989,10 +989,10 @@ Set off operators with spaces.
 
 ```javascript
 // bad
-var x=y+5;
+let x=y+5;
 
 // good
-var x = y + 5;
+let x = y + 5;
 ```
 
 End files with a single newline character.
@@ -1042,13 +1042,13 @@ $('#items')
         .updateCount();
 
 // bad
-var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
+let leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
     .attr('width', (radius + margin) * 2).append('svg:g')
     .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
     .call(tron.led);
 
 // good
-var leds = stage.selectAll('.led')
+let leds = stage.selectAll('.led')
   .data(data)
   .enter().append('svg:svg')
       .classed('led', true)
@@ -1075,7 +1075,7 @@ if (foo) {
 return baz;
 
 // bad
-var obj = {
+let obj = {
     foo: function() {
     },
     bar: function() {
@@ -1084,7 +1084,7 @@ var obj = {
 return obj;
 
 // good
-var obj = {
+let obj = {
     foo: function() {
     },
 
@@ -1101,21 +1101,21 @@ Leading commas: **No, please.**
 
 ```javascript
 // bad
-var story = [
+let story = [
     once
   , upon
   , aTime
 ];
 
 // good
-var story = [
+let story = [
     once,
     upon,
     aTime
 ];
 
 // bad
-var hero = {
+let hero = {
     firstName: 'Bob'
   , lastName: 'Parr'
   , heroName: 'Mr. Incredible'
@@ -1123,7 +1123,7 @@ var hero = {
 };
 
 // good
-var hero = {
+let hero = {
     firstName: 'Bob',
     lastName: 'Parr',
     heroName: 'Mr. Incredible',
@@ -1135,23 +1135,23 @@ Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 
 
 ```javascript
 // kaboooom
-var hero = {
+let hero = {
     firstName: 'Kevin',
     lastName: 'Flynn',
 };
 
-var heroes = [
+let heroes = [
     'Batman',
     'Superman',
 ];
 
 // phew
-var hero = {
+let hero = {
     firstName: 'Kevin',
     lastName: 'Flynn'
 };
 
-var heroes = [
+let heroes = [
     'Batman',
     'Superman'
 ];
@@ -1165,13 +1165,13 @@ var heroes = [
 ```javascript
 // bad
 (function() {
-    var name = 'Skywalker'
+    let name = 'Skywalker'
     return name
 })()
 
 // good
 (function() {
-    var name = 'Skywalker';
+    let name = 'Skywalker';
     return name;
 })();
 ```
@@ -1188,58 +1188,58 @@ Strings:
 //  => this.reviewScore = 9;
 
 // bad
-var totalScore = this.reviewScore + '';
+let totalScore = this.reviewScore + '';
 
 // good
-var totalScore = '' + this.reviewScore;
+let totalScore = '' + this.reviewScore;
 
 // bad
-var totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
+let totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-var totalScore = String(this.reviewScore);
+let totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
 
 ```javascript
-var inputValue = '4';
+let inputValue = '4';
 
 // bad
-var val = new Number(inputValue);
+let val = new Number(inputValue);
 
 // bad
-var val = +inputValue;
+let val = +inputValue;
 
 // bad
-var val = inputValue >> 0;
+let val = inputValue >> 0;
 
 // bad
-var val = parseInt(inputValue);
+let val = parseInt(inputValue);
 
 // bad
-var val = 1 * inputValue;
+let val = 1 * inputValue;
 
 // good
-var val = Number(inputValue);
+let val = Number(inputValue);
 
 // good
-var val = parseInt(inputValue, 10);
+let val = parseInt(inputValue, 10);
 ```
 
 Booleans:
 
 ```javascript
-var age = 0;
+let age = 0;
 
 // bad
-var hasAge = new Boolean(age);
+let hasAge = new Boolean(age);
 
 // bad
-var hasAge = !!age;
+let hasAge = !!age;
 
 // good
-var hasAge = Boolean(age);
+let hasAge = Boolean(age);
 ```
 
 ## Naming Conventions
@@ -1266,20 +1266,20 @@ Be consistent with either camelCase or underscore_case convention when naming ob
 
 ```javascript
 // bad, matches neither convention:
-var OBJEcttsssss = {};
-var o = {};
+let OBJEcttsssss = {};
+let o = {};
 function c() {}
 
 // bad, mixed conventions:
-var thisIsMyObject = {};
+let thisIsMyObject = {};
 function this_is_my_function() {}
 
 // good, camelCase:
-var thisIsMyObject = {};
+let thisIsMyObject = {};
 function thisIsMyFunction() {}
 
 // good, underscore_case:
-var this_is_my_object = {};
+let this_is_my_object = {};
 function this_is_my_function() {}
 
 ```
@@ -1292,7 +1292,7 @@ function user(options) {
     this.name = options.name;
 }
 
-var bad = new user({
+let bad = new user({
     name: 'nope'
 });
 
@@ -1301,7 +1301,7 @@ function User(options) {
     this.name = options.name;
 }
 
-var good = new User({
+let good = new User({
     name: 'yup'
 });
 ```
@@ -1309,7 +1309,7 @@ var good = new User({
 To indicate that a variable contains a jQuery object, start names with a `$`:
 
 ```javascript
-var $email = $("#email");
+let $email = $("#email");
 ```
 
 If you must reference this, avoid using an alias. Alisases to this are very bug prone.
@@ -1318,7 +1318,7 @@ If you must reference this, avoid using an alias. Alisases to this are very bug 
 
 // Bad
 function() {
-    var _this = this;
+    let _this = this;
     return function() {
         console.log(_this);
     };
@@ -1344,12 +1344,12 @@ Name your functions. This is helpful for stack traces.
 
 ```javascript
 // bad
-var log = function(msg) {
+let log = function(msg) {
     console.log(msg);
 };
 
 // good
-var log = function log(msg) {
+let log = function log(msg) {
     console.log(msg);
 };
 ```
@@ -1366,13 +1366,13 @@ module.exports = CheckBox;
 
 // in some other file
 // bad
-var CheckBox = require('./checkBox');
+let CheckBox = require('./checkBox');
 
 // bad
-var CheckBox = require('./check_box');
+let CheckBox = require('./check_box');
 
 // good
-var CheckBox = require('./CheckBox');
+let CheckBox = require('./CheckBox');
 ```
 
 ## Constructors
@@ -1418,7 +1418,7 @@ Jedi.prototype.setHeight = function(height) {
     this.height = height;
 };
 
-var luke = new Jedi();
+let luke = new Jedi();
 luke.jump(); // => true
 luke.setHeight(20); // => undefined
 
@@ -1433,7 +1433,7 @@ Jedi.prototype.setHeight = function(height) {
     return this;
 };
 
-var luke = new Jedi();
+let luke = new Jedi();
 
 luke.jump()
     .setHeight(20);
