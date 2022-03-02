@@ -407,7 +407,7 @@ function yup(name, options, args) {
 
 Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
-Arrow Functions were introduced in ES6. They are compact way of writing functions. 
+Arrow Functions are a compact way of writing functions. 
 
 ``` javascript
 
@@ -418,6 +418,10 @@ function (a){
 
 // Arrow function with one argument
 a => a + 100;
+
+
+// Arrow function with two arguments
+(a, b) => a + b;
 
 ```
 
