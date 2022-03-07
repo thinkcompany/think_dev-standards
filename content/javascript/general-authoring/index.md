@@ -83,13 +83,13 @@ Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 
 ```javascript
 // bad
-let superman = {
+const superman = {
     default: { clark: 'kent' },
     private: true
 };
 
 // good
-let superman = {
+const superman = {
     defaults: { clark: 'kent' },
     hidden: true
 };
@@ -99,17 +99,17 @@ Use readable synonyms in place of reserved words.
 
 ```javascript
 // bad
-let superman = {
+const superman = {
     class: 'alien'
 };
 
 // bad
-let superman = {
+const superman = {
     klass: 'alien'
 };
 
 // good
-let superman = {
+const superman = {
     type: 'alien'
 };
 ```
@@ -1135,23 +1135,23 @@ Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 
 
 ```javascript
 // kaboooom
-let hero = {
+const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn',
 };
 
-let heroes = [
+const heroes = [
     'Batman',
     'Superman',
 ];
 
 // phew
-let hero = {
+const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn'
 };
 
-let heroes = [
+const heroes = [
     'Batman',
     'Superman'
 ];
@@ -1165,13 +1165,13 @@ let heroes = [
 ```javascript
 // bad
 (function() {
-    let name = 'Skywalker'
+    const name = 'Skywalker'
     return name
 })()
 
 // good
 (function() {
-    let name = 'Skywalker';
+    const name = 'Skywalker';
     return name;
 })();
 ```
@@ -1188,58 +1188,58 @@ Strings:
 //  => this.reviewScore = 9;
 
 // bad
-let totalScore = this.reviewScore + '';
+const totalScore = this.reviewScore + '';
 
 // good
-let totalScore = '' + this.reviewScore;
+const totalScore = '' + this.reviewScore;
 
 // bad
-let totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
+const totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-let totalScore = String(this.reviewScore);
+const totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
 
 ```javascript
-let inputValue = '4';
+const inputValue = '4';
 
 // bad
-let val = new Number(inputValue);
+const val = new Number(inputValue);
 
 // bad
-let val = +inputValue;
+const val = +inputValue;
 
 // bad
-let val = inputValue >> 0;
+const val = inputValue >> 0;
 
 // bad
-let val = parseInt(inputValue);
+const val = parseInt(inputValue);
 
 // bad
-let val = 1 * inputValue;
+const val = 1 * inputValue;
 
 // good
-let val = Number(inputValue);
+const val = Number(inputValue);
 
 // good
-let val = parseInt(inputValue, 10);
+const val = parseInt(inputValue, 10);
 ```
 
 Booleans:
 
 ```javascript
-let age = 0;
+const age = 0;
 
 // bad
-let hasAge = new Boolean(age);
+const hasAge = new Boolean(age);
 
 // bad
-let hasAge = !!age;
+const hasAge = !!age;
 
 // good
-let hasAge = Boolean(age);
+const hasAge = Boolean(age);
 ```
 
 ## Naming Conventions
@@ -1292,7 +1292,7 @@ function user(options) {
     this.name = options.name;
 }
 
-let bad = new user({
+const bad = new user({
     name: 'nope'
 });
 
@@ -1301,7 +1301,7 @@ function User(options) {
     this.name = options.name;
 }
 
-let good = new User({
+const good = new User({
     name: 'yup'
 });
 ```
@@ -1309,7 +1309,7 @@ let good = new User({
 To indicate that a variable contains a jQuery object, start names with a `$`:
 
 ```javascript
-let $email = $("#email");
+const $email = $("#email");
 ```
 
 If you must reference this, avoid using an alias. Alisases to this are very bug prone.
@@ -1318,7 +1318,7 @@ If you must reference this, avoid using an alias. Alisases to this are very bug 
 
 // Bad
 function() {
-    let _this = this;
+    const _this = this;
     return function() {
         console.log(_this);
     };
@@ -1344,12 +1344,12 @@ Name your functions. This is helpful for stack traces.
 
 ```javascript
 // bad
-let log = function(msg) {
+const log = function(msg) {
     console.log(msg);
 };
 
 // good
-let log = function log(msg) {
+const log = function log(msg) {
     console.log(msg);
 };
 ```
@@ -1366,13 +1366,13 @@ module.exports = CheckBox;
 
 // in some other file
 // bad
-let CheckBox = require('./checkBox');
+const CheckBox = require('./checkBox');
 
 // bad
-let CheckBox = require('./check_box');
+const CheckBox = require('./check_box');
 
 // good
-let CheckBox = require('./CheckBox');
+const CheckBox = require('./CheckBox');
 ```
 
 ## Constructors
@@ -1418,7 +1418,7 @@ Jedi.prototype.setHeight = function(height) {
     this.height = height;
 };
 
-let luke = new Jedi();
+const luke = new Jedi();
 luke.jump(); // => true
 luke.setHeight(20); // => undefined
 
@@ -1433,7 +1433,7 @@ Jedi.prototype.setHeight = function(height) {
     return this;
 };
 
-let luke = new Jedi();
+const luke = new Jedi();
 
 luke.jump()
     .setHeight(20);
