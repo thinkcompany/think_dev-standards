@@ -73,7 +73,7 @@ Use the literal syntax for object creation.
 
 ```javascript
 // bad
-let item = new Object();
+const item = new Object();
 
 // good
 let item = {};
