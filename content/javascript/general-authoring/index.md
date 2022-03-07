@@ -1129,7 +1129,7 @@ const hero = {
 Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 if it's in quirksmode. 
 
 ```javascript
-
+// kaboooom
 const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn',
@@ -1140,7 +1140,7 @@ const heroes = [
     'Superman',
 ];
 
-
+// phew
 const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn'
