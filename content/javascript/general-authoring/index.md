@@ -79,7 +79,7 @@ const item = new Object();
 let item = {};
 ```
 
-Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_keywords_as_of_ecmascript_2015) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
 
 ```javascript
 // bad
