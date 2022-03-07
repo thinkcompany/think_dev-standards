@@ -45,7 +45,7 @@ This document contains Think Company's standards for writing JavaScript.
 
 ```javascript
 const foo = 1;
-const bar = foo;
+let bar = foo;
 
 bar = 9;
 
