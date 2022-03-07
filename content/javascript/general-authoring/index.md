@@ -142,7 +142,7 @@ someStack.push('abracadabra');
 When you need to copy an array use `Array#slice`. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
 ```javascript
-let len = items.length;
+const len = items.length;
 let itemsCopy = [];
 let i;
 
@@ -171,16 +171,16 @@ Use single quotes `''` for strings.
 
 ```javascript
 // bad
-let name = "Bob Parr";
+const name = "Bob Parr";
 
 // good
-let name = 'Bob Parr';
+const name = 'Bob Parr';
 
 // bad
-let fullName = "Bob " + this.lastName;
+const fullName = "Bob " + this.lastName;
 
 // good
-let fullName = 'Bob ' + this.lastName;
+const fullName = 'Bob ' + this.lastName;
 ```
 
 Use multiple lines for strings longer than 80 characters using string concatenation.
@@ -189,16 +189,16 @@ Note: If overused, long strings with concatenation could impact performance: [js
 
 ```javascript
 // bad
-let errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
 // bad
-let errorMessage = 'This is a super long error that was thrown because \
+const errorMessage = 'This is a super long error that was thrown because \
 of Batman. When you stop to think about how Batman had anything to do \
 with this, you would get nowhere \
 fast.';
 
 // good
-let errorMessage = 'This is a super long error that was thrown because ' +
+const errorMessage = 'This is a super long error that was thrown because ' +
     'of Batman. When you stop to think about how Batman had anything to do ' +
     'with this, you would get nowhere fast.';
 ```
@@ -273,12 +273,12 @@ Function expressions:
 
 ```javascript
 // anonymous function expression
-let anonymous = function() {
+const anonymous = function() {
     return true;
 };
 
 // named function expression
-let named = function named() {
+const named = function named() {
     return true;
 };
 
@@ -293,7 +293,7 @@ Do not use a space between the name of a function and the `(` (left parenthesis)
 
 ```javascript
     function outer(c, d) {
-       let e = c * d;
+        const e = c * d;
         function inner(a, b) {
             return (e * a) + b;
         }
@@ -462,22 +462,22 @@ s
 Use dot notation when accessing properties.
 
 ```javascript
-let luke = {
+const luke = {
     jedi: true,
     age: 28
 };
 
 // bad
-let isJedi = luke['jedi'];
+const isJedi = luke['jedi'];
 
 // good
-let isJedi = luke.jedi;
+const isJedi = luke.jedi;
 ```
 
 Use subscript notation `[]` when accessing properties with a variable.
 
 ```javascript
-let luke = {
+const luke = {
     jedi: true,
     age: 28
 };
@@ -486,7 +486,7 @@ function getProp(prop) {
     return luke[prop];
 }
 
-let isJedi = getProp('jedi');
+const isJedi = getProp('jedi');
 ```
 
 
@@ -499,7 +499,7 @@ Always use `let` or `const` to declare variables. Use `let` for variables that n
 superPower = new SuperPower();
 
 // good
-let superPower = new SuperPower();
+const superPower = new SuperPower();
 ```
 
 Variables can be defined one per line or sequentially. If declaring sequentially, place `let` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
@@ -532,14 +532,14 @@ let i, len, dragonball,
 
 // bad
 let i;
-let items = getItems();
+const items = getItems();
 let dragonball;
-let goSportsTeam = true;
+const goSportsTeam = true;
 let len;
 
 // good
-let items = getItems();
-let goSportsTeam = true;
+const items = getItems();
+const goSportsTeam = true;
 let dragonball;
 let length;
 let i;
@@ -559,7 +559,7 @@ function() {
 
     //..other stuff..
 
-    let name = getName();
+    const name = getName();
 
     if (name === 'test') {
         return false;
@@ -570,7 +570,7 @@ function() {
 
 // good
 function() {
-    let name = getName();
+   const name = getName();
 
     test();
     console.log('doing stuff..');
@@ -586,7 +586,7 @@ function() {
 
 // bad - unnessary function call
 function() {
-    let name = getName();
+   const name = getName();
 
     if (!arguments.length) {
         return false;
@@ -860,11 +860,11 @@ Use `//` for single line comments. Place single line comments on a newline above
 
 ```javascript
 // bad
-let active = true;  // is current tab
+const active = true;  // is current tab
 
 // good
 // is current tab
-let active = true;
+const active = true;
 
 // bad
 function getType() {
@@ -880,7 +880,7 @@ function getType() {
     console.log('fetching type...');
 
     // set the default type to 'no type'
-    let type = this._type || 'no type';
+   const type = this._type || 'no type';
 
     return type;
 }
@@ -989,10 +989,10 @@ Set off operators with spaces.
 
 ```javascript
 // bad
-let x=y+5;
+const x=y+5;
 
 // good
-let x = y + 5;
+const x = y + 5;
 ```
 
 End files with a single newline character.
@@ -1042,13 +1042,13 @@ $('#items')
         .updateCount();
 
 // bad
-let leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
+const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
     .attr('width', (radius + margin) * 2).append('svg:g')
     .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
     .call(tron.led);
 
 // good
-let leds = stage.selectAll('.led')
+const leds = stage.selectAll('.led')
   .data(data)
   .enter().append('svg:svg')
       .classed('led', true)
@@ -1101,21 +1101,21 @@ Leading commas: **No, please.**
 
 ```javascript
 // bad
-let story = [
+const story = [
     once
   , upon
   , aTime
 ];
 
 // good
-let story = [
+const story = [
     once,
     upon,
     aTime
 ];
 
 // bad
-let hero = {
+const hero = {
     firstName: 'Bob'
   , lastName: 'Parr'
   , heroName: 'Mr. Incredible'
@@ -1123,7 +1123,7 @@ let hero = {
 };
 
 // good
-let hero = {
+const hero = {
     firstName: 'Bob',
     lastName: 'Parr',
     heroName: 'Mr. Incredible',
