@@ -492,7 +492,7 @@ let isJedi = getProp('jedi');
 
 ## Variables
 
-Always use `let` or `const` to declare variables. Use `let` for variables that need to mutable. Be sure to declare `let` at the top of the scope in which they are used.  The preference is to use `const` when possible. A variable declare with  `const` is immutable ( with exceptions of object and array properties. [Read More](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)) 
+Always use `let` or `const` to declare variables. Use `let` for variables that need to mutable. Be sure to declare `let` at the top of the scope in which they are used. The preference is to use `const` when possible. A variable declared with `const` is immutable (i.e. it cannot be redefined). When creating objects or arrays using `const`, keep in mind that modifying the items _inside_ the object does not mutate the object reference itself. [Read More about using `const` here.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ```javascript
 // bad
