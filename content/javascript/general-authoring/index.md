@@ -31,6 +31,7 @@ This document contains Think Company's standards for writing JavaScript.
   - [Naming Conventions](#naming-conventions)
   - [Constructors](#constructors)
   - [Performance](#performance)
+  - [jQuery](#jquery)
   - [Miscellaneous](#miscellaneous)
 
 ## Types
@@ -1445,10 +1446,13 @@ luke.jump()
   - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
   - [Try/Catch Cost In a Loop](http://jsperf.com/try-catch-in-loop-cost)
   - [Bang Function](http://jsperf.com/bang-function)
-  - [jQuery Find vs Context, Selector](http://jsperf.com/jquery-find-vs-context-sel/13)
   - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
 
+
+## jQuery
+
+While jQuery is something Think avoids using on new projects, we acknowledge that is still in use. Please follow best practices and use [jquery](https://jquery.com/) as guide when working with code that has jQuery.
 
 ## Miscellaneous
 
