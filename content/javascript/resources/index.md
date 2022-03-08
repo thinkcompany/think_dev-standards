@@ -12,12 +12,8 @@ description: "Think Recommended Javascript Resources"
   * [airbnb/javascript](https://github.com/airbnb/javascript)
 
 
-
 ## Articles
   * [Douglas Crockford - Code Conventions for the Javascript Programming Language](http://javascript.crockford.com/code.html)
-  
-
-## Presentations
   
 
 ## Books
