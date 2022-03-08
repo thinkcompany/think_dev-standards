@@ -579,7 +579,7 @@ function() {
     return name;
 }
 
-// bad - unnessary function call
+// bad - unnecessary function call
 function() {
    const name = getName();
 
@@ -606,6 +606,24 @@ function() {
     return true;
 }
 ```
+
+## Spread Operator
+
+'Spread syntax can be used when all elements from an object or array need to be included in a list of some kind.' [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#description)
+
+``` javascript
+
+// function example
+
+
+// array example
+let userList = ["Mark", "Zia", "Forrest"];
+let newUser = "Lang";
+numberStore = [...userList, newUser];
+
+
+```
+
 
 
 ## Comparison Operators & Equality
