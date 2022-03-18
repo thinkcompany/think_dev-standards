@@ -453,7 +453,7 @@ const $myDiv = document.getElementById('myDiv');
 $myDiv.addEventListener('click', function() {
         console.log('clicked');
 });
-s
+
 ```
 
 
