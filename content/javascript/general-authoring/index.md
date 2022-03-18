@@ -248,7 +248,7 @@ function inbox(messages) {
       items[i] = `<li>${messages[i].message}</li>`;
   }
 
-  return '<ul>' + items.join('') + '</ul>';
+  return `<ul>{items.join('')}</ul>`;
 }
 ```
 
