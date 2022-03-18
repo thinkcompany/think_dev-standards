@@ -614,7 +614,14 @@ function() {
 
 ## Spread Operator
 
-'Spread syntax can be used when all elements from an object or array need to be included in a list of some kind.' [MDN Docs](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax#description)
+When to use:
+- combining two arrays
+- passing all elements of an iterableObj as arguments
+- copy an array
+
+
+When not to use:
+
 
 ``` javascript
 
