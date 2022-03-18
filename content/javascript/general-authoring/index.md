@@ -612,15 +612,15 @@ function() {
 }
 ```
 
-## Spread Operator
+## Spread Syntax
 
-When to use:
-- combining two arrays
-- passing all elements of an iterableObj as arguments
-- copy an array
+When to use Spread Syntax:
+- Combining to arrays
+- Passing all elements of an iterableObj as arguments to a function
+- To make a copy of an array
 
 
-When not to use:
+When not to use Spread Syntax:
 
 
 ``` javascript
