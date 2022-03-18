@@ -412,24 +412,6 @@ function yup(name, options, args) {
 
 Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
 
-Arrow Functions are a compact way of writing functions. 
-
-``` javascript
-
-// Traditional Anonymous Function
-function (a){
-  return a + 100;
-}
-
-// Arrow function with one argument
-a => a + 100;
-
-
-// Arrow function with two arguments
-(a, b) => a + b;
-
-```
-
 When to use them:
 * DOM-level methods (setTimeout, setInterval, addEventListener)
 * Non-method functions
@@ -455,9 +437,6 @@ When not to use them:
 * as constructors
 * when `yield` is required
 
-
-In arrow functions `this` is determined by the lexical scope
-
 ```javascript
 
 const printNames = {
@@ -472,9 +451,6 @@ const printNames = {
 printNames.usersLog();
 
 ```  
-
-
-
 
 ## Event Binding
 
