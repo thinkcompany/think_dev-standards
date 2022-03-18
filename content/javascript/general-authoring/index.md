@@ -405,47 +405,22 @@ function yup(name, options, args) {
 
 ### Arrow Functions
 
-Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions
+How to use arrow functions
+- Don't wrap a single argument with parenthesis.
+- When returning a function from an arrow function, create a block rather than returning on one line (helps readability).
+- If support for older browsers is required, use Babel to compile arrow functions to older 
 
-When to use them:
-* DOM-level methods (setTimeout, setInterval, addEventListener)
-* Non-method functions
-* Named functions (treat them as variables)
-* Common usages `.filter` and `.map`
+When to use arrow functions
+- Use arrow functions whenever you don't want to think about or modify the context of the function (`this`). You might find that this is the majority of the functions you are writing on a daily basis, especially when building standalone modules or components.
+- Nested functions that need to share context with their parent
+- Array methods
+- Promise chains
+- Named variables
 
-```javascript
-// named functions
-let difference = (a, b) => a - b;
-
-// filter and map examples
-let numbers = [5, 6, 13, 0, 1, 18, 23];
-let = numbers.filter(x => x > 12);
-// [13, 18, 23]
-
-let salesTax = numbers.map(x => x * .05);
-// [.05,  .03, .65, 0, .05, .09, 1.15]
-```
-
-When not to use them:
-* methods
-* in Call, apply or bind methods
-* as constructors
-* when `yield` is required
-
-```javascript
-
-const printNames = {
-  intro: 'The user\'s name is',
-  users: ["Sarah", "Malcom", "Jesse", "Joe"],
-  usersLog() {
-    this.users.forEach((user) => {
-      console.log(this.intro, user)
-    })
-  },
-}
-printNames.usersLog();
-
-```  
+When not to use arrow functions
+- Event handlers that rely on the element context.
+- In cases where you need to leverage the `arguments` or `prototype` objects of a function.
+- Inside classes as properties, since they will not be added to the class' prototype.
 
 ## Event Binding
 
