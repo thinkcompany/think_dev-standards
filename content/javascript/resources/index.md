@@ -2,7 +2,7 @@
 title: Resources
 date: "2021-04-01T23:46:37.121Z"
 area: Javascript
-section: 5. Resources
+section: 4. Resources
 description: ""
 ---
 

@@ -51,8 +51,7 @@ This document contains Think Company's development standards for React/JSX (Java
     ```
 
 * **Instance Names**
-    - Instances of React components should use *camelCa
-    se*.
+    - Instances of React components should use *camelCase*.
 
     ```
     // bad
