@@ -9,7 +9,6 @@ module.exports = {
     },
   },
   plugins: [
-    `gatsby-plugin-percy`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
