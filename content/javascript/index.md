@@ -12,6 +12,7 @@ All of our JavaScript code is sent directly to the public. It should always be o
 
 ## Table of Contents
 
+  1. [Overview](/javascript/)
   1. [Authoring Guidelines](/javascript/general-authoring/)
-  2. [Resources](/javascript/resources/)
-  
+  1. [React](/javascript/react-best-practices/)
+  1. [Resources](/javascript/resources/)
