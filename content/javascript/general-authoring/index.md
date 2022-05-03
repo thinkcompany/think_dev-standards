@@ -189,22 +189,6 @@ const errorMessage = 'This is a super long error that was thrown because of Batm
 
 When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 
-```javascript
-// bad
-const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-
-// bad
-const errorMessage = 'This is a super long error that was thrown because \
-of Batman. When you stop to think about how Batman had anything to do \
-with this, you would get nowhere \
-fast.';
-
-// good
-const errorMessage = 'This is a super long error that was thrown because ' +
-    'of Batman. When you stop to think about how Batman had anything to do ' +
-    'with this, you would get nowhere fast.';
-```
-
 
 When programmatically building up a string, use `Array#join` instead of string concatenation. 
 
