@@ -45,8 +45,8 @@ This document contains Think Company's standards for writing JavaScript.
 + `undefined`
 
 ```javascript
-var foo = 1;
-var bar = foo;
+const foo = 1;
+let bar = foo;
 
 bar = 9;
 
@@ -59,8 +59,8 @@ console.log(foo, bar); // => 1, 9
 + `function`
 
 ```javascript
-var foo = [1, 2];
-var bar = foo;
+const foo = [1, 2];
+const bar = foo;
 
 bar[0] = 9;
 
@@ -74,23 +74,23 @@ Use the literal syntax for object creation.
 
 ```javascript
 // bad
-var item = new Object();
+const item = new Object();
 
 // good
-var item = {};
+let item = {};
 ```
 
-Don't use [reserved words](http://es5.github.io/#x7.6.1) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_keywords_as_of_ecmascript_2015) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
 
 ```javascript
 // bad
-var superman = {
+const superman = {
     default: { clark: 'kent' },
     private: true
 };
 
 // good
-var superman = {
+const superman = {
     defaults: { clark: 'kent' },
     hidden: true
 };
@@ -100,17 +100,17 @@ Use readable synonyms in place of reserved words.
 
 ```javascript
 // bad
-var superman = {
+const superman = {
     class: 'alien'
 };
 
 // bad
-var superman = {
+const superman = {
     klass: 'alien'
 };
 
 // good
-var superman = {
+const superman = {
     type: 'alien'
 };
 ```
@@ -121,16 +121,16 @@ Use the literal syntax for array creation.
 
 ```javascript
 // bad
-var items = new Array();
+let items = new Array();
 
 // good
-var items = [];
+let items = [];
 ```
 
 Use `Array#push` instead of direct assignment to add items to an array.
 
 ```javascript
-var someStack = [];
+let someStack = [];
 
 
 // bad
@@ -143,9 +143,9 @@ someStack.push('abracadabra');
 When you need to copy an array use `Array#slice`. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
 
 ```javascript
-var len = items.length;
-var itemsCopy = [];
-var i;
+const len = items.length;
+let itemsCopy = [];
+let i;
 
 // bad
 for (i = 0; i < len; i++) {
@@ -160,7 +160,7 @@ To convert an array-like object to an array, use `Array#slice`.
 
 ```javascript
 function trigger() {
-    var args = Array.prototype.slice.call(arguments);
+    let args = Array.prototype.slice.call(arguments);
     ...
 }
 ```
@@ -172,16 +172,16 @@ Use single quotes `''` for strings.
 
 ```javascript
 // bad
-var name = "Bob Parr";
+const name = "Bob Parr";
 
 // good
-var name = 'Bob Parr';
+const name = 'Bob Parr';
 
 // bad
-var fullName = "Bob " + this.lastName;
+const fullName = "Bob " + this.lastName;
 
 // good
-var fullName = 'Bob ' + this.lastName;
+const fullName = 'Bob ' + this.lastName;
 ```
 
 Use multiple lines for strings longer than 80 characters using string concatenation.
@@ -190,16 +190,16 @@ Note: If overused, long strings with concatenation could impact performance: [js
 
 ```javascript
 // bad
-var errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
 
 // bad
-var errorMessage = 'This is a super long error that was thrown because \
+const errorMessage = 'This is a super long error that was thrown because \
 of Batman. When you stop to think about how Batman had anything to do \
 with this, you would get nowhere \
 fast.';
 
 // good
-var errorMessage = 'This is a super long error that was thrown because ' +
+const errorMessage = 'This is a super long error that was thrown because ' +
     'of Batman. When you stop to think about how Batman had anything to do ' +
     'with this, you would get nowhere fast.';
 ```
@@ -207,10 +207,10 @@ var errorMessage = 'This is a super long error that was thrown because ' +
 When programmatically building up a string, use `Array#join` instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
 
 ```javascript
-var items;
-var messages;
-var length;
-var i;
+let items;
+let messages;
+let length;
+let i;
 
 messages = [{
     state: 'success',
@@ -274,12 +274,12 @@ Function expressions:
 
 ```javascript
 // anonymous function expression
-var anonymous = function() {
+const anonymous = function() {
     return true;
 };
 
 // named function expression
-var named = function named() {
+const named = function named() {
     return true;
 };
 
@@ -288,13 +288,13 @@ var named = function named() {
     console.log('Welcome to the Internet. Please follow me.');
 })();
 ```
-**Declare all functions before they are used.** Inner functions should follow the var statement. This helps make it clear what variables are included in its scope.
+**Declare all functions before they are used.** Inner functions should follow the let statement. This helps make it clear what variables are included in its scope.
 
 Do not use a space between the name of a function and the `(` (left parenthesis) of its parameter list. Use one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
 
 ```javascript
     function outer(c, d) {
-        var e = c * d;
+        const e = c * d;
         function inner(a, b) {
             return (e * a) + b;
         }
@@ -306,11 +306,11 @@ This convention works well with JavaScript because in JavaScript, functions and 
 
 ```javascript
     function getElementsByClassName(className) {
-        var results = [];
+        let results = [];
         walkTheDOM(document.body, function (node) {
-            var a;                  // array of class names
-            var c = node.className; // the node's classname
-            var i;                  // loop counter
+            let a;                  // array of class names
+            let c = node.className; // the node's classname
+            let i;                  // loop counter
 // If the node has a class name, then split it into a list of simple names.
 // If any of them match the requested name, then append the node to the set of results.
             if (c) {
@@ -327,7 +327,7 @@ This convention works well with JavaScript because in JavaScript, functions and 
     }
 ```
 
-If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is    function, which is an incorrect reading.
+If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is function, which is an incorrect reading.
 
 ```javascript
     div.addEventListener('click', function(e) {
@@ -347,17 +347,17 @@ Minimize the use of global functions. If your code contains functions that are o
 When a function is to be invoked immediately, wrap the entire invocation expression in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
 
 ```javascript
-var collection = (function () {
-    var keys = [], values = [];
+const collection = (function () {
+   let keys = [], values = [];
     return {
         get: function (key) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at >= 0) {
                 return value[at];
             }
         },
         set: function (key, value) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at < 0) {
                 at = keys.length;
             }
@@ -365,7 +365,7 @@ var collection = (function () {
             value[at] = value;
         },
         remove: function (key) {
-            var at = keys.indexOf(key);
+           const at = keys.indexOf(key);
             if (at >= 0) {
                 keys.splice(at, 1);
                 value.splice(at, 1);
@@ -387,7 +387,7 @@ if (currentUser) {
 }
 
 // good
-var test;
+let test;
 if (currentUser) {
     test = function test() {
         console.log('Yup.');
@@ -429,7 +429,7 @@ window.addEventListener('resize', function() {
 
 // Good: This is using debouncing to only fire every 250ms
 
-var windowResizeFn = debounce(function() {
+const windowResizeFn = debounce(function() {
     console.log('resize');
 }, 250);
 
@@ -449,7 +449,7 @@ document.getElementById('myDiv').addEventListener('click', function() {
 
 // Good: the node is now cached to the $myDiv variable. Instead of traversing the DOM to find myDiv, it will use the node reference in memory to locate it.
 
-var $myDiv = document.getElementById('myDiv');
+const $myDiv = document.getElementById('myDiv');
 
 $myDiv.addEventListener('click', function() {
         console.log('clicked');
@@ -463,22 +463,22 @@ $myDiv.addEventListener('click', function() {
 Use dot notation when accessing properties.
 
 ```javascript
-var luke = {
+const luke = {
     jedi: true,
     age: 28
 };
 
 // bad
-var isJedi = luke['jedi'];
+const isJedi = luke['jedi'];
 
 // good
-var isJedi = luke.jedi;
+const isJedi = luke.jedi;
 ```
 
 Use subscript notation `[]` when accessing properties with a variable.
 
 ```javascript
-var luke = {
+const luke = {
     jedi: true,
     age: 28
 };
@@ -487,39 +487,39 @@ function getProp(prop) {
     return luke[prop];
 }
 
-var isJedi = getProp('jedi');
+const isJedi = getProp('jedi');
 ```
 
 
 ## Variables
 
-Always use `var` to declare variables. Not doing so will result in global variables. We want to avoid polluting the global namespace.
+Always use `let` or `const` to declare variables. Use `let` for variables that need to mutable. Be sure to declare `let` at the top of the scope in which they are used. The preference is to use `const` when possible. A variable declared with `const` is immutable (i.e. it cannot be redefined). When creating objects or arrays using `const`, keep in mind that modifying the items _inside_ the object does not mutate the object reference itself. [Read More about using `const` here.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ```javascript
 // bad
 superPower = new SuperPower();
 
 // good
-var superPower = new SuperPower();
+const superPower = new SuperPower();
 ```
 
-Variables can be defined one per line or sequentially. If declaring sequentially, place `var` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
+Variables can be defined one per line or sequentially. If declaring sequentially, place `let` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
 
 ```javascript
 // bad
-var width, length, height, depth;
+let width, length, height, depth;
 
 // good
-var width, 
+let width, 
     height, 
     length,
     depth;
 
 // good
-var width;
-var height;
-var length;
-var depth;
+let width;
+let height;
+let length;
+let depth;
 
 ```
 
@@ -527,23 +527,23 @@ Declare unassigned variables last. This is helpful when later on you might need 
 
 ```javascript
 // bad
-var i, len, dragonball,
+let i, len, dragonball,
     items = getItems(),
     goSportsTeam = true;
 
 // bad
-var i;
-var items = getItems();
-var dragonball;
-var goSportsTeam = true;
-var len;
+let i;
+const items = getItems();
+let dragonball;
+const goSportsTeam = true;
+let len;
 
 // good
-var items = getItems();
-var goSportsTeam = true;
-var dragonball;
-var length;
-var i;
+const items = getItems();
+const goSportsTeam = true;
+let dragonball;
+let length;
+let i;
 ```
 
 Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
@@ -560,7 +560,7 @@ function() {
 
     //..other stuff..
 
-    var name = getName();
+    const name = getName();
 
     if (name === 'test') {
         return false;
@@ -571,7 +571,7 @@ function() {
 
 // good
 function() {
-    var name = getName();
+   const name = getName();
 
     test();
     console.log('doing stuff..');
@@ -587,7 +587,7 @@ function() {
 
 // bad - unnessary function call
 function() {
-    var name = getName();
+   const name = getName();
 
     if (!arguments.length) {
         return false;
@@ -600,7 +600,7 @@ function() {
 
 // good
 function() {
-    var name;
+    let name;
 
     if (!arguments.length) {
         return false;
@@ -861,17 +861,17 @@ Use `//` for single line comments. Place single line comments on a newline above
 
 ```javascript
 // bad
-var active = true;  // is current tab
+const active = true;  // is current tab
 
 // good
 // is current tab
-var active = true;
+const active = true;
 
 // bad
 function getType() {
     console.log('fetching type...');
     // set the default type to 'no type'
-    var type = this._type || 'no type';
+    let type = this._type || 'no type';
 
     return type;
 }
@@ -881,7 +881,7 @@ function getType() {
     console.log('fetching type...');
 
     // set the default type to 'no type'
-    var type = this._type || 'no type';
+   const type = this._type || 'no type';
 
     return type;
 }
@@ -922,17 +922,17 @@ Use soft tabs set to 4 spaces. ([Stack Overflow: Soft tabs or hard tabs?](http:/
 ```javascript
 // no
 function() {
-∙∙var name;
+∙∙let name;
 }
 
 // no
 function() {
-∙var name;
+∙let name;
 }
 
 // yeah
 function() {
-∙∙∙∙var name;
+∙∙∙∙let name;
 }
 ```
 
@@ -990,10 +990,10 @@ Set off operators with spaces.
 
 ```javascript
 // bad
-var x=y+5;
+const x=y+5;
 
 // good
-var x = y + 5;
+const x = y + 5;
 ```
 
 End files with a single newline character.
@@ -1043,13 +1043,13 @@ $('#items')
         .updateCount();
 
 // bad
-var leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
+const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
     .attr('width', (radius + margin) * 2).append('svg:g')
     .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
     .call(tron.led);
 
 // good
-var leds = stage.selectAll('.led')
+const leds = stage.selectAll('.led')
   .data(data)
   .enter().append('svg:svg')
       .classed('led', true)
@@ -1076,7 +1076,7 @@ if (foo) {
 return baz;
 
 // bad
-var obj = {
+let obj = {
     foo: function() {
     },
     bar: function() {
@@ -1085,7 +1085,7 @@ var obj = {
 return obj;
 
 // good
-var obj = {
+let obj = {
     foo: function() {
     },
 
@@ -1102,21 +1102,21 @@ Leading commas: **No, please.**
 
 ```javascript
 // bad
-var story = [
+const story = [
     once
   , upon
   , aTime
 ];
 
 // good
-var story = [
+const story = [
     once,
     upon,
     aTime
 ];
 
 // bad
-var hero = {
+const hero = {
     firstName: 'Bob'
   , lastName: 'Parr'
   , heroName: 'Mr. Incredible'
@@ -1124,7 +1124,7 @@ var hero = {
 };
 
 // good
-var hero = {
+const hero = {
     firstName: 'Bob',
     lastName: 'Parr',
     heroName: 'Mr. Incredible',
@@ -1136,23 +1136,23 @@ Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 
 
 ```javascript
 // kaboooom
-var hero = {
+const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn',
 };
 
-var heroes = [
+const heroes = [
     'Batman',
     'Superman',
 ];
 
 // phew
-var hero = {
+const hero = {
     firstName: 'Kevin',
     lastName: 'Flynn'
 };
 
-var heroes = [
+const heroes = [
     'Batman',
     'Superman'
 ];
@@ -1166,13 +1166,13 @@ var heroes = [
 ```javascript
 // bad
 (function() {
-    var name = 'Skywalker'
+    const name = 'Skywalker'
     return name
 })()
 
 // good
 (function() {
-    var name = 'Skywalker';
+    const name = 'Skywalker';
     return name;
 })();
 ```
@@ -1189,58 +1189,58 @@ Strings:
 //  => this.reviewScore = 9;
 
 // bad
-var totalScore = this.reviewScore + '';
+const totalScore = this.reviewScore + '';
 
 // good
-var totalScore = '' + this.reviewScore;
+const totalScore = '' + this.reviewScore;
 
 // bad
-var totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
+const totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
 
 // good
-var totalScore = String(this.reviewScore);
+const totalScore = String(this.reviewScore);
 ```
 
 Use `parseInt` for Numbers and always with a radix for type casting.
 
 ```javascript
-var inputValue = '4';
+const inputValue = '4';
 
 // bad
-var val = new Number(inputValue);
+const val = new Number(inputValue);
 
 // bad
-var val = +inputValue;
+const val = +inputValue;
 
 // bad
-var val = inputValue >> 0;
+const val = inputValue >> 0;
 
 // bad
-var val = parseInt(inputValue);
+const val = parseInt(inputValue);
 
 // bad
-var val = 1 * inputValue;
+const val = 1 * inputValue;
 
 // good
-var val = Number(inputValue);
+const val = Number(inputValue);
 
 // good
-var val = parseInt(inputValue, 10);
+const val = parseInt(inputValue, 10);
 ```
 
 Booleans:
 
 ```javascript
-var age = 0;
+const age = 0;
 
 // bad
-var hasAge = new Boolean(age);
+const hasAge = new Boolean(age);
 
 // bad
-var hasAge = !!age;
+const hasAge = !!age;
 
 // good
-var hasAge = Boolean(age);
+const hasAge = Boolean(age);
 ```
 
 ## Naming Conventions
@@ -1267,20 +1267,20 @@ Be consistent with either camelCase or underscore_case convention when naming ob
 
 ```javascript
 // bad, matches neither convention:
-var OBJEcttsssss = {};
-var o = {};
+let OBJEcttsssss = {};
+let o = {};
 function c() {}
 
 // bad, mixed conventions:
-var thisIsMyObject = {};
+let thisIsMyObject = {};
 function this_is_my_function() {}
 
 // good, camelCase:
-var thisIsMyObject = {};
+let thisIsMyObject = {};
 function thisIsMyFunction() {}
 
 // good, underscore_case:
-var this_is_my_object = {};
+let this_is_my_object = {};
 function this_is_my_function() {}
 
 ```
@@ -1293,7 +1293,7 @@ function user(options) {
     this.name = options.name;
 }
 
-var bad = new user({
+const bad = new user({
     name: 'nope'
 });
 
@@ -1302,7 +1302,7 @@ function User(options) {
     this.name = options.name;
 }
 
-var good = new User({
+const good = new User({
     name: 'yup'
 });
 ```
@@ -1310,7 +1310,7 @@ var good = new User({
 To indicate that a variable contains a jQuery object, start names with a `$`:
 
 ```javascript
-var $email = $("#email");
+const $email = $("#email");
 ```
 
 If you must reference this, avoid using an alias. Alisases to this are very bug prone.
@@ -1319,7 +1319,7 @@ If you must reference this, avoid using an alias. Alisases to this are very bug 
 
 // Bad
 function() {
-    var _this = this;
+    const _this = this;
     return function() {
         console.log(_this);
     };
@@ -1345,12 +1345,12 @@ Name your functions. This is helpful for stack traces.
 
 ```javascript
 // bad
-var log = function(msg) {
+const log = function(msg) {
     console.log(msg);
 };
 
 // good
-var log = function log(msg) {
+const log = function log(msg) {
     console.log(msg);
 };
 ```
@@ -1367,13 +1367,13 @@ module.exports = CheckBox;
 
 // in some other file
 // bad
-var CheckBox = require('./checkBox');
+const CheckBox = require('./checkBox');
 
 // bad
-var CheckBox = require('./check_box');
+const CheckBox = require('./check_box');
 
 // good
-var CheckBox = require('./CheckBox');
+const CheckBox = require('./CheckBox');
 ```
 
 ## Constructors
@@ -1419,7 +1419,7 @@ Jedi.prototype.setHeight = function(height) {
     this.height = height;
 };
 
-var luke = new Jedi();
+const luke = new Jedi();
 luke.jump(); // => true
 luke.setHeight(20); // => undefined
 
@@ -1434,7 +1434,7 @@ Jedi.prototype.setHeight = function(height) {
     return this;
 };
 
-var luke = new Jedi();
+const luke = new Jedi();
 
 luke.jump()
     .setHeight(20);
