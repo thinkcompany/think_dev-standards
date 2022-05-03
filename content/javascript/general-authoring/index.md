@@ -173,23 +173,31 @@ Use single quotes `''` for strings.
 ```javascript
 // bad
 const name = "Bob Parr";
+const fullName = "Bob " + this.lastName;
+const errorMessage = 'This is a super long error that was thrown because ' +
+    'of Batman. When you stop to think about how Batman had anything to do ' +
+    'with this, you would get nowhere fast.';
 
 // good
 const name = 'Bob Parr';
 
-// bad
-const fullName = "Bob " + this.lastName;
+const fullName = `Bob ${this.lastName}`;
 
-// good
-const fullName = 'Bob ' + this.lastName;
-
-const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
-
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.'
 ```
 
 When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
+```javascript
+const firstName = 'Mary'
+const lastName = 'Wind'
 
+// bad 
+const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.'
 
+// good
+const fullName = `My first name is ${firstName} and my last name is ${lastName}.`
+
+```
 When programmatically building up a string, use `Array#join` instead of string concatenation. 
 
 ```javascript
