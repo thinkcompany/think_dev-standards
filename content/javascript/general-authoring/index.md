@@ -173,38 +173,32 @@ Use single quotes `''` for strings.
 ```javascript
 // bad
 const name = "Bob Parr";
+const fullName = "Bob " + this.lastName;
+const errorMessage = 'This is a super long error that was thrown because ' +
+    'of Batman. When you stop to think about how Batman had anything to do ' +
+    'with this, you would get nowhere fast.';
 
 // good
 const name = 'Bob Parr';
 
-// bad
-const fullName = "Bob " + this.lastName;
+const fullName = `Bob ${this.lastName}`;
 
-// good
-const fullName = 'Bob ' + this.lastName;
+const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.'
 ```
 
-Use multiple lines for strings longer than 80 characters using string concatenation.
-
-Note: If overused, long strings with concatenation could impact performance: [jsPerf](http://jsperf.com/ya-string-concat) & [Discussion](https://github.com/airbnb/javascript/issues/40).
-
+When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 ```javascript
-// bad
-const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.';
+const firstName = 'Mary'
+const lastName = 'Wind'
 
-// bad
-const errorMessage = 'This is a super long error that was thrown because \
-of Batman. When you stop to think about how Batman had anything to do \
-with this, you would get nowhere \
-fast.';
+// bad 
+const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.'
 
 // good
-const errorMessage = 'This is a super long error that was thrown because ' +
-    'of Batman. When you stop to think about how Batman had anything to do ' +
-    'with this, you would get nowhere fast.';
-```
+const fullName = `My first name is ${firstName} and my last name is ${lastName}.`
 
-When programmatically building up a string, use `Array#join` instead of string concatenation. Mostly for IE: [jsPerf](http://jsperf.com/string-vs-array-concat/2).
+```
+When programmatically building up a string, use `Array#join` instead of string concatenation. 
 
 ```javascript
 let items;
@@ -212,7 +206,7 @@ let messages;
 let length;
 let i;
 
-messages = [{
+const messages = [{
     state: 'success',
     message: 'This one worked.'
 }, {
@@ -242,10 +236,10 @@ function inbox(messages) {
 
   for (i = 0; i < length; i++) {
       // use direct assignment in this case because we're micro-optimizing.
-      items[i] = '<li>' + messages[i].message + '</li>';
+      items[i] = `<li>${messages[i].message}</li>`;
   }
 
-  return '<ul>' + items.join('') + '</ul>';
+  return `<ul>{items.join('')}</ul>`;
 }
 ```
 
@@ -1475,18 +1469,6 @@ intended? Avoid constructs that cannot easily be determined to be correct.
 
 ###`===` AND `!==` OPERATORS.
 It is almost always better to use the `===` and `!==` operators. The `==` and `!=` operators do type coercion. In particular, do not use `==` to compare against falsy values.
-
-
-###CONFUSING PLUSES AND MINUSES
-Be careful to not follow a `+` with `+` or `++`. This pattern can be confusing. Insert parenthesis between them to make your intention clear.
-```javascript
-    total = subtotal + +myInput.value;
-```
-is better written as
-```javascript
-    total = subtotal + (+myInput.value);
-```
-so that the `+ +` is not misread as `++`.
 
 
 ###`EVAL` IS EVIL
