@@ -408,7 +408,7 @@ function yup(name, options, args) {
 How to use arrow functions
 - Don't wrap a single argument with parenthesis.
 - When returning a function from an arrow function, create a block rather than returning on one line (helps readability).
-- If support for older browsers is required, use Babel to compile arrow functions to older 
+- If support for older browsers is required, use Babel to compile arrow functions to older syntax. 
 
 When to use arrow functions
 - Use arrow functions whenever you don't want to think about or modify the context of the function (`this`). You might find that this is the majority of the functions you are writing on a daily basis, especially when building standalone modules or components.
@@ -424,7 +424,7 @@ When not to use arrow functions
 
 ## Event Binding
 
-Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript seperate from HTML. Inline bindings can also lead to very hard to track bugs.
+Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript separate from HTML. Inline bindings can also lead to very hard to track bugs.
 
 ```html 
 <!-- Bad -->
