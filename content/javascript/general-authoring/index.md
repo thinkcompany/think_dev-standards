@@ -188,14 +188,14 @@ const errorMessage = 'This is a super long error that was thrown because of Batm
 
 When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 ```javascript
-const firstName = 'Mary'
-const lastName = 'Wind'
+const firstName = 'Mary';
+const lastName = 'Wind';
 
 // bad 
-const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.'
+const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.';
 
 // good
-const fullName = `My first name is ${firstName} and my last name is ${lastName}.`
+const fullName = `My first name is ${firstName} and my last name is ${lastName}.`;
 
 ```
 When programmatically building up a string, use `Array#join` instead of string concatenation. 
