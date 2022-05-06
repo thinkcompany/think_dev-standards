@@ -188,14 +188,14 @@ const errorMessage = 'This is a super long error that was thrown because of Batm
 
 When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
 ```javascript
-const firstName = 'Mary'
-const lastName = 'Wind'
+const firstName = 'Mary';
+const lastName = 'Wind';
 
 // bad 
-const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.'
+const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.';
 
 // good
-const fullName = `My first name is ${firstName} and my last name is ${lastName}.`
+const fullName = `My first name is ${firstName} and my last name is ${lastName}.`;
 
 ```
 When programmatically building up a string, use `Array#join` instead of string concatenation. 
@@ -403,9 +403,28 @@ function yup(name, options, args) {
 }
 ```
 
+### Arrow Functions
+
+How to use arrow functions
+- Don't wrap a single argument with parenthesis.
+- When returning a function from an arrow function, create a block rather than returning on one line (helps readability).
+- If support for older browsers is required, use Babel to compile arrow functions to older syntax. 
+
+When to use arrow functions
+- Use arrow functions whenever you don't want to think about or modify the context of the function (`this`). You might find that this is the majority of the functions you are writing on a daily basis, especially when building standalone modules or components.
+- Nested functions that need to share context with their parent
+- Array methods
+- Promise chains
+- Named variables
+
+When not to use arrow functions
+- Event handlers that rely on the element context.
+- In cases where you need to leverage the `arguments` or `prototype` objects of a function.
+- Inside classes as properties, since they will not be added to the class' prototype.
+
 ## Event Binding
 
-Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript seperate from HTML. Inline bindings can also lead to very hard to track bugs.
+Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript separate from HTML. Inline bindings can also lead to very hard to track bugs.
 
 ```html 
 <!-- Bad -->
