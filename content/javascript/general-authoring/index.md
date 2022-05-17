@@ -21,6 +21,7 @@ This document contains Think Company's standards for writing JavaScript.
   - [Event Binding](#event-binding)
   - [Properties](#properties)
   - [Variables](#variables)
+  - [Spread Syntax](#spread-syntax)
   - [Comparison Operators & Equality](#comparison-operators--equality)
   - [Blocks](#blocks)
   - [Comments](#comments)
@@ -164,7 +165,6 @@ function trigger() {
     ...
 }
 ```
-
 
 ## Strings
 
@@ -448,7 +448,7 @@ const $myDiv = document.getElementById('myDiv');
 $myDiv.addEventListener('click', function() {
         console.log('clicked');
 });
-s
+
 ```
 
 
@@ -622,16 +622,20 @@ When not to use Spread Syntax:
 
 // function example
 
-
 // array example
 let userList = ["Mark", "Zia", "Forrest"];
 let newUser = "Lang";
 numberStore = [...userList, newUser];
 
+// copy an array
+let users = ["Paul", "Tara", "Malcom"];
+let admin = [...users]; 
+admin.push("Sara");
+console.log(admin)
+     // returns ["Paul", "Tara", "Malcom", "Sara"]
+
 
 ```
-
-
 
 ## Comparison Operators & Equality
 
