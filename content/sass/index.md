@@ -33,7 +33,7 @@ description: ""
 
 Write Sass in the most readable and maintainable way (e.g. as close to regular CSS) as possible while taking advantage of the conveniences that the language provides. Don't introduce unnecessary, hard-to-read complexity just because Sass allows you to.
 
-Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](/styles/css/) still apply with regard to formatting, naming, specificity, and modularity.
+Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](../css/index.md) still apply with regard to formatting, naming, specificity, and modularity.
 
 View the resulting CSS frequently to ensure the quality meets our standards.
 
@@ -215,7 +215,7 @@ In practice, define a function to check whether or not a key exists in the map p
 
 Use `@extend` cautiously, and check the CSS output carefully to ensure that you are not generating unintended selectors.
 
-This is particularly true when a class that has nested selectors is extended, because all of the nested classes/elements will also be extended. This should be avoided. (see http://oliverjash.me/2012/09/07/methods-for-modifying-objects-in-oocss.html)
+This is particularly true when a class that has nested selectors is extended, because all of the nested classes/elements will also be extended. This should be avoided.
 
 A better way to use `@extend`, which reduces the chances of bloating your css, is to extend a placeholder rather than a selector (see http://csswizardry.com/2014/01/extending-silent-classes-in-sass), and extend only closely related rulesets such as the button example below.
 
