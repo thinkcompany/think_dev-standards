@@ -59,11 +59,11 @@ We will use the SCSS syntax, which is similar to standard CSS, with the addition
 
 ```scss
 a {
-	color: blue;
-	&:hover,
-	&:focus {
-		text-decoration: underline;
-	}
+    color: blue;
+    &:hover,
+    &:focus {
+        text-decoration: underline;
+    }
 }
 ```
 
@@ -80,18 +80,18 @@ Use the following declaration order inside Sass rules:
 
 ```scss
 .module {
-	@extend %module;
-	@include mixin($argument);
-	property: value;
-	&:pseudo {
-		// styles
-	}
-	.nested {
-		// styles
-	}
-	@include mq($size) {
-		// styles
-	}
+    @extend %module;
+    @include mixin($argument);
+    property: value;
+    &:pseudo {
+        // styles
+    }
+    .nested {
+        // styles
+    }
+    @include mq($size) {
+        // styles
+    }
 }
 ```
 
@@ -101,16 +101,16 @@ Media queries should be named and added along with their base rulesets, ordered 
 
 ```scss
 .module {
-	background: #fff;
-	font-size: 1em;
-	@include mq($bp-small) {
-		background: #333;
-		font-size: 1.5em;
-	}
-	@include mq($bp-medium) {
-		background: #000;
-		font-size: 2em;
-	}
+    background: #fff;
+    font-size: 1em;
+    @include mq($bp-small) {
+        background: #333;
+        font-size: 1.5em;
+    }
+    @include mq($bp-medium) {
+        background: #000;
+        font-size: 2em;
+    }
 }
 ```
 
@@ -141,11 +141,11 @@ Name variables, mixins, and functions similarly to the way classes are named - l
 $base-font-size: 1rem;
 	
 @mixin breakpoint($size) {
-	// ...
+    // ...
 }
 
 @function url-encode($string) {
-	// ...
+    // ...
 }
 ```
 
@@ -186,8 +186,8 @@ Document all parameters for mixins and functions, as well as the return value fo
 // @return {String} - encoded string
 
 @function url-encode($string) {
-	// ...
-	@return $string;
+    // ...
+    @return $string;
 }
 ```
 
@@ -198,14 +198,14 @@ Sass maps allow you to define a key/value structure. These are useful for defini
 ```scss
 // define a Sass map
 $z-index: (
-	'modal': 100,
-	'tooltip': 150
+    'modal': 100,
+    'tooltip': 150
 );
 
 // use a Sass map
 
 .tooltip {
-	z-index: map-get($z-index, 'modal');
+    z-index: map-get($z-index, 'modal');
 }
 ```
 
@@ -224,22 +224,22 @@ When you want to share declarations with multiple, unrelated rulesets (e.g. usin
 ```scss
 .btn,
 %btn { // placeholder
-	display: inline-block;
-	padding: 1em;
-	background: gray;
-	border-radius: 3px;
+    display: inline-block;
+    padding: 1em;
+    background: gray;
+    border-radius: 3px;
 }
 
 // extend the placeholder rather than the class
 
 .btn--primary {
-	@extend %btn;
-	background-color: green;
+    @extend %btn;
+    background-color: green;
 }
 
 .btn--secondary {
-	@extend %btn;
-	background-color: blue;
+    @extend %btn;
+    background-color: blue;
 }
 ```
 
@@ -249,7 +249,7 @@ Organize and name Sass partials using the following guidelines, based on the CSS
 
 ### Naming convention for partials
 
-_[category].[partial-name].scss
+`_[category].[partial-name].scss`
 
 Example:
 
@@ -292,7 +292,7 @@ Example:
  */
 
  .module {
- 	// module styles...
+    // module styles...
  }
 ```
 
@@ -310,7 +310,7 @@ Example that will generate a base.css file:
 @import 'base.elements';
 ```  
 
-You do not need to include the underscore or the file extension in the @import. 
+You do not need to include the underscore or the file extension in the `@import`. 
 
 All rules should reside in partials. Do not add any rules directly into files that import partials.
 
