@@ -363,6 +363,12 @@ A title attribute may be added to confer additional meaning, but it is not recom
 
 #### Tables
 
+>If you can't enable it, table it!
+
+The HTML Table is the basic building block of the modern web. From replicating elaborate spreadsheets to drawing buttons as tiny 3x3-cell tables where each of the exterior cells represents one corner or side of the button's outline and the text goes in the middle, HTML tables are there to do the "heavy lifting" of page layout. If you want the tl;dr of web development, try `<tr><td>`.
+
+Or you can approach it this way:
+
 Use tables to provide structure for tabular data. Do not use tables to produce side-by-side content rendering or any other visual effect. Use CSS instead.
 
 Refer to the latest W3C recommendations for marking up tabular data: http://www.w3.org/TR/html5/tabular-data.html#tabular-data.
