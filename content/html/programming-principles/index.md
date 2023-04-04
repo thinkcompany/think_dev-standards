@@ -67,12 +67,12 @@ Only use elements and attributes that have semantic value, or are commonly used 
 - `target` (validation errors in XHTML may be ignored)
 - `action`, `method`, `type`, `maxsize`, and other form-specific attributes
 - `rowspan`, `colspan`, `scope`
-- `placeholder` and other HTML5 form attributes/attribute values 
+- `placeholder` and other HTML5 form attributes/attribute values
 - custom data attributes (`data-*`)
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
-*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr. 
+*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr.
 
 ## Format & Style
 
@@ -103,7 +103,7 @@ Inline elements may appear on the same line as their block-level containers when
 
 Although wireframes and visual designs may approach the user experience from a page or flow perspective, a web site is actually constructed from many smaller pieces of code. Sometimes referred to as LEGO blocks or modules, we refer to them as modules.
 
-A module is a block of HTML that has been coded such that it can be reused anywhere in a web site or application. A module may vary to a limited degree, based on the data available to populate the markup. 
+A module is a block of HTML that has been coded such that it can be reused anywhere in a web site or application. A module may vary to a limited degree, based on the data available to populate the markup.
 
 Example module:
 ```html
@@ -120,13 +120,13 @@ Example module:
 
 Modules are generally wrapped in DIV tags, to give the overall object a class name that can be referenced by CSS. CSS and JavaScript deliverables are often paired with a module and are equally reusable.
 
-To support the goal of maximum reusability of modules, refrain from using IDs on any piece of markup in a module. One exception to this is form controls, where an ID must be used on the form field in order to explicitly pair a label to it. 
+To support the goal of maximum reusability of modules, refrain from using IDs on any piece of markup in a module. One exception to this is form controls, where an ID must be used on the form field in order to explicitly pair a label to it.
 
 ### Classes, IDs, & Custom Data Attributes
- 
-Class names are the preferred method for linking styles to markup. Custom data (data-*) attributes are the preferred hooks for behavior (JavaScript). Only use IDs on objects which are unique within the entire site or when commonly prescribed (in-page anchors). Avoid the use of IDs on module elements (i.e. buttons, links, list items), since these objects are likely to appear multiple times in a single page and can cause both validation and back-end issues. 
 
-Assign names to objects based on the function they fulfill rather than what they look like. For example, a navbar will always provide a menu of links regardless of whether it is horizontal or vertical, or whether it is placed at the top or bottom of a page. 
+Class names are the preferred method for linking styles to markup. Custom data (data-*) attributes are the preferred hooks for behavior (JavaScript). Only use IDs on objects which are unique within the entire site or when commonly prescribed (in-page anchors). Avoid the use of IDs on module elements (i.e. buttons, links, list items), since these objects are likely to appear multiple times in a single page and can cause both validation and back-end issues.
+
+Assign names to objects based on the function they fulfill rather than what they look like. For example, a navbar will always provide a menu of links regardless of whether it is horizontal or vertical, or whether it is placed at the top or bottom of a page.
 Create names using a single lowercase word. In cases where a longer description is needed, separate words using hyphens. Do not use camel case and do not use underscores.
 
 ```html
@@ -137,7 +137,7 @@ Create names using a single lowercase word. In cases where a longer description 
 ```
 
 ### Attribute Order
-Add attributes to HTML elements in the following order: 
+Add attributes to HTML elements in the following order:
 
 * `class`
 * `id`/`name`
@@ -149,11 +149,11 @@ Add attributes to HTML elements in the following order:
 Example:
 ```html
 <a class="classes" id="id" data-hook="expand" href="href" title="link title">link text</a>
-```  
+```
 
 ### Page Layouts
 
-Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location. 
+Use the HTML5 sectioning elements to create structure in an HTML page. When there is no appropriate sectioning element, use `<div>`. Give structural elements unique class names that describe their purpose, not their location.
 
 When appropriate, use structural elements to create a grid of "columns" that contain the core content of the page. Use classes so that these grids can be used multiple times per page if necessary.
 
@@ -182,9 +182,9 @@ Use the appropriate language code for the page. For instance, use "es" for Spani
 
 The `<head>` element is always required and immediately follows the opening `<html>` tag.
 
-#### Meta 
+#### Meta
 
-One or more `<meta>` elements may be nested in the document head. 
+One or more `<meta>` elements may be nested in the document head.
 
 #### Charset Meta Tag
 
@@ -238,7 +238,7 @@ Use conditional comments in the `<head>` to include IE browser version specific 
 
 #### Importing JavaScript
 
-JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag. 
+JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag.
 
 ```html
 <script src="/js/lib/jquery.js"></script>
@@ -267,7 +267,7 @@ Use headings consistently on a page and throughout a site. Here are some guideli
 
 #### Text Content
 
-Mark up non-heading text with the appropriate semantic element. 
+Mark up non-heading text with the appropriate semantic element.
 
 Most non-heading, non-list, prose content should be marked up using `<p>`. Do not use the `<br>` tag to create the appearance of paragraphs. Always format text using CSS: do not write content in all capital or lowercase letters (unless a brand name or trademark), do not use special characters such as `&nbsp;` to add whitespace, etc.
 
@@ -344,7 +344,7 @@ This will produce a visible tooltip in most browsers. Make sure you repeat the l
 
 Use the `<img>` tag to include a content image. Do not use `<img>` to include design ("chrome") graphics; load and apply those images via CSS instead.
 
-Unless coding a responsive design, specify the the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout. 
+Unless coding a responsive design, specify the the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout.
 
 Always specify an alt attribute that describes the image. If a design element is loaded via HTML, use a blank alt attribute value rather than no alt attribute.
 
@@ -362,12 +362,6 @@ If there is descriptive text directly adjacent to the image, then you may leave 
 A title attribute may be added to confer additional meaning, but it is not recommended to use both title and alt on an `<img>` tag.
 
 #### Tables
-
->If you can't enable it, table it!
-
-The HTML Table is the basic building block of the modern web. From replicating elaborate spreadsheets to drawing buttons as tiny 3x3-cell tables where each of the exterior cells represents one corner or side of the button's outline and the text goes in the middle, HTML tables are there to do the "heavy lifting" of page layout. If you want the tl;dr of web development, try `<tr><td>`.
-
-Or you can approach it this way:
 
 Use tables to provide structure for tabular data. Do not use tables to produce side-by-side content rendering or any other visual effect. Use CSS instead.
 
@@ -411,7 +405,7 @@ The `<form>` element must include action and method attributes. When choosing th
 - GET: form data is encoded by the browser and appended to the URL; typically used for retrieving data
 - POST: form data appears in a message body which in encrypted over HTTPS; typically used for sending or storing data
 
-Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) will always come first, regardless of visual order. 
+Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) will always come first, regardless of visual order.
 
 
 #### Fieldset
@@ -454,7 +448,7 @@ Refrain from complicated CSS styling of form inputs so as not to override defaul
 
 #### Checkboxes & Radio Buttons
 Group sets of checkboxes and radio buttons using the `<fieldset>` element. The `<legend>` provides a text label for the group, since the `<label>` is required for each individual input.
- 
+
 ```html
 <fieldset>
     <legend>What is your favorite ice cream flavor?</legend>
