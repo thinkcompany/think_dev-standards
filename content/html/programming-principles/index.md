@@ -2,7 +2,7 @@
 title: HTML Development Standards
 date: "2020-06-08T23:46:37.121Z"
 area: HTML
-section: 1. Progamming Principles
+section: 1. Programming Principles
 description: ""
 ---
 
