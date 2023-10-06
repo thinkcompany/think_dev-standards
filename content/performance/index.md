@@ -108,7 +108,7 @@ Do not use too many fonts on your site, and do not import more font variants tha
 The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to compressing the font files with GZIP when delivering the fonts.
 
 ### Include local() & format() Directives in a @font-face Declaration
-When you the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
+When you use the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
 
 Your declaration should look something like this:
 
