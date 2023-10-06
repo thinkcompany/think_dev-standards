@@ -228,7 +228,7 @@ class HomePage extends React.Component {
                 </svg>
               </div>
               <h3>SASS</h3>
-              <p>CSS with super powers</p>
+              <p>CSS with superpowers</p>
             </div>
           </Link>
           <Link to="/seo/" className={styles.linkCard}>
