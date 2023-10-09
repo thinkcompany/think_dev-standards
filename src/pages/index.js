@@ -228,7 +228,7 @@ class HomePage extends React.Component {
                 </svg>
               </div>
               <h3>SASS</h3>
-              <p>Dolorem ipsum dolor sit amet</p>
+              <p>CSS with superpowers</p>
             </div>
           </Link>
           <Link to="/seo/" className={styles.linkCard}>
@@ -251,7 +251,7 @@ class HomePage extends React.Component {
                 </svg>
               </div>
               <h3>SEO</h3>
-              <p>Dolorum ipsom dolor sit amet</p>
+              <p>Find relevant content faster</p>
             </div>
           </Link>
         </div>
