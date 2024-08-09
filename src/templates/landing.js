@@ -1,12 +1,11 @@
 import React from "react";
-import DOMPurify from "dompurify";
-import htmlParse from "html-react-parser";
 import { graphql } from "gatsby";
 import { MDXRenderer } from "gatsby-plugin-mdx";
 import HeroBlockLanding from "../components/HeroBlockLanding";
 import Layout from "../components/layout";
 import SEO from "../components/seo";
 import SideNav from "../components/SideNav";
+import { htmlSanitizeParse } from "../utils";
 import fooHeroImage from "../../content/assets/hero-01.jpg";
 import barHeroImage from "../../content/assets/hero-02.jpg";
 import styles from "../styles/LandingPage.module.scss";
@@ -40,7 +39,7 @@ const LandingPage = ({ data, pageContext }) => {
         <div className={styles.TwoColumnGrid}>
           <SideNav menuData={sideMenuData} className={styles.SideNav}></SideNav>
           <div className={styles.PageContent}>
-            <h1>{htmlParse(DOMPurify.sanitize(post.frontmatter.title))}</h1>
+            <h1>{htmlSanitizeParse(post.frontmatter.title)}</h1>
             <MDXRenderer>{post.body}</MDXRenderer>
           </div>
         </div>

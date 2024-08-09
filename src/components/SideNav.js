@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import styles from "../styles/SideNav.module.scss";
+import { htmlSanitizeParse } from "../utils";
 
 const SideNav = ({ menuData }) => {
   //Creates an array of all the sections from the frontmatter
@@ -30,7 +31,7 @@ const SideNav = ({ menuData }) => {
                         key={post.fields.slug}
                       >
                         <div className={styles.linkItem}>
-                          {post.frontmatter.title}
+                          {htmlSanitizeParse(post.frontmatter.title)}
                         </div>
                       </Link>
                     </li>
