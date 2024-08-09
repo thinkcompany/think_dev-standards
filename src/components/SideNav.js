@@ -10,7 +10,6 @@ const SideNav = ({ menuData }) => {
 
   //Removes the duplicates of the sections array
   let newSections = [...new Set(sections)];
-  console.log(newSections);
 
   return (
     <div className={styles.navContainer}>
