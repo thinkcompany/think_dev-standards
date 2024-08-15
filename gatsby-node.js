@@ -44,9 +44,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        css: allMdx(
-          filter: { frontmatter: { area: { eq: "CSS" } } }
-        ) {
+        css: allMdx(filter: { frontmatter: { area: { eq: "CSS" } } }) {
           edges {
             node {
               excerpt
@@ -63,9 +61,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        git: allMdx(
-          filter: { frontmatter: { area: { eq: "Git" } } }
-        ) {
+        git: allMdx(filter: { frontmatter: { area: { eq: "Git" } } }) {
           edges {
             node {
               excerpt
@@ -82,9 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        html: allMdx(
-          filter: { frontmatter: { area: { eq: "HTML" } } }
-        ) {
+        html: allMdx(filter: { frontmatter: { area: { eq: "HTML" } } }) {
           edges {
             node {
               excerpt
@@ -158,9 +152,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        sass: allMdx(
-          filter: { frontmatter: { area: { eq: "SASS" } } }
-        ) {
+        sass: allMdx(filter: { frontmatter: { area: { eq: "SASS" } } }) {
           edges {
             node {
               excerpt
@@ -177,9 +169,7 @@ exports.createPages = async ({ graphql, actions }) => {
             }
           }
         }
-        seo: allMdx(
-          filter: { frontmatter: { area: { eq: "SEO" } } }
-        ) {
+        seo: allMdx(filter: { frontmatter: { area: { eq: "SEO" } } }) {
           edges {
             node {
               excerpt
@@ -358,6 +348,23 @@ exports.onCreateNode = ({ node, actions, getNode }) => {
       name: `slug`,
       node,
       value,
+    });
+  }
+};
+
+// Silence the canvas package when building html (needed for isomorphic-dompurify)
+// <https://github.com/gatsbyjs/gatsby/issues/17661#issuecomment-532424504>
+exports.onCreateWebpackConfig = ({ stage, loaders, actions }) => {
+  if (stage === "build-html") {
+    actions.setWebpackConfig({
+      module: {
+        rules: [
+          {
+            test: /canvas/,
+            use: loaders.null(),
+          },
+        ],
+      },
     });
   }
 };

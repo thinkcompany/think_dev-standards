@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "gatsby";
 import styles from "../styles/SideNav.module.scss";
+import { htmlSanitizeParse } from "../utils";
 
 const SideNav = ({ menuData }) => {
   //Creates an array of all the sections from the frontmatter
@@ -10,7 +11,6 @@ const SideNav = ({ menuData }) => {
 
   //Removes the duplicates of the sections array
   let newSections = [...new Set(sections)];
-  console.log(newSections);
 
   return (
     <div className={styles.navContainer}>
@@ -31,7 +31,7 @@ const SideNav = ({ menuData }) => {
                         key={post.fields.slug}
                       >
                         <div className={styles.linkItem}>
-                          {post.frontmatter.title}
+                          {htmlSanitizeParse(post.frontmatter.title)}
                         </div>
                       </Link>
                     </li>
