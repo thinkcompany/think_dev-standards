@@ -54,7 +54,7 @@ There are several meta elements that should be implemented to aid in search engi
 
 #### Description
 
-The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and in link descriptions on social sharing sites. The meta description is more important for visitor click-through than page ranking. If no meta decription is provided on a given page, generally search engines will scan the page for the most relevant keywords based on the query, and use the surrounding copy in result pages. 
+The description meta element should contain a 150-character blurb (including spaces and separators) that may appear on the search engine results page and in link descriptions on social sharing sites. The meta description is more important for visitor click-through than page ranking. If no meta description is provided on a given page, generally search engines will scan the page for the most relevant keywords based on the query, and use the surrounding copy in result pages. 
 
 #### Keywords
 
@@ -107,7 +107,7 @@ Good Example:
 
 #### NOFOLLOW
 
-The `rel` attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, `rel="nofollow"` should be used to prevent spidering of anchors that link to unreleated domains. 
+The `rel` attribute of the anchor element can be used to indicate the relationship to the linked page. For search engine purposes, `rel="nofollow"` should be used to prevent spidering of anchors that link to unrelated domains. 
 
 Example:
 ```html

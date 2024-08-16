@@ -75,7 +75,7 @@ Better Example:
 
 * ⚠️ You should _NEVER_ use force push to rewrite history on a shared branch
   unless you _really_ understand what you are doing! In the unlikely situation that
-  it this is necessary, make sure the _entire_ team is aware when it is happening, and
+  this is necessary, make sure the _entire_ team is aware when it is happening, and
   what they need to do to safely update the branch without losing any of their work.
 
 * Delete your branch from the upstream repository after it's merged (unless
@@ -182,7 +182,7 @@ Better Example:
        main branch and results in a very simple history.
 
        *(Note: This strategy is better suited for projects with short-running
-       branches. Otherwise it might be better to occassionally merge the
+       branches. Otherwise it might be better to occasionally merge the
        main branch instead of rebasing onto it.)*
 
 * If your branch includes more than one commit, do not merge with a

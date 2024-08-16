@@ -17,7 +17,7 @@ This document contains Think Company's standards for quality assurance when auth
 - [Security](#security)
 - [Codebase Integrity](#codebase-integrity)
 
-This set of documents contain the standards for quality assurance at Think Company. There are six primary areas of focus to ensure quality on projects: Standards Compliance, Accessibility, Browser Compatibility, Performance, Security, and Codebase Integrity. It is every developer's responsibilty to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.
+This set of documents contain the standards for quality assurance at Think Company. There are six primary areas of focus to ensure quality on projects: Standards Compliance, Accessibility, Browser Compatibility, Performance, Security, and Codebase Integrity. It is every developer's responsibility to execute each step outlined below. In certain cases, a step will require collaboration between the developer and the dev lead on the project.
 
 ## Standards Compliance
 
