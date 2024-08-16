@@ -151,11 +151,11 @@ $base-font-size: 1rem;
 
 ## Sass Language Features
 
-This sections covers some of the most commonly used features of Sass and related best practices. It is not meant to be a comprehensive review of the language.
+This section covers some of the most commonly used features of Sass and related best practices. It is not meant to be a comprehensive review of the language.
 
 ### Nesting
 
-A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output adheres to the specificity rules defined our CSS Authoring Guidelines documentation.
+A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output adheres to the specificity rules defined in our CSS Authoring Guidelines documentation.
 
 ### Variables
 
@@ -175,7 +175,7 @@ $space-large: 2em;
 
 ### Mixins & Functions
 
-The main objective of mixins and functions is keeping your code DRY. Make these as simple as possible, sticking to single purpose and avoiding unnecessary complexity.
+The main objective of mixins and functions is keeping your code DRY. Make these as simple as possible, sticking to a single purpose and avoiding unnecessary complexity.
 
 Document all parameters for mixins and functions, as well as the return value for functions, as follows:
 

@@ -424,7 +424,7 @@ When not to use arrow functions
 
 ## Event Binding
 
-Avoid inline event bindings. It is better to keep a seperations of concerns by keeping our JavaScript separate from HTML. Inline bindings can also lead to very hard to track bugs.
+Avoid inline event bindings. It is better to keep a separations of concerns by keeping our JavaScript separate from HTML. Inline bindings can also lead to very hard to track bugs.
 
 ```html 
 <!-- Bad -->
@@ -450,11 +450,11 @@ window.addEventListener('resize', windowResizeFn);
 
 ```
 
-Always cache the DOM query for the element you are binding to. This creates a memory refrence to the DOM nodes, which significantly speeds up execution time.
+Always cache the DOM query for the element you are binding to. This creates a memory reference to the DOM nodes, which significantly speeds up execution time.
 
 ```js
 
-// Bad: This will query for the selector everytime, in a complex document that could take some time.
+// Bad: This will query for the selector every time, in a complex document that could take some time.
 
 document.getElementById('myDiv').addEventListener('click', function() {
         console.log('clicked');
@@ -506,7 +506,7 @@ const isJedi = getProp('jedi');
 
 ## Variables
 
-Always use `let` or `const` to declare variables. Use `let` for variables that need to mutable. Be sure to declare `let` at the top of the scope in which they are used. The preference is to use `const` when possible. A variable declared with `const` is immutable (i.e. it cannot be redefined). When creating objects or arrays using `const`, keep in mind that modifying the items _inside_ the object does not mutate the object reference itself. [Read More about using `const` here.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+Always use `let` or `const` to declare variables. Use `let` for variables that need to be mutable. Be sure to declare `let` at the top of the scope in which they are used. The preference is to use `const` when possible. A variable declared with `const` is immutable (i.e. it cannot be redefined). When creating objects or arrays using `const`, keep in mind that modifying the items _inside_ the object does not mutate the object reference itself. [Read More about using `const` here.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
 
 ```javascript
 // bad
@@ -598,7 +598,7 @@ function() {
     return name;
 }
 
-// bad - unnessary function call
+// bad - unnecessary function call
 function() {
    const name = getName();
 
@@ -630,7 +630,7 @@ function() {
 ## Comparison Operators & Equality
 
 Use `===` and `!==` over `==` and `!=`.
-Conditional statements such as the `if` statement evaulate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
 
 + **Objects** evaluate to **true**
 + **Undefined** evaluates to **false**
@@ -1326,7 +1326,7 @@ To indicate that a variable contains a jQuery object, start names with a `$`:
 const $email = $("#email");
 ```
 
-If you must reference this, avoid using an alias. Alisases to this are very bug prone.
+If you must reference this, avoid using an alias. Aliases to this are very bug prone.
 
 ```javascript
 
@@ -1465,7 +1465,7 @@ luke.jump()
 
 ## jQuery
 
-While jQuery is something Think avoids using on new projects, we acknowledge that is still in use. Please follow best practices and use [jquery](https://jquery.com/) as guide when working with code that has jQuery.
+While jQuery is something Think avoids using on new projects, we acknowledge that it is still in use. Please follow best practices and use [jquery](https://jquery.com/) as a guide when working with code that has jQuery.
 
 ## Miscellaneous
 

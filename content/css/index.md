@@ -242,7 +242,7 @@ Examples of pseudo-classes:
 * `:not(x)`, `:target`, `:lang(language)`
 
 
-Use a double-colon for pseudo-elements and use a single-colon for pseudo-classes in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if you need support an older browser, use single-colons for both pseudo-elements and pseudo-classes.
+Use a double-colon for pseudo-elements and use a single-colon for pseudo-classes in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if support for older browsers is needed, use single-colons for both pseudo-elements and pseudo-classes.
 
 Poor example:
 ```css
@@ -518,7 +518,7 @@ Example:
 }
 ```
 
-Do not link to an external style sheet for hack rules unless there are major layout overrides needed to support IE7 or IE8. These older browser are already slow, and forcing the browser to download an additional style sheet will further impact page performance. If an additional style sheet is necessary, however, use conditional comments to load it only for the browsers that need it.
+Do not link to an external style sheet for hack rules unless there are major layout overrides needed to support IE7 or IE8. These older browsers are already slow, and forcing the browser to download an additional style sheet will further impact page performance. If an additional style sheet is necessary, however, use conditional comments to load it only for the browsers that need it.
 
 ## Integration
 
@@ -528,7 +528,7 @@ Always link style sheets in the HEAD of an HTML document, before any JavaScript 
 
 Concatenate and minify style sheets in production code, and aim for the fewest number of style sheets per page. NOTE: Do not exceed 30 style sheets per page. Internet Explorer (any version) will stop importing style sheets after it reaches 30, and the browser will not report an error, making debugging difficult.
 
-Note also that Internet Explorer 9 and below are limited to 4095 selectors per style sheet. If you are hitting that limit, consider a tool such as Bless (blesscss.com) to split you selectors across multiple style sheets.
+Note also that Internet Explorer 9 and below are limited to 4095 selectors per style sheet. If you are hitting that limit, consider a tool such as Bless (blesscss.com) to split selectors across multiple style sheets.
 
 ### Integrating CSS with JavaScript
 

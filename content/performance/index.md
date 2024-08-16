@@ -16,19 +16,19 @@ This document contains Think Company's standards for addressing performance.
 - [Third Party Code](#third-party-code)
 - [Testing Performance](#testing-performance)
 
-Each individual element on a web page generates an HTTP request which adds its own network latency, download time and render time. The most crucial optimization for any web site is to reduce or limit the number of total HTTP requests. There are several ways to accomplish this, the most common of which is to combine CSS, JS and images into as few files as possible.
+Each individual element on a web page generates an HTTP request which adds its own network latency, download time and render time. The most crucial optimization for any website is to reduce or limit the number of total HTTP requests. There are several ways to accomplish this, the most common of which is to combine CSS, JS and images into as few files as possible.
 
 ### Serve external assets from a content delivery network (CDN) with a cookie-less domain
-Always serve JavaScript, CSS and chrome images from a CDN, which distributes the content across a wide geographic area and helps reduce the roundtrip time for these assets. It is crucial that the domain for the CDN be different from the web site. A web browser will send any cookies it has stored for a domain for every HTTP request to that domain. Serving external assets from a different domain will avoid this unnecessary data transmission.
+Always serve JavaScript, CSS and chrome images from a CDN, which distributes the content across a wide geographic area and helps reduce the roundtrip time for these assets. It is crucial that the domain for the CDN be different from the website. A web browser will send any cookies it has stored for a domain for every HTTP request to that domain. Serving external assets from a different domain will avoid this unnecessary data transmission.
 
 ### Set a future expiration date on external assets
-Most of the visits to a web site are by visitors with a "primed cache", which means that the user has visited the site before and is viewing additional content. It is crucial to ensure that these page views make use of the users local cache to retrieve JavaScript, CSS and images instead of retrieving them from the server. These assets should have an expiration date of at least one month from the request time.
+Most of the visits to a website are by visitors with a "primed cache", which means that the user has visited the site before and is viewing additional content. It is crucial to ensure that these page views make use of the users local cache to retrieve JavaScript, CSS and images instead of retrieving them from the server. These assets should have an expiration date of at least one month from the request time.
 
 ### Compress assets with GZIP
 Compress all text assets — JavaScript and style sheets — with GZIP. It can compress these files by 70% or more and it is universally supported.
 
 ### Reduce DNS Lookups
-DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. [Yahoo!](https://developer.yahoo.com/performance/rules.html#dns_lookups) recommends between two and four unique host names per site.
+DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. [Yahoo!](https://developer.yahoo.com/performance/rules.html#dns_lookups) recommends between two and four unique hostnames per site.
 
 ### Avoid Redirects
 URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided.
@@ -102,10 +102,10 @@ GOOD
 ## Fonts
 
 ### Minimize the Number of Fonts Being Used
-Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire fontface. Libraries like [Google Fonts](https://fonts.google.com/) and [Adobe Typekit](https://typekit.com/) allow you to import the exact font weights and styles you need. [Web Font Loader](https://github.com/typekit/webfontloader) is a helpful tool for importing the exact font styles you want from multiple sources, including local fonts.
+Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire font-face. Libraries like [Google Fonts](https://fonts.google.com/) and [Adobe Typekit](https://typekit.com/) allow you to import the exact font weights and styles you need. [Web Font Loader](https://github.com/typekit/webfontloader) is a helpful tool for importing the exact font styles you want from multiple sources, including local fonts.
 
 ### Use Compressed Font File Types
-The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to compressing the font files with GZIP when delivering the fonts.
+The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to compress the font files with GZIP when delivering the fonts.
 
 ### Include local() & format() Directives in a @font-face Declaration
 When you use the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
@@ -138,7 +138,7 @@ A web browser will block while downloading a JavaScript file at the bottom of th
 ### Third Party Ads
 Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
 
-The best way to mitigate these effects is to place each display ad into an iframe. The iframe will allow the ad requests to be processed in parallel to the web page without interfering with is performance. An ad that fails to load in an iframe may delay the onLoad or onDomReady events and prevent JavaScript loading, but the HTML documents will be completely styled and interactive.
+The best way to mitigate these effects is to place each display ad into an iframe. The iframe will allow the ad requests to be processed in parallel to the web page without interfering with its performance. An ad that fails to load in an iframe may delay the onLoad or onDomReady events and prevent JavaScript loading, but the HTML documents will be completely styled and interactive.
 
 ## Images
 
@@ -158,7 +158,7 @@ All images in the project should be compressed. This will be one of the biggest 
 
 Different images perform better depending on what type of graphic you are using. Vector images (.svg) perform better for images composed of geometric shapes. Raster images (.jpeg) perform better for photos.
 
-PNG files are not as compressable as JPEG images. You should choose the best format based on an individual use-case. For example, the PNG format can be used if you need transparency, but should not be used for photographic images.
+PNG files are not as compressible as JPEG images. You should choose the best format based on an individual use-case. For example, the PNG format can be used if you need transparency, but should not be used for photographic images.
 
 #### Image Sprites
 
@@ -167,7 +167,7 @@ Combining SVG assets into one reduces the number of assets loaded. Using a tool 
 #### Progressive JPEG
 Typically, JPEG images load top-to-bottom so the full image appears slowly as it loads. With Progressive JPEG files, the whole image loads at once, starting in low quality and gradually becoming the full quality image. While this doesn't load the image any faster or decrease the file size, it gives the appearance of faster loading to the user. [Yahoo](https://yuiblog.com/blog/2008/12/05/imageopt-4/) has a blog post with more information about progressive JPEG files.
 
-Medium and Facebook use a use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
+Medium and Facebook use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
 
 #### WebP Images
 WebP is an image format that can be used as an alternative for PNG and JPEG images at a fraction of the file size. It has [minimal browser support](http://caniuse.com/#feat=webp), but where it is supported, it can significantly decrease file size. You should include WebP images on projects where a lot of the traffic comes from supported browsers. 
@@ -228,7 +228,7 @@ For background images, use CSS media queries to serve different images at lower 
 ```
 
 ## Testing Performance
-When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site. A slow page load is also penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want more detailed break down of your page performance, you can use free, online tools to measure your performance. Below are a few of these resources. 
+When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site. A slow page load is also penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want a more detailed breakdown, you can use free, online tools to measure performance. Below are a few of these resources. 
 
 ### Chrome Timeline
 The Timeline tool in Chrome inspector allows you to record and analyze every event that occurs during page load. [Google Developers](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool) is a great resource for learning how to use the Timeline Tool.
@@ -240,4 +240,4 @@ The Timeline tool in Chrome inspector allows you to record and analyze every eve
 Similar to Webpagetest, [Yellow Lab Tools](http://yellowlab.tools/) gives you a report card with detailed information about improving page performance in specific areas. Yellow Lab Tools gives especially detailed information about bad CSS patterns that could affect performances, like 
 
 ### Louis for Gulp
-[Louis](https://github.com/AvraamMavridis/gulp-louis) is gulp plugin a good tool for measuring performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.
+[Louis](https://github.com/AvraamMavridis/gulp-louis) is a gulp plugin and a good tool for measuring performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.

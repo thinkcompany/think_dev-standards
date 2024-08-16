@@ -28,7 +28,7 @@ This document contains Think Company's standards for writing HTML.
     * [Content Markup](#content-markup)
 
 ## Programming Principles
-A building is only as strong as its foundation; the same is true for a web site or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
+A building is only as strong as its foundation; the same is true for a website or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
 
 ### Versions & Validation
 All HTML documents must be authored according to the W3C HTML 5 specification, keeping in mind the tenets of the XHTML 1.0 Strict specification.
@@ -101,9 +101,9 @@ Inline elements may appear on the same line as their block-level containers when
 
 ### Module-based Markup
 
-Although wireframes and visual designs may approach the user experience from a page or flow perspective, a web site is actually constructed from many smaller pieces of code. Sometimes referred to as LEGO blocks or modules, we refer to them as modules.
+Although wireframes and visual designs may approach the user experience from a page or flow perspective, a website is actually constructed from many smaller pieces of code. Sometimes referred to as LEGO blocks or modules, we refer to them as modules.
 
-A module is a block of HTML that has been coded such that it can be reused anywhere in a web site or application. A module may vary to a limited degree, based on the data available to populate the markup.
+A module is a block of HTML that has been coded such that it can be reused anywhere in a website or application. A module may vary to a limited degree, based on the data available to populate the markup.
 
 Example module:
 ```html
@@ -344,7 +344,7 @@ This will produce a visible tooltip in most browsers. Make sure you repeat the l
 
 Use the `<img>` tag to include a content image. Do not use `<img>` to include design ("chrome") graphics; load and apply those images via CSS instead.
 
-Unless coding a responsive design, specify the the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout.
+Unless coding a responsive design, specify the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout.
 
 Always specify an alt attribute that describes the image. If a design element is loaded via HTML, use a blank alt attribute value rather than no alt attribute.
 
