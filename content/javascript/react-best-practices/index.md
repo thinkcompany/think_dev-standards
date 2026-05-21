@@ -632,16 +632,14 @@ function Example() {
 
 ## Ordering
 
-The recommended ordering for a functional component:
+The recommended ordering for a functional component. Group hooks by **feature or concern**, not by hook type — this keeps related state, refs, and effects together and makes components easier to read as they grow.
 
 1. Type definitions (props interface)
-2. `useState` hooks
-3. `useRef` hooks
-4. `useContext` hooks
-5. `useMemo` / `useCallback` hooks
-6. `useEffect` hooks
-7. Event handlers and derived values
-8. Return / JSX
+2. Context reads (`useContext`)
+3. State, refs, and memos — grouped by feature/concern
+4. Effects — placed adjacent to the state they relate to
+5. Event handlers and derived values
+6. Return / JSX
 
 ```tsx
 interface CardProps {
@@ -650,13 +648,16 @@ interface CardProps {
 }
 
 function Card({ title, onDismiss }: CardProps) {
+    const theme = useContext(ThemeContext);
+
+    // expand/collapse concern
     const [isExpanded, setIsExpanded] = useState(false);
     const containerRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
-        // side effects here
-    }, []);
+        // side effect related to expand state
+    }, [isExpanded]);
 
+    // handlers
     const handleToggle = () => setIsExpanded((prev) => !prev);
 
     return (

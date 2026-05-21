@@ -1027,15 +1027,27 @@ End files with a single newline character.
 
 Use indentation when making long method chains. Use a leading dot, which emphasizes that the line is a method call, not a new statement.
 
+Prefer `async`/`await` over promise chains — it is easier to read and reason about, especially when handling errors.
+
 ```javascript
-// bad
+// bad — chained promises are hard to follow
 promise.then(doSomething).then(doSomethingElse).catch(handleError);
 
-// good
+// better — indented chain is readable, but still verbose
 promise
     .then(doSomething)
     .then(doSomethingElse)
     .catch(handleError);
+
+// best — async/await reads like synchronous code
+async function run() {
+    try {
+        const result = await doSomething();
+        await doSomethingElse(result);
+    } catch (error) {
+        handleError(error);
+    }
+}
 ```
 
 Leave a blank line after blocks and before the next statement

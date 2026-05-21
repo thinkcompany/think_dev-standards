@@ -1,331 +1,233 @@
 ---
-title: SASS Authoring Guidelines
-date: "2021-04-01T23:46:37.121Z"
-area: SASS
+title: CSS Authoring Guidelines
+date: "2026-05-21T00:00:00.000Z"
+area: CSS
 section: 1. Overview
 description: ""
 ---
 
+# CSS Authoring Guidelines
+
+This document contains Think Company's standards for writing CSS. We author vanilla CSS on all projects and use [Tailwind CSS](https://tailwindcss.com/) as a utility layer where the project and client permit.
+
+> **Note:** Sass/SCSS is no longer our default CSS tooling. Projects that already use Sass may continue to do so; refer to the git history for the previous Sass standards.
+
 ## Table of Contents
 
- - [Programming Principles](#programming-principles)
- - [Versions & References](#versions--references)
- - [Tools & Libraries](#tools--libraries)
- - [Vendor Prefixes](#vendor-prefixes)
- - [Format & Style](#format--style)
- - [Formatting for Readability](#formatting-for-readability)
- - [Declaration Order](#declaration-order)
-	- [Media Queries](#media-queries)
-	- [Comments](#comments)
-	- [Naming](#naming)
-	- [Sass Language Features](#sass-language-features)
-		- [Nesting](#nesting)
-		- [Variables](#variables)
-		- [Mixins & Functions](#mixins--functions)
-		- [Maps](#maps)
-		- [Extend](#extend)
-	- [Naming & Organization of Sass Partials](#naming--organization-of-sass-partials)
-		- [Naming convention for partials](#naming-convention-for-partials)
-		- [Partial Headers](#partial-headers)
-		- [CSS File Generation](#css-file-generation)
+- [Core Principles](#core-principles)
+- [Vanilla CSS Standards](#vanilla-css-standards)
+  - [Custom Properties](#custom-properties)
+  - [Selectors & Specificity](#selectors--specificity)
+  - [Format & Style](#format--style)
+  - [Architecture (SMACSS)](#architecture-smacss)
+  - [Media Queries](#media-queries)
+- [Tailwind CSS Standards](#tailwind-css-standards)
+  - [When to Use Tailwind](#when-to-use-tailwind)
+  - [Class Ordering](#class-ordering)
+  - [Extracting Components](#extracting-components)
+  - [Configuration](#configuration)
+- [What Not to Do](#what-not-to-do)
 
-## Programming Principles
+---
 
-Write Sass in the most readable and maintainable way (e.g. as close to regular CSS) as possible while taking advantage of the conveniences that the language provides. Don't introduce unnecessary, hard-to-read complexity just because Sass allows you to.
+## Core Principles
 
-Even though we are using a preprocessor, the standards and principles written in our [CSS Authoring Guidelines](../css/index.md) still apply with regard to formatting, naming, specificity, and modularity.
+- Write CSS that is readable and maintainable first. Clever optimizations come second.
+- Prefer the cascade and inheritance. Work with the browser, not against it.
+- Author from general to specific. Keep specificity as low as possible.
+- Name things by function, not appearance.
+- Stay in normal flow as much as possible.
 
-View the resulting CSS frequently to ensure the quality meets our standards.
+---
 
-### Versions & References
+## Vanilla CSS Standards
 
-The official Sass language site is http://sass-lang.com, and lists the most current version of Sass along with links to release notes and the Github repository.
+### Custom Properties
 
-The site also provides setup and learning materials to help you get started with Sass.
+Use CSS custom properties (variables) for all design tokens — colors, spacing, type scales, z-index values, breakpoints.
 
-### Tools & Libraries
-
-We won't use vendor mixin libraries (Compass, Bourbon, etc) unless required by a client/project. It creates an unnecessary dependency. Rather, we'll maintain a library of our own useful mixins and functions that we can pull into projects as needed.
-
-### Vendor Prefixes
-
-Don't write vendor prefixes directly in your Sass rules. Instead, use a build tool such as Autoprefixer to handle it automatically, or use a mixin if Autoprefixer is not an option for the project.
-
-## Format & Style
-
-### Formatting for Readability
-
-We will use the SCSS syntax, which is similar to standard CSS, with the addition of nesting.
-
-```scss
-a {
-    color: blue;
-    &:hover,
-    &:focus {
-        text-decoration: underline;
-    }
+```css
+:root {
+    --color-primary: #336699;
+    --color-text: #1a1a1a;
+    --space-sm: 0.5rem;
+    --space-md: 1rem;
+    --space-lg: 2rem;
+    --font-base: 1rem;
+    --z-modal: 500;
 }
 ```
 
-### Declaration Order
+- Define all tokens on `:root` unless scoped overrides are intentional.
+- Use a consistent naming convention: `--[category]-[variant]`.
+- Prefer custom properties over hardcoded values everywhere.
 
-Use the following declaration order inside Sass rules:
+### Selectors & Specificity
 
-1. @extend
-2. @include
-3. Regular declarations
-4. Pseudo-class/elements
-5. Nested selectors
-6. Media queries
+- Use class selectors as the primary styling hook. Avoid ID selectors.
+- Name classes based on function, not appearance. Use lowercase, hyphen-separated words.
+- Do not over-qualify selectors (e.g. `div.card` → `.card`).
+- Do not chain more selectors than necessary.
+- Nest no more than 3 levels deep using native CSS nesting or a preprocessor.
+- Do not use `!important` except to override unmodifiable third-party styles — add a comment explaining why.
 
-```scss
-.module {
-    @extend %module;
-    @include mixin($argument);
-    property: value;
-    &:pseudo {
-        // styles
-    }
-    .nested {
-        // styles
-    }
-    @include mq($size) {
-        // styles
-    }
-}
+```css
+/* bad */
+div#main-header .nav ul li a { color: red; }
+
+/* good */
+.nav-link { color: var(--color-primary); }
+```
+
+#### BEM / SMACSS module naming
+
+- Subcomponents: `.module-subcomponent`
+- Modifiers: `.module--modifier`
+- State classes: `.is-active`, `.has-error`
+
+### Format & Style
+
+- Use double quotes for property values.
+- One rule per line; one declaration per line.
+- Place a space between the selector and the opening brace.
+- Place a space after the colon in declarations.
+- End every declaration with a semicolon.
+- Use `box-sizing: border-box` globally via the inherit pattern:
+
+```css
+html { box-sizing: border-box; }
+*, *::before, *::after { box-sizing: inherit; }
+```
+
+- Use relative units (`rem`, `em`, `%`) over `px` wherever possible.
+- Do not add a unit to `line-height`. Use a unitless ratio: `line-height: 1.5`.
+- Avoid vendor prefixes in authored CSS — use Autoprefixer in the build pipeline.
+
+#### Declaration order (within a rule)
+
+1. Custom property declarations (`--token: value`)
+2. Layout (`display`, `position`, `grid-*`, `flex-*`, `float`, `top`, `right`, etc.)
+3. Box model (`width`, `height`, `margin`, `padding`, `border`)
+4. Typography (`font-*`, `line-height`, `text-*`, `color`)
+5. Visual (`background`, `box-shadow`, `opacity`, `transform`)
+6. Interaction (`cursor`, `pointer-events`, `user-select`)
+7. Animation (`transition`, `animation`)
+
+### Architecture (SMACSS)
+
+Organize styles into the following layers:
+
+- **Settings** — custom properties and design tokens
+- **Base** — normalize/reset, type selectors, universal rules
+- **Layout** — page structure: header, footer, main content, grids
+- **Modules** — reusable UI components (the majority of CSS)
+- **Helpers** — global utility and state rules
+
+File naming convention: `[category].[partial-name].css`
+
+```
+settings.tokens.css
+base.normalize.css
+base.elements.css
+layout.grid.css
+layout.containers.css
+module.card.css
+module.button.css
+helpers.spacing.css
+helpers.states.css
 ```
 
 ### Media Queries
 
-Media queries should be named and added along with their base rulesets, ordered from smallest to largest (assuming a mobile-first approach).
+- Mobile-first. Write base styles for the smallest viewport; add breakpoints upward.
+- Place media queries alongside the rules they modify, not in a separate file.
+- Use custom properties or a defined set of breakpoint values for consistency.
 
-```scss
-.module {
-    background: #fff;
-    font-size: 1em;
-    @include mq($bp-small) {
-        background: #333;
-        font-size: 1.5em;
+```css
+.card {
+    padding: var(--space-sm);
+
+    @media (min-width: 48rem) {
+        padding: var(--space-md);
     }
-    @include mq($bp-medium) {
-        background: #000;
-        font-size: 2em;
+
+    @media (min-width: 64rem) {
+        padding: var(--space-lg);
     }
 }
 ```
 
-### Comments
+---
 
-Add comments to any rule that might not be readily understood by another developer. More is better than less, as they'll be stripped out during minification/compression and will not increase the size of the resulting CSS.
+## Tailwind CSS Standards
 
-Examples:
+### When to Use Tailwind
 
-```scss
-/**
- * Use this format for long comments spanning multiple lines,
- * e.g. to describe a module
- */
+Use Tailwind on projects where:
 
-/*----------------------------------------------*\
-    #SECTION-NAME
-\*----------------------------------------------*/
+- The project team has agreed to use it.
+- The client codebase does not already have a conflicting CSS architecture.
+- You are building component-driven UIs in React/JSX where utility classes stay co-located with markup.
 
-// Preprocessor comment, when you do not want it in the generated source
+Do not introduce Tailwind into a project that already has a custom CSS architecture without team agreement.
+
+### Class Ordering
+
+Follow a consistent utility class order within elements. The recommended order mirrors the vanilla CSS declaration order above: layout → box model → typography → visual → interaction → animation.
+
+Use the [Prettier Tailwind plugin](https://github.com/tailwindlabs/prettier-plugin-tailwindcss) to enforce order automatically.
+
+```tsx
+// good — layout → spacing → typography → visual
+<div className="flex items-center gap-4 px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700">
 ```
 
-### Naming
+### Extracting Components
 
-Name variables, mixins, and functions similarly to the way classes are named - lowercase and hyphen-delimited.
+Do not extract a utility group into a custom class just to reduce repetition. Prefer component abstraction (a reusable JSX component) over CSS abstraction (`@apply`).
 
-```scss
-$base-font-size: 1rem;
-	
-@mixin breakpoint($size) {
-    // ...
-}
+Use `@apply` only when:
+- You are working in a context where JSX components are not available (e.g. a CMS template).
+- The class combination is used in more than three places and cannot be abstracted as a component.
 
-@function url-encode($string) {
-    // ...
-}
-```
-
-## Sass Language Features
-
-This section covers some of the most commonly used features of Sass and related best practices. It is not meant to be a comprehensive review of the language.
-
-### Nesting
-
-A general rule of thumb is to avoid nesting more than 3 levels, including pseudo classes and elements. Ensure that the CSS output adheres to the specificity rules defined in our CSS Authoring Guidelines documentation.
-
-### Variables
-
-Use variables for all common/reusable values such as colors, fonts, spacing and z-index values.
-
-Examples:
-
-```scss
-$color-primary: #336699;
-
-$z-modal: 500;
-
-$font-stack: helvetica, arial, sans-serif;
-
-$space-large: 2em;
-```
-
-### Mixins & Functions
-
-The main objective of mixins and functions is keeping your code DRY. Make these as simple as possible, sticking to a single purpose and avoiding unnecessary complexity.
-
-Document all parameters for mixins and functions, as well as the return value for functions, as follows:
-
-```scss
-// Brief description/purpose for mixin or function, e.g. URL encode a string
-
-// @param {String} $string - string to encode
-// @return {String} - encoded string
-
-@function url-encode($string) {
-    // ...
-    @return $string;
+```css
+/* only if a JSX component is not an option */
+.btn-primary {
+    @apply px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700;
 }
 ```
 
-### Maps
+### Configuration
 
-Sass maps allow you to define a key/value structure. These are useful for defining collections of related values such as a z-index scale or list of breakpoints.
+- Define all design tokens in `tailwind.config.js` under `theme.extend` — do not override the default theme wholesale unless intentional.
+- Map brand colors, type scales, and spacing to custom properties so they are available both in Tailwind utilities and vanilla CSS rules.
 
-```scss
-// define a Sass map
-$z-index: (
-    'modal': 100,
-    'tooltip': 150
-);
-
-// use a Sass map
-
-.tooltip {
-    z-index: map-get($z-index, 'modal');
-}
+```js
+// tailwind.config.js
+module.exports = {
+    theme: {
+        extend: {
+            colors: {
+                primary: 'var(--color-primary)',
+                text: 'var(--color-text)',
+            },
+            spacing: {
+                sm: 'var(--space-sm)',
+                md: 'var(--space-md)',
+                lg: 'var(--space-lg)',
+            },
+        },
+    },
+};
 ```
 
-In practice, define a function to check whether or not a key exists in the map prior to calling the map-get function, then return the value of the matching key.
+---
 
-### Extend
+## What Not to Do
 
-Use `@extend` cautiously, and check the CSS output carefully to ensure that you are not generating unintended selectors.
-
-This is particularly true when a class that has nested selectors is extended, because all of the nested classes/elements will also be extended. This should be avoided.
-
-A better way to use `@extend`, which reduces the chances of bloating your css, is to extend a placeholder rather than a selector (see http://csswizardry.com/2014/01/extending-silent-classes-in-sass), and extend only closely related rulesets such as the button example below.
-
-When you want to share declarations with multiple, unrelated rulesets (e.g. using a particular font family on headings as well as a specific module), a `mixin` is a better choice.
-
-```scss
-.btn,
-%btn { // placeholder
-    display: inline-block;
-    padding: 1em;
-    background: gray;
-    border-radius: 3px;
-}
-
-// extend the placeholder rather than the class
-
-.btn--primary {
-    @extend %btn;
-    background-color: green;
-}
-
-.btn--secondary {
-    @extend %btn;
-    background-color: blue;
-}
-```
-
-## Naming & Organization of Sass Partials
-
-Organize and name Sass partials using the following guidelines, based on the CSS categories we defined in our CSS Authoring Guidelines. Note that partials should always begin with an underscore - this lets Sass know that the file should not generate a CSS file.
-
-### Naming convention for partials
-
-`_[category].[partial-name].scss`
-
-Example:
-
-```scss
-_settings.variables.scss
-_settings.functions.scss
-_settings.mixins.scss
-
-_base.normalize.scss
-_base.universals.scss (box-sizing, etc)
-_base.elements.scss (type selectors, elements without classes)
-
-_layout.grid.scss (if needed)
-_layout.justify.scss (reusable layout pattern)
-_layout.containers.scss (sections, wrappers, etc)
-
-_module.accordion.scss (specific UI module)
-_module.object.media.scss ("object" indicates an OOCSS structural abstraction)
-
-_theme.admin.scss (example theme partial)
-
-_helpers.spacing.scss
-_helpers.width.scss
-_helpers.states.scss
-```
-
-### Partial Headers
-
-It's good practice to add comments at the top of each partial with the name of the partial, along with a block comment describing the purpose of the partial.
-
-Example:
-
-```scss
-/*----------------------------------------------*\
-    #PARTIAL-NAME
-\*----------------------------------------------*/
-
-/**
- * Description of the purpose of this partial, e.g. overview of a module
- */
-
- .module {
-    // module styles...
- }
-```
-
-### CSS File Generation
-
-Use `@use` and `@forward` to assemble Sass partials. The legacy `@import` rule is deprecated in modern Sass and will be removed in a future version.
-
-- `@use` loads a module for use in the current file.
-- `@forward` re-exports a module's members so they are available to files that `@use` the current file.
-
-Example entry file:
-
-```scss
-// main.scss
-
-@use 'settings.variables' as vars;
-@use 'base.normalize';
-@use 'base.universals';
-@use 'base.elements';
-@use 'layout.grid';
-@use 'module.card';
-```
-
-Example partial forwarding shared tokens:
-
-```scss
-// _settings.index.scss
-
-@forward 'settings.variables';
-@forward 'settings.mixins';
-@forward 'settings.functions';
-```
-
-All rules should reside in partials. Do not add any rules directly into entry files that only assemble partials.
-
-Third-party Sass libraries should be loaded first via `@use`.
+- Do not use `!important` without a comment.
+- Do not use ID selectors for styling.
+- Do not write vendor prefixes manually — use Autoprefixer.
+- Do not use `@import` in vanilla CSS for performance-critical paths — use a build tool to bundle CSS files.
+- Do not mix Tailwind utilities and custom class names arbitrarily — agree on a boundary with your team (e.g. layout via custom classes, typography via Tailwind).
+- Do not use Tailwind's `arbitrary values` (`w-[347px]`) for values that should be design tokens.

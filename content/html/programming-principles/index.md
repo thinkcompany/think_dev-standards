@@ -74,7 +74,7 @@ Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`
 
 ## Format & Style
 
-Markup must be written as XHTML: all elements and attributes must be written in lowercase characters; attribute values must be contained in double quotes; and all tags must be closed. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
+Markup must follow HTML5 standards. Stylistically, elements and attributes should be written in lowercase characters; attribute values should be contained in double quotes. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
 
 ```html
 <img src="logo.png" alt="Client Name" />
@@ -207,15 +207,26 @@ Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent user
 Style sheets must always be included in the `<head>` of an HTML document. Never import a style sheet in the `<body>` of a page. Always use the `<link>` element to include external style sheets. Specify the media attribute value (i.e. all, screen, print) to scope the style sheet appropriately for browser application and download.
 
 ```html
-<link href="/css/global.css" type="text/css" media="screen" />
+<link rel="stylesheet" href="/css/global.css" media="screen" />
 ```
 
 #### Importing JavaScript
 
-For optimal performance, place scripts at the bottom of the page, just inside the closing `</body>` tag, or use the `defer` attribute on scripts in the `<head>`.
+Place scripts in the `<head>` with an appropriate loading attribute. The right attribute depends on what the script does:
+
+- **`defer`** — for scripts that need the DOM and/or must run in a specific order. Downloads in parallel with HTML parsing, executes after the DOM is parsed but before `DOMContentLoaded`, and preserves source order across multiple deferred scripts. This is the correct default for most application code.
+- **`async`** — for independent scripts that do not depend on the DOM or other scripts (analytics, error reporting, isolated third-party widgets). Downloads in parallel and executes as soon as it is ready; execution order is not guaranteed.
+- **`type="module"`** — ES modules are deferred by default; no `defer` attribute is needed. Only add `async` to a module if it is truly independent.
 
 ```html
+<!-- default for most scripts -->
 <script src="/js/main.js" defer></script>
+
+<!-- independent third-party script -->
+<script src="https://analytics.example.com/tracker.js" async></script>
+
+<!-- ES module -->
+<script type="module" src="/js/app.js"></script>
 ```
 
 ### Content Markup
