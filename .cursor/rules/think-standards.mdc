@@ -1,0 +1,21 @@
+---
+description: Think Company coding standards — applies to all files in this project
+globs: ["**/*.ts", "**/*.tsx", "**/*.js", "**/*.jsx", "**/*.scss", "**/*.css", "**/*.html"]
+alwaysApply: true
+---
+
+# Think Company Coding Standards
+
+Follow all standards in `AGENTS.md` at the repo root.
+
+## Key rules for Cursor
+
+- TypeScript only. `strict: true`. Never use `any`.
+- Functional React components only. Hooks for state and effects.
+- WCAG 2.2 AA accessibility on all UI.
+- Conventional Commits format for commit messages.
+- No inline styles, no inline event handlers.
+- Sass with `@use`/`@forward` — not `@import`.
+- One component per file, PascalCase filename matches component name.
+
+See `AGENTS.md` for the full standard.
