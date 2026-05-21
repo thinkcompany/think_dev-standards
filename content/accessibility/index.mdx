@@ -58,9 +58,9 @@ This document draws its recommendations from a combination of practical experien
 
 ### Web Content Accessibility Guidelines
 
-The Web Content Accessibility Guidelines (WCAG) are part of a series of standards developed by the W3C's Web Accessibility Initiative. The US Department of Justice and the FCC are establishing new laws that will require most sites to comply with WCAG 2 Level AA.
+The Web Content Accessibility Guidelines (WCAG) are part of a series of standards developed by the W3C's Web Accessibility Initiative. Most sites are expected to comply with WCAG 2.2 Level AA, and this is the target standard for all Think Company projects.
 
-http://www.w3.org/TR/WCAG20/
+https://www.w3.org/TR/WCAG22/
 
 ### ARIA
 
@@ -105,10 +105,12 @@ Keyboard navigation concerns permeate many aspects of our accessibility guidelin
 
 Our current list of expected supported assistive tools and browsers.
 
-- NVDA + Windows
-- JAWS + Windows
-- VoiceOver (iOS)
-- TalkBack (Android)
+- NVDA + Firefox (Windows) — primary
+- VoiceOver + Safari (macOS)
+- VoiceOver + Safari (iOS)
+- TalkBack + Chrome (Android)
+
+Use the [axe browser extension](https://www.deque.com/axe/browser-extensions/) for automated accessibility checks during development.
 
 ### Document Structure & Semantics
 

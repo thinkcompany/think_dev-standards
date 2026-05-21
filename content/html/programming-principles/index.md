@@ -72,8 +72,6 @@ Only use elements and attributes that have semantic value, or are commonly used 
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
-*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr.
-
 ## Format & Style
 
 Markup must be written as XHTML: all elements and attributes must be written in lowercase characters; attribute values must be contained in double quotes; and all tags must be closed. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
@@ -194,14 +192,6 @@ Always specify the character set; it must appear first. (This prevents IE from r
 <meta charset="utf-8" />
 ```
 
-#### Http-equiv Meta Tag
-
-Ensure that Internet Explorer uses the latest supported rendering mode.
-
-```html
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-```
-
 #### Viewport Meta Tag
 
 When implementing responsive web design or a dedicated mobile site, use the following as the default viewport tag:
@@ -211,12 +201,6 @@ When implementing responsive web design or a dedicated mobile site, use the foll
 ```
 
 Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent users from zooming the page.
-In addition, use the corresponding `@viewport` rule in your base CSS file for browsers/rendering modes that do not support the viewport meta tag:
-
-```css
-@-ms-viewport {width:device-width;}
-@viewport {width:device-width;}
-```
 
 #### Importing CSS
 
@@ -226,22 +210,12 @@ Style sheets must always be included in the `<head>` of an HTML document. Never 
 <link href="/css/global.css" type="text/css" media="screen" />
 ```
 
-#### Conditional Comments
-
-Use conditional comments in the `<head>` to include IE browser version specific content, such as CSS.
-
-```html
-<!--[if lte IE 8]>
-    <link href="/css/ie8.css" media="all" />
-<![endif]-->
-```
-
 #### Importing JavaScript
 
-JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag.
+For optimal performance, place scripts at the bottom of the page, just inside the closing `</body>` tag, or use the `defer` attribute on scripts in the `<head>`.
 
 ```html
-<script src="/js/lib/jquery.js"></script>
+<script src="/js/main.js" defer></script>
 ```
 
 ### Content Markup
@@ -481,4 +455,3 @@ Good Example:
 <button type="submit">Submit</button>
 ```
 
-*NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the `<button>` element is not supported.

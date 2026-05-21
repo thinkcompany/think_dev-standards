@@ -298,27 +298,34 @@ Example:
 
 ### CSS File Generation
 
-Sass partials will be combined to generate CSS files by importing one or more partials.
+Use `@use` and `@forward` to assemble Sass partials. The legacy `@import` rule is deprecated in modern Sass and will be removed in a future version.
 
-Example that will generate a base.css file: 
+- `@use` loads a module for use in the current file.
+- `@forward` re-exports a module's members so they are available to files that `@use` the current file.
 
-```scss
-// base.scss
-
-@import 'base.normalize';
-@import 'base.universals';
-@import 'base.elements';
-```  
-
-You do not need to include the underscore or the file extension in the `@import`. 
-
-All rules should reside in partials. Do not add any rules directly into files that import partials.
-
-If you are using any 3rd party Sass libraries, those should be imported first, e.g.:
+Example entry file:
 
 ```scss
-@import "compass";
+// main.scss
 
-@import "base.normalize";
-...
+@use 'settings.variables' as vars;
+@use 'base.normalize';
+@use 'base.universals';
+@use 'base.elements';
+@use 'layout.grid';
+@use 'module.card';
 ```
+
+Example partial forwarding shared tokens:
+
+```scss
+// _settings.index.scss
+
+@forward 'settings.variables';
+@forward 'settings.mixins';
+@forward 'settings.functions';
+```
+
+All rules should reside in partials. Do not add any rules directly into entry files that only assemble partials.
+
+Third-party Sass libraries should be loaded first via `@use`.
