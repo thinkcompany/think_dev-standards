@@ -1137,12 +1137,9 @@ Discriminated unions replace the "boolean and a maybe-undefined value" pattern t
 
 ## Performance
 
-  - [On Layout & Web Performance](http://kellegous.com/j/2013/01/26/layout-performance/)
-  - [String vs Array Concat](http://jsperf.com/string-vs-array-concat/2)
-  - [Try/Catch Cost In a Loop](http://jsperf.com/try-catch-in-loop-cost)
-  - [Bang Function](http://jsperf.com/bang-function)
-  - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
-  - [Long String Concatenation](http://jsperf.com/ya-string-concat)
+For performance guidance — bundling, code splitting, lazy loading, third-party scripts, image and font optimization, and Core Web Vitals — see the dedicated [Performance standards](/performance/) doc.
+
+For measuring runtime cost in the page, use the **Performance panel** in Chrome DevTools (or the equivalent in Firefox / Safari). It will tell you, in concrete numbers for your real code, far more than micro-benchmarks ever could. Most of the historical "X is faster than Y" advice in JS style guides has been invalidated by modern engine optimizations — write clear code first, measure if it's actually slow, and optimize from data.
 
 
 ## Miscellaneous
