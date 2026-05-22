@@ -1144,30 +1144,36 @@ For measuring runtime cost in the page, use the **Performance panel** in Chrome 
 
 ## Miscellaneous
 
-###BLOCK SCOPE
-In JavaScript blocks do not have scope. Only functions have scope. Do not use blocks except as required by the compound statements.
+### Assignment in Conditions
 
-###ASSIGNMENT EXPRESSIONS
-Avoid doing assignments in the condition part of if and while statements.
-
-Is
-```javascript
-    if (a = b) {
-```
-a correct statement? Or was
+Don't assign inside the test of an `if` or `while` statement.
 
 ```javascript
-    if (a == b) {
+// is this a typo?
+if (a = b) {
+    // ...
+}
+
+// or was this intended?
+if (a === b) {
+    // ...
+}
 ```
-intended? Avoid constructs that cannot easily be determined to be correct.
 
-###`===` AND `!==` OPERATORS.
-It is almost always better to use the `===` and `!==` operators. The `==` and `!=` operators do type coercion. In particular, do not use `==` to compare against falsy values.
+Avoid constructs that cannot easily be determined to be correct. ESLint's `no-cond-assign` rule catches this automatically; keep it on.
 
+### Avoid `eval`
 
-###`EVAL` IS EVIL
-The `eval` function is the most misused feature of JavaScript. Avoid it.
+`eval` runs arbitrary code in the current scope and is a security and performance hazard. Don't use it. Don't use its aliases either: the `Function` constructor, or string arguments to `setTimeout` / `setInterval`.
 
-`eval` has aliases. Do not use the `Function` constructor. Do not pass strings to `setTimeout` or `setInterval`.
+```javascript
+// bad
+setTimeout('handleTimeout()', 1000);
+const sum = new Function('a', 'b', 'return a + b');
 
-Most uses of `eval` involve the developer generating some code on the fly to include a variable's value in the source. This is inefficient and can be avoided with some simple refactoring. When you're tempted to use `eval` in this way, stop and consider alternative implementations that will be more readable and maintainable in the future.
+// good
+setTimeout(handleTimeout, 1000);
+const sum = (a, b) => a + b;
+```
+
+Most uses of `eval` are dynamic code generation that can be expressed cleanly with closures, object lookups, or template literals.
