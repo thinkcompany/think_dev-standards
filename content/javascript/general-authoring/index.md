@@ -643,20 +643,22 @@ Use the following format for a `do` statement:
 
 Unlike the other compound statements, the do statement always ends with a `;` (semicolon).
 
-Use the following format for a `switch` statement:
+Use the following format for a `switch` statement. Indent each `case` under the `switch` — this matches Prettier defaults and every modern style guide.
 
 ```javascript
-    switch (expression) {
-    case expression:
-        // statements
+switch (allegiance) {
+    case 'Jedi':
+        joinOrder();
+        break;
+    case 'Sith':
+        joinEmpire();
+        break;
     default:
-        // statements
-    }
+        wander();
+}
 ```
 
-Each `case` is aligned with the `switch`. This avoids over-indentation.
-
-Each group of statements (except the `default`) should end with `break`, `return`, or `throw`. If your intention is to fall though into the next case, it must be indicated with a comment in place of the `break`.
+Each group of statements (except the `default`) should end with `break`, `return`, or `throw`. If you intend to fall through into the next case, indicate it with a `// falls through` comment in place of the `break` — ESLint's `no-fallthrough` rule expects this.
 
 Use the following format for a `try` statement:
 
@@ -683,104 +685,72 @@ Do not use the `with` statement. (Learn more at http://yuiblog.com/blog/2006/04/
 
 ## Comments
 
-**Be generous with comments, but make them meaningful.** It is useful to leave information that will be read at a later time by people (possibly yourself) who will need to understand what you have done. The comments must be well-written and clear, just like the code they are annotating. An occasional nugget of humor might be appreciated. Frustrations and resentments will not. Never use inappropriate language. Even though comments are stripped by compression, it is far too easy for uncompressed code to be viewed by third parties and users.
+**Write comments that explain *why*, not *what*.** Well-named identifiers already explain what the code does; comments should capture the things that aren't visible from reading the code: a non-obvious constraint, a subtle invariant, a workaround for a specific bug, or behavior that would surprise a reader.
 
-It is important that comments be kept up-to-date. Erroneous comments can make programs even harder to read and understand.
-
-Make comments meaningful. Focus on what is not immediately visible. Don't waste the reader's time with stuff like:
+Don't waste the reader's time with restatement:
 
 ```javascript
-    i = 0; // Set i to zero.
+// bad — the code already says this
+i = 0; // Set i to zero.
+
+// good — explains a non-obvious constraint
+// Tatooine has two suns, so day/night detection compares against both.
+const isNight = !sunriseSet.some(([rise, set]) => now > rise && now < set);
 ```
 
-Always retain comments related to licensing of open source code. Comments may never contain alarming or negative language (i.e. "hack to fix broken IE") nor individual programmer names, handles, URLs, etc.
+Keep comments up to date. A stale comment is worse than no comment — it actively misleads.
 
-Use `/** ... */` for multi-line comments. Include a description, specify types and values for all parameters and return values.
+Never include alarming or negative language ("hack to fix broken IE", "this is terrible"), individual programmer names, handles, or URLs to internal issue trackers. Comments outlive the people and tickets they reference.
 
-```javascript
-// bad
-// make() returns a new element
-// based on the passed in tag name
-//
-// @param {String} tag
-// @return {Element} element
-function make(tag) {
+Retain comments related to open-source licensing.
 
-    // ...stuff...
+### JSDoc
 
-    return element;
-}
+In **TypeScript** projects, most JSDoc `@param` / `@return` tags are redundant — the types are already in the signature. Skip them. Use prose docstrings only when you need to explain *what the function is for* or *how it should be used*.
 
-// good
+```typescript
 /**
- * make() returns a new element
- * based on the passed in tag name
- *
- * @param {String} tag
- * @return {Element} element
+ * Returns the most Force-sensitive Jedi in the group, or undefined
+ * if the group is empty. Ties are broken by name (alphabetical).
  */
-function make(tag) {
-
-    // ...stuff...
-
-    return element;
+function mostPowerful(jedi: Jedi[]): Jedi | undefined {
+    // ...
 }
 ```
 
-Use `//` for single line comments. Place single line comments on a newline above the subject of the comment. Put an empty line before the comment.
+In **plain JavaScript** projects, JSDoc with types is still valuable — modern editors (VS Code with the TypeScript Language Server) use it for IntelliSense and inline diagnostics:
 
 ```javascript
-// bad
-const active = true;  // is current tab
+/**
+ * @param {string} name
+ * @param {number} midiChlorians
+ * @returns {Jedi}
+ */
+function summon(name, midiChlorians) {
+    // ...
+}
+```
 
+### Inline comments
+
+Use `//` for single-line comments. Place them on the line above the code they describe, with a blank line before (when not at the top of a block).
+
+```javascript
 // good
-// is current tab
-const active = true;
+function rank(jedi) {
+    // Council rank requires 12,000 midi-chlorians and 8 years of service.
+    const eligible = jedi.midiChlorians >= 12000 && jedi.yearsOfService >= 8;
 
-// bad
-function getType() {
-    console.log('fetching type...');
-    // set the default type to 'no type'
-    let type = this._type || 'no type';
-
-    return type;
-}
-
-// good
-function getType() {
-    console.log('fetching type...');
-
-    // set the default type to 'no type'
-   const type = this._type || 'no type';
-
-    return type;
+    return eligible ? 'Council' : 'Knight';
 }
 ```
 
-Prefixing your comments with `FIXME` or `TODO` helps other developers quickly understand if you're pointing out a problem that needs to be revisited, or if you're suggesting a solution to the problem that needs to be implemented. These are different than regular comments because they are actionable. The actions are `FIXME -- need to figure this out` or `TODO -- need to implement`.
+### `TODO` and `FIXME`
 
-Use `// FIXME:` to annotate problems.
-
-```javascript
-function Calculator() {
-
-    // FIXME: shouldn't use a global here
-    total = 0;
-
-    return this;
-}
-```
-
-Use `// TODO:` to annotate solutions to problems.
+Use `// TODO:` for known work that hasn't been done yet. Use `// FIXME:` for a known bug or shortcut that needs to be revisited. Either way, link to a ticket if one exists — a bare TODO has a half-life of about six months before nobody remembers what it meant.
 
 ```javascript
-function Calculator() {
-
-    // TODO: total should be configurable by an options param
-    this.total = 0;
-
-    return this;
-}
+// TODO(PROJ-123): replace polling with a server-sent event stream
 ```
 
 
@@ -821,65 +791,50 @@ const result = items
 
 ## Type Casting & Coercion
 
-Perform type coercion at the beginning of the statement.
-Strings:
+Perform type coercion explicitly, using the type's constructor function (called without `new`).
+
+### Strings
 
 ```javascript
-//  => this.reviewScore = 9;
+const reviewScore = 9;
 
-// bad
-const totalScore = this.reviewScore + '';
+// bad — relies on implicit coercion
+const totalScore = reviewScore + '';
 
-// good
-const totalScore = '' + this.reviewScore;
-
-// bad
-const totalScore = this.reviewScore.toString(); // not 100% guaranteed to return a string
-
-// good
-const totalScore = String(this.reviewScore);
+// good — explicit
+const totalScore = String(reviewScore);
 ```
 
-Use `parseInt` for Numbers and always with a radix for type casting.
+### Numbers
+
+Use `Number()` for general string-to-number conversion. Use `Number.parseInt(value, 10)` (or the legacy `parseInt`) when you need to parse leading digits out of a string and ignore trailing characters (e.g. `"24px"` → `24`). Always pass an explicit radix.
 
 ```javascript
 const inputValue = '4';
 
 // bad
 const val = new Number(inputValue);
-
-// bad
-const val = +inputValue;
-
-// bad
 const val = inputValue >> 0;
-
-// bad
-const val = parseInt(inputValue);
-
-// bad
 const val = 1 * inputValue;
 
 // good
 const val = Number(inputValue);
-
-// good
-const val = parseInt(inputValue, 10);
+const val = Number.parseInt(inputValue, 10);
 ```
 
-Booleans:
+`Number.parseInt` and `Number.parseFloat` are the modern, namespaced versions of the global `parseInt` and `parseFloat`; they behave identically. Either is acceptable, but consistency within a project matters.
+
+The unary `+` (`+inputValue`) and double-bang (`!!value`) idioms are common in the wild and acceptable in expressions where their meaning is obvious from context. Prefer the named constructors in code you want a junior reader to understand without pausing.
+
+### Booleans
 
 ```javascript
-const age = 0;
+const hasJedi = Boolean(jedi.length);
 
-// bad
-const hasAge = new Boolean(age);
-
-// bad
-const hasAge = !!age;
-
-// good
-const hasAge = Boolean(age);
+// also fine — well understood, common in conditionals
+if (jedi.length) {
+    // ...
+}
 ```
 
 ## Naming Conventions
