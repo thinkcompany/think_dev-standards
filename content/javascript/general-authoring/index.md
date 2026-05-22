@@ -31,12 +31,12 @@ This document focuses on the **semantic** rules a linter can't enforce — patte
   - [Modern Operators](#modern-operators)
   - [Async](#async)
   - [Classes](#classes)
+  - [TypeScript](#typescript)
   - [Comparison Operators & Equality](#comparison-operators--equality)
   - [Blocks](#blocks)
   - [Comments](#comments)
   - [Type Casting & Coercion](#type-casting--coercion)
   - [Naming Conventions](#naming-conventions)
-  - [TypeScript](#typescript)
   - [Miscellaneous](#miscellaneous)
 
 ## Modules
@@ -1005,6 +1005,135 @@ A few rules:
 - **Use `static` for factory methods and constants** that belong to the class itself rather than an instance (`Jedi.fromHolocron` above).
 - **Use `extends` and `super` for inheritance**, but prefer composition over inheritance unless you have a real "is-a" relationship. Deep hierarchies (`SithLord extends Jedi extends ForceUser extends Sentient`) age poorly — Padawans become Masters become Ghosts, and the class tree rarely models that gracefully.
 - **Don't use arrow functions as class methods** when you need `this` to behave normally. Define methods with shorthand syntax; arrow-function-as-class-field has different semantics (per-instance binding) and isn't on the prototype.
+
+## TypeScript
+
+TypeScript is the default for new projects. Even short scripts benefit from type checking — most bugs are someone passing the wrong shape to the wrong function, and `tsc` catches that in milliseconds.
+
+### Enable strict mode
+
+Start every project with `"strict": true` in `tsconfig.json`. Strict mode bundles `noImplicitAny`, `strictNullChecks`, `strictFunctionTypes`, and friends — together they're the difference between TypeScript catching bugs and TypeScript decorating JavaScript. Turn things off individually if you have to; never start permissive.
+
+```json
+{
+    "compilerOptions": {
+        "strict": true,
+        "noUncheckedIndexedAccess": true,
+        "exactOptionalPropertyTypes": true
+    }
+}
+```
+
+`noUncheckedIndexedAccess` is worth enabling on top of strict — it makes `arr[i]` return `T | undefined`, which surfaces a whole class of off-by-one bugs.
+
+### `interface` vs `type`
+
+Rule of thumb: use **`interface`** for object shapes you expect to be extended, augmented, or implemented by a class. Use **`type`** for unions, intersections, mapped types, conditional types, and aliases.
+
+```typescript
+// good — object shape, may be extended
+interface Jedi {
+    name: string;
+    midiChlorians: number;
+}
+
+interface SithLord extends Jedi {
+    allegiance: 'Sith';
+}
+
+// good — union; type is the right tool
+type Allegiance = 'Jedi' | 'Sith' | 'Gray';
+
+// good — mapped/derived type
+type ReadonlyJedi = Readonly<Jedi>;
+```
+
+The two are nearly interchangeable for plain object shapes; pick one convention per project and stick with it.
+
+### Avoid `any` — prefer `unknown` and narrow
+
+`any` opts out of type checking entirely. `unknown` says "I don't know yet" and forces you to narrow before use.
+
+```typescript
+// bad — typecheck disabled
+function parseHolocron(record: any) {
+    return record.designation.toUpperCase();
+}
+
+// good — narrow before use
+function parseHolocron(record: unknown): string {
+    if (
+        typeof record === 'object' &&
+        record !== null &&
+        'designation' in record &&
+        typeof record.designation === 'string'
+    ) {
+        return record.designation.toUpperCase();
+    }
+    throw new Error('Invalid holocron record');
+}
+```
+
+For external data (API responses, user input), pair `unknown` with a runtime validator like [Zod](https://zod.dev/) or [Valibot](https://valibot.dev/) so the runtime check produces a real TypeScript type.
+
+### Generics
+
+Reach for generics when a function or type works on a *shape* rather than a specific type. Don't make things generic preemptively — wait until you have a second concrete use.
+
+```typescript
+function mostPowerful<T extends Jedi>(jedi: T[]): T | undefined {
+    return jedi.toSorted((a, b) => b.midiChlorians - a.midiChlorians)[0];
+}
+
+const winner = mostPowerful([luke, yoda, obiwan]); // type is Jedi | undefined
+```
+
+### `satisfies`
+
+The `satisfies` operator (TS 4.9+) lets you check that a value conforms to a type *without widening it*. Use it when you want to keep the precise literal type but verify the shape.
+
+```typescript
+// inferred type: { name: string; allegiance: 'Jedi' }
+const luke = {
+    name: 'Luke Skywalker',
+    allegiance: 'Jedi',
+} satisfies Jedi;
+
+// luke.allegiance is the literal 'Jedi', not string
+```
+
+### `as const` for literal narrowing
+
+Pair `as const` with `satisfies` (or use it alone) to lock object and tuple types to their literal values — useful for config objects, lookup tables, and discriminator strings.
+
+```typescript
+const ALLEGIANCES = ['Jedi', 'Sith', 'Gray'] as const;
+type Allegiance = (typeof ALLEGIANCES)[number]; // 'Jedi' | 'Sith' | 'Gray'
+```
+
+### Discriminated unions for state
+
+Model state as a union of variants, each tagged with a literal `kind` (or `status`, or `type`). TypeScript will narrow the variant inside `switch` and `if` branches.
+
+```typescript
+type ForceTrial =
+    | { status: 'idle' }
+    | { status: 'training'; padawan: Jedi }
+    | { status: 'complete'; result: 'pass' | 'fail' };
+
+function describe(trial: ForceTrial): string {
+    switch (trial.status) {
+        case 'idle':
+            return 'Awaiting student';
+        case 'training':
+            return `Training ${trial.padawan.name}`; // padawan is in scope
+        case 'complete':
+            return `Trial ${trial.result}`; // result is in scope
+    }
+}
+```
+
+Discriminated unions replace the "boolean and a maybe-undefined value" pattern that plagues a lot of JS state code.
 
 ## Performance
 
