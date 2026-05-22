@@ -930,69 +930,81 @@ export class CheckBox { /* ... */ }
 import { CheckBox } from './CheckBox.js';
 ```
 
-## Constructors
+## Classes
 
-Assign methods to the prototype object, instead of overwriting the prototype with a new object. Overwriting the prototype makes inheritance impossible: by resetting the prototype you'll overwrite the base!
+Use ES6 `class` syntax. The prototype-assignment pattern (`Jedi.prototype.fight = ...`) is obsolete — `class` produces the same prototype-based result with clearer syntax, true private fields, and proper `super` calls in subclasses.
+
+Reach for a class when you have:
+
+- a piece of state with a meaningful lifecycle (train/duel/fall)
+- multiple methods that operate on the same private state
+- a real "is-a" relationship that benefits from `extends` and `instanceof`
+
+For everything else — utility functions, plain data, single-method "services" — prefer a module of named functions or a plain object literal. Classes are not the default unit of code organization in modern JavaScript.
 
 ```javascript
-function Jedi() {
-    console.log('new jedi');
+class Jedi {
+    #name;
+    #midiChlorians;
+    jumping = false;
+
+    constructor({ name, midiChlorians }) {
+        this.#name = name;
+        this.#midiChlorians = midiChlorians;
+    }
+
+    get name() {
+        return this.#name;
+    }
+
+    get isForceSensitive() {
+        return this.#midiChlorians >= 7000;
+    }
+
+    jump() {
+        this.jumping = true;
+        return this;
+    }
+
+    setHeight(height) {
+        this.height = height;
+        return this;
+    }
+
+    static fromHolocron(record) {
+        return new Jedi({
+            name: record.designation,
+            midiChlorians: record.midi_count,
+        });
+    }
 }
 
-// bad
-Jedi.prototype = {
-  fight: function fight() {
-      console.log('fighting');
-  },
+class SithLord extends Jedi {
+    constructor(args) {
+        super(args);
+        this.allegiance = 'Sith';
+    }
 
-  block: function block() {
-      console.log('blocking');
-  }
-};
+    strikeDown(target) {
+        target.fallen = true;
+        return this;
+    }
+}
 
-// good
-Jedi.prototype.fight = function fight() {
-    console.log('fighting');
-};
+const luke = new Jedi({ name: 'Luke Skywalker', midiChlorians: 14500 });
+luke.jump().setHeight(1.72);
 
-Jedi.prototype.block = function block() {
-    console.log('blocking');
-};
+const vader = SithLord.fromHolocron(archive.lookup('DV-001'));
+vader.strikeDown(luke);
 ```
 
-Methods can return `this` to help with method chaining.
+A few rules:
 
-```javascript
-// bad
-Jedi.prototype.jump = function() {
-    this.jumping = true;
-    return true;
-};
-
-Jedi.prototype.setHeight = function(height) {
-    this.height = height;
-};
-
-const luke = new Jedi();
-luke.jump(); // => true
-luke.setHeight(20); // => undefined
-
-// good
-Jedi.prototype.jump = function() {
-    this.jumping = true;
-    return this;
-};
-
-Jedi.prototype.setHeight = function(height) {
-    this.height = height;
-    return this;
-};
-
-const luke = new Jedi();
-
-luke.jump()
-    .setHeight(20);
-```
+- **Private fields use `#`**, not a leading underscore. `Jedi#midiChlorians` is enforced by the language — outside the class, `luke.#midiChlorians` is a syntax error. The old `_field` convention provided no actual privacy.
+- **Return `this` from mutator methods** when method chaining produces meaningfully cleaner call sites (`luke.jump().setHeight(1.72)`) — but don't reflexively chain everything; sometimes a sequence of statements is clearer.
+- **Use `static` for factory methods and constants** that belong to the class itself rather than an instance (`Jedi.fromHolocron` above).
+- **Use `extends` and `super` for inheritance**, but prefer composition over inheritance unless you have a real "is-a" relationship. Deep hierarchies (`SithLord extends Jedi extends ForceUser extends Sentient`) age poorly — Padawans become Masters become Ghosts, and the class tree rarely models that gracefully.
+- **Don't use arrow functions as class methods** when you need `this` to behave normally. Define methods with shorthand syntax; arrow-function-as-class-field has different semantics (per-instance binding) and isn't on the prototype.
 
 ## Performance
 
