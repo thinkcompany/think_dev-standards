@@ -1,6 +1,6 @@
 ---
 title: Authoring Guidelines
-date: "2021-04-01T23:46:37.121Z"
+date: "2026-05-22T00:00:00.000Z"
 area: Javascript
 section: 2. Authoring Guidelines
 description: ""
@@ -8,30 +8,51 @@ description: ""
 
 # General Authoring Guidelines
 
-This document contains Think Company's standards for writing JavaScript.
+This document contains Think Company's standards for writing JavaScript and TypeScript.
+
+These guidelines assume **ES2022+** and a modern build pipeline. TypeScript is the default for new projects.
+
+## Tooling
+
+Most formatting and many of these rules are enforced automatically by [`eslint-config-thinkcompany`](https://www.npmjs.com/package/eslint-config-thinkcompany) — install it, extend from it, and stop arguing about commas and braces in code review. Where supplementary formatting is needed, [Prettier](https://prettier.io/) is a reasonable fallback.
+
+This document focuses on the **semantic** rules a linter can't enforce — patterns to prefer, anti-patterns to avoid, and modern language features to reach for.
 
 ## Table of Contents
 
+  - [Modules](#modules)
   - [Types](#types)
+  - [Variables and Constants](#variables-and-constants)
   - [Objects](#objects)
   - [Arrays](#arrays)
   - [Strings](#strings)
-  - [JSON](#json)
+  - [Destructuring](#destructuring)
   - [Functions](#functions)
-  - [Event Binding](#event-binding)
-  - [Properties](#properties)
-  - [Variables](#variables)
+  - [Modern Operators](#modern-operators)
+  - [Async](#async)
+  - [Classes](#classes)
   - [Comparison Operators & Equality](#comparison-operators--equality)
   - [Blocks](#blocks)
   - [Comments](#comments)
-  - [Whitespace](#whitespace)
-  - [Commas](#commas)
-  - [Semicolons](#semicolons)
   - [Type Casting & Coercion](#type-casting--coercion)
   - [Naming Conventions](#naming-conventions)
-  - [Constructors](#constructors)
-  - [Performance](#performance)
+  - [TypeScript](#typescript)
   - [Miscellaneous](#miscellaneous)
+
+## Modules
+
+Use **ES modules** (`import` / `export`). CommonJS (`require` / `module.exports`) is acceptable only in Node-only contexts where ESM interop isn't viable; new code should be ESM.
+
+```javascript
+// good
+import { Button } from './Button.js';
+export function MyComponent() { /* ... */ }
+export default MyComponent;
+```
+
+- Prefer named exports over default exports for non-component modules — they refactor cleanly and surface typos at import time.
+- Don't mix default and named exports in the same module unless there's a clear reason.
+- Use `.js` extensions in import paths in pure-ESM projects (Node's resolver requires them); bundlers tolerate omitting them, but explicit is safer.
 
 ## Types
 
@@ -76,7 +97,7 @@ Use the literal syntax for object creation.
 const item = new Object();
 
 // good
-let item = {};
+const item = {};
 ```
 
 Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_keywords_as_of_ecmascript_2015) as keys.
@@ -120,17 +141,16 @@ Use the literal syntax for array creation.
 
 ```javascript
 // bad
-let items = new Array();
+const items = new Array();
 
 // good
-let items = [];
+const items = [];
 ```
 
 Use `Array#push` instead of direct assignment to add items to an array.
 
 ```javascript
-let someStack = [];
-
+const someStack = [];
 
 // bad
 someStack[someStack.length] = 'abracadabra';
@@ -139,24 +159,23 @@ someStack[someStack.length] = 'abracadabra';
 someStack.push('abracadabra');
 ```
 
-To copy an array, use spread syntax or `Array#slice`.
+To copy an array, use spread syntax or `Array.from`.
 
 ```javascript
 // good
 const itemsCopy = [...items];
 
 // also good
-const itemsCopy = items.slice();
+const itemsCopy = Array.from(items);
 ```
 
-To convert an array-like object to an array, use `Array.from` or spread syntax.
+Prefer rest parameters (`...args`) over the `arguments` object in new code — they are real arrays, work in arrow functions, and play nicely with destructuring.
 
 ```javascript
 // good
-const args = Array.from(arguments);
-
-// also good
-const args = [...arguments];
+function logAll(...args) {
+    args.forEach((arg) => console.log(arg));
+}
 ```
 
 
@@ -192,276 +211,201 @@ const fullName = 'My first name is' + firstName + 'and my last name is' + lastNa
 const fullName = `My first name is ${firstName} and my last name is ${lastName}.`;
 
 ```
-When programmatically building up a string, use `Array#join` instead of string concatenation. 
+When programmatically building up a string, use `Array#map` and `Array#join` over a concatenation loop. It's more declarative and easier to read.
 
 ```javascript
-let items;
-let messages;
-let length;
-let i;
-
-const messages = [{
-    state: 'success',
-    message: 'This one worked.'
-}, {
-    state: 'success',
-    message: 'This one worked as well.'
-}, {
-    state: 'error',
-    message: 'This one did not work.'
-}];
-
-length = messages.length;
+const messages = [
+    { state: 'success', message: 'This one worked.' },
+    { state: 'success', message: 'This one worked as well.' },
+    { state: 'error', message: 'This one did not work.' },
+];
 
 // bad
 function inbox(messages) {
-    items = '<ul>';
-
-    for (i = 0; i < length; i++) {
-      items += '<li>' + messages[i].message + '</li>';
+    let items = '<ul>';
+    for (let i = 0; i < messages.length; i++) {
+        items += '<li>' + messages[i].message + '</li>';
     }
-
     return items + '</ul>';
 }
 
 // good
 function inbox(messages) {
-  items = [];
-
-  for (i = 0; i < length; i++) {
-      // use direct assignment in this case because we're micro-optimizing.
-      items[i] = `<li>${messages[i].message}</li>`;
-  }
-
-  return `<ul>{items.join('')}</ul>`;
+    const items = messages.map((m) => `<li>${m.message}</li>`).join('');
+    return `<ul>${items}</ul>`;
 }
 ```
 
 
-## JSON
+## Destructuring
 
-A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
+Use destructuring to pull values out of objects and arrays. It is shorter, clearer, and supports defaults.
 
-```json
-{
-    "id" : 148372,
-    "title" : "Learn Javascript",
-    "tags" : [
-        "javascript", 
-        "programming"
-    ],
-    "in-stock": true,
-    "price": 22.50
+```javascript
+// object destructuring with defaults and rename
+function greet({ name = 'friend', greeting: hello = 'Hello' } = {}) {
+    console.log(`${hello}, ${name}!`);
 }
 
+// array destructuring
+const [first, second, ...rest] = items;
+
+// nested
+const { user: { id, email } } = response;
 ```
+
+Destructure function parameters when a function takes 3+ arguments — named parameters via a single options object are clearer than a long positional argument list.
 
 ## Functions
 
-Function expressions:
+### Function declarations vs. expressions
+
+Use a `function` declaration for top-level named functions and arrow functions for callbacks.
 
 ```javascript
-// anonymous function expression
-const anonymous = function() {
-    return true;
-};
+// good — named function declaration, hoisted, named in stack traces
+function calculateTotal(items) {
+    return items.reduce((sum, item) => sum + item.price, 0);
+}
 
-// named function expression
-const named = function named() {
-    return true;
-};
-
-// immediately-invoked function expression (IIFE)
-(function() {
-    console.log('Welcome to the Internet. Please follow me.');
-})();
-```
-**Declare all functions before they are used.** Inner functions should follow the let statement. This helps make it clear what variables are included in its scope.
-
-Do not use a space between the name of a function and the `(` (left parenthesis) of its parameter list. Use one space between the `)` (right parenthesis) and the `{` (left curly brace) that begins the statement body. The body itself is indented four spaces. The `}` (right curly brace) is aligned with the line containing the beginning of the declaration of the function.
-
-```javascript
-    function outer(c, d) {
-        const e = c * d;
-        function inner(a, b) {
-            return (e * a) + b;
-        }
-        return inner(0, 1);
-    }
+// good — arrow function as a callback
+const totals = orders.map((order) => calculateTotal(order.items));
 ```
 
-This convention works well with JavaScript because in JavaScript, functions and object literals can be placed anywhere that an expression is allowed. It provides the best readability with inline functions and complex structures.
-
-```javascript
-    function getElementsByClassName(className) {
-        let results = [];
-        walkTheDOM(document.body, function (node) {
-            let a;                  // array of class names
-            let c = node.className; // the node's classname
-            let i;                  // loop counter
-// If the node has a class name, then split it into a list of simple names.
-// If any of them match the requested name, then append the node to the set of results.
-            if (c) {
-                a = c.split(' ');
-                for (i = 0; i < a.length; i += 1) {
-                    if (a[i] === className) {
-                        results.push(node);
-                        break;
-                    }
-                }
-            }
-        });
-        return results;
-    }
-```
-
-If a function literal is anonymous, there should be one space between the word function and the ( (left parenthesis). If the space is omitted, then it can appear that the function's name is function, which is an incorrect reading.
-
-```javascript
-    div.addEventListener('click', function(e) {
-        console.log('hello');
-    }, false);
-    
-    that = {
-        method: function () {
-            return this.datum;
-        },
-        datum: 0
-    };
-```
-
-Minimize the use of global functions. If your code contains functions that are only useful to the module, then encapsulate those functions in an immediately executed anonymous function with the rest of the module's code.
-
-When a function is to be invoked immediately, wrap the entire invocation expression in parenthesis so that it is clear that the value being produced is the result of the function and not the function itself.
-
-```javascript
-const collection = (function () {
-   let keys = [], values = [];
-    return {
-        get: function (key) {
-           const at = keys.indexOf(key);
-            if (at >= 0) {
-                return value[at];
-            }
-        },
-        set: function (key, value) {
-           const at = keys.indexOf(key);
-            if (at < 0) {
-                at = keys.length;
-            }
-            keys[at] = key;
-            value[at] = value;
-        },
-        remove: function (key) {
-           const at = keys.indexOf(key);
-            if (at >= 0) {
-                keys.splice(at, 1);
-                value.splice(at, 1);
-            }
-        }
-    };
-}());
-```
-
-Never declare a function in a non-function block (if, while, etc). Assign the function to a variable instead. Browsers will allow you to do it, but they all interpret it differently, which is bad news bears.
-**Note:** ECMA-262 defines a `block` as a list of statements. A function declaration is not a statement. [Read ECMA-262's note on this issue](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf#page=97).
+Use **default parameters** rather than reassigning falsy values inside the function body.
 
 ```javascript
 // bad
-if (currentUser) {
-    function test() {
-        console.log('Nope.');
-    }
+function greet(name) {
+    name = name || 'friend';
+    console.log(`Hello, ${name}`);
 }
 
 // good
-let test;
-if (currentUser) {
-    test = function test() {
-        console.log('Yup.');
-    };
+function greet(name = 'friend') {
+    console.log(`Hello, ${name}`);
 }
 ```
 
-Never name a parameter `arguments`. This will take precedence over the `arguments` object that is given to every function scope.
+Use **rest parameters** rather than the legacy `arguments` object — they are real arrays and work in arrow functions.
 
 ```javascript
-// bad
-function nope(name, options, arguments) {
-    // ...stuff...
-}
-
 // good
-function yup(name, options, args) {
-    // ...stuff...
+function sum(...numbers) {
+    return numbers.reduce((a, b) => a + b, 0);
 }
 ```
+
+Never name a parameter `arguments`. This shadows the legacy `arguments` object and is a footgun even if you never use it.
+
+Never declare a `function` inside a block (`if`, `while`, etc.) — assign a function expression to a variable instead, or extract it to module scope.
 
 ### Arrow Functions
 
-How to use arrow functions
-- Don't wrap a single argument with parenthesis.
-- When returning a function from an arrow function, create a block rather than returning on one line (helps readability).
-When to use arrow functions
-- Use arrow functions whenever you don't want to think about or modify the context of the function (`this`). You might find that this is the majority of the functions you are writing on a daily basis, especially when building standalone modules or components.
-- Nested functions that need to share context with their parent
-- Array methods
-- Promise chains
-- Named variables
+- Omit parentheses around a single parameter (`(x) => x` → `x => x`) — this is a style choice; ESLint can enforce either form.
+- Use a block body (`{ return ...; }`) when the function is more than one expression, or when you need an early return.
+- Prefer arrow functions in callbacks and array methods. They inherit `this` from their enclosing scope, which is almost always what you want.
+- **Do not** use arrow functions as object methods or class methods when you need `this` to refer to the object — use shorthand method syntax instead.
+- **Do not** use arrow functions for DOM event handlers attached via `addEventListener` when the handler needs `this` to be the element — use a regular `function`.
 
-When not to use arrow functions
-- Event handlers that rely on the element context.
-- In cases where you need to leverage the `arguments` or `prototype` objects of a function.
-- Inside classes as properties, since they will not be added to the class' prototype.
+## Modern Operators
+
+Use the operators ES2020+ added — they replace whole categories of older boilerplate.
+
+**Optional chaining (`?.`)** short-circuits property access when the operand is `null` or `undefined`:
+
+```javascript
+// bad
+const city = user && user.address && user.address.city;
+
+// good
+const city = user?.address?.city;
+
+// works on function calls and array indexing too
+user?.greet?.();
+items?.[0];
+```
+
+**Nullish coalescing (`??`)** falls back only when the left side is `null` or `undefined` — not on every falsy value the way `||` does. Use it for defaults that should treat `0` and `''` as real values:
+
+```javascript
+// bad — overrides legitimate 0 / '' / false
+const fontSize = config.fontSize || 14;
+
+// good
+const fontSize = config.fontSize ?? 14;
+```
+
+**Logical assignment (`??=`, `||=`, `&&=`)** combines the operator with assignment:
+
+```javascript
+options.timeout ??= 5000;  // assign only if currently null/undefined
+```
+
+## Async
+
+Prefer `async`/`await` over hand-rolled promise chains. It reads like synchronous code and makes try/catch error handling natural.
+
+```javascript
+// bad — chained promises are hard to follow
+function loadUser(id) {
+    return fetchUser(id)
+        .then((user) => fetchOrders(user.id))
+        .then((orders) => orders.filter((o) => o.active))
+        .catch((err) => log(err));
+}
+
+// good
+async function loadUser(id) {
+    try {
+        const user = await fetchUser(id);
+        const orders = await fetchOrders(user.id);
+        return orders.filter((o) => o.active);
+    } catch (err) {
+        log(err);
+    }
+}
+```
+
+- Run independent async operations in parallel with `Promise.all`. Sequential `await`s are a common performance bug.
+- Use `Promise.allSettled` when you want every promise to complete regardless of failures.
+- Top-level `await` is allowed in ES modules — use it for module-init code that depends on async resolution.
 
 ## Event Binding
 
-Avoid inline event bindings. It is better to keep a separations of concerns by keeping our JavaScript separate from HTML. Inline bindings can also lead to very hard to track bugs.
+Bind events with `addEventListener`. Never use inline `on*` attributes in HTML.
 
-```html 
-<!-- Bad -->
+```html
+<!-- bad -->
 <button onclick="document.bgColor='lightblue'">Feel Blue</button>
+
+<!-- good -->
+<button id="feel-blue">Feel Blue</button>
 ```
 
-Avoid binding to events that can fire multiple times. Some events like resizing the window, or scrolling can fire a large amount of events in a very short amount of time, causing overall performance to degrade. If you need to attach a function to an event like scrolling or window resizing, use [debouncing](https://davidwalsh.name/javascript-debounce-function). This will cut down on the number of times the event fires.
-
-```js 
-// Bad: This is going to fire thousands of times within a few seconds. 
-
-window.addEventListener('resize', function() {
-        console.log('resize');
+```javascript
+document.getElementById('feel-blue').addEventListener('click', () => {
+    document.body.style.backgroundColor = 'lightblue';
 });
-
-// Good: This is using debouncing to only fire every 250ms
-
-const windowResizeFn = debounce(function() {
-    console.log('resize');
-}, 250);
-
-window.addEventListener('resize', windowResizeFn);
-
 ```
 
-Always cache the DOM query for the element you are binding to. This creates a memory reference to the DOM nodes, which significantly speeds up execution time.
+For high-frequency events (`scroll`, `resize`, `pointermove`, `input`), throttle or debounce the handler so it does not fire thousands of times per second. Use a small utility (lodash's `debounce`/`throttle`) or roll your own:
 
-```js
+```javascript
+function debounce(fn, delay = 250) {
+    let timerId;
+    return (...args) => {
+        clearTimeout(timerId);
+        timerId = setTimeout(() => fn(...args), delay);
+    };
+}
 
-// Bad: This will query for the selector every time, in a complex document that could take some time.
-
-document.getElementById('myDiv').addEventListener('click', function() {
-        console.log('clicked');
-});
-
-// Good: the node is now cached to the $myDiv variable. Instead of traversing the DOM to find myDiv, it will use the node reference in memory to locate it.
-
-const $myDiv = document.getElementById('myDiv');
-
-$myDiv.addEventListener('click', function() {
-        console.log('clicked');
-});
-
+window.addEventListener('resize', debounce(() => console.log('resize')));
 ```
 
+Cache DOM queries when you bind multiple events to the same node — repeated `document.querySelector` calls in tight loops add up.
+
+For scroll-position-driven UI, prefer `IntersectionObserver` over a manual `scroll` listener. For element-size-driven UI, use `ResizeObserver`. They fire only when state actually changes and are scheduled around frame timing.
 
 ## Properties
 
@@ -496,173 +440,86 @@ const isJedi = getProp('jedi');
 ```
 
 
-## Variables
+## Variables and Constants
 
-Always use `let` or `const` to declare variables. Use `let` for variables that need to be mutable. Be sure to declare `let` at the top of the scope in which they are used. The preference is to use `const` when possible. A variable declared with `const` is immutable (i.e. it cannot be redefined). When creating objects or arrays using `const`, keep in mind that modifying the items _inside_ the object does not mutate the object reference itself. [Read More about using `const` here.](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const)
+Use `const` by default. Use `let` only when reassignment is genuinely required. Never use `var` — it is function-scoped and hoists, which causes bugs that `let`/`const`'s block scoping eliminates.
 
 ```javascript
-// bad
+// bad — implied global
 superPower = new SuperPower();
+
+// bad — var hoists and is function-scoped
+var superPower = new SuperPower();
 
 // good
 const superPower = new SuperPower();
 ```
 
-Variables can be defined one per line or sequentially. If declaring sequentially, place `let` declarations on their own line, and indented. Agree on a declaration format with your project team and follow it consistently throughout the lifecycle of the application.
+`const` makes the binding immutable, not the value. You can still mutate properties of a `const` object or push to a `const` array — `const` only prevents reassignment of the variable itself.
+
+**Declare variables close to where they're first used**, not in a block at the top of the function. Block scoping makes this safe and readable; the old "declare everything at the top" rule was a workaround for `var` hoisting and no longer applies.
+
+```javascript
+// good — declarations are next to their use
+async function loadDashboard(userId) {
+    const user = await fetchUser(userId);
+    if (!user) return null;
+
+    const orders = await fetchOrders(user.id);
+    return { user, orders };
+}
+```
+
+Declare each variable on its own line. Don't chain multiple declarations with commas — it makes diffs noisier and obscures intent.
 
 ```javascript
 // bad
-let width, length, height, depth;
-
-// good
-let width, 
-    height, 
-    length,
-    depth;
+let width, height, length, depth;
 
 // good
 let width;
 let height;
 let length;
 let depth;
-
 ```
 
-Declare unassigned variables last. This is helpful when later on you might need to assign a variable depending on one of the previous assigned variables.
-
-```javascript
-// bad
-let i, len, dragonball,
-    items = getItems(),
-    goSportsTeam = true;
-
-// bad
-let i;
-const items = getItems();
-let dragonball;
-const goSportsTeam = true;
-let len;
-
-// good
-const items = getItems();
-const goSportsTeam = true;
-let dragonball;
-let length;
-let i;
-```
-
-Declare all variables before use. JavaScript does not require this, but doing so makes the program easier to read and makes it easier to detect undeclared variables that may become implied [globals](http://yuiblog.com/blog/2006/06/01/global-domination/).
-
-Minimize the use of global variables. Do not use implied global variables.
-  
-Assign variables at the top of their scope. This helps avoid issues with variable declaration and assignment hoisting related issues. 
-
-```javascript
-// bad
-function() {
-    test();
-    console.log('doing stuff..');
-
-    //..other stuff..
-
-    const name = getName();
-
-    if (name === 'test') {
-        return false;
-    }
-
-    return name;
-}
-
-// good
-function() {
-   const name = getName();
-
-    test();
-    console.log('doing stuff..');
-
-    //..other stuff..
-
-    if (name === 'test') {
-        return false;
-    }
-
-    return name;
-}
-
-// bad - unnecessary function call
-function() {
-   const name = getName();
-
-    if (!arguments.length) {
-        return false;
-    }
-
-    this.setFirstName(name);
-
-    return true;
-}
-
-// good
-function() {
-    let name;
-
-    if (!arguments.length) {
-        return false;
-    }
-
-    name = getName();
-    this.setFirstName(name);
-
-    return true;
-}
-```
+Minimize the use of module-scope mutable state. Treat any non-`const` value at module scope as a smell — it's usually a sign that state belongs inside a function, a class, or a dedicated store.
 
 
 ## Comparison Operators & Equality
 
-Use `===` and `!==` over `==` and `!=`.
-Conditional statements such as the `if` statement evaluate their expression using coercion with the `ToBoolean` abstract method and always follow these simple rules:
+Use `===` and `!==`. The loose equality operators (`==`, `!=`) perform type coercion that produces surprising results (`0 == ''` is `true`, `null == undefined` is `true`).
 
-+ **Objects** evaluate to **true**
-+ **Undefined** evaluates to **false**
-+ **Null** evaluates to **false**
-+ **Booleans** evaluate to **the value of the boolean**
-+ **Numbers** evaluate to **false** if **+0, -0, or NaN**, otherwise **true**
-+ **Strings** evaluate to **false** if an empty string `''`, otherwise **true**
+Conditional expressions coerce their value to boolean. The rules:
 
-```javascript
-if ([0]) {
-    // true
-    // An array is an object, objects evaluate to true
-}
-```
++ **Objects** (including arrays and functions) → **true**
++ **`undefined`** → **false**
++ **`null`** → **false**
++ **Booleans** → their value
++ **Numbers** → **false** for `+0`, `-0`, `NaN`; **true** otherwise
++ **Strings** → **false** for `''`; **true** otherwise
 
-Use shortcuts.
+Be explicit in conditions when the type is ambiguous. "Truthy check" shortcuts can hide bugs around `0`, `''`, and `null`:
 
 ```javascript
-// bad
-if (name !== '') {
-    // ...stuff...
-}
+// risky — also true for null, undefined, 0
+if (count) { /* ... */ }
 
-// good
-if (name) {
-    // ...stuff...
-}
+// explicit — only true for actual positive numbers
+if (count > 0) { /* ... */ }
 
-// bad
-if (collection.length > 0) {
-    // ...stuff...
-}
+// risky — also true for null, undefined
+if (name) { /* ... */ }
 
-// good
-if (collection.length) {
-    // ...stuff...
-}
+// explicit — distinguishes null/undefined from empty string
+if (name != null) { /* ... */ }
 ```
 
-For more information see [Truth Equality and JavaScript](http://javascriptweblog.wordpress.com/2011/02/07/truth-equality-and-javascript/#more-2108) by Angus Croll.
+When you want to distinguish "not provided" from "provided but falsy," reach for `??`:
+
+```javascript
+const label = props.label ?? 'Untitled';
+```
 
 
 ## Blocks
@@ -749,16 +606,24 @@ Use the following format for a `for` statement:
     }
 ```
 
-Use the first example of the for loop with arrays and with loops of a predeterminable number of iterations.
-
-Only use the second form with objects. Be aware that members that are added to the prototype of the object will be included in the enumeration. It is wise to program defensively by using the `hasOwnProperty` method to distinguish the true members of the object:
+For array iteration, prefer `for...of` (or array methods like `forEach`/`map`/`filter`/`reduce`) over the C-style `for` loop. They're harder to get wrong.
 
 ```javascript
-    for (variable in object) {
-        if (object.hasOwnProperty(variable)) {
-            // statements
-        }
-    }
+// good — direct, clear
+for (const item of items) {
+    process(item);
+}
+
+// good — when index is needed
+items.forEach((item, index) => process(item, index));
+```
+
+For object iteration, do **not** use `for...in` (it walks the prototype chain). Use `Object.keys`, `Object.values`, or `Object.entries` instead:
+
+```javascript
+for (const [key, value] of Object.entries(obj)) {
+    console.log(key, value);
+}
 ```
 
 Use the following format for a `while` statement:
@@ -919,256 +784,39 @@ function Calculator() {
 ```
 
 
-## Whitespace
-Blank lines improve readability by setting off sections of code that are logically related.
+## Formatting
 
-Use soft tabs set to 4 spaces. ([Stack Overflow: Soft tabs or hard tabs?](http://stackoverflow.com/a/9446364/1096083))
+Use `eslint-config-thinkcompany` (with Prettier as a backup if ESLint doesn't cover a file type) to enforce formatting automatically. The rules below are the ones it expects — knowing them helps when reading code, but you should not be applying them by hand.
 
-```javascript
-// no
-function() {
-∙∙let name;
-}
-
-// no
-function() {
-∙let name;
-}
-
-// yeah
-function() {
-∙∙∙∙let name;
-}
-```
-
-Place 1 space before the leading brace.
+- **Indent with 4 spaces** (soft tabs).
+- **One space** before opening braces, between operators, and after commas. **No space** between a function name and its argument list.
+- **Trailing commas** in multi-line objects, arrays, and function parameter lists. They produce cleaner diffs (adding a line touches one line, not two) and have been universal in JS engines since ES2017.
+- **Semicolons at statement ends.** Several major style guides (Standard, some Prettier configs) omit them, but the consistent presence of semicolons eliminates an entire class of ASI surprises.
+- **Single quotes** for strings unless the string contains a single quote. Template literals for any string that interpolates a value.
+- **One blank line** between logically distinct blocks of code; no more than one consecutive blank line.
+- **End files with a single trailing newline.**
 
 ```javascript
-// bad
-function test(){
-    console.log('test');
-}
-
 // good
-function test() {
-    console.log('test');
-}
+const hero = {
+    firstName: 'Kevin',
+    lastName: 'Flynn',
+    superPower: 'strength',
+};
 
-// bad
-dog.set('attr',{
-    age: '1 year',
-    breed: 'Bernese Mountain Dog'
-});
-
-// good
-dog.set('attr', {
-    age: '1 year',
-    breed: 'Bernese Mountain Dog'
-});
-```
-
-Place 1 space before the opening parenthesis in control statements (`if`, `while` etc.). Do not place a space before the argument list in function calls and declarations.
-
-```javascript
-// bad
-if(isJedi) {
-    fight ();
-}
-
-// good
-if (isJedi) {
-    fight();
-}
-
-// bad
-function fight () {
-    console.log ('Swooosh!');
-}
-
-// good
 function fight() {
     console.log('Swooosh!');
 }
 ```
 
-Set off operators with spaces.
+For long method chains, indent each call on its own line with a leading dot:
 
 ```javascript
-// bad
-const x=y+5;
-
-// good
-const x = y + 5;
+const result = items
+    .filter((item) => item.active)
+    .map((item) => item.value)
+    .reduce((sum, value) => sum + value, 0);
 ```
-
-End files with a single newline character.
-
-```javascript
-// bad
-(function(global) {
-    // ...stuff...
-})(this);
-```
-
-```javascript
-// bad
-(function(global) {
-    // ...stuff...
-})(this);↵
-↵
-```
-
-```javascript
-// good
-(function(global) {
-    // ...stuff...
-})(this);↵
-```
-
-Use indentation when making long method chains. Use a leading dot, which emphasizes that the line is a method call, not a new statement.
-
-Prefer `async`/`await` over promise chains — it is easier to read and reason about, especially when handling errors.
-
-```javascript
-// bad — chained promises are hard to follow
-promise.then(doSomething).then(doSomethingElse).catch(handleError);
-
-// better — indented chain is readable, but still verbose
-promise
-    .then(doSomething)
-    .then(doSomethingElse)
-    .catch(handleError);
-
-// best — async/await reads like synchronous code
-async function run() {
-    try {
-        const result = await doSomething();
-        await doSomethingElse(result);
-    } catch (error) {
-        handleError(error);
-    }
-}
-```
-
-Leave a blank line after blocks and before the next statement
-
-```javascript
-// bad
-if (foo) {
-    return bar;
-}
-return baz;
-
-// good
-if (foo) {
-    return bar;
-}
-
-return baz;
-
-// bad
-let obj = {
-    foo: function() {
-    },
-    bar: function() {
-    }
-};
-return obj;
-
-// good
-let obj = {
-    foo: function() {
-    },
-
-    bar: function() {
-    }
-};
-
-return obj;
-```
-
-## Commas
-
-Leading commas: **No, please.**
-
-```javascript
-// bad
-const story = [
-    once
-  , upon
-  , aTime
-];
-
-// good
-const story = [
-    once,
-    upon,
-    aTime
-];
-
-// bad
-const hero = {
-    firstName: 'Bob'
-  , lastName: 'Parr'
-  , heroName: 'Mr. Incredible'
-  , superPower: 'strength'
-};
-
-// good
-const hero = {
-    firstName: 'Bob',
-    lastName: 'Parr',
-    heroName: 'Mr. Incredible',
-    superPower: 'strength'
-};
-```
-
-Additional trailing comma: **Nope.**
-
-```javascript
-// kaboooom
-const hero = {
-    firstName: 'Kevin',
-    lastName: 'Flynn',
-};
-
-const heroes = [
-    'Batman',
-    'Superman',
-];
-
-// phew
-const hero = {
-    firstName: 'Kevin',
-    lastName: 'Flynn'
-};
-
-const heroes = [
-    'Batman',
-    'Superman'
-];
-```
-
-
-## Semicolons
-
-**[Yes, have some.](https://www.youtube.com/watch?v=pdMGPvODN44)**
-
-```javascript
-// bad
-(function() {
-    const name = 'Skywalker'
-    return name
-})()
-
-// good
-(function() {
-    const name = 'Skywalker';
-    return name;
-})();
-```
-
-[Read more](http://stackoverflow.com/a/7365214/1712802).
 
 
 ## Type Casting & Coercion
@@ -1236,127 +884,50 @@ const hasAge = Boolean(age);
 
 ## Naming Conventions
 
-**Names should be formed from the 26 upper and lower case letters (A .. Z, a .. z), the 10 digits (0 .. 9), and `_` (underscore).** Avoid use of international characters because they may not read well or be understood everywhere. 
+- **`camelCase`** for variables, functions, instances, and methods.
+- **`PascalCase`** for classes, constructors, and React components.
+- **`SCREAMING_SNAKE_CASE`** for top-level constants that represent fixed values (e.g. `const MAX_RETRIES = 3`).
+- **`kebab-case`** for filenames in JS/TS source (`use-debounced-value.ts`), with the exception that files exporting a single class or component match the export name (`Button.tsx`).
 
-Do not use `_` (underscore) as the first character of a name. It is sometimes used to indicate privacy, but it does not actually provide [privacy](http://javascript.crockford.com/private.html). If privacy is important, use the forms that provide private members.
+Avoid single-letter names. The only acceptable single-letter names are loop counters (`i`, `j`) in short, conventional contexts. Use descriptive names everywhere else.
 
-Avoid single letter names. Be descriptive with your naming.
-
-```javascript
-// bad
-function q() {
-    // ...stuff...
-}
-
-// good
-function query() {
-    // ..stuff..
-}
-```
-
-Be consistent with either camelCase or underscore_case convention when naming objects, functions, and instances. Don't mix naming conventions within a single project.
-
-```javascript
-// bad, matches neither convention:
-let OBJEcttsssss = {};
-let o = {};
-function c() {}
-
-// bad, mixed conventions:
-let thisIsMyObject = {};
-function this_is_my_function() {}
-
-// good, camelCase:
-let thisIsMyObject = {};
-function thisIsMyFunction() {}
-
-// good, underscore_case:
-let this_is_my_object = {};
-function this_is_my_function() {}
-
-```
-
-Use PascalCase when naming constructors or classes. Start constructor functions, which must be used with the [new](http://yuiblog.com/blog/2006/11/13/javascript-we-hardly-new-ya/) prefix, with a capital letter. JavaScript issues neither a compile-time warning nor a run-time warning if a required new is omitted. Bad things can happen if new is not used, so the capitalization convention is the only defense we have.
+Don't use `_` as a name prefix to imply privacy — it provides none, and TypeScript's `private` (or true private fields with `#`) does. The only valid prefix uses are conventional: `_` for "ignore this argument" in destructuring, or `$` for jQuery-wrapped values in legacy codebases.
 
 ```javascript
 // bad
-function user(options) {
-    this.name = options.name;
-}
-
-const bad = new user({
-    name: 'nope'
-});
+function q() { /* ... */ }
+let OBJ = {};
 
 // good
-function User(options) {
-    this.name = options.name;
-}
-
-const good = new User({
-    name: 'yup'
-});
+function query() { /* ... */ }
+const userPreferences = {};
+const MAX_RETRIES = 3;
+class UserSession { /* ... */ }
 ```
 
-If you must reference this, avoid using an alias. Aliases to this are very bug prone.
-
-```javascript
-
-// Bad
-function() {
-    const _this = this;
-    return function() {
-        console.log(_this);
-    };
-}
-
-//Good: If you can use ES6, use arrow functions to take advantage how it handles lexical scoping
-function() {
-    return () => {
-        console.log(this);
-    };
-}
-
-//Good: If ES6 is not available, revert to a traditional function declaration structure
-function() {
-    return function() {
-        console.log(this);
-    }.bind(this);
-}
-
-```
-
-Name your functions. This is helpful for stack traces.
+Use lexical `this` (arrow functions) rather than aliasing `this` to a variable.
 
 ```javascript
 // bad
-const log = function(msg) {
-    console.log(msg);
-};
+function setup() {
+    const self = this;
+    setTimeout(function () { self.start(); }, 100);
+}
 
 // good
-const log = function log(msg) {
-    console.log(msg);
-};
+function setup() {
+    setTimeout(() => this.start(), 100);
+}
 ```
 
-If your file exports a single class, your filename should be exactly the name of the class.
+Filenames should match the kind of module they contain. If a file exports a single class or React component, name the file after the export:
+
 ```javascript
-// file contents
-class CheckBox {
-  // ...
-}
-module.exports = CheckBox;
+// CheckBox.tsx
+export class CheckBox { /* ... */ }
 
 // in some other file
-// bad
-const CheckBox = require('./checkBox');
-
-// bad
-const CheckBox = require('./check_box');
-
-// good
-const CheckBox = require('./CheckBox');
+import { CheckBox } from './CheckBox.js';
 ```
 
 ## Constructors
