@@ -1,6 +1,6 @@
 ---
 title: HTML Development Standards
-date: "2020-06-08T23:46:37.121Z"
+date: "2026-05-22T00:00:00.000Z"
 area: HTML
 section: 1. Programming Principles
 description: ""
@@ -15,12 +15,12 @@ This document contains Think Company's standards for writing HTML.
  - [Allowed Elements & Attributes](#allowed-elements--attributes)
     * [Elements](#elements)
     * [Attributes](#attributes)
- - [Format & Style](#format--stle)
+ - [Format & Style](#format--style)
  - [Formatting for Readability](#formatting-for-readability)
  - [Module-based Markup](#module-based-markup)
  - [Classes, IDs, & Custom Data Attributes](#classes-ids--custom-data-attributes)
  - [Attribute Order](#attribute-order)
- - [Page Layouts](#programming-principles)
+ - [Page Layouts](#page-layouts)
  - [Coding Practices](#coding-practices)
     * [Doctype](#doctype)
     * [HTML](#html)
@@ -31,15 +31,11 @@ This document contains Think Company's standards for writing HTML.
 A building is only as strong as its foundation; the same is true for a website or web application. Our foundation is plain-old semantic HTML (POSH), which is broken down into discrete, reusable components. Markup is progressively enhanced with CSS and JavaScript. Usability and accessibility are core concerns, and are often realized by leveraging default browser functionality.
 
 ### Versions & Validation
-All HTML documents must be authored according to the W3C HTML 5 specification, keeping in mind the tenets of the XHTML 1.0 Strict specification.
+All HTML documents must be authored according to the [WHATWG HTML Living Standard](https://html.spec.whatwg.org/). HTML is no longer versioned — there is no "HTML 5.x" spec. Stay current with the living standard.
 
-[HTML5 Spec](http://www.w3.org/TR/html5/)
+Use the W3C validator to check your markup. Limited errors may be ignored; read on for details.
 
-[XHTML 1.0 Spec](http://www.w3.org/TR/xhtml1/)
-
-Use the W3C validator to check your markup. Limited errors may be ignored, read on for details.
-
-[W3C Validator](http://validator.w3.org/)
+[W3C Validator](https://validator.w3.org/)
 
 ### Allowed Elements & Attributes
 Only use elements and attributes that have semantic value, or are commonly used to structure markup for styling or interaction. This includes the following elements:
@@ -70,14 +66,14 @@ Only use elements and attributes that have semantic value, or are commonly used 
 - `placeholder` and other HTML5 form attributes/attribute values
 - custom data attributes (`data-*`)
 
-Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
+Do not use presentational elements (`font`, `b`, etc.) or attributes (`align`, `valign`, `style`, inline event handlers, etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styles/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
 ## Format & Style
 
-Markup must follow HTML5 standards. Stylistically, elements and attributes should be written in lowercase characters; attribute values should be contained in double quotes. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
+Markup must follow the HTML living standard. Stylistically, elements and attributes should be written in lowercase characters and attribute values contained in double quotes. Void elements (`<img>`, `<meta>`, `<link>`, `<input>`, `<br>`, `<hr>`) do not need a trailing slash — that is an XHTML convention and adds no value in HTML.
 
 ```html
-<img src="logo.png" alt="Client Name" />
+<img src="logo.png" alt="Client Name">
 ```
 
 ### Formatting for Readability
@@ -186,10 +182,10 @@ One or more `<meta>` elements may be nested in the document head.
 
 #### Charset Meta Tag
 
-Always specify the character set; it must appear first. (This prevents IE from re-parsing the page, if it appears too late.) The current standard for character encoding is UTF-8. The HTML5 meta charset tag may be used in XHTML documents (validation errors may be ignored) as all browsers support this.
+Always specify the character set; it must appear within the first 1024 bytes of the document. The standard for character encoding is UTF-8.
 
 ```html
-<meta charset="utf-8" />
+<meta charset="utf-8">
 ```
 
 #### Viewport Meta Tag
@@ -197,7 +193,7 @@ Always specify the character set; it must appear first. (This prevents IE from r
 When implementing responsive web design or a dedicated mobile site, use the following as the default viewport tag:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 ```
 
 Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent users from zooming the page.
@@ -207,7 +203,7 @@ Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent user
 Style sheets must always be included in the `<head>` of an HTML document. Never import a style sheet in the `<body>` of a page. Always use the `<link>` element to include external style sheets. Specify the media attribute value (i.e. all, screen, print) to scope the style sheet appropriately for browser application and download.
 
 ```html
-<link rel="stylesheet" href="/css/global.css" media="screen" />
+<link rel="stylesheet" href="/css/global.css" media="screen">
 ```
 
 #### Importing JavaScript
@@ -237,7 +233,7 @@ Use headings to denote important passages of text and to build a semantic conten
 
 Headings must appear in logical order, beginning with `<h1>`. For instance, an `<h4>` cannot appear in the document before an `<h3>`.
 
-Never use headings as subtitles or subheadlines. The `hgroup` concept that was once part of the HTML5 specification is invalid, in part because it is detrimental to accessibility.
+Do not use headings as subtitles or subheadlines. `<hgroup>` was reinstated in the HTML living standard for pairing a heading with a single related `<p>` of subtitle text; if you use it, follow the current spec exactly. Otherwise mark a subtitle as a `<p>` adjacent to the heading.
 
 ```html
 <h2>Getting Started</h2>
@@ -291,7 +287,7 @@ Good Example:
 Note that a `<button>`'s default type is "submit". When using a `<button>` outside of a form, include the attribute type="button", e.g. `<button type="button">Action</button>`
 
 #### Anchor Targets (aka In-page Anchors)
-Do not use the name attribute on `<a>` tags. Create an in-page anchor by linking to an ID value on the appropriate target. When creating in-page anchor IDs, use a camelCase representation of the heading or name for the content section.
+Do not use the `name` attribute on `<a>` tags. Create an in-page anchor by linking to an `id` value on the appropriate target. Use lowercase, hyphen-separated IDs to stay consistent with the rest of our class and ID naming conventions.
 
 Poor Example:
 ```html
@@ -301,18 +297,11 @@ Poor Example:
 <ul> ... </ul>
 ```
 
-Poor Example:
-```html
-<a href="#navigation">Jump to Navigation</a>
-
-<ul id="navigation"> ... </ul>
-```
-
 Good Example:
 ```html
-<a href="#responsiveDesign">Learn more about Responsive Design</a>
+<a href="#responsive-design">Learn more about Responsive Design</a>
 
-<h2 id="responsiveDesign">Responsive Design</h2>
+<h2 id="responsive-design">Responsive Design</h2>
 ```
 
 #### Link Titles
@@ -329,28 +318,38 @@ This will produce a visible tooltip in most browsers. Make sure you repeat the l
 
 Use the `<img>` tag to include a content image. Do not use `<img>` to include design ("chrome") graphics; load and apply those images via CSS instead.
 
-Unless coding a responsive design, specify the dimensions of an image using the width and height attributes. This will aid the browser in calculating page layout.
+**Always specify `width` and `height` attributes**, even in responsive layouts. The browser uses these values to compute an aspect ratio and reserve space, preventing Cumulative Layout Shift (CLS). In responsive CSS, set `max-width: 100%; height: auto;` so the image scales while preserving that ratio.
 
-Always specify an alt attribute that describes the image. If a design element is loaded via HTML, use a blank alt attribute value rather than no alt attribute.
+Always specify an `alt` attribute that describes the image. If a design element is loaded via HTML, use an empty `alt=""` rather than omitting the attribute entirely.
 
 ```html
-<img src="logo.png" alt="Client Name" width="320" height="240" />
+<img src="logo.png" alt="Client Name" width="320" height="240">
 ```
 
-If there is descriptive text directly adjacent to the image, then you may leave the alt attribute blank.
+If there is descriptive text directly adjacent to the image, leave the alt attribute empty so screen readers skip the duplicate.
 
 ```html
-<img src="photo.jpg" alt="" width="640" height="480" />
+<img src="photo.jpg" alt="" width="640" height="480">
 <p class="caption">A yellow flower in a grassy meadow.</p>
 ```
 
-A title attribute may be added to confer additional meaning, but it is not recommended to use both title and alt on an `<img>` tag.
+For art-directed images, multiple resolutions, or modern formats with fallbacks, use `<picture>`:
+
+```html
+<picture>
+    <source srcset="hero.avif" type="image/avif">
+    <source srcset="hero.webp" type="image/webp">
+    <img src="hero.jpg" alt="Sunrise over the Schuylkill" width="1600" height="900">
+</picture>
+```
+
+Use the `loading="lazy"` attribute on images that are below the fold, and `fetchpriority="high"` on the LCP (largest contentful paint) image.
 
 #### Tables
 
 Use tables to provide structure for tabular data. Do not use tables to produce side-by-side content rendering or any other visual effect. Use CSS instead.
 
-Refer to the latest W3C recommendations for marking up tabular data: http://www.w3.org/TR/html5/tabular-data.html#tabular-data.
+Refer to the [HTML living standard for tabular data](https://html.spec.whatwg.org/multipage/tables.html).
 
 Provide a `<caption>` element that describes the table. This will render on-screen but can be shifted off-screen if necessary.
 
@@ -386,11 +385,15 @@ Provide a `<caption>` element that describes the table. This will render on-scre
 ```
 
 #### Forms
-The `<form>` element must include action and method attributes. When choosing the form submission method, consider the user experience:
-- GET: form data is encoded by the browser and appended to the URL; typically used for retrieving data
-- POST: form data appears in a message body which in encrypted over HTTPS; typically used for sending or storing data
+The `<form>` element must include `action` and `method` attributes. When choosing the form submission method, consider the user experience:
+- GET: form data is encoded by the browser and appended to the URL; use for retrieving or filtering data.
+- POST: form data is sent in the request body (encrypted over HTTPS); use for any state-changing action.
 
-Code form fields in their natural (i.e. visual) navigation order, to aid in keyboard navigation. There are some exceptions to this, such as "OK/Cancel" button combinations, where the default action (OK) will always come first, regardless of visual order.
+Code form fields in their natural (visual) navigation order to aid keyboard users. There are some exceptions, such as "OK/Cancel" button combinations, where the default action (OK) comes first regardless of visual order.
+
+Use the right HTML5 input type for the data being collected — `email`, `tel`, `url`, `number`, `search`, `date`, `time`, `color`. These improve mobile keyboards, enable built-in validation, and surface native UI affordances at zero cost.
+
+Use native form validation (`required`, `pattern`, `min`, `max`, `minlength`, `maxlength`) as the first line of defense, paired with custom messaging via the Constraint Validation API. Modern screen readers announce these states reliably; do not assume server-side validation is enough.
 
 
 #### Fieldset
@@ -452,17 +455,40 @@ For groups of radio buttons, ensure that the *name* attribute value matches, so 
 
 #### Buttons
 
-Use the `<button>` element to render actionable buttons in forms instead of inputs. Use type="submit" to generate a submit button. Use CSS to style buttons according to designs. Do not use the image input type.
+Use the `<button>` element to render actionable buttons in forms instead of inputs. Use `type="submit"` to generate a submit button. Use CSS to style buttons according to designs. Do not use `<input type="image">`.
 
 Poor Example:
 
 ```html
-<image type="submit" src="button.png" alt="Submit" />
+<input type="image" src="button.png" alt="Submit">
 ```
 
 Good Example:
 
 ```html
 <button type="submit">Submit</button>
+```
+
+### Dialogs and Disclosure Widgets
+
+Use the native `<dialog>` element for modal and non-modal dialogs. It provides focus trapping, a top-layer rendering stack, and an `::backdrop` pseudo-element out of the box — no JS focus management required.
+
+```html
+<dialog id="confirm-dialog">
+    <form method="dialog">
+        <p>Are you sure?</p>
+        <button value="cancel">Cancel</button>
+        <button value="confirm">Confirm</button>
+    </form>
+</dialog>
+```
+
+Use `<details>` and `<summary>` for native disclosure widgets (accordions, "show more" toggles). No JS, no ARIA, fully accessible by default.
+
+```html
+<details>
+    <summary>Shipping details</summary>
+    <p>Standard shipping takes 3–5 business days.</p>
+</details>
 ```
 
