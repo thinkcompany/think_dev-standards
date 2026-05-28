@@ -72,11 +72,9 @@ Only use elements and attributes that have semantic value, or are commonly used 
 
 Do not use presentational elements (`font`, `b`, `small`, etc.) or attributes (`align`, `valign`, `style`, event handlers etc.) that mix presentation or interaction with markup. Use only the allowed elements/attributes, [CSS](/styes/css/), or [JavaScript](/javascript/general/) to achieve the desired result.
 
-*NOTE:* The following elements [do not work on older browsers](https://caniuse.com/#feat=html5semantic): `header`, `footer`, `main`, `section`, `article`, `aside`, `nav`, `figure`, `figcaption`. Use an all-markup solution to support these elements in these browsers (`<main><div role="main"></div></main>`), unless the client explicitly requests a JS solution like htmlshiv or modernizr.
-
 ## Format & Style
 
-Markup must be written as XHTML: all elements and attributes must be written in lowercase characters; attribute values must be contained in double quotes; and all tags must be closed. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
+Markup must follow HTML5 standards. Stylistically, elements and attributes should be written in lowercase characters; attribute values should be contained in double quotes. Insert a single space between the last attribute and the trailing slash in a self-closing tag.
 
 ```html
 <img src="logo.png" alt="Client Name" />
@@ -194,14 +192,6 @@ Always specify the character set; it must appear first. (This prevents IE from r
 <meta charset="utf-8" />
 ```
 
-#### Http-equiv Meta Tag
-
-Ensure that Internet Explorer uses the latest supported rendering mode.
-
-```html
-<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
-```
-
 #### Viewport Meta Tag
 
 When implementing responsive web design or a dedicated mobile site, use the following as the default viewport tag:
@@ -211,37 +201,32 @@ When implementing responsive web design or a dedicated mobile site, use the foll
 ```
 
 Do not set maximum-scale=1 or user-scalable=no, as these attributes prevent users from zooming the page.
-In addition, use the corresponding `@viewport` rule in your base CSS file for browsers/rendering modes that do not support the viewport meta tag:
-
-```css
-@-ms-viewport {width:device-width;}
-@viewport {width:device-width;}
-```
 
 #### Importing CSS
 
 Style sheets must always be included in the `<head>` of an HTML document. Never import a style sheet in the `<body>` of a page. Always use the `<link>` element to include external style sheets. Specify the media attribute value (i.e. all, screen, print) to scope the style sheet appropriately for browser application and download.
 
 ```html
-<link href="/css/global.css" type="text/css" media="screen" />
-```
-
-#### Conditional Comments
-
-Use conditional comments in the `<head>` to include IE browser version specific content, such as CSS.
-
-```html
-<!--[if lte IE 8]>
-    <link href="/css/ie8.css" media="all" />
-<![endif]-->
+<link rel="stylesheet" href="/css/global.css" media="screen" />
 ```
 
 #### Importing JavaScript
 
-JavaScript files may be included in the `<head>` of an HTML document but, for optimal performance, place the scripts at the bottom of a page, just inside the closing `</body>` tag.
+Place scripts in the `<head>` with an appropriate loading attribute. The right attribute depends on what the script does:
+
+- **`defer`** — for scripts that need the DOM and/or must run in a specific order. Downloads in parallel with HTML parsing, executes after the DOM is parsed but before `DOMContentLoaded`, and preserves source order across multiple deferred scripts. This is the correct default for most application code.
+- **`async`** — for independent scripts that do not depend on the DOM or other scripts (analytics, error reporting, isolated third-party widgets). Downloads in parallel and executes as soon as it is ready; execution order is not guaranteed.
+- **`type="module"`** — ES modules are deferred by default; no `defer` attribute is needed. Only add `async` to a module if it is truly independent.
 
 ```html
-<script src="/js/lib/jquery.js"></script>
+<!-- default for most scripts -->
+<script src="/js/main.js" defer></script>
+
+<!-- independent third-party script -->
+<script src="https://analytics.example.com/tracker.js" async></script>
+
+<!-- ES module -->
+<script type="module" src="/js/app.js"></script>
 ```
 
 ### Content Markup
@@ -481,4 +466,3 @@ Good Example:
 <button type="submit">Submit</button>
 ```
 
-*NOTE:* Certain browsers may require the use of `<input type="submit">` in order to properly submit all form fields. Use this only when the `<button>` element is not supported.

@@ -378,97 +378,19 @@ function Example() {
     ))}
     ```
 
-- Typecheck with [PropTypes](https://reactjs.org/docs/typechecking-with-proptypes.html) by declaring propTypes above the component declaration. Assign the propTypes to the component below.
+- In TypeScript projects, use TypeScript interfaces or types to define component props instead of PropTypes. PropTypes provide no benefit when TypeScript is already enforcing types at compile time.
 
-    ```jsx
-    // bad
-    function SFC({ foo, bar, children }) {
-        return <div>{foo}{bar}{children}</div>;
+    ```tsx
+    // TypeScript project — use an interface
+    interface ButtonProps {
+        label: string;
+        onClick: () => void;
+        disabled?: boolean;
     }
-    SFC.propTypes = {
-        foo: PropTypes.number.isRequired,
-        bar: PropTypes.string,
-        children: PropTypes.node,
-    };
-    
-    // good
-    
-    const propTypes = {
-        foo: PropTypes.number.isRequired,
-        bar: PropTypes.string,
-        children: PropTypes.node,
-    };
-    
-    function SFC({ foo, bar, children }) {
-        return <div>{foo}{bar}{children}</div>;
+
+    function Button({ label, onClick, disabled = false }: ButtonProps) {
+        return <button onClick={onClick} disabled={disabled}>{label}</button>;
     }
-    
-    SFC.propTypes = propTypes;
-    ```
-
-- Always define explicit defaultProps for all non-required props.
-
-    **Why?** propTypes are a form of documentation, and providing defaultProps means the reader of your code doesn’t have to assume as much. In addition, it can mean that your code can omit certain type checks.
-
-    ```jsx
-    // bad
-    const propTypes = {
-        foo: PropTypes.number.isRequired,
-        bar: PropTypes.string,
-        children: PropTypes.node,
-    };
-    function SFC({ foo, bar, children }) {
-        return (
-            <div>
-            {foo}
-            {bar}
-            {children}
-            </div>
-        );
-    }
-    
-    SFC.propTypes = propTypes;
-    
-    // good
-    const propTypes = {
-        foo: PropTypes.number.isRequired,
-        bar: PropTypes.string,
-        children: PropTypes.node,
-    };
-    const defaultProps = {
-        bar: "",
-        children: null,
-    };
-    function SFC({ foo, bar, children }) {
-        return (
-            <div>
-                {foo}
-                {bar}
-                {children}
-            </div>
-        );
-    }
-    
-    SFC.propTypes = propTypes;
-    SFC.defaultProps = defaultProps;
-    ```
-
-- Deepcheck props with propTypes where applicable.
-
-    **Why?** Deepchecking allows React to to better validate props and provides even more clarity around what props the component is expecting.
-
-    ```jsx
-    // bad
-    const propTypes = {
-        foo: PropTypes.array.isRequired
-    };
-    // good
-    const propTypes = {
-        foo: PropTypes.arrayOf(PropTypes.shape({
-            id: PropTypes.string.isRequired,
-            name: PropTypes.string.isRequired
-        })).isRequired,
-    };
     ```
 
 - Use spread props sparingly.
@@ -710,57 +632,42 @@ function Example() {
 
 ## Ordering
 
-The recommended ordering for `class extends React.Component`:
+The recommended ordering for a functional component. Group hooks by **feature or concern**, not by hook type — this keeps related state, refs, and effects together and makes components easier to read as they grow.
 
-1. optional `static` methods
-2. `constructor`
-3. `getChildContext`
-4. `componentWillMount`
-5. `componentDidMount`
-6. `componentWillReceiveProps`
-7. `shouldComponentUpdate`
-8. `componentWillUpdate`
-9. `componentDidUpdate`
-10. `componentWillUnmount`
-11. *clickHandlers or eventHandlers* like `onClickSubmit()` or `onChangeDescription()`
-12. *getter methods for `render`* like `getSelectReason()` or `getFooterContent()`
-13. *optional render methods* like `renderNavigation()` or `renderProfilePicture()`
-14. `render`
+1. Type definitions (props interface)
+2. Context reads (`useContext`)
+3. State, refs, and memos — grouped by feature/concern
+4. Effects — placed adjacent to the state they relate to
+5. Event handlers and derived values
+6. Return / JSX
 
-How to define `propTypes`, `defaultProps`, `contextTypes`, etc...
-
-```jsx
-import React from 'react';
-import PropTypes from 'prop-types';
- 
-const propTypes = {
-    id: PropTypes.number.isRequired,
-    url: PropTypes.string.isRequired,
-    text: PropTypes.string
-};
- 
-const defaultProps = {
-    text: 'Hello World'
-};
- 
-class Link extends React.Component {
-    static methodsAreOk() {
-        return true;
-    }
- 
-    render() {
-        return (
-            <a href={this.props.url} data-id={this.props.id}>
-                {this.props.text}
-            </a>
-        );
-    }
+```tsx
+interface CardProps {
+    title: string;
+    onDismiss: () => void;
 }
- 
-Link.propTypes = propTypes;
-Link.defaultProps = defaultProps;
- 
-export default Link;
+
+function Card({ title, onDismiss }: CardProps) {
+    const theme = useContext(ThemeContext);
+
+    // expand/collapse concern
+    const [isExpanded, setIsExpanded] = useState(false);
+    const containerRef = useRef<HTMLDivElement>(null);
+    useEffect(() => {
+        // side effect related to expand state
+    }, [isExpanded]);
+
+    // handlers
+    const handleToggle = () => setIsExpanded((prev) => !prev);
+
+    return (
+        <div ref={containerRef}>
+            <button onClick={handleToggle}>{title}</button>
+            {isExpanded && <p>Content</p>}
+            <button onClick={onDismiss}>Dismiss</button>
+        </div>
+    );
+}
 ```
 ## Conditional Rendering
 

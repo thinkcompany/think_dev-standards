@@ -37,8 +37,8 @@ An often overlooked redirect occurs when a user requests a URL without a trailin
 
 ## JavaScript
 
-### Concatenate JavaScript Files
-Every web page should serve a maximum of two JavaScript files, one for a site-wide library (including jQuery) and one for page-specific scripts. Use frameworks like [webpack](http://webpack.github.io/) and [Browserify](http://browserify.org/) to handle bundling your javascript files.
+### Bundle JavaScript Files
+Modern bundlers (Vite, webpack, esbuild) split and tree-shake JavaScript automatically. Favor code splitting over serving one monolithic bundle. Ensure your build produces no more output than the page needs.
 
 These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources. 
 
@@ -170,7 +170,7 @@ Typically, JPEG images load top-to-bottom so the full image appears slowly as it
 Medium and Facebook use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
 
 #### WebP Images
-WebP is an image format that can be used as an alternative for PNG and JPEG images at a fraction of the file size. It has [minimal browser support](http://caniuse.com/#feat=webp), but where it is supported, it can significantly decrease file size. You should include WebP images on projects where a lot of the traffic comes from supported browsers. 
+WebP is broadly supported in all modern browsers and should be the default format for raster images where JPEG or PNG would otherwise be used. For even better compression, consider AVIF with a WebP fallback.
 
 The best way to incorporate a WebP image in HTML is using the picture element with a fallback option.
 
@@ -239,5 +239,5 @@ The Timeline tool in Chrome inspector allows you to record and analyze every eve
 ### Yellow Lab Tools
 Similar to Webpagetest, [Yellow Lab Tools](http://yellowlab.tools/) gives you a report card with detailed information about improving page performance in specific areas. Yellow Lab Tools gives especially detailed information about bad CSS patterns that could affect performances, like 
 
-### Louis for Gulp
-[Louis](https://github.com/AvraamMavridis/gulp-louis) is a gulp plugin and a good tool for measuring performance during the development process. It allows you to budget performance and measure actual values against your expected values for things like HTML size, number of global variables, and total number of requests.
+### Lighthouse / Web Vitals
+Use [Lighthouse](https://developer.chrome.com/docs/lighthouse/) (built into Chrome DevTools) or the [Web Vitals extension](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibgt) to measure Core Web Vitals (LCP, INP, CLS) during development. Set performance budgets in your CI pipeline using tools like `bundlesize` or Lighthouse CI.

@@ -31,7 +31,6 @@ This document contains Think Company's standards for writing JavaScript.
   - [Naming Conventions](#naming-conventions)
   - [Constructors](#constructors)
   - [Performance](#performance)
-  - [jQuery](#jquery)
   - [Miscellaneous](#miscellaneous)
 
 ## Types
@@ -80,7 +79,7 @@ const item = new Object();
 let item = {};
 ```
 
-Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_keywords_as_of_ecmascript_2015) as keys. It won't work in IE8. [More info](https://github.com/airbnb/javascript/issues/61).
+Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#reserved_keywords_as_of_ecmascript_2015) as keys.
 
 ```javascript
 // bad
@@ -140,29 +139,24 @@ someStack[someStack.length] = 'abracadabra';
 someStack.push('abracadabra');
 ```
 
-When you need to copy an array use `Array#slice`. [jsPerf](http://jsperf.com/converting-arguments-to-an-array/7)
+To copy an array, use spread syntax or `Array#slice`.
 
 ```javascript
-const len = items.length;
-let itemsCopy = [];
-let i;
-
-// bad
-for (i = 0; i < len; i++) {
-    itemsCopy[i] = items[i];
-}
-
 // good
-itemsCopy = items.slice();
+const itemsCopy = [...items];
+
+// also good
+const itemsCopy = items.slice();
 ```
 
-To convert an array-like object to an array, use `Array#slice`.
+To convert an array-like object to an array, use `Array.from` or spread syntax.
 
 ```javascript
-function trigger() {
-    let args = Array.prototype.slice.call(arguments);
-    ...
-}
+// good
+const args = Array.from(arguments);
+
+// also good
+const args = [...arguments];
 ```
 
 
@@ -408,8 +402,6 @@ function yup(name, options, args) {
 How to use arrow functions
 - Don't wrap a single argument with parenthesis.
 - When returning a function from an arrow function, create a block rather than returning on one line (helps readability).
-- If support for older browsers is required, use Babel to compile arrow functions to older syntax. 
-
 When to use arrow functions
 - Use arrow functions whenever you don't want to think about or modify the context of the function (`this`). You might find that this is the majority of the functions you are writing on a daily basis, especially when building standalone modules or components.
 - Nested functions that need to share context with their parent
@@ -1035,41 +1027,27 @@ End files with a single newline character.
 
 Use indentation when making long method chains. Use a leading dot, which emphasizes that the line is a method call, not a new statement.
 
+Prefer `async`/`await` over promise chains — it is easier to read and reason about, especially when handling errors.
+
 ```javascript
-// bad
-$('#items').find('.selected').highlight().end().find('.open').updateCount();
+// bad — chained promises are hard to follow
+promise.then(doSomething).then(doSomethingElse).catch(handleError);
 
-// bad
-$('#items').
-    find('.selected').
-        highlight().
-        end().
-    find('.open').
-        updateCount();
+// better — indented chain is readable, but still verbose
+promise
+    .then(doSomething)
+    .then(doSomethingElse)
+    .catch(handleError);
 
-// good
-$('#items')
-    .find('.selected')
-        .highlight()
-        .end()
-    .find('.open')
-        .updateCount();
-
-// bad
-const leds = stage.selectAll('.led').data(data).enter().append('svg:svg').classed('led', true)
-    .attr('width', (radius + margin) * 2).append('svg:g')
-    .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-    .call(tron.led);
-
-// good
-const leds = stage.selectAll('.led')
-  .data(data)
-  .enter().append('svg:svg')
-      .classed('led', true)
-      .attr('width', (radius + margin) * 2)
-  .append('svg:g')
-      .attr('transform', 'translate(' + (radius + margin) + ',' + (radius + margin) + ')')
-      .call(tron.led);
+// best — async/await reads like synchronous code
+async function run() {
+    try {
+        const result = await doSomething();
+        await doSomethingElse(result);
+    } catch (error) {
+        handleError(error);
+    }
+}
 ```
 
 Leave a blank line after blocks and before the next statement
@@ -1145,7 +1123,7 @@ const hero = {
 };
 ```
 
-Additional trailing comma: **Nope.** This can cause problems with IE6/7 and IE9 if it's in quirksmode. 
+Additional trailing comma: **Nope.**
 
 ```javascript
 // kaboooom
@@ -1320,12 +1298,6 @@ const good = new User({
 });
 ```
 
-To indicate that a variable contains a jQuery object, start names with a `$`:
-
-```javascript
-const $email = $("#email");
-```
-
 If you must reference this, avoid using an alias. Aliases to this are very bug prone.
 
 ```javascript
@@ -1367,8 +1339,6 @@ const log = function log(msg) {
     console.log(msg);
 };
 ```
-
-**Note:** IE8 and below exhibit some quirks with named function expressions. See [http://kangax.github.io/nfe/](http://kangax.github.io/nfe/) for more info.
 
 If your file exports a single class, your filename should be exactly the name of the class.
 ```javascript
@@ -1462,10 +1432,6 @@ luke.jump()
   - [innerHTML vs textContent for script text](http://jsperf.com/innerhtml-vs-textcontent-for-script-text)
   - [Long String Concatenation](http://jsperf.com/ya-string-concat)
 
-
-## jQuery
-
-While jQuery is something Think avoids using on new projects, we acknowledge that it is still in use. Please follow best practices and use [jquery](https://jquery.com/) as a guide when working with code that has jQuery.
 
 ## Miscellaneous
 

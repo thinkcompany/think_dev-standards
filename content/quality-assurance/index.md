@@ -75,9 +75,7 @@ Again, the [aXe browser extension](http://www.deque.com/products/axe/) for Chrom
 
 [ ] **Test manually with screen readers**
 
-Ensure that the site's content is announced correctly and can be navigated using screen readers. Use [NVDA](http://www.nvaccess.org/) (with Firefox) and/or [JAWS](http://www.freedomscientific.com/Products/Blindness/JAWS) (with Internet Explorer) on Windows as the primary tools for this testing. 
-
-Use VoiceOver for doing screen reader testing on a Mac, though NVDA and JAWS on Windows are preferred.
+Ensure that the site's content is announced correctly and can be navigated using screen readers. Use [NVDA](http://www.nvaccess.org/) with Firefox on Windows as the primary tool. Also test with VoiceOver on macOS and iOS, and TalkBack on Android.
 
 [ ] **Ensure appropriate use of ARIA attributes**
 
