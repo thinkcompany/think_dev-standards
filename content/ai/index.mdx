@@ -12,6 +12,7 @@ This document covers how we work with AI coding assistants at Think Company and 
 
 - [Why Standardized AI Files](#why-standardized-ai-files)
 - [The Files](#the-files)
+- [Download the Files](#download-the-files)
 - [Per-Tool Setup](#per-tool-setup)
 - [Keeping Them in Sync](#keeping-them-in-sync)
 - [What's Inside](#whats-inside)
@@ -41,6 +42,15 @@ All four files live at the **root of each project repository**:
 | `.github/copilot-instructions.md` | GitHub Copilot | A condensed summary tuned for inline suggestions. |
 
 `AGENTS.md` is the authoritative document. `CLAUDE.md` is a complete embed of it (tools don't reliably follow file references, so it is duplicated rather than linked). The Cursor and Copilot files are intentional summaries.
+
+## Download the Files
+
+Grab the current version of any file and drop it into your project at the path shown above. These downloads are generated from the canonical files in the repository on every build, so they always reflect the latest standards.
+
+- <a href="/downloads/AGENTS.md" download="AGENTS.md"><code>AGENTS.md</code></a> — canonical source (all tools)
+- <a href="/downloads/CLAUDE.md" download="CLAUDE.md"><code>CLAUDE.md</code></a> — Claude Code
+- <a href="/downloads/think-standards.mdc" download="think-standards.mdc"><code>.cursor/rules/think-standards.mdc</code></a> — Cursor
+- <a href="/downloads/copilot-instructions.md" download="copilot-instructions.md"><code>.github/copilot-instructions.md</code></a> — GitHub Copilot
 
 ## Per-Tool Setup
 

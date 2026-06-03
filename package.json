@@ -59,7 +59,10 @@
     "url": "git+https://github.com/gatsbyjs/gatsby-starter-blog.git"
   },
   "scripts": {
+    "copy:ai-files": "node scripts/copy-ai-files.js",
+    "prebuild": "npm run copy:ai-files",
     "build": "gatsby build",
+    "predevelop": "npm run copy:ai-files",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
