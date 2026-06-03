@@ -1,21 +1,20 @@
 ---
 title: React Development Standards
-date: "2021-04-01T23:46:37.121Z"
+date: "2026-05-22T00:00:00.000Z"
 area: Javascript
 section: 3. React
 description: ""
 ---
 
-[React](https://reactjs.org/) is a JavaScript library for building user interfaces. We use React at Think Company to build rich, interactive user experiences within web applications. This page contains best practices we follow while writing React code for web applications, and has been adapted from [Airbnb's React/JSX Style Guide](https://github.com/airbnb/javascript/tree/master/react).
+[React](https://react.dev/) is a JavaScript library for building user interfaces. We use React at Think Company to build rich, interactive user experiences within web applications. This page contains best practices we follow while writing React code for web applications.
+
+These guidelines target **React 18+** and assume functional components with hooks. Class components and their patterns are no longer covered — if you are working in a legacy codebase that uses them, refer to the older [React 17 docs](https://17.reactjs.org/) for class-component guidance.
 
 ## Table of Contents
 
 - [Basic Rules](#basic-rules)
-- [Class vs. Functional components](#class-vs-functional-components)
-- [Hooks](#hooks)
-- [Mixins](#mixins)
+- [Components and Hooks](#components-and-hooks)
 - [Naming](#naming)
-- [Declaration](#declaration)
 - [Alignment](#alignment)
 - [Quotes](#quotes)
 - [Spacing](#spacing)
@@ -23,11 +22,15 @@ description: ""
 - [Refs](#refs)
 - [Parentheses](#parentheses)
 - [Managing State](#managing-state)
+- [Effects](#effects)
+- [Custom Hooks](#custom-hooks)
+- [Error Boundaries](#error-boundaries)
+- [Server Components and Suspense](#server-components-and-suspense)
 - [Tags](#tags)
-- [Methods](#methods)
+- [Event Handlers](#event-handlers)
 - [Ordering](#ordering)
 - [Conditional Rendering](#conditional-rendering)
-- [isMounted](#isMounted)
+- [Testing](#testing)
 
 ## Basic Rules
 
@@ -35,88 +38,30 @@ description: ""
 - Always use JSX syntax.
 - Do not use `React.createElement` unless you're initializing the app from a file that is not JSX, or creating a dynamic component.
 
-## Class vs. Functional components
+## Components and Hooks
 
-Prefer functional components for new component development. Use hooks to manage internal state. Avoid using React.createClass.
+Write components as functions with hooks. Extract reusable stateful logic into [custom hooks](#custom-hooks), not higher-order components or render props.
 
-```js
-// bad
-const Listing = React.createClass({
-    render() {
-        return <div>{this.state.hello}</div>;
-    }
-});
- 
-// better
-class Listing extends React.Component {
-    render() {
-        return <div>{this.state.hello}</div>;
-    }
-}
- 
-// best
-function Listing() {
-    const [hello, setHello] = useState();
-    return <div>{hello}</div>;
+```tsx
+import { useState } from 'react';
+
+function Counter() {
+    const [count, setCount] = useState(0);
+
+    return (
+        <div>
+            <p>You clicked {count} times</p>
+            <button onClick={() => setCount(count + 1)}>Click me</button>
+        </div>
+    );
 }
 ```
 
-## Hooks
-
-Prefer [hooks](https://reactjs.org/docs/hooks-intro.html) for **new components** instead of using class-based components with lifecycle methods. For most cases, hooks allow you to achieve the same result as lifecycle methods, using significantly less code that is easier to read.
-
-```js
-// Avoid using class-based components with lifecycle methods
- 
-import React, { Component } from 'react';
- 
-class Example extends Component {
- 
-    constructor() {
-        this.state = {
-            count: 0
-        };
-    }
- 
-    render() {
-        return (
-            <div>
-                <p>You clicked {this.state.count} times</p>
-                <button onClick={() => this.setState({ count: this.state.count + 1 })}>Click me</button>
-            </div>
-        );
-    }
- 
-}
- 
-// Start using functional components with hooks
- 
-import React, { useState } from 'react';
- 
-function Example() {
- 
-  const [count, setCount] = useState(0);
- 
-  return (
-    <div>
-      <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>
-        Click me
-      </button>
-    </div>
-  );
-}
-```
-
-## Mixins
-
-- [Do not use mixins](https://facebook.github.io/react/blog/2016/07/13/mixins-considered-harmful.html).
-
-    **Why?** Mixins introduce implicit dependencies, cause name clashes, and cause snowballing complexity. Most use cases for mixins can be accomplished in better ways via components, higher-order components, or utility modules.
+Follow the [Rules of Hooks](https://react.dev/reference/rules/rules-of-hooks): call hooks at the top level of a function component or custom hook only, never inside loops, conditions, or nested functions. The `eslint-plugin-react-hooks` package enforces this — make sure it's enabled.
 
 ## Naming
 
-- **Extensions:** Always use `.jsx` extension for React components.
+- **Extensions:** Use `.tsx` for TypeScript projects (preferred for new code) and `.jsx` for JavaScript projects. A bare `.js` file should not contain JSX.
 
 - **Filename:** Use PascalCase for filenames. E.g. `ReservationCard.jsx` .
 
@@ -149,33 +94,7 @@ function Example() {
     import Footer from './Footer/Footer';
     ```
 
-- **Higher-order Component Naming:** Use a composite of the higher-order component's name and the passed-in component's name as the `displayName` on the generated component. For example, the higher-order component `withFoo()`, when passed a component `Bar` should produce a component with a `displayName` of `withFoo(Bar)`.
-
-    **Why?** A component's `displayName` may be used by developer tools or in error messages, and having a value that clearly expresses this relationship helps people understand what is happening.
-
-    ```js
-    // bad
-    export default function withFoo(WrappedComponent) {
-        return function WithFoo(props) {
-            return <WrappedComponent {...props} foo />;
-        }
-    }
-        
-    // good
-    export default function withFoo(WrappedComponent) {
-        
-        function WithFoo(props) {
-            return <WrappedComponent {...props} foo />;
-        }
-        
-        const wrappedComponentName = WrappedComponent.displayName
-            || WrappedComponent.name
-            || 'Component';
-        
-        WithFoo.displayName = `withFoo(${wrappedComponentName})`;
-        return WithFoo;
-    }
-    ```
+- **Higher-order components are mostly a legacy pattern.** Prefer custom hooks for sharing stateful logic between components. If you do write an HOC (rare — usually for crossing render-tree boundaries that hooks can't), set `displayName` to a composite of the HOC name and the wrapped component name (e.g. `withFoo(Bar)`) so DevTools and stack traces remain readable.
 
 - Props Naming: if a native prop is to be passed down to a child DOM element, do not use a modification of the prop name.
 
@@ -197,21 +116,6 @@ function Example() {
             <p className={className}>Hello</p>
         );
     }
-    ```
-
-## Declaration
-
-- Do not use `displayName` for naming components. Instead, name the component by reference.
-
-    ```js
-    // bad
-    export default React.createClass({
-        displayName: 'ReservationCard',
-        // stuff goes here
-    });
-    
-    // good
-    export default class ReservationCard extends React.Component {}
     ```
 
 ## Alignment
@@ -397,71 +301,28 @@ function Example() {
 
     **Why?** Otherwise you're more likely to pass unnecessary props down to components.
 
-    *Exceptions:*
+    When you do spread, filter out props the child doesn't need first:
 
-    - HOCs that proxy down props and hoist propTypes
-
-        ```jsx
-        function HOC(WrappedComponent) {
-            return class Proxy extends React.Component {
-                Proxy.propTypes = {
-                    text: PropTypes.string,
-                    isLoading: PropTypes.bool
-                };
-        
-                render() {
-                    return <WrappedComponent {...this.props} />
-                }
-            }
-        }
-        ```
-
-    - Spreading objects with known, explicit props. This can be particularly useful when testing React components with Mocha's beforeEach construct.
-
-        ```jsx
-        export default function Foo {
-            const props = {
-                text: '',
-                isPublished: false
-            }
-        
-            return (<div {...props} />);
-        }
-        ```
-
-    - Notes for use: Filter out unnecessary props when possible. Also, use [prop-types-exact](https://www.npmjs.com/package/prop-types-exact) to help prevent bugs.
-
-        ```jsx
-        // good
-        render() {
-            const { irrelevantProp, ...relevantProps  } = this.props;
-            return <WrappedComponent {...relevantProps} />
-        }
-        
-        // bad
-        render() {
-            const { irrelevantProp, ...relevantProps  } = this.props;
-            return <WrappedComponent {...this.props} />
-        }
-        ```
+    ```tsx
+    // good — only the relevant props are forwarded
+    function Wrapper({ irrelevantProp, ...rest }: WrapperProps) {
+        return <ChildComponent {...rest} />;
+    }
+    ```
 
 ## Refs
 
-- Always use ref callbacks, or the **useRef** hook. eslint: [`react/no-string-refs`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-string-refs.md)
+- Use the **`useRef`** hook. Never use the legacy string-ref API (`ref="myRef"`).
 
-    ```jsx
-    // bad
-    <Foo ref="myRef" />
-    
-    // good
-    <Foo
-        ref={(ref) => { this.myRef = ref; }}
-    />
-    
-    // good
-    const myRef = useRef();
-    <Foo ref={myRef} />
+    ```tsx
+    const inputRef = useRef<HTMLInputElement>(null);
+
+    // ...
+
+    <input ref={inputRef} />
     ```
+
+- Use a callback ref only when you need to react to the element being attached or detached. With React 19, callback refs can return a cleanup function.
 
 ## Parentheses
 
@@ -493,9 +354,83 @@ function Example() {
 
 ## Managing State
 
-- For managing state of a single component that does not need to be shared outside of the component, use the [`useState` hook](https://reactjs.org/docs/hooks-reference.html#usestate).
-- For managing state within a component tree with more than two levels, use [Context](https://reactjs.org/docs/context.html). 
-- For managing state of an application that will be shared by all components, use [Redux](https://redux.js.org/) with [Redux Toolkit (RTK)](https://redux-toolkit.js.org/).
+Distinguish the **kind** of state before reaching for a tool. Most React state-management headaches come from treating server data, URL state, and ephemeral UI state as if they were the same problem.
+
+- **Local component state** — `useState` for simple values, `useReducer` when transitions get complex.
+- **State shared across a small subtree** — [Context](https://react.dev/reference/react/createContext) with a custom provider. Don't reach for a global store just to skip prop drilling.
+- **Server state (API responses, caching, revalidation)** — [TanStack Query](https://tanstack.com/query) (React Query), [SWR](https://swr.vercel.app/), or framework primitives (Next.js Server Components, Remix loaders). Do not put server data in Redux.
+- **URL state** — keep filter selections, pagination, and open modals in query params and let the router be the source of truth. Use the framework's router (`react-router`, `next/navigation`) or [`nuqs`](https://nuqs.47ng.com/) for typed URL state.
+- **Global client state** — when you genuinely need it (auth, theme, cross-cutting UI state), [Zustand](https://github.com/pmndrs/zustand) or [Jotai](https://jotai.org/) are lighter-weight defaults; reach for [Redux Toolkit](https://redux-toolkit.js.org/) on larger projects where its ecosystem (devtools, middleware, RTK Query) earns its keep.
+
+## Effects
+
+`useEffect` is for **synchronizing with external systems** (the DOM, browser APIs, network, subscriptions) — not for transforming data on render. The single most common React bug is using `useEffect` to derive state from props.
+
+- **Don't put derived data in state + an effect.** Compute it during render instead.
+
+    ```tsx
+    // bad — derived state synced through useEffect
+    const [fullName, setFullName] = useState('');
+    useEffect(() => { setFullName(`${first} ${last}`); }, [first, last]);
+
+    // good — derive during render
+    const fullName = `${first} ${last}`;
+    ```
+
+- **Always declare every reactive value the effect uses in the dependency array.** Disabling the `react-hooks/exhaustive-deps` ESLint rule is almost always wrong.
+- **Return a cleanup function** when the effect subscribes, opens a connection, or starts a timer.
+- For data fetching, prefer a library (TanStack Query, SWR) over hand-rolled `useEffect` + `fetch` — they handle stale-while-revalidate, retries, and race conditions for free.
+
+Read [You Might Not Need an Effect](https://react.dev/learn/you-might-not-need-an-effect) before reaching for `useEffect`.
+
+## Custom Hooks
+
+Extract reusable stateful logic into custom hooks. Name them with a `use` prefix so the React linter recognizes them and applies the Rules of Hooks. Keep them focused — a hook should do one thing well.
+
+```tsx
+function useDebouncedValue<T>(value: T, delay = 300): T {
+    const [debounced, setDebounced] = useState(value);
+
+    useEffect(() => {
+        const id = setTimeout(() => setDebounced(value), delay);
+        return () => clearTimeout(id);
+    }, [value, delay]);
+
+    return debounced;
+}
+```
+
+## Error Boundaries
+
+Wrap subtrees that can fail (data-fetching regions, third-party widgets, route components) in an [Error Boundary](https://react.dev/reference/react/Component#catching-rendering-errors-with-an-error-boundary) so a single component crash doesn't blank the page. Use [`react-error-boundary`](https://github.com/bvaughn/react-error-boundary) rather than hand-rolling one — it provides a hook-friendly API and a `FallbackComponent` prop.
+
+```tsx
+import { ErrorBoundary } from 'react-error-boundary';
+
+<ErrorBoundary FallbackComponent={ErrorFallback}>
+    <Dashboard />
+</ErrorBoundary>
+```
+
+Report caught errors to your error-tracking service (Sentry, Rollbar) inside the boundary's `onError` callback.
+
+## Server Components and Suspense
+
+In React 19 / Next.js App Router, components are **Server Components by default**. They render on the server, ship zero JS to the client, and can read directly from databases or filesystems.
+
+- Mark any component that uses state, effects, or browser APIs with the `'use client'` directive at the top of the file.
+- Keep client components leaf-shaped — push them as far down the tree as possible so the Server Component shell remains static.
+- Pass server-fetched data into client components as props; do not refetch on the client.
+
+For loading states, use Suspense boundaries rather than imperative `isLoading` flags:
+
+```tsx
+<Suspense fallback={<Spinner />}>
+    <Dashboard />
+</Suspense>
+```
+
+Suspense pairs with data-fetching primitives that throw a promise while pending — Next.js `fetch`, TanStack Query's `useSuspenseQuery`, etc.
 
 ## Tags
 
@@ -524,111 +459,28 @@ function Example() {
     />
     ```
 
-## Methods
+## Event Handlers
 
-- Use arrow functions to close over local variables. It is handy when you need to pass additional data to an event handler. Although, make sure they [do not massively hurt performance](https://www.bignerdranch.com/blog/choosing-the-best-approach-for-react-event-handlers/), in particular when passed to custom components that might be PureComponents, because they will trigger a possibly needless rerender every time.
+- Name event handler props with an `on` prefix (`onClick`, `onSubmit`) and the implementing function with a `handle` prefix (`handleClick`, `handleSubmit`).
+- Inline arrow functions are fine for most components. They only matter when you're passing a stable identity to a memoized child — in that case, wrap with `useCallback`.
+- When you need extra data passed to a handler, prefer an arrow function over `.bind`:
 
-    ```jsx
-    function ItemList(props) {
-    return (
-        <ul>
-        {props.items.map((item, index) => (
-            <Item
-            key={item.key}
-            onClick={() => doSomethingWith(item.name, index)}
-            />
-        ))}
-        </ul>
-    );
+    ```tsx
+    function ItemList({ items }: { items: Item[] }) {
+        return (
+            <ul>
+                {items.map((item, index) => (
+                    <Item
+                        key={item.id}
+                        onClick={() => doSomethingWith(item.name, index)}
+                    />
+                ))}
+            </ul>
+        );
     }
     ```
 
-- Bind event handlers for the render method using an arrow function in the class property. This approach requires [transform-class-properties](http://babeljs.io/docs/plugins/transform-class-properties) or [enable stage-2 in Babel](http://babeljs.io/docs/plugins/preset-stage-2/). eslint: [`react/jsx-no-bind`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md)
-
-    **Why?** Other methods of binding have minor performance, readability, and maintainability concerns. For a more in depth explanation of options and reasons, see [React Binding Patterns](https://medium.freecodecamp.org/react-binding-patterns-5-approaches-for-handling-this-92c651b5af56).
-
-    ```jsx
-    // bad
-    class extends React.Component {
-        onClickDiv() {
-            // do stuff
-        }
-    
-        render() {
-            
-            return <div onClick={this.onClickDiv.bind(this)} />;
-        }
-    }
-    
-    // bad
-    class extends React.Component {
-        constructor(props) {
-            super(props);
-            this.onClickDiv = this.onClickDiv.bind(this);
-        }
-    
-        onClickDiv() {
-            // do stuff
-        }
-    
-        render() {
-            return <div onClick={this.onClickDiv} />;
-        }
-    }
-    
-    // good
-    class extends React.Component {
-        constructor(props) {
-            super(props);
-        }
-    
-        onClickDiv = () => {
-            // do stuff
-        }
-    
-        render() {
-            return <div onClick={this.onClickDiv} />;
-        }
-    }
-    ```
-
-- Do not use underscore prefix for internal methods of a React component.
-
-    **Why?** Underscore prefixes are sometimes used as a convention in other languages to denote privacy. But, unlike those languages, there is no native support for privacy in JavaScript, everything is public. Regardless of your intentions, adding underscore prefixes to your properties does not actually make them private, and any property (underscore-prefixed or not) should be treated as being public. See issues [#1024](https://github.com/airbnb/javascript/issues/1024), and [#490](https://github.com/airbnb/javascript/issues/490)for a more in-depth discussion.
-
-    ```jsx
-    // bad
-    React.createClass({
-        _onClickSubmit() {
-            // do stuff
-        }
-    
-        // other stuff
-    });
-    
-    // good
-    class MyComponent extends React.Component {
-        onClickSubmit() {
-            // do stuff
-        }
-    
-        // other stuff
-    }
-    ```
-
-- Be sure to return a value in your `render` methods. eslint: [`react/require-render-return`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/require-render-return.md)
-
-    ```jsx
-    // bad
-    render() {
-    (<div />);
-    }
-    
-    // good
-    render() {
-        return (<div />);
-    }
-    ```
+- Don't pull DOM event values out of synthetic events asynchronously without first reading them — React reuses event objects.
 
 ## Ordering
 
@@ -677,8 +529,24 @@ function Card({ title, onDismiss }: CardProps) {
 - When in doubt, break down into more components if things are getting complicated.
 - “If the logic is too complex to be appropriate inline, then it belongs in a separate component.” -> https://github.com/airbnb/javascript/issues/520 
 
-## `isMounted`
+## Testing
 
-- Do not use `isMounted`. eslint: [`react/no-is-mounted`](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/no-is-mounted.md)
+Use [Vitest](https://vitest.dev/) (preferred for Vite-based projects) or [Jest](https://jestjs.io/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/). Test from the user's perspective: render the component, interact with it the way a user would, assert on what they would see.
 
-    **Why?** [`isMounted` is an anti-pattern](https://facebook.github.io/react/blog/2015/12/16/ismounted-antipattern.html), is not available when using ES6 classes, and is on its way to being officially deprecated.    
+```tsx
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+
+test('increments count when button is clicked', async () => {
+    render(<Counter />);
+
+    await userEvent.click(screen.getByRole('button', { name: /click me/i }));
+
+    expect(screen.getByText(/you clicked 1 times/i)).toBeInTheDocument();
+});
+```
+
+- Query by accessible roles and labels first (`getByRole`, `getByLabelText`), falling back to `getByText`. Reserve `getByTestId` for cases where there is no accessible identifier and adding one would distort the markup.
+- Avoid testing internal state, props, or the shape of rendered HTML — those are implementation details.
+- For component-level visual regression, use [Storybook](https://storybook.js.org/) with [Chromatic](https://www.chromatic.com/) or Playwright's visual snapshots.
+- For end-to-end browser tests, see the [QA standards](/quality-assurance/).

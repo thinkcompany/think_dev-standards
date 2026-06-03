@@ -1,6 +1,6 @@
 ---
 title: Quality Assurance
-date: "2021-04-02T23:46:37.121Z"
+date: "2026-05-22T00:00:00.000Z"
 area: Quality Assurance
 section: 1. Standards Compliance
 description: ""
@@ -45,13 +45,20 @@ Someone will eventually work with the code you write, so make sure you provide a
 
 [ ] **Validate and/or lint HTML, CSS, and JavaScript**
 
-Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) according to WC3 Specifications.
+Validate [HTML](https://validator.w3.org/) and [CSS](https://jigsaw.w3.org/css-validator/) against the current specifications.
 
-Lint HTML ([HTMLHint](http://htmlhint.com/)), and Sass ([Sass Lint](https://github.com/sasstools/sass-lint/)) or CSS ([CSSLint](http://csslint.net/)) to check for adherence to Think Company development standards and naming conventions. 
+Lint JavaScript and TypeScript using our shared [`eslint-config-thinkcompany`](https://www.npmjs.com/package/eslint-config-thinkcompany) — this is the canonical configuration for both linting and formatting on Think Company projects. Where supplementary formatting is needed (e.g. for languages ESLint doesn't cover), [Prettier](https://prettier.io/) is a reasonable fallback.
 
-Lint JavaScript using our shared [ESLint configuration](https://www.npmjs.com/package/eslint-config-thinkcompany).
+Lint HTML with [HTMLHint](https://htmlhint.com/), and CSS (and SCSS/Less) with [Stylelint](https://stylelint.io/). Sass Lint and CSSLint have both been deprecated for years — do not introduce them on new projects.
 
-These tools are bundled with each project and can be run using NPM-based task runners. If you are running a task that watches your project directory, it will lint your code each time you save a file. You can also configure your text editor to give you more immediate feedback against these linters.
+Run these tools in three places:
+1. **In the editor**, via the relevant extensions (ESLint, Stylelint), so feedback is immediate.
+2. **In a pre-commit hook** ([Husky](https://typicode.github.io/husky/) + [lint-staged](https://github.com/lint-staged/lint-staged)) so unlinted code never enters the branch.
+3. **In CI**, so a failed lint blocks the PR.
+
+[ ] **Type-check the project (TypeScript)**
+
+For TypeScript projects, run `tsc --noEmit` in CI on every PR. Strict mode (`"strict": true` in `tsconfig.json`) is the default — turn things off explicitly if you have to; don't start permissive.
 
 ## Accessibility
 
@@ -99,9 +106,11 @@ When native device testing isn't possible, [Browserstack](https://www.browsersta
 
 [ ] **Run visual and functional regression testing**
 
-Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares changes visually to ensure nothing accidentally breaks. Functional regression testing works similarly by testing certain interactions a user may perform and making sure the intended functionality occurs. 
+Whenever you make a change on a project, it can impact the design and functionality of other parts. Visual regression testing compares before/after screenshots to ensure nothing accidentally breaks. Functional regression testing exercises real user interactions to confirm intended behavior.
 
-Both visual and functional regression testing can be supported with automation tools to make the process more efficient and repeatable.
+For end-to-end functional tests, use [Playwright](https://playwright.dev/) (preferred) or [Cypress](https://www.cypress.io/). Both run real browsers, support modern web platform features, and integrate cleanly into CI. Playwright also handles visual snapshot diffing out of the box.
+
+For component-level tests in JavaScript projects, use [Vitest](https://vitest.dev/) or [Jest](https://jestjs.io/) with [React Testing Library](https://testing-library.com/docs/react-testing-library/intro/) (or its equivalent for your framework). Write tests against rendered output and user-visible behavior, not implementation details.
 
 [ ] **Verify appropriate image formats, according to browser support**
 
@@ -133,61 +142,87 @@ Also consider [font loading tools](https://github.com/typekit/webfontloader) tha
 
 Browsers can only handle so many requests at a time; the more requests a website has to make, the longer it can take to load. Make sure you are not requesting resources when they are not needed. For example, if you are using a WordPress plugin like Gravity Forms, dequeue the scripts it uses except for the page it is called on. 
 
-[ ] **Concatenate and minify text-based assets (JavaScript, CSS, etc.)**
+[ ] **Bundle, minify, and serve compressed text-based assets**
 
-To help reduce the number and size of HTTP calls, use build tools to concatenate and minify your code. This can be further improved by using a server side compression algorithm like GZIP to reduce file size before being sent to the client.
+Use a modern bundler ([Vite](https://vitejs.dev/), [esbuild](https://esbuild.github.io/), [Rollup](https://rollupjs.org/), or framework defaults like Turbopack/webpack-via-Next) to bundle, tree-shake, and minify JavaScript and CSS. Bundlers minify by default in production builds via terser, esbuild, or SWC.
 
-Use build tools like Sass, Browserify, and Webpack to compile and concatenate source files, and tools like UglifyJS to minify your source code.
+Serve compressed responses with Brotli (preferred) or GZIP — configure this at the CDN or server level, not the build.
 
 [ ] **Choose the most efficient SVG icon system approach**
 
-Consider the most appropriate approach for SVG icon systems (inline, background, sprites). Project requirements and browser support will influence the approach, but some [SVG Best Practices](https://thinkbrownstone.atlassian.net/wiki/display/DEV/SVG+Best+Practices) are available on our Wiki.
+Consider the most appropriate approach for SVG icon systems (inline, sprite via `<use>`, or background). For component-based UI, an SVG-as-component approach (e.g. `svgr`) is usually the best balance of performance and ergonomics.
 
-[ ] **Run automated performance tests**
+[ ] **Run automated performance tests in CI**
 
-Automating performance testing done with tools like [Louis](https://github.com/AvraamMavridis/gulp-louis) will help identify changes that affect performance during development.
+Use [Lighthouse CI](https://github.com/GoogleChrome/lighthouse-ci) to run Lighthouse on every PR and fail the build if Core Web Vitals scores regress past configured thresholds. Pair with a bundle-size budget via [`size-limit`](https://github.com/ai/size-limit) or [`bundlesize`](https://github.com/siddharthkp/bundlesize).
 
 [ ] **Perform manual tests on key pages with performance testing tools, document before and after results**
 
-Performance testing tools that show key metrics such as "time to first byte" along a visual representation of the page load process (e.g. [WebPageTest](https://www.webpagetest.org/), [Google PageSpeed](https://developers.google.com/speed/pagespeed/insights/), Chrome Dev Tools film strip), can help identify areas that need further optimization.
+Use [Lighthouse](https://developer.chrome.com/docs/lighthouse/) (in Chrome DevTools), [PageSpeed Insights](https://pagespeed.web.dev/), and [WebPageTest](https://www.webpagetest.org/) to capture before/after numbers on the pages your change affects. Document the deltas in the PR description — at minimum, LCP, INP, CLS, and total transfer size.
 
-These tools can also point out code that causes poor performance by triggering excessive CPU/painting cycles that can have a negative impact on performance. By specifically mentioning/documenting the results in the pull request or commit message for the change, the development team will be made aware of the issue, your solution, and how much performance was improved.
+For real-user data, the [`web-vitals`](https://github.com/GoogleChrome/web-vitals) library reports Core Web Vitals to your analytics pipeline.
 
 [ ] **Implement CDN (if applicable)**
 
-If applicable, use a CDN for loading a website's assets. Typically this will be necessary on larger high traffic websites.
+For production sites, use a CDN to serve static assets. With HTTP/2 multiplexing, you don't need multiple hostnames — serve everything from one origin and let the CDN handle global distribution.
 
 ## Security
 
-Security is extremely important and something we take very seriously. Take steps to provide safeguards against basic hacks like SQL injections, remote file inclusion, XSS (cross-site scripting), and CSRF (cross-site request forgery).
+Security applies across the stack. Protect against the [OWASP Top 10](https://owasp.org/Top10/) — including XSS, CSRF, injection, broken access control, and (increasingly important) software supply-chain attacks.
 
 [ ] **Secure input and output handling**
 
-When handling data that is sent to or from an application, it is important to secure it. This means checking to make sure data that is going into the system is safe, secure, and valid, while also ensuring that the data sent from the system meets that criteria as well. OWASP has guides for [input validation](https://www.owasp.org/index.php/Input_Validation_Cheat_Sheet) and [data validation](https://www.owasp.org/index.php/Data_Validation).
+Validate input at the system boundary and escape output at the rendering boundary. Use OWASP's [Input Validation Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Input_Validation_Cheat_Sheet.html) and [Cross Site Scripting Prevention Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html). Never construct SQL or shell commands from string concatenation — use parameterized queries and the platform's escaping primitives.
+
+[ ] **Set a Content Security Policy (CSP)**
+
+A well-tuned [Content Security Policy](https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP) is one of the highest-leverage defenses against XSS. Start with a strict default-src policy and explicitly allow only the origins you need. Prefer nonce- or hash-based script allowlisting over `'unsafe-inline'`.
+
+[ ] **Add Subresource Integrity (SRI) for third-party scripts**
+
+When loading scripts from a CDN you don't control, add an `integrity="sha384-..."` attribute so the browser refuses to execute a tampered file.
+
+```html
+<script src="https://cdn.example.com/lib.js" integrity="sha384-..." crossorigin="anonymous"></script>
+```
+
+[ ] **Enforce HTTPS with HSTS**
+
+Serve every page over HTTPS and send the `Strict-Transport-Security` header to prevent protocol-downgrade attacks. Submit to the [HSTS preload list](https://hstspreload.org/) once you're confident the site can sustain HTTPS-only.
+
+[ ] **Configure CORS and isolation headers**
+
+Set `Access-Control-Allow-Origin` restrictively — never `*` for any origin that handles credentials. Add `Cross-Origin-Opener-Policy: same-origin` and `Cross-Origin-Embedder-Policy: require-corp` where the app design allows; they unlock high-resolution timers and protect against Spectre-class attacks.
+
+[ ] **Automate dependency scanning**
+
+Enable [GitHub Dependabot](https://docs.github.com/en/code-security/dependabot) (or [Renovate](https://github.com/renovatebot/renovate)) on every repo to alert on vulnerable dependencies. Pair with a scanner like [Snyk](https://snyk.io/) or `npm audit` in CI. Pin versions in lockfiles and review lockfile changes carefully — npm supply-chain attacks are now the dominant attack vector for JS apps.
 
 [ ] **Do not include sensitive environment information or credentials in project documents or codebase**
 
-Keep sensitive information like logins, user data, etc. where it can be secured. Should a password find its way into version control, remove it from the repository's history.
+Keep secrets out of the repo. Use environment variables, a secret manager (1Password, AWS Secrets Manager, GitHub Actions secrets), or `.env` files that are `.gitignore`'d. Add a [secret-scanning](https://docs.github.com/en/code-security/secret-scanning/about-secret-scanning) pre-commit hook (e.g. [`gitleaks`](https://github.com/gitleaks/gitleaks)) so leaked credentials get caught before they're pushed.
+
+If a secret reaches version control, rotate it first, then scrub history.
 
 [ ] **Set least privileged access**
 
-Only people who need access to data, login information, etc. should have access to it. Avoid including MySQL root passwords in company-wide "reply-all" email threads.
+Only people who need access to data, login information, etc. should have access to it. Apply the same principle to service accounts and CI tokens — narrow scopes, short-lived where possible.
 
 [ ] **Set minimum folder and file permissions**
 
-Make sure that folders and files have the lowest permissions necessary to run. This will help mitigate remote file inclusions, directory traversal attacks, and jailbreaking.
+Make sure that folders and files have the lowest permissions necessary to run. This helps mitigate remote file inclusions, directory traversal, and privilege escalation.
 
-[ ] **Remove unused code**
+[ ] **Remove unused code and dependencies**
 
-Unused code is still vulnerable code. This is especially true with PHP. Most WordPress, Drupal, and Joomla hacks come from plugins that are deactivated but can still be exploited.
+Unused code is still vulnerable code. Periodically prune dead routes, feature flags, and dependencies — every dependency is a potential supply-chain entry point.
 
 [ ] **Remove metadata from SVGs**
 
-Metadata will be removed during the image optimization process for SVGs that we create. Any process that allows user SVG uploads should verify that no vulnerabilities are allowed.
+Image-optimization pipelines (SVGO) strip metadata by default. Any process that accepts user SVG uploads must additionally sanitize against embedded `<script>` and event-handler attributes — SVGs can execute JS.
 
-[ ] **Have a dev lead check code against OWASP standards and best practices**
+[ ] **Have a dev lead review against OWASP**
 
-[OWASP](https://www.owasp.org/index.php/Main_Page) is a great resource for how to secure code. Have your dev lead look over your code and compare it to their standards and best practices.
+The [OWASP Cheat Sheet Series](https://cheatsheetseries.owasp.org/) is the canonical reference. For higher-stakes work, request a security review from a dev lead before merging.
 
 
 ## Codebase Integrity

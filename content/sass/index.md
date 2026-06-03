@@ -1,6 +1,6 @@
 ---
 title: CSS Authoring Guidelines
-date: "2026-05-21T00:00:00.000Z"
+date: "2026-05-22T00:00:00.000Z"
 area: CSS
 section: 1. Overview
 description: ""
@@ -8,7 +8,7 @@ description: ""
 
 # CSS Authoring Guidelines
 
-This document contains Think Company's standards for writing CSS. We author vanilla CSS on all projects and use [Tailwind CSS](https://tailwindcss.com/) as a utility layer where the project and client permit.
+This document contains Think Company's standards for writing CSS. We author vanilla CSS on all projects and use [Tailwind CSS](https://tailwindcss.com/) (v4 where greenfield) as a utility layer where the project and client permit.
 
 > **Note:** Sass/SCSS is no longer our default CSS tooling. Projects that already use Sass may continue to do so; refer to the git history for the previous Sass standards.
 
@@ -21,6 +21,7 @@ This document contains Think Company's standards for writing CSS. We author vani
   - [Format & Style](#format--style)
   - [Architecture (SMACSS)](#architecture-smacss)
   - [Media Queries](#media-queries)
+- [Modern CSS Features](#modern-css-features)
 - [Tailwind CSS Standards](#tailwind-css-standards)
   - [When to Use Tailwind](#when-to-use-tailwind)
   - [Class Ordering](#class-ordering)
@@ -68,7 +69,7 @@ Use CSS custom properties (variables) for all design tokens — colors, spacing,
 - Name classes based on function, not appearance. Use lowercase, hyphen-separated words.
 - Do not over-qualify selectors (e.g. `div.card` → `.card`).
 - Do not chain more selectors than necessary.
-- Nest no more than 3 levels deep using native CSS nesting or a preprocessor.
+- Nest no more than 3 levels deep using native CSS nesting (Baseline 2023) or a preprocessor.
 - Do not use `!important` except to override unmodifiable third-party styles — add a comment explaining why.
 
 ```css
@@ -156,6 +157,84 @@ helpers.states.css
     }
 }
 ```
+
+---
+
+## Modern CSS Features
+
+The following features have reached Baseline or near-universal support and should be considered first-class tools, not experimental:
+
+### Cascade Layers (`@layer`)
+
+Use cascade layers to manage specificity across third-party styles, framework defaults, and your own code without relying on `!important` or selector hacks. Layers declared later win.
+
+```css
+@layer reset, tokens, base, layout, components, utilities;
+
+@layer components {
+    .card { /* component styles */ }
+}
+```
+
+### Container Queries
+
+Prefer container queries over media queries when a component's layout depends on the size of its parent rather than the viewport.
+
+```css
+.card-container {
+    container-type: inline-size;
+}
+
+@container (min-width: 30rem) {
+    .card {
+        grid-template-columns: 1fr 2fr;
+    }
+}
+```
+
+### `:has()` Selector
+
+Use `:has()` to style a parent based on its children — eliminates many of the JavaScript class-toggling patterns that were previously required.
+
+```css
+.card:has(img) {
+    padding-top: 0;
+}
+
+.form-field:has(:invalid) {
+    border-color: var(--color-error);
+}
+```
+
+### Subgrid
+
+Use `subgrid` when nested grids must align to a parent grid's tracks. This replaces the workaround of duplicating column definitions.
+
+### Logical Properties
+
+Prefer logical properties (`margin-inline`, `padding-block`, `border-inline-start`) over physical properties (`margin-left`, `padding-top`) when authoring layouts that may localize to RTL languages.
+
+### Modern Color
+
+Use `oklch()` for color definitions when fine control over perceived brightness matters. Use `color-mix()` to derive related colors from tokens without defining new variables.
+
+```css
+:root {
+    --color-primary: oklch(60% 0.18 250);
+    --color-primary-hover: color-mix(in oklch, var(--color-primary), black 10%);
+}
+```
+
+### View Transitions
+
+Use the View Transitions API for cross-document or in-page state animations that would otherwise require coordinated JS animation libraries.
+
+### Other Worth Knowing
+
+- `accent-color` — themes native form controls without restyling them.
+- `aspect-ratio` — reserves space for media and prevents CLS.
+- `text-wrap: balance` and `text-wrap: pretty` — typographic refinements that don't need JS.
+- `scrollbar-gutter` — eliminates layout shift when scrollbars appear.
 
 ---
 

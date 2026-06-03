@@ -1,6 +1,6 @@
 ---
 title: Performance
-date: "2021-04-01T23:46:37.121Z"
+date: "2026-05-22T00:00:00.000Z"
 area: Performance
 section: 1. Overview
 description: ""
@@ -10,91 +10,105 @@ This document contains Think Company's standards for addressing performance.
 
 ## Table of contents
 
+- [Asset Delivery](#asset-delivery)
 - [JavaScript](#javascript)
 - [HTML](#html)
 - [Fonts](#fonts)
 - [Third Party Code](#third-party-code)
+- [Images](#images)
 - [Testing Performance](#testing-performance)
 
-Each individual element on a web page generates an HTTP request which adds its own network latency, download time and render time. The most crucial optimization for any website is to reduce or limit the number of total HTTP requests. There are several ways to accomplish this, the most common of which is to combine CSS, JS and images into as few files as possible.
+Performance is measured against the **Core Web Vitals**: Largest Contentful Paint (LCP), Interaction to Next Paint (INP — which replaced First Input Delay in March 2024), and Cumulative Layout Shift (CLS). Optimization is about removing time and bytes from the path between a user's request and a usable page.
 
-### Serve external assets from a content delivery network (CDN) with a cookie-less domain
-Always serve JavaScript, CSS and chrome images from a CDN, which distributes the content across a wide geographic area and helps reduce the roundtrip time for these assets. It is crucial that the domain for the CDN be different from the website. A web browser will send any cookies it has stored for a domain for every HTTP request to that domain. Serving external assets from a different domain will avoid this unnecessary data transmission.
+## Asset Delivery
 
-### Set a future expiration date on external assets
-Most of the visits to a website are by visitors with a "primed cache", which means that the user has visited the site before and is viewing additional content. It is crucial to ensure that these page views make use of the users local cache to retrieve JavaScript, CSS and images instead of retrieving them from the server. These assets should have an expiration date of at least one month from the request time.
+### Serve assets from a CDN over HTTP/2 or HTTP/3
 
-### Compress assets with GZIP
-Compress all text assets — JavaScript and style sheets — with GZIP. It can compress these files by 70% or more and it is universally supported.
+Always serve JavaScript, CSS, images, and fonts from a CDN, which distributes the content across a wide geographic area and reduces round-trip time. The advice to use a separate cookieless domain is obsolete — it was a workaround for HTTP/1.1's 6-connection-per-host limit. With HTTP/2 multiplexing (and even more so with HTTP/3/QUIC), serving everything from a single origin is faster and simpler.
 
-### Reduce DNS Lookups
-DNS lookups add latency to HTTP requests and are not cached for very long in the browser. On the other hand, parallel downloads from different domains can be an effective performance enhancement, so there is a balance to be found. [Yahoo!](https://developer.yahoo.com/performance/rules.html#dns_lookups) recommends between two and four unique hostnames per site.
+### Set far-future cache headers on immutable assets
 
-### Avoid Redirects
-URL redirects with status codes 301 or 302 are not cached by any browser and should be avoided.
+Build pipelines should include a content hash in every static asset filename (e.g. `main.a1b2c3.js`). Cache those assets with `Cache-Control: public, max-age=31536000, immutable` (one year). When the asset changes, the filename changes, so cache invalidation is automatic.
 
-An often overlooked redirect occurs when a user requests a URL without a trailing slash, such as domain.com/about. This URL usually redirects to domain.com/about/. This redirect adds extra latency and processing time to the request, so whenever possible both URLs should serve the actual page.
+For HTML and other resources that can't be hashed, use shorter cache lifetimes with revalidation (`Cache-Control: no-cache` or short `max-age` with `stale-while-revalidate`).
+
+### Compress assets with Brotli (or GZIP)
+
+Compress all text assets — JavaScript, CSS, HTML, SVG, JSON — with **Brotli** (preferred) or **GZIP**. Brotli typically compresses 15–25% better than GZIP and is supported by every browser that matters. Configure your CDN/server to negotiate Brotli with clients that send `Accept-Encoding: br`, with GZIP as a fallback.
+
+### Use resource hints
+
+Place these in the `<head>` to give the browser a head start:
+
+- `<link rel="preconnect" href="https://cdn.example.com">` — open the TCP/TLS connection early to a known third-party origin.
+- `<link rel="dns-prefetch" href="https://cdn.example.com">` — cheaper than preconnect; resolves DNS only.
+- `<link rel="preload" href="/fonts/brand.woff2" as="font" type="font/woff2" crossorigin>` — fetch a critical asset early; use for fonts, hero images, and any LCP candidate.
+- `<link rel="modulepreload" href="/js/app.js">` — preloads an ES module and its imported dependencies.
+
+Use `fetchpriority="high"` on the LCP `<img>` and `fetchpriority="low"` on below-the-fold or non-critical assets.
+
+### Avoid redirects
+
+Redirects add a full round-trip before the actual response. While 301s _are_ cached by modern browsers (often aggressively), each one still costs latency on the first hit and can interfere with cache-control headers.
+
+An often-overlooked redirect occurs when a user requests a URL without a trailing slash, such as `domain.com/about`, which usually redirects to `domain.com/about/`. Serve both URLs directly when possible.
 
 ## JavaScript
 
-### Bundle JavaScript Files
-Modern bundlers (Vite, webpack, esbuild) split and tree-shake JavaScript automatically. Favor code splitting over serving one monolithic bundle. Ensure your build produces no more output than the page needs.
+### Bundle and code-split
 
-These files will be served in the "exploded" view during local development, but Dev, QA, Staging and Production environments should all serve the combined JavaScript resources. 
+Modern bundlers (Vite, esbuild, Rollup, Turbopack) split and tree-shake JavaScript automatically. Favor route- and component-level code splitting over serving one monolithic bundle. Configure your build so the initial bundle contains only what's needed for first paint and interaction; lazy-load the rest with dynamic `import()`.
 
-### Minify JavaScript Files
-Use a resource compressor to compress and minify the combined JavaScript files. This can save a significant amount of bandwidth by stripping whitespace and shortening variable names, thereby reducing overall JavaScript file size.
+Set a bundle-size budget in your CI (e.g. via `bundlesize`, Lighthouse CI, or `size-limit`) so regressions get caught before they ship.
 
-### Import JavaScript at the Bottom of the Page
-Web browsers stop processing a web page while they are downloading, parsing and executing external JavaScript files. This behavior — called "blocking" — can be avoided by loading the JavaScript at the bottom of the page, just before the closing HTML element.
+### Minify
 
-This method also ensures that scripts do not attempt to manipulate DOM elements before they have loaded.
+Bundlers minify JavaScript by default in production builds via terser, esbuild, or SWC. Verify your production build is producing minified output and source maps separately. Do not ship source maps publicly unless you intend to.
 
-BAD
+### Load scripts in `<head>` with the right attribute
+
+The "scripts at the bottom of the body" pattern is obsolete. Place scripts in `<head>` and let modern script-loading attributes handle blocking behavior:
+
+- `defer` — downloads in parallel with HTML parsing, executes after parsing, preserves source order. Correct default for most application code.
+- `async` — downloads in parallel and executes as soon as ready; order not guaranteed. Use for independent third-party scripts (analytics, isolated widgets).
+- `type="module"` — ES modules are deferred by default; no `defer` needed.
+
 ```html
-    <head>
-        <script type="text/javascript" src="main.js"></script>
-    </head>
-    <body>
-        ...
-    </body>
+<head>
+  <script src="/js/main.js" defer></script>
+  <script src="https://analytics.example.com/tracker.js" async></script>
+  <script type="module" src="/js/app.js"></script>
+</head>
 ```
 
+### Lazy-load content below the fold
 
-GOOD 
-```html
-    <body>
-        ...
-        <footer></footer>
-        <script type="text/javascript" src="main.js"></script>
-    </body>
-```
-
-### Load Dynamic Content Asynchronously
-Many sites with dynamic displays contain content that is not initially visible and may not be shown to some devices (like mobile phones). When it makes sense, this content should be loaded asynchronously via AJAX – either after the page has loaded or when it is needed. This helps keep the size of the HTML document small.
+Use `loading="lazy"` on `<img>` and `<iframe>` elements that appear below the fold — it is native, requires no JavaScript, and is widely supported. For more granular control (component-level lazy hydration in a framework), use the framework's primitives (`React.lazy`, `next/dynamic`, etc.).
 
 ### Make Requests Cacheable
-Ensure that HTTP requests loaded via JavaScript are subject to the same web caching rules as full web pages. For instance, if a standard document is cached for 15 minutes, then all JavaScript requests on that page should also be cached for 15 minutes.
 
-### Use GET
-Using GET instead of POST saves a small amount of bandwidth by sending one packet instead of two.
+Ensure that HTTP requests loaded via JavaScript are subject to appropriate caching headers. Use `Cache-Control` directives like `stale-while-revalidate` to serve a stale response while refreshing in the background. For client-side data caching, libraries like TanStack Query (React) handle this layer.
 
 ## HTML
 
 ### Valid Markup
+
 The first priority for a web developer should be to write markup that validates. This is a best practice that crosses many aspects of web development and should be relatively straightforward to achieve (with maybe the exception of third-party code). A browser does less work when parsing valid code and can avoid "interpreting" broken code. This also ensures that validation can be used as part of the troubleshooting process: if the page doesn't validate, there's something wrong in the system that should be fixed.
 
 You can use a tool like [W3C's Markup Validation Service](https://validator.w3.org/) to validate your markup.
 
 ### Avoid Inline Styles and Scripts
+
 All scripts and styles should be moved to an external source. This increases code reuse and keeps the markup clean. Inline event handlers (i.e. onClick) should never be used; always attach JavaScript functions via DOM scripting methods. The exception is scripts included via conditional comments for particular browsers; these should be embedded in the markup.
 
 BAD
+
 ```html
 <div style="background-color: #000;" onclick="event"></div>
 ```
 
 GOOD
+
 ```html
 <div class="my-div" data-click-target></div>
 ```
@@ -102,43 +116,66 @@ GOOD
 ## Fonts
 
 ### Minimize the Number of Fonts Being Used
-Do not use too many fonts on your site, and do not import more font variants than you need. For instance, if the designs only call for 400 & 700 weights of a font, do not import the entire font-face. Libraries like [Google Fonts](https://fonts.google.com/) and [Adobe Typekit](https://typekit.com/) allow you to import the exact font weights and styles you need. [Web Font Loader](https://github.com/typekit/webfontloader) is a helpful tool for importing the exact font styles you want from multiple sources, including local fonts.
 
-### Use Compressed Font File Types
-The WOFF format is pre-compressed and works in all modern browsers and is the preferred format. WOFF2 comes with the best compression out of the box, but has less browser support. If you need to use TTF or EOT formats (TTF for old Android browsers, EOT for IE), be sure to compress the font files with GZIP when delivering the fonts.
+Do not use too many fonts on your site, and do not import more font variants than you need. If the designs call for only 400 and 700 weights, do not import the entire family. Consider a **variable font** when multiple weights/widths are needed — a single variable font file can replace several static variant files at a lower combined cost.
 
-### Include local() & format() Directives in a @font-face Declaration
-When you use the `local()` directive in a `@font-face` declaration, the browser will first check for the font locally. If the font exists locally, it will stop and render the font from the local resource. When you use the `format()` directive, the browser will only download a resource if the browser supports that format. 
+### Self-host fonts when possible
 
-Your declaration should look something like this:
+Self-hosting from your own origin (or CDN) avoids a third-party connection and the latency of `fonts.googleapis.com`. The Google Fonts UI provides files you can download and serve yourself. When using a third-party font service, add `<link rel="preconnect">` to its CDN.
 
-```css 
-    @font-face {
-        font-family: 'Font Name';
-        font-weight: 400;
-        src: local('Awesome Font Italic'),
-        url('/fonts/awesome-i.woff2') format('woff2'), 
-        url('/fonts/awesome-i.woff') format('woff'),
-        url('/fonts/awesome-i.ttf') format('truetype'),
-        url('/fonts/awesome-i.eot') format('embedded-opentype');
-    }
+### Use WOFF2
+
+**WOFF2 is the only format you need.** It has universal support in every browser still receiving updates (Baseline since 2020), uses Brotli-equivalent compression, and is roughly 30% smaller than WOFF. Drop WOFF, TTF, and EOT fallbacks unless you have a specific reason to keep them — they add bytes without serving real users.
+
+### Use `font-display` and preload critical fonts
+
+Use `font-display: swap` (or `optional` for the smallest CLS impact) to prevent invisible text during font load. Preload fonts used for above-the-fold text:
+
+```html
+<link
+  rel="preload"
+  href="/fonts/brand.woff2"
+  as="font"
+  type="font/woff2"
+  crossorigin
+/>
 ```
 
-Including these directives prevents the browser from downloading unused resources and improves page performance.
+```css
+@font-face {
+  font-family: "Brand Sans";
+  font-style: normal;
+  font-weight: 400 700; /* variable font range */
+  font-display: swap;
+  src: url("/fonts/brand.woff2") format("woff2-variations");
+}
+```
+
+Use `size-adjust`, `ascent-override`, and `descent-override` to tune fallback fonts to the metrics of your custom font and minimize layout shift when the web font swaps in.
 
 ## Third Party Code
 
-### async script
-A web browser will block while downloading a JavaScript file at the bottom of the page that is called via a SCRIPT element. To further speed up JS processing, add the `async` attribute to the script element. This will further ensure that the page will not block when the script is loading.
+Every third-party script is a performance liability you do not control. Audit them ruthlessly: each one runs JavaScript on your users' devices, may make additional network requests, and can block rendering.
+
+### Load third-party scripts asynchronously
+
+Use `async` (not `defer`) for scripts whose execution order doesn't matter — analytics, error reporting, marketing tags. See the [JavaScript loading section](#load-scripts-in-head-with-the-right-attribute) for full guidance.
 
 ```html
-<script type="text/javascript" src="js/main.js" async></script>
+<script src="https://analytics.example.com/tracker.js" async></script>
 ```
 
-### Third Party Ads
-Third party display ads are the single biggest performance drain on the web today. For every 1 HTTP request a web page sends to an ad server, as many as 10 elements are returned in order to fulfill that request, including tracking beacons, JavaScript files, images and Flash. These assets are usually distributed across domain names, further increasing latency and round trip time for the entire page.
+For tags that need to run after the page is interactive, consider deferring their initialization with `requestIdleCallback` so they don't compete with critical work.
 
-The best way to mitigate these effects is to place each display ad into an iframe. The iframe will allow the ad requests to be processed in parallel to the web page without interfering with its performance. An ad that fails to load in an iframe may delay the onLoad or onDomReady events and prevent JavaScript loading, but the HTML documents will be completely styled and interactive.
+### Third Party Ads and Embeds
+
+Third-party ads, social embeds, and chat widgets are routinely the single biggest performance drain on the page. Each request to an ad server often returns 10+ subresources — tracking beacons, scripts, images — distributed across additional origins.
+
+Mitigations:
+
+- Sandbox each ad/embed in an `<iframe>` so it cannot block the parent document. Use the `loading="lazy"` attribute to defer offscreen iframes.
+- Use **facade patterns** for heavy embeds (YouTube, Twitter, chat widgets): render a lightweight placeholder that loads the real embed only when the user interacts with it. See [Lighthouse's "third-party-facades" audit](https://developer.chrome.com/docs/lighthouse/performance/third-party-facades).
+- Set a performance budget for third-party JS in your CI; reject changes that exceed it.
 
 ## Images
 
@@ -162,82 +199,127 @@ PNG files are not as compressible as JPEG images. You should choose the best for
 
 #### Image Sprites
 
-Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader 'svg-sprite-loader'), your set of SVGs can be combined into one.
+Combining SVG assets into one reduces the number of assets loaded. Using a tool like [svg-sprite-loader](https://github.com/kisenka/svg-sprite-loader "svg-sprite-loader"), your set of SVGs can be combined into one.
 
-#### Progressive JPEG
-Typically, JPEG images load top-to-bottom so the full image appears slowly as it loads. With Progressive JPEG files, the whole image loads at once, starting in low quality and gradually becoming the full quality image. While this doesn't load the image any faster or decrease the file size, it gives the appearance of faster loading to the user. [Yahoo](https://yuiblog.com/blog/2008/12/05/imageopt-4/) has a blog post with more information about progressive JPEG files.
+#### Use Modern Formats: AVIF and WebP
 
-Medium and Facebook use a javascript technique to imitate progressive JPEG files. This technique entails loading a very small version of the image onto the page with an aesthetically pleasing blur, and then loading the full image when the page is fully loaded. We've created a [proof of concept](https://codepen.io/kamul13/pen/LxKKEv "proof of concept") to demonstrate the creation of these progressive JPEGs.
+**AVIF** offers the best compression for raster images today (typically 30–50% smaller than equivalent JPEG, 20% smaller than WebP) and is supported by all major browsers. **WebP** is universally supported and is a strong default. Use both with a JPEG fallback via `<picture>`:
 
-#### WebP Images
-WebP is broadly supported in all modern browsers and should be the default format for raster images where JPEG or PNG would otherwise be used. For even better compression, consider AVIF with a WebP fallback.
-
-The best way to incorporate a WebP image in HTML is using the picture element with a fallback option.
-
-HTML WebP image: 
 ```html
 <picture>
-    <source srcset="./image_1.webp" type="image/webp">
-    <source srcset="./image_1.jpg" type="image/jpeg"> 
-    <img src="./image_1.jpg" alt="Alt Text!">
+  <source srcset="hero.avif" type="image/avif" />
+  <source srcset="hero.webp" type="image/webp" />
+  <img
+    src="hero.jpg"
+    alt="Sunrise over the Schuylkill"
+    width="1600"
+    height="900"
+  />
 </picture>
 ```
 
-You can create WebP files using the [ImageMin](https://www.npmjs.com/package/imagemin "ImageMin") NPM package mentioned above to optimize images.
+Use a build pipeline (Sharp via [sharp-cli](https://github.com/vseventer/sharp-cli), [`imagemin`](https://www.npmjs.com/package/imagemin), or a CDN that does on-the-fly conversion like Cloudinary or imgix) to generate all three formats automatically.
 
-[CSS Tricks](https://css-tricks.com/using-webp-images/ "CSS Tricks") has more detailed information about the WebP image format.
+#### Progressive JPEG (legacy)
 
+For any remaining JPEG fallbacks, save them as progressive — the image renders coarsely first and refines as more bytes arrive, perceptually faster than a top-to-bottom render. Native browser support means the JS "blurhash" workarounds Medium and Facebook used years ago are no longer necessary.
 
-### Specify Image Dimensions, Do Not Resize
+### Specify Image Dimensions, Always
 
-Images are inline elements and content must flow around them. Embedding the image dimensions in the markup via the width and height attributes will help the browser do less processing to determine the layout and will eliminate the reflow drawing that can occur as content is loaded and parsed. This only works for static designs however.
+**Every `<img>` must have `width` and `height` attributes set to the intrinsic dimensions of the image**, even in responsive layouts. The browser uses them to compute an aspect ratio and reserve space before the image loads, which prevents Cumulative Layout Shift (CLS) — one of the three Core Web Vitals. Pair the attributes with responsive CSS so the image still scales:
 
-BAD
-`<img src="placehold.it/500x500" width="100" height="100">`
+```html
+<img src="hero.jpg" alt="..." width="1600" height="900" />
+```
 
-GOOD 
-`<img src="placehold.it/500x500" width="500" height="500">`
+```css
+img {
+  max-width: 100%;
+  height: auto;
+}
+```
 
-When implementing a responsive design, let the CSS control the image size rather than using HTML width and height attributes.
+For background images and other cases where intrinsic dimensions can't be expressed in HTML, use the `aspect-ratio` CSS property on the container.
 
 ### Lazy loading
 
-This is a technique used to improve initial load speed by delaying the actual loading of images until they are viewable. By setting empty or invalid `src` attributes on your image tags, you can prevent any initial image asset loading. Then, you must include a script to add event listeners to the DOM, waiting for the user to navigate to parts of the page where the image comes into the window frame, *then* the image is loaded. [CSS Tricks](https://css-tricks.com/snippets/javascript/lazy-loading-images/ 'CSS Trick Lazy Loading') has a good example of one such script.
+Use the native `loading="lazy"` attribute on offscreen `<img>` and `<iframe>` elements. It is supported by every current browser and requires no JavaScript:
 
-### Mobile
+```html
+<img src="below-fold.jpg" alt="..." width="800" height="600" loading="lazy" />
+```
 
-In some cases, responsive design will call for different size/shapes of an image at different breakpoints. To deliver this with the best performance, we should avoid always serving the same image simply redrawn at the right size. On low-bandwidth devices, loading a huge desktop sized image so that it fits on a mobile screen is a huge waste of page-weight.
+For the LCP image (typically the hero), do _not_ lazy-load it. Instead, set `fetchpriority="high"` so the browser prioritizes its download.
 
-For background images, use CSS media queries to serve different images at lower sizes. The example below uses SASS to demonstrate this technique.
+### Responsive Images
 
-```sass
+Use `srcset` and `sizes` to let the browser pick the right asset for the user's viewport and device pixel ratio. This avoids shipping a desktop-sized image to a phone:
+
+```html
+<img
+  src="hero-800.jpg"
+  srcset="hero-400.jpg 400w, hero-800.jpg 800w, hero-1600.jpg 1600w"
+  sizes="(min-width: 64rem) 800px, 100vw"
+  alt="..."
+  width="800"
+  height="450"
+/>
+```
+
+For background images that change at breakpoints, use vanilla CSS with `image-set()` or media queries:
+
+```css
 .hero {
-    // Smallest image loaded by default.
-    background-image: url("./my_image100x200")
+  background-image: url("./hero-400.jpg");
+}
 
-    // First breakpoint, load the medium sized image.
-    @media (min-width: 600px) {
-        background-image: url("./my_image200x400");
-    }
+@media (min-width: 600px) {
+  .hero {
+    background-image: url("./hero-800.jpg");
+  }
+}
 
-    // Second breakpoint, load the large image.
-    @media (min-width: 1000px) {
-        background-image: url("./my_image400x800");
-    }
+@media (min-width: 1000px) {
+  .hero {
+    background-image: url("./hero-1600.jpg");
+  }
 }
 ```
 
 ## Testing Performance
-When testing performance, there are some basic metrics you should measure against. The main performance benchmark is page load speed, which is important for User Experience and SEO. The slower your page loads, the more likely a user is to abandon the site. A slow page load is also penalized in Google's search ranking. If you want to find ways to improve on this benchmark or want a more detailed breakdown, you can use free, online tools to measure performance. Below are a few of these resources. 
 
-### Chrome Timeline
-The Timeline tool in Chrome inspector allows you to record and analyze every event that occurs during page load. [Google Developers](https://developers.google.com/web/tools/chrome-devtools/evaluate-performance/timeline-tool) is a great resource for learning how to use the Timeline Tool.
+Measure against the **Core Web Vitals**, which are Google's primary user-experience signals and a ranking factor in Search:
 
-### Webpagetest
-[webpagetest.org](https://www.webpagetest.org/) is another tool that records and analyzes page performance. This tool also gives you a report card that grades you on individual performance measures, such as using a CDN and compressing images, and gives you detailed information about where you can improve performance. 
+- **LCP (Largest Contentful Paint)** — when the largest element above the fold paints. Target: under 2.5s.
+- **INP (Interaction to Next Paint)** — replaced FID in March 2024. Measures responsiveness across the user's full session. Target: under 200ms.
+- **CLS (Cumulative Layout Shift)** — visual stability. Target: under 0.1.
 
-### Yellow Lab Tools
-Similar to Webpagetest, [Yellow Lab Tools](http://yellowlab.tools/) gives you a report card with detailed information about improving page performance in specific areas. Yellow Lab Tools gives especially detailed information about bad CSS patterns that could affect performances, like 
+### Lighthouse
 
-### Lighthouse / Web Vitals
-Use [Lighthouse](https://developer.chrome.com/docs/lighthouse/) (built into Chrome DevTools) or the [Web Vitals extension](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibgt) to measure Core Web Vitals (LCP, INP, CLS) during development. Set performance budgets in your CI pipeline using tools like `bundlesize` or Lighthouse CI.
+[Lighthouse](https://developer.chrome.com/docs/lighthouse/) is built into Chrome DevTools (Lighthouse panel) and is the primary tool for local performance audits. It runs the same audits Google uses for PageSpeed Insights. Run it in "Mobile" emulation against a clean profile (incognito/guest) to get representative numbers.
+
+### Chrome DevTools Performance panel
+
+The **Performance** panel (formerly "Timeline") records every event in a page's load and runtime. Use it to find long tasks, layout shifts, render-blocking resources, and main-thread bottlenecks. The newer **Performance Insights** panel provides a guided LCP/CLS analysis.
+
+### PageSpeed Insights and Web Vitals
+
+[PageSpeed Insights](https://pagespeed.web.dev/) runs Lighthouse on Google's servers and also surfaces **field data** (real-user metrics from the Chrome User Experience Report). Lab data measures what _can_ happen; field data measures what _is_ happening to your users. Track both.
+
+The [Web Vitals Chrome extension](https://chrome.google.com/webstore/detail/web-vitals/ahfhijdlegdabablpippeagghigmibgt) overlays LCP / INP / CLS readings while you browse — a fast feedback loop during development.
+
+### WebPageTest
+
+[WebPageTest](https://www.webpagetest.org/) is the most thorough free synthetic testing tool. It can run from multiple geographic locations, on real mobile devices, with throttled network conditions, and produces filmstrips and waterfall charts that DevTools can't match.
+
+### CI integration: Lighthouse CI and size budgets
+
+Catch regressions before they ship:
+
+- [**Lighthouse CI**](https://github.com/GoogleChrome/lighthouse-ci) runs Lighthouse on every PR and fails the build if scores drop below configured thresholds.
+- [**`size-limit`**](https://github.com/ai/size-limit) or [**`bundlesize`**](https://github.com/siddharthkp/bundlesize) enforce JS/CSS budgets per route.
+- [**Calibre**](https://calibreapp.com/) and **SpeedCurve** are paid services that track field and synthetic data over time with alerting.
+
+### Real-user monitoring (RUM)
+
+For production-running apps, install a RUM script that reports the Web Vitals back to your analytics. The [`web-vitals` library](https://github.com/GoogleChrome/web-vitals) is the canonical implementation; it's a few KB and emits LCP, INP, CLS, FCP, and TTFB events.
