@@ -24,19 +24,30 @@ These instructions apply to all AI-assisted coding at Think Company. They encode
 - Keep type definitions co-located with the code that uses them. Only promote to a shared `types/` directory when truly shared.
 - Avoid type assertions (`as Foo`) except at verified system boundaries. Never use non-null assertions (`!`) without a comment explaining why the value cannot be null.
 - Prefer `satisfies` over `as` when you need to validate a value against a type without widening it.
+- Use `as const` to lock object and tuple literals to their narrowest types (e.g. to derive a union from an array of values).
+- Model mutually-exclusive states as discriminated unions (a shared literal `kind`/`status` tag), not a bag of optional fields. Narrow them with `switch`.
+- For data crossing a system boundary (API responses, form input, `localStorage`), type it as `unknown` and validate at runtime with a schema validator (Zod or Valibot) before use. Do not trust a hand-written `as` cast on external data.
+- Enable `noUncheckedIndexedAccess` so indexed access (`arr[i]`, `record[key]`) is typed as possibly `undefined`. Consider `exactOptionalPropertyTypes` per project — it is stricter and can fight library interop.
 
 ---
 
 ## JavaScript
 
 - Use `const` by default. Use `let` only when the value will be reassigned. Never use `var`.
+- Declare variables close to where they are first used, not in a block at the top of the scope.
 - Use `===` and `!==`. Never `==` or `!=`.
+- Be explicit in conditions when the type is ambiguous. Truthy shortcuts hide bugs around `0`, `''`, and `null` — prefer `if (count > 0)` over `if (count)` and `if (name != null)` over `if (name)`.
 - Use template literals for string interpolation. No string concatenation.
 - Arrow functions for callbacks and closures. Named function declarations for top-level functions (better stack traces).
+- Use ES modules (`import`/`export`). Prefer named exports over default exports for non-component modules.
+- Use the modern operators: optional chaining (`?.`), nullish coalescing (`??`), and logical assignment (`??=`, `||=`, `&&=`). Use `??` (not `||`) for defaults so `0` and `''` are preserved.
+- Use `async`/`await` over hand-rolled promise chains. Run independent async work concurrently with `Promise.all`; use `Promise.allSettled` when failures should not short-circuit. Sequential `await`s on independent calls are a performance bug.
+- Iterate with `for...of` and array methods. Never use `for...in`; use `Object.keys`/`Object.values`/`Object.entries` for objects.
+- Bind events with `addEventListener` — never inline `on*` attributes. Use `IntersectionObserver`/`ResizeObserver` instead of polling `scroll`/`resize`; debounce or throttle high-frequency handlers.
+- Use trailing commas in multi-line objects, arrays, and parameter lists.
+- When converting strings to numbers, use `Number()` or `Number.parseInt(value, 10)` with an explicit radix.
 - Never use `eval` or the `Function` constructor.
 - Avoid assignments inside conditionals.
-- Wrap immediately-invoked function expressions in parentheses.
-- Do not bind to scroll or resize events without debouncing.
 
 ---
 
@@ -49,21 +60,27 @@ These instructions apply to all AI-assisted coding at Think Company. They encode
 - Use double quotes for JSX attributes; single quotes for all other JS/TS strings.
 - Do not use array index as `key` prop. Use a stable, unique ID.
 - Do not spread props onto DOM elements without filtering (`{...rest}` onto a `<div>` leaks unknown attributes).
-- State management:
-  - Single component: `useState`
-  - Component trees (2+ levels): React Context
-  - Application-wide: Redux with Redux Toolkit (RTK)
+- State management — match the tool to the *kind* of state:
+  - Local component state: `useState` (or `useReducer` for complex transitions).
+  - Shared across a small subtree: React Context. Do not reach for a global store just to avoid prop drilling.
+  - Server state (API data, caching, revalidation): TanStack Query or SWR. Do not put server data in Redux.
+  - URL state (filters, pagination): keep it in query params via the router.
+  - Global client state: Zustand or Jotai for lighter needs; Redux Toolkit (RTK) on larger projects.
+- `useEffect` is for synchronizing with external systems, not for deriving data. Compute derived values during render — do not mirror props into state via an effect. Declare every reactive dependency (do not disable `react-hooks/exhaustive-deps`), and return a cleanup function for subscriptions, timers, and connections.
+- Extract reusable stateful logic into custom hooks (`use`-prefixed), not HOCs or render props.
+- Wrap failure-prone subtrees (data fetching, third-party widgets, route components) in an error boundary.
+- In React 19 / Next.js App Router, components are Server Components by default. Mark components that use state, effects, or browser APIs with `'use client'`, and push client components as far down the tree as possible.
 - Do not use `isMounted`. It is deprecated and unavailable in functional components.
 - Conditional rendering: avoid nested ternaries. Break complex conditionals into separate components.
 - PropTypes are not required in TypeScript projects — use TypeScript types instead.
 
 ---
 
-## CSS / Sass
+## CSS
 
-- Use Sass (SCSS syntax). Write CSS as close to standard CSS as possible; use Sass features only where they add clarity.
-- Do not use vendor mixin libraries (Compass, Bourbon). Use Autoprefixer in the build pipeline instead.
-- Do not write vendor prefixes manually in `.scss` files.
+- Author **vanilla CSS** on all projects. Use **Tailwind CSS** as a utility layer where the project and client permit. Sass/SCSS is no longer the default — projects already on Sass may continue, but do not start new work in it.
+- Use CSS custom properties for all design tokens (colors, spacing, type scale, z-index, breakpoints). Define them on `:root`.
+- Do not use vendor mixin libraries. Avoid manual vendor prefixes — use Autoprefixer in the build pipeline.
 - Architecture follows SMACSS: Settings → Base → Layout → Modules → Helpers.
   - State classes: prefix with `is-` or `has-`.
   - Subcomponents: `[module]-[subcomponent]`.
@@ -76,15 +93,32 @@ These instructions apply to all AI-assisted coding at Think Company. They encode
 - Use `box-sizing: border-box` globally via the inherit pattern.
 - Use relative units (`em`, `rem`, `%`) over `px` wherever possible.
 - Do not use `line-height` with a unit. Use a unitless ratio (e.g., `line-height: 1.5`).
-- Use Sass modules (`@use`, `@forward`). Do not use the deprecated `@import`.
-- Declaration order inside a rule: `@extend` → `@include` → regular properties → pseudo-classes/elements → nested selectors → media queries.
+- Declaration order within a rule: custom properties → layout → box model → typography → visual → interaction → animation.
 - Name and place media queries alongside their base ruleset, smallest to largest (mobile-first).
 
-### Partial naming convention
+### File naming convention
 
-`_[category].[partial-name].scss`
+`[category].[partial-name].css`
 
-Examples: `_settings.variables.scss`, `_layout.grid.scss`, `_module.card.scss`, `_helpers.spacing.scss`
+Examples: `settings.tokens.css`, `layout.grid.css`, `module.card.css`, `helpers.spacing.css`
+
+### Tailwind
+
+- Use Tailwind only where the team has agreed and no conflicting CSS architecture exists.
+- Order utility classes layout → box model → typography → visual → interaction → animation; enforce with the Prettier Tailwind plugin.
+- Prefer extracting a reusable component over `@apply`. Use `@apply` only where JSX components aren't available (e.g. CMS templates).
+- Map tokens in config to custom properties; don't use arbitrary values (`w-[347px]`) for things that should be tokens.
+
+### Modern CSS features
+
+These have reached broad/Baseline support — treat them as first-class tools, not experimental:
+
+- **Cascade layers (`@layer`)** to manage specificity across resets, third-party styles, and your own code without `!important`.
+- **Container queries** when a component's layout depends on its container's size rather than the viewport.
+- **`:has()`** to style a parent based on its descendants — replaces many JS class-toggling patterns.
+- **Logical properties** (`margin-inline`, `padding-block`, `border-inline-start`) over physical ones for RTL-friendly layouts.
+- **Modern color** — `oklch()` for perceptually-uniform colors, `color-mix()` to derive related colors from a token.
+- **Custom properties** for all design tokens (colors, spacing, type scale, z-index).
 
 ---
 
@@ -93,7 +127,7 @@ Examples: `_settings.variables.scss`, `_layout.grid.scss`, `_module.card.scss`, 
 - All HTML must conform to the HTML5 spec. Validate with the W3C validator.
 - Write semantic markup. Use the correct element for the meaning, not for the appearance.
 - Use HTML5 sectioning elements (`<header>`, `<main>`, `<article>`, `<aside>`, `<nav>`, `<footer>`).
-- All elements and attribute names must be lowercase. Attribute values in double quotes. All tags closed.
+- All elements and attribute names must be lowercase. Attribute values in double quotes. Void elements (`<img>`, `<input>`, `<br>`, etc.) do not need a trailing slash — that's an XHTML convention.
 - Attribute order: `class` → `id`/`name` → `data-*` → `src`/`for`/`type`/`href`/`value` → `title`/`alt` → `aria-*`/`role`.
 - Use `<button>` for actions, `<a>` for navigation. Use `type="button"` on `<button>` elements outside of forms.
 - Never use inline styles or inline event handlers. Hook JavaScript behavior via `data-*` attributes.
@@ -110,7 +144,9 @@ Target WCAG 2.2 Level AA compliance on all projects.
 - Always declare the page language: `<html lang="en">`.
 - Heading hierarchy must be logical and sequential. One `<h1>` per page. Do not choose heading levels based on visual size.
 - Text contrast: 4.5:1 minimum for normal text; 3:1 for large or bold text.
-- Every interactive element must be keyboard-accessible. Never remove the default focus outline without replacing it with a clearly visible alternative.
+- Every interactive element must be keyboard-accessible. Never remove the default focus outline without replacing it with a clearly visible alternative. Prefer `:focus-visible` over `:focus` so mouse clicks don't show a stray ring. Focus indicators need at least a 2px outline at 3:1 contrast (WCAG 2.2 SC 2.4.11/2.4.13).
+- Interactive targets must be at least 24×24 CSS pixels (WCAG 2.2 SC 2.5.8); 44×44 is the AAA/design-system target.
+- Wrap non-essential animation in `@media (prefers-reduced-motion: reduce)` and disable it there.
 - Provide a visually-hidden "Skip to main content" link as the first focusable element on each page.
 - Use ARIA attributes only when native HTML semantics are insufficient. Incorrect ARIA is worse than no ARIA.
 - Use `aria-haspopup`, `aria-expanded`, and `aria-hidden` to communicate toggle state.
@@ -118,7 +154,7 @@ Target WCAG 2.2 Level AA compliance on all projects.
 - All `<img>` elements must have an `alt` attribute. Decorative images use `alt=""`.
 - Do not use color alone to convey information.
 - Error validation fires on submit, not on keystroke or blur. On error: move focus to the first invalid field, set `aria-invalid="true"`, link to the error message via `aria-describedby`.
-- Use `aria-required="true"` on required fields; do not rely solely on the HTML5 `required` attribute.
+- Use the native HTML `required` attribute as the source of truth for required fields — it is well-supported by current screen readers and gives free browser validation. `aria-required="true"` is redundant when `required` is present; use it only on custom widgets that can't use the native attribute.
 - Test with: VoiceOver (macOS/iOS), NVDA + Firefox (Windows), TalkBack (Android). Use the axe browser extension for automated checks.
 
 ---
@@ -166,12 +202,16 @@ Use CI/CD to run linting, type checks, and tests automatically on every PR. Do n
 
 ## Security
 
-- Never commit secrets, API keys, credentials, or `.env` files. Use environment variables and a secrets manager.
-- Validate and sanitize all user input at the boundary. Do not trust client-supplied data server-side.
-- Follow OWASP Top 10 guidance. Pay particular attention to XSS, CSRF, and injection.
-- Set least-privilege access for all roles and service accounts.
+- Never commit secrets, API keys, credentials, or `.env` files. Use environment variables and a secrets manager. Run a secret-scanning hook (e.g. gitleaks). If a secret reaches version control, rotate it first, then scrub history.
+- Validate and sanitize all user input at the boundary. Do not trust client-supplied data server-side. Never build SQL or shell commands via string concatenation — use parameterized queries.
+- Follow OWASP Top 10 guidance. Pay particular attention to XSS, CSRF, injection, and supply-chain attacks.
+- Set a Content Security Policy (CSP) — prefer nonce/hash allowlisting over `'unsafe-inline'`. It is one of the highest-leverage XSS defenses.
+- Add Subresource Integrity (`integrity="sha384-…"`) to third-party scripts loaded from a CDN you don't control.
+- Serve over HTTPS and send `Strict-Transport-Security` (HSTS).
+- Automate dependency scanning (Dependabot or Renovate, plus `npm audit`/Snyk in CI). Review lockfile changes carefully — pin versions.
+- Set least-privilege access for all roles, service accounts, and CI tokens.
 - Remove unused code, dependencies, and assets before shipping.
-- Strip metadata from SVGs before committing.
+- Strip metadata from SVGs before committing. Any process accepting user-uploaded SVGs must sanitize embedded `<script>` and event-handler attributes.
 
 ---
 

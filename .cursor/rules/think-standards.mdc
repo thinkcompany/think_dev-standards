@@ -10,12 +10,14 @@ Follow all standards in `AGENTS.md` at the repo root.
 
 ## Key rules for Cursor
 
-- TypeScript only. `strict: true`. Never use `any`.
-- Functional React components only. Hooks for state and effects.
-- WCAG 2.2 AA accessibility on all UI.
+- TypeScript only. `strict: true`. Never use `any` — use `unknown` and narrow. Validate external data with Zod/Valibot, not an `as` cast.
+- `const` by default, never `var`. Modern operators (`?.`, `??`, logical assignment). `async`/`await` over promise chains. `for...of`/`Object.entries`, never `for...in`.
+- Functional React components only. Hooks for state and effects. `useEffect` synchronizes with external systems — don't derive state in it; declare all deps; return cleanup.
+- Server state → TanStack Query/SWR (not Redux). Reusable logic → custom hooks. Wrap failure-prone subtrees in an error boundary.
+- WCAG 2.2 AA accessibility on all UI. `:focus-visible` focus states, targets ≥ 24×24px, respect `prefers-reduced-motion`. Native `required` over `aria-required`.
+- Vanilla CSS is the default; Tailwind as a utility layer where agreed. Sass is grandfathered, not for new work. Custom-property tokens; modern CSS (cascade layers, container queries, `:has()`, logical properties).
 - Conventional Commits format for commit messages.
-- No inline styles, no inline event handlers.
-- Sass with `@use`/`@forward` — not `@import`.
+- No inline styles, no inline event handlers. No secrets in code.
 - One component per file, PascalCase filename matches component name.
 
 See `AGENTS.md` for the full standard.
