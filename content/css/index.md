@@ -12,40 +12,46 @@ This document contains Think Company's standards for writing CSS.
 
 ## Table of Contents
 
- - [Programming Principles](#programming-principles)
- - [Versions, Validation, & Linting](#versions-validations--linting)
- - [Errors & Warnings](#errors--warnings)
- - [Approved Properties](#approved-properties)
- - [Disallowed Properties & Values](#disallowed-properties--values)
- - [Tools & Libraries](#tools--libraries)
- - [Format & Style](#format--style)
-  * [Formatting for Readability](#formatting-for-readability)
-  * [Quotes](#quotes)
-	* [Comments](#comments)
-	* [Selectors](#selectors)
-	* [Pseudo-Element and Pseudo-Class Selectors](#pseudo-element-and-pseudo-class-selectors)
-	* [Properties](#properties)
-		+ [Declaration Order](#declaration-order)
-		+ [Shorthand](#shorthand)
-		+ [Line-height](#line-height)
-		+ [Vendor Prefixes](#vendor-prefixes)
-		+ [Box Model & Layout Dimensions](#box-model--layout-dimensions)
-		+ [Flow, Floats, & Positioning](#flow-floats--positioning)
-		+ [Fonts](#fonts)
-		+ [Colors](#colors)
-		+ [Images](#images)
-		+ [Anchors](#anchors)
+- [Programming Principles](#programming-principles)
+  - [Versions, Validation, & Linting](#versions-validation--linting)
+  - [Errors & Warnings](#errors--warnings)
+  - [Approved Properties](#approved-properties)
+  - [Disallowed Properties & Values](#disallowed-properties--values)
+- [Tools & Libraries](#tools--libraries)
+  - [Preprocessors](#preprocessors)
+  - [Browser Resets (Normalize)](#browser-resets-normalize)
+- [Format & Style](#format--style)
+  - [Formatting for Readability](#formatting-for-readability)
+  - [Quotes](#quotes)
+  - [Comments](#comments)
+  - [Selectors](#selectors)
+  - [Pseudo-Element and Pseudo-Class Selectors](#pseudo-element-and-pseudo-class-selectors)
+  - [Properties](#properties)
+    - [Shorthand](#shorthand)
+    - [Line-height](#line-height)
+    - [Vendor Prefixes](#vendor-prefixes)
+    - [Box Model & Layout Dimensions](#box-model--layout-dimensions)
+    - [Flow, Floats, & Positioning](#flow-floats--positioning)
+    - [Fonts](#fonts)
+    - [Colors](#colors)
+    - [Images](#images)
+    - [Anchors](#anchors)
 - [Coding Practices](#coding-practices)
-  * [Grouping Styles](#grouping-styles)
-	* [Media Queries](#media-queries)
-	* [Using Sprites](#using-sprites)
-	* [Hack Strategy](#hack-strategy)
-	* [Integration](#integration)
+  - [Don't class EVERY element](#dont-class-every-element)
+  - [Grouping Styles](#grouping-styles)
+  - [Media Queries](#media-queries)
+  - [Using Sprites](#using-sprites)
+  - [Hack Strategy](#hack-strategy)
+- [Integration](#integration)
+  - [Integrating CSS with HTML](#integrating-css-with-html)
+  - [Integrating CSS with JavaScript](#integrating-css-with-javascript)
+    - [Binding](#binding)
 - [Organization & Architectural Principles](#organization--architectural-principles)
-	* [Style sheet organization](#style-sheet-organization)
-	* [Modules](#modules)
-	* [Specificity](#specificity)
- 
+  - [Style sheet organization](#style-sheet-organization)
+  - [Modules](#modules)
+    - [Module Structure](#module-structure)
+    - [Module Modifiers](#module-modifiers)
+  - [Specificity](#specificity)
 
 ## Programming Principles
 
@@ -69,8 +75,8 @@ http://csslint.net/
 
 Style sheets may not validate due to unsupported properties, such as:
 
-* CSS3 selectors and rules (i.e. text-shadow or border-radius)
-* vendor-specific prefixes for new CSS features (i.e. –moz, -webkit, or -ms)
+- CSS3 selectors and rules (i.e. text-shadow or border-radius)
+- vendor-specific prefixes for new CSS features (i.e. –moz, -webkit, or -ms)
 
 Syntax or parsing errors are not acceptable and must be fixed. Review all link warnings to ensure poor programming practices are avoided.
 
@@ -84,9 +90,9 @@ Example:
 
 ```css
 .example {
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-radius: 5px;
 }
 ```
 
@@ -124,10 +130,10 @@ Each rule in a CSS file will occupy multiple lines, unless the rule contains a s
 
 Use spaces between:
 
-* a rule's final selector and the opening curly brace of the declaration
-* each value in a declaration
-* a declaration's colon and value
-* after a comma, in comma-separated property values
+- a rule's final selector and the opening curly brace of the declaration
+- each value in a declaration
+- a declaration's colon and value
+- after a comma, in comma-separated property values
 
 Do not leave a space between a declaration's value and the closing semicolon.
 
@@ -136,23 +142,28 @@ Examples:
 Poor example:
 
 ```css
-.module{
-	margin:0 0 15em 0;
-	padding:0 ;
-	background-image: url("img1.png"), url("img2.png");}
-.error{color: #f00;}
+.module {
+  margin: 0 0 15em 0;
+  padding: 0;
+  background-image: url("img1.png"), url("img2.png");
+}
+.error {
+  color: #f00;
+}
 ```
 
 Good example:
 
 ```css
 .module {
-	margin: 0 0 15em 0;
-	padding: 0;
-	background-image: url("img1.png"), url("img2.png");
+  margin: 0 0 15em 0;
+  padding: 0;
+  background-image: url("img1.png"), url("img2.png");
 }
 
-.error { color: #f00; }
+.error {
+  color: #f00;
+}
 ```
 
 Do not indent rules; all rules must be flush with the left margin of the editor.
@@ -165,10 +176,10 @@ Examples:
 
 ```css
 .module {
-	background-image: url("img1.png");
+  background-image: url("img1.png");
 }
 .module::before {
-	content: "";
+  content: "";
 }
 ```
 
@@ -203,7 +214,7 @@ Aside from a base style sheet, which will specify default styles for HTML elemen
 
 Follow the HTML coding practices when creating class names: Assign names to objects based on the function they fulfill rather than what they look like. Create names using a single lowercase word. In cases where a longer description is needed, separate words using hyphens.
 
-Refrain from over-qualifying selectors (e.g. body.class) and chaining classes (i.e. .module.variant). Avoid using the universal selector (*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only be as specific as you need to be in composing a selector.
+Refrain from over-qualifying selectors (e.g. body.class) and chaining classes (i.e. .module.variant). Avoid using the universal selector (\*), the exception being setting box-sizing universally. Keep in mind that selectors are parsed from right to left – not left to right – so only be as specific as you need to be in composing a selector.
 
 Use quotes in your attribute selectors, even though they are not always required.
 
@@ -230,21 +241,23 @@ input[type="text"] {...}
 Pseudo-elements are phantom elements of the page that can be styled like HTML elements, but are created in CSS and do not exist in the DOM. Pseudo-classes, on the other hand, are phantom states or attributes of a DOM element that can be styled with CSS.
 
 Examples of pseudo-elements:
-* `::before`
-* `::after`
-* `::first-letter`
-* `::first-line`
+
+- `::before`
+- `::after`
+- `::first-letter`
+- `::first-line`
 
 Examples of pseudo-classes:
-* `:link`, `:visited`, `:hover`, `:active`, `:focus`
-* `:enabled`, `:disabled`, `:checked`
-* `:first-child`, `:nth-child(n)`, `:nth-last-child(n)`, `:nth-of-type(n)`, `:nth-last-of-type(n)`, `:last-child`, `:first-of-type`, `:last-of-type`, `:only-child`, `:only-of-type`, `:root`, `:empty`
-* `:not(x)`, `:target`, `:lang(language)`
 
+- `:link`, `:visited`, `:hover`, `:active`, `:focus`
+- `:enabled`, `:disabled`, `:checked`
+- `:first-child`, `:nth-child(n)`, `:nth-last-child(n)`, `:nth-of-type(n)`, `:nth-last-of-type(n)`, `:last-child`, `:first-of-type`, `:last-of-type`, `:only-child`, `:only-of-type`, `:root`, `:empty`
+- `:not(x)`, `:target`, `:lang(language)`
 
 Use a double-colon for pseudo-elements and use a single-colon for pseudo-classes in CSS. This capability was added in CSS3 in order to differentiate between the two types of pseudo selectors. Double-colons are not supported in IE8 or earlier, so if support for older browsers is needed, use single-colons for both pseudo-elements and pseudo-classes.
 
 Poor example:
+
 ```css
 .pseudo-element:after {
 	...
@@ -255,7 +268,9 @@ Poor example:
 }
 
 ```
+
 Good example:
+
 ```css
 .pseudo-element::after {
 	...
@@ -276,11 +291,11 @@ Poor example:
 
 ```css
 .example {
-	margin: 5em 2em 10em 2em;
+  margin: 5em 2em 10em 2em;
 }
 
 .example--alt {
-	margin: 5em 2em 20em 2em;
+  margin: 5em 2em 20em 2em;
 }
 ```
 
@@ -288,11 +303,11 @@ Good example:
 
 ```css
 .example {
-	margin: 5em 2em 10em 2em;
+  margin: 5em 2em 10em 2em;
 }
 
 .example--alt {
-	margin-bottom: 20em;
+  margin-bottom: 20em;
 }
 ```
 
@@ -319,14 +334,16 @@ html {
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: inherit;
 }
 ```
 
-* Use relative units whenever possible to maintain a flexible layout. 
-* In responsive and fluid layouts, use % for container widths.
-* Use em units for margin and padding values.
+- Use relative units whenever possible to maintain a flexible layout.
+- In responsive and fluid layouts, use % for container widths.
+- Use em units for margin and padding values.
 
 #### Flow, Floats, & Positioning
 
@@ -348,10 +365,10 @@ When using rems for font-size, provide a px fallback for browsers that do not su
 Example:
 
 ```css
-	.module {
-		font-size: 12px;
-		font-size: .75rem;
-	}
+.module {
+  font-size: 12px;
+  font-size: 0.75rem;
+}
 ```
 
 When developing a style sheet based on a Photoshop document, translate points directly into pixels. For example, if the Photoshop document displays a heading at 24 points, use 24 pixels in the CSS rule.
@@ -364,8 +381,8 @@ Use hexadecimal notation (lowercase) to define colors without alpha-transparency
 
 ```css
 .button {
-	color: #f00;
-	color: rgba(255,0,0,.2);
+  color: #f00;
+  color: rgba(255, 0, 0, 0.2);
 }
 ```
 
@@ -375,9 +392,10 @@ Unless coding a responsive design, set image dimensions using the width and heig
 
 Set image presentation attributes using CSS. Always remove the border from images nested inside anchors. By default, specify this rule in the base CSS file.
 
-
 ```css
-a img { border: 0; }
+a img {
+  border: 0;
+}
 ```
 
 #### Anchors
@@ -386,18 +404,18 @@ Encourage designers to visually distinguish between visited and unvisited links,
 
 ```css
 .nav a:link {
-	color: #fff;
-	background: #000;
+  color: #fff;
+  background: #000;
 }
 
 .nav a:visited {
-	color: #0000f6;
+  color: #0000f6;
 }
 
 .nav a:hover,
 .nav a:focus,
 .nav a:active {
-	color: #f60000;
+  color: #f60000;
 }
 ```
 
@@ -413,11 +431,14 @@ Lists, for example, often won't need a class for each list item. Instead, class 
 
 ```css
 /* instead of... */
-.feature-list {}
-.feature-list-item {}
+.feature-list {
+}
+.feature-list-item {
+}
 
 /* you can use... */
-.feature-list > li {}
+.feature-list > li {
+}
 ```
 
 ### Grouping Styles
@@ -428,11 +449,12 @@ Poor Example:
 
 ```css
 .header {
-	background-color: #fff;
-	margin: 10em 0 15em 5em;
+  background-color: #fff;
+  margin: 10em 0 15em 5em;
 }
-.header, .footer {
-	color: #bada55;
+.header,
+.footer {
+  color: #bada55;
 }
 ```
 
@@ -440,12 +462,12 @@ Good Example:
 
 ```css
 .header {
-	margin: 10em 0 15em 5em;
-	color: #bada55;
-	background-color: #fff;
+  margin: 10em 0 15em 5em;
+  color: #bada55;
+  background-color: #fff;
 }
 .footer {
-	color: #bada55;
+  color: #bada55;
 }
 ```
 
@@ -457,16 +479,16 @@ Sass example:
 
 ```scss
 .module {
-	background: #fff;
-	font-size: 1em;
-	@media screen and (min-width: 20em) {
-		background: #fff;
-		font-size: 1.5em;
-	}
-	@media screen and (min-width: 40em) {
-		background: #000;
-		font-size: 2em;
-	}
+  background: #fff;
+  font-size: 1em;
+  @media screen and (min-width: 20em) {
+    background: #fff;
+    font-size: 1.5em;
+  }
+  @media screen and (min-width: 40em) {
+    background: #000;
+    font-size: 2em;
+  }
 }
 ```
 
@@ -476,27 +498,28 @@ CSS sprites are best used to combine graphic design elements such as logos, icon
 
 When writing rules for sprites, first create a class that will be used for all of the sprites in a series (i.e. "icon"). Specify all of the relevant style data in this initial rule, including:
 
-* display
-* width
-* height
-* overflow
-* background
+- display
+- width
+- height
+- overflow
+- background
 
 For all of the different icons in the series (i.e. "video", "photo", etc.) you only need to specify a new background-position value that corresponds to the pixel coordinates in the sprite graphic file.
 
 ```css
 .icon {
-	display: block;
-	width: 10px;
-	height: 10px;
-	overflow: hidden;
-	background: transparent url("/layout/images/sprites/standard/base.png") no-repeat 0 0;
+  display: block;
+  width: 10px;
+  height: 10px;
+  overflow: hidden;
+  background: transparent url("/layout/images/sprites/standard/base.png")
+    no-repeat 0 0;
 }
 .icon-video {
-	background-position: 0 -50px;
+  background-position: 0 -50px;
 }
 .icon-photo {
-	background-position: 0 -100px;
+  background-position: 0 -100px;
 }
 ```
 
@@ -510,11 +533,11 @@ Example:
 
 ```css
 .button {
-	padding: 3px;
+  padding: 3px;
 }
 /* sets equivalent padding on button class in IE7 */
-*:first-child+html .button {
-	padding: 6px;
+*:first-child + html .button {
+  padding: 6px;
 }
 ```
 
@@ -538,16 +561,16 @@ Example Style:
 
 ```css
 .tab-selected {
-	background-color: #ccc;
-	font-weight: bold;
+  background-color: #ccc;
+  font-weight: bold;
 }
 ```
 
 Corresponding JQuery Snippet:
 
 ```javascript
-$('.tab').click(function() {
-	$(this).addClass('tab-selected');
+$(".tab").click(function () {
+  $(this).addClass("tab-selected");
 });
 ```
 
@@ -555,7 +578,7 @@ Developers may use JavaScript to add inline styles to an element only when the v
 
 #### Binding
 
-Use data attributes such as data-hook="something", data-component="component-name" for JavaScript hooks, rather than binding to classes or IDs. 
+Use data attributes such as data-hook="something", data-component="component-name" for JavaScript hooks, rather than binding to classes or IDs.
 
 ## Organization & Architectural Principles
 
@@ -563,14 +586,14 @@ Use data attributes such as data-hook="something", data-component="component-nam
 
 Global files must be included first so that they may be overwritten by more specific styles. Include style sheets referenced by conditional comments (usually browser-specific files) last.
 
-We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS). 
+We'll organize our CSS based on a SMACSS approach (Scalable and Modular Architecture for CSS).
 
-* **Settings:** Variables, conditionals, mixins, functions *[preprocessor only]*
-* **Base:** normalize, type selectors (unclassed html elements - html, body, p, ul, headings, etc), and universals (e.g. setting box-sizing globally)
-* **Layout:** page layout including header, footer, main content, sidebars, wrappers, generic containers, and grids
-* **Modules:** modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
-* **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
-* **Helpers:** generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
+- **Settings:** Variables, conditionals, mixins, functions _[preprocessor only]_
+- **Base:** normalize, type selectors (unclassed html elements - html, body, p, ul, headings, etc), and universals (e.g. setting box-sizing globally)
+- **Layout:** page layout including header, footer, main content, sidebars, wrappers, generic containers, and grids
+- **Modules:** modular UI components, including OOCSS structural abstractions (media object, etc) and module-specific states (.is-module-expanded). Most of the CSS for a site will be in this layer.
+- **Theme:** optional layer for how modules may look in a specific context (line of business, user configurable, etc - e.g. .theme .module)
+- **Helpers:** generally applicable helper and state rules - cannot be overwritten (only apply these when you absolutely want the properties, e.g. .float-left)
 
 Note regarding state rules: include general rules that are globally applicable, such as .is-visually-hidden, in the helpers layer. Prefix state classes with "is-" or "has-".
 
@@ -579,9 +602,8 @@ Note regarding state rules: include general rules that are globally applicable, 
 Modules are the discrete and/or reusable components of the UI. Style each discrete module with a separate style sheet (or Sass partial), and always namespace module selectors to avoid conflicts with other modules.
 
 ```css
-.module
-.module-body {
-	margin: 0 0 20em 0;
+.module .module-body {
+  margin: 0 0 20em 0;
 }
 ```
 
@@ -599,9 +621,9 @@ Poor Example:
 
 ```html
 <div class="modal">
-	<div class="header">...</div>
-	<div class="main">...</div>
-	<div class="footer">...</div>
+  <div class="header">...</div>
+  <div class="main">...</div>
+  <div class="footer">...</div>
 </div>
 ```
 
@@ -609,11 +631,12 @@ Good Example:
 
 ```html
 <div class="modal">
-	<div class="modal-header">...</div>
-	<div class="modal-main">...</div>
-	<div class="modal-footer">...</div>
+  <div class="modal-header">...</div>
+  <div class="modal-main">...</div>
+  <div class="modal-footer">...</div>
 </div>
 ```
+
 CSS (note that we're not nesting here, more on this in the Specificity section):
 
 ```css
@@ -646,35 +669,44 @@ Keep specificity low and author CSS in specificity order as much as possible - f
 
 Guidelines:
 
-* If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed.
-* Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
-* Avoid chaining selectors when possible
-* Avoid location-specific selectors
-* Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but do not style them.
+- If a selector will work without it being nested, don't nest it. It adds specificity where it often isn't needed.
+- Don't nest more than three levels, including child selectors (>) and pseudo-selectors/elements (:).
+- Avoid chaining selectors when possible
+- Avoid location-specific selectors
+- Avoid styling IDs. If an ID must be styled (to override a 3rd party module, legacy css, etc), use an attribute selector: [id="identifier"]. This has the same specificity as a class/attribute selector. Note that IDs will be used in markup where appropriate (form elements, aria attribute targets), but do not style them.
 
 Poor example:
 
 ```css
-.module {}
-.module .module-subcomponent {} /* nested, unnecessarily specific */
-.module.modifier {} /* avoid chaining */
-.sidebar .module {} /* avoid location-specific selectors */
+.module {
+}
+.module .module-subcomponent {
+} /* nested, unnecessarily specific */
+.module.modifier {
+} /* avoid chaining */
+.sidebar .module {
+} /* avoid location-specific selectors */
 ```
 
 Good example (CSS for our general module pattern):
 
 ```css
-.module {}
-.module-subcomponent {}
-.module--modifier {}
-.module--modifier .module-subcomponent {} /* nesting makes sense here to avoid having 
+.module {
+}
+.module-subcomponent {
+}
+.module--modifier {
+}
+.module--modifier .module-subcomponent {
+} /* nesting makes sense here to avoid having 
 to create a modifier for every subcomponent of a modified module */
 ```
 
 Good State example:
 
 ```css
-.module.is-visibile {} /* chaining/higher specificity makes sense
+.module.is-visibile {
+} /* chaining/higher specificity makes sense
  with states as they are temporary, only applied given specific 
  conditions, and you want to ensure that the styles are applied */
 ```

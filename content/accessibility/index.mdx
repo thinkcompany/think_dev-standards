@@ -12,45 +12,48 @@ This document defines the best practices for producing websites that are accessi
 
 ## Table of Contents
 
-  - [Introduction](#introduction)
+- [Introduction](#introduction)
+  - [Web Content Accessibility Guidelines](#web-content-accessibility-guidelines)
   - [ARIA](#aria)
   - [Section 508](#section-508)
-  - [Audience](#audience)
-  - [Web Accessibility](#web-accessibility)
-    * [Keyboard Accessibility](#keyboard-accessibility)
-    * [Support](#support)
+  - [ADA Title II](#ada-title-ii)
+- [Audience](#audience)
+- [Web Accessibility](#web-accessibility)
+  - [Keyboard Accessibility](#keyboard-accessibility)
+    - [Visual Focus States](#visual-focus-states)
+  - [Support](#support)
   - [Document Structure & Semantics](#document-structure--semantics)
-    * [Initial Markup](#initial-markup)
-    * [Language and Localization](#language-and-localization)
-    * [Page Titles](#page-titles)
-    * [Meta Tags](#meta-tags)
-    * [Semantics](#semantics)
-    * [Paragraphs and Text](#paragraphs-and-text)
-    * [Lists](#lists)
-    * [Skip Navigation](#skip-navigation)
+    - [Initial Markup](#initial-markup)
+      - [Language and Localization](#language-and-localization)
+      - [Page Titles](#page-titles)
+      - [Meta Tags](#meta-tags)
+    - [Semantics](#semantics)
+    - [Headings](#headings)
+    - [Paragraphs and Text](#paragraphs-and-text)
+    - [Lists](#lists)
+    - [Skip Navigation](#skip-navigation)
   - [Actionable Elements](#actionable-elements)
-    * [Events](#events)
-    * [Buttons](#buttons)
-    * [Links](#links)
+    - [Events](#events)
+    - [Buttons](#buttons)
+    - [Links](#links)
   - [Imagery](#imagery)
-    * [Color, Shape, Location](#color-shape-location)
-    * [Images](#images)
+    - [Color, Shape, Location](#color-shape-location)
+    - [Images](#images)
   - [Alt Attribute](#alt-attribute)
   - [Forms](#forms)
-    * [Labels](#labels)
-    * [Radio Buttons and Checkboxes](#radio-buttons-and-checkboxes)
-    * [Select](#select)
-    * [Instructional Form Text](#instructional-form-text)
-    * [Required Fields](#required-fields)
-    * [Disabled Form Elements](#disabled-form-elements)
+    - [Labels](#labels)
+    - [Radio Buttons and Checkboxes](#radio-buttons-and-checkboxes)
+    - [Select](#select)
+    - [Instructional Form Text](#instructional-form-text)
+    - [Required Fields](#required-fields)
+    - [Disabled Form Elements](#disabled-form-elements)
   - [Validation](#validation)
-    * [Just-in-time Validation](#just-in-time-validation)
-    * [Error Handling](#error-handling)
+    - [Validation timing](#validation-timing)
+  - [Error Handling](#error-handling)
   - [Tables](#tables)
   - [iFrames](#iframes)
-  - [Flexbox](#flexbox)
-  - [Accessible Email Requirements](#accessible-email-requirements)
-  
+  - [Source Order vs. Visual Order](#source-order-vs-visual-order)
+- [Accessible Email Requirements](#accessible-email-requirements)
 
 ## Introduction
 
@@ -84,26 +87,26 @@ Estimates vary, but most studies find that about one fifth or 20% of the populat
 
 It'd be unwise to purposely exclude up to 20% of users from web experiences. In the cases of educational institutions and government entities, it would be a violation of the law.
 
- This document will discuss development practices intended to aid users with particular disabilities. No website or application can be 100% accessible to all groups, so we will focus on the following users:
+This document will discuss development practices intended to aid users with particular disabilities. No website or application can be 100% accessible to all groups, so we will focus on the following users:
 
 - Users with **visual impairment** such as blindness, low vision or color blindness. Depending on the impairment, these users might not be able to distinguish between red/green, blue/yellow. Designs must use other visual cues to convey information.
 - Users with **hearing impairment** such as deafness or hard-of-hearing. These users can typically navigate web pages with relative ease, but they need subtitles and captions in order to use video content.
 - Users with **motor impairment**. These users are unable to use a mouse, have slower response times and limited fine motor control. Their actions are usually performed using keyboard-only input or a variety of switch devices including joysticks, [sip-and-puff](https://www.spectronics.com.au/catalogue/sip-and-puff-switch-solutions-by-origin-instruments) devices and [eye-tracking](http://usabilitygeek.com/what-is-eye-tracking-when-to-use-it/) devices. Some users perform actions through the exclusive use of speech recognition software such as Dragon NaturallySpeaking.
 - Users with **cognitive impairment**. Learning disabilities, distractibility, inability to remember or focus on large amounts of information can affect users. While there is a great deal of web content that cannot be made easily accessible to individuals with profound cognitive disabilities, there is much designers and developers can do to increase the ease of use of web content to people with less severe cognitive disabilities.
 
-This list covers a great deal of users with disabilities, but there are those who are still not covered. For example, it is difficult to determine the number of users affected by multiple disabilities such as low motor control *and* blindness.
+This list covers a great deal of users with disabilities, but there are those who are still not covered. For example, it is difficult to determine the number of users affected by multiple disabilities such as low motor control _and_ blindness.
 
 ## Web Accessibility
 
 ### Keyboard Accessibility
 
-A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can *tab* forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation. Users can interact with elements with the enter button and spacebar. Design and develop so that keyboard users receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
+A central component of making websites accessible is ensuring the site is equivalently navigable with the keyboard as with the mouse, as some of the impairments outlined above do not allow for mouse usage at all. A typical keyboard user can _tab_ forward and backward in a specific sequential order through certain elements on the page. Sometimes the arrows are used for navigation. Users can interact with elements with the enter button and spacebar. Design and develop so that keyboard users receive equivalent forms of the feedback and information conveyed to mouse users. It's very easy to accidentally hinder this functionality by hiding or rearranging elements in a way that goes undetected by keyboard navigation.
 
 Also respect users who have indicated they prefer reduced motion. Wrap non-essential animation in a `@media (prefers-reduced-motion: reduce)` query and disable it. Animation that conveys meaning (a loading spinner, a state transition) should still be present but minimized.
 
 #### Visual Focus States
 
-To arrive at an element with keyboard navigation is to give that element a *focus* state. When an element has *focus*, it is the only element that will respond to enter/spacebar keypresses. It is important that the user knows which element has focus at all times, so they know which element they are currently able to interact with, and position of their focused element on the page. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable focus state on a component for when keyboard users arrive at the component, similar hover state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
+To arrive at an element with keyboard navigation is to give that element a _focus_ state. When an element has _focus_, it is the only element that will respond to enter/spacebar keypresses. It is important that the user knows which element has focus at all times, so they know which element they are currently able to interact with, and position of their focused element on the page. Screen readers will read the information in the focused element, but if the user is not using a screen reader, they should still be able to tell where they are on the page through visual cues. A keyboard accessible page will include a detectable focus state on a component for when keyboard users arrive at the component, similar hover state for mouse users. A high contrast and/or colorful outline, a change in text size/style, a change in perceived depth of the focused element are common ways to do this. A combination of those attributes is the strongest solution.
 
 Prefer the `:focus-visible` pseudo-class over `:focus` when styling focus indicators — `:focus-visible` only applies the indicator when the browser determines a focus ring is warranted (typically keyboard navigation), so mouse clicks don't trigger a stray outline. WCAG 2.2 SC 2.4.11 (Focus Not Obscured) and 2.4.13 (Focus Appearance) now place stricter requirements on focus indicators: the indicator must have at least a 2 px outline and a 3:1 contrast against adjacent colors.
 
@@ -133,7 +136,7 @@ Creating web pages that meet our accessibility criteria starts with including im
 Ensure the language of the page is explicitly set. Always declare the default language for text in the page using attributes on the html tag. This signals to screen-readers what language to read the document content in. Do not use the meta element with `http-equiv` set to Content-Language. If you are unable to update the language value when the language changes due to framework constraints, it is better to leave the language attribute altogether.
 
 ```html
-<html lang="en">
+<html lang="en"></html>
 ```
 
 When switching languages on the page, make this explicit as well with the `<lang>` attribute.
@@ -142,7 +145,8 @@ Example:
 
 ```html
 <p>This sentence is in English.</p>
-<p lang="es">Esta frase es en espa&ntilde;ol.</p> (Spanish)
+<p lang="es">Esta frase es en espa&ntilde;ol.</p>
+(Spanish)
 ```
 
 ##### Page Titles
@@ -160,13 +164,17 @@ There are a couple specific things to keep in mind when addressing meta tags and
 **Bad**:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+/>
 ```
+
 **Good**:
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="utf-8" />
 ```
 
 #### Semantics
@@ -191,9 +199,17 @@ Example:
 <h2>Fruit</h2>
 <p>Sweet and often juicy food that grows on plants</p>
 <h3>Apple</h3>
-<p>A fist-sized round fruit that grows on trees. Often red or green outside with a crisp and pale colored inside.</p>
-<h3>Grape/h3>
-<p>A quarter-sized round fruit that grows in bunches on vines. Thin skin and very juicy.</p>
+<p>
+  A fist-sized round fruit that grows on trees. Often red or green outside with
+  a crisp and pale colored inside.
+</p>
+<h3>
+  Grape/h3>
+  <p>
+    A quarter-sized round fruit that grows in bunches on vines. Thin skin and
+    very juicy.
+  </p>
+</h3>
 ```
 
 #### Paragraphs and Text
@@ -212,9 +228,9 @@ One or two navigation link lists on a page should be a guiding principle (i.e. a
 
 ```html
 <div class="product-ctas">
-    <a href="more.html">More Info</a>
-    <a href="options.html">Other Options</a>
-    <a href="sign-up.html">Sign Up Now</a>
+  <a href="more.html">More Info</a>
+  <a href="options.html">Other Options</a>
+  <a href="sign-up.html">Sign Up Now</a>
 </div>
 ```
 
@@ -238,11 +254,13 @@ In content, it might look like:
 
 ```html
 <body>
-    <a href="#maincontent">Skip to main content</a>
-    ... 3 Menus, a search bar, etc.
-    <main id="maincontent">
-        <h1>Heading</h1>
-        <p>This is the first paragraph</p>
+  <a href="#maincontent">Skip to main content</a>
+  ... 3 Menus, a search bar, etc.
+  <main id="maincontent">
+    <h1>Heading</h1>
+    <p>This is the first paragraph</p>
+  </main>
+</body>
 ```
 
 In order to hide this element from regular users while maintaining its functionality, it is common to make the link at the very top of the page, but hidden by default with CSS. Then when a user first engages with keyboard navigation, it is the first link to receive focus and can be revealed with CSS.
@@ -251,13 +269,14 @@ Set `tabindex="-1"` on the skip-link target so that focus can be moved to it pro
 
 ```html
 <body>
-    <a href="#main-content">Skip to main content</a>
-    ... 3 Menus, a search bar, etc.
-    <main id="main-content" tabindex="-1">
-        <h1>Heading</h1>
-        <p>This is the first paragraph</p>
+  <a href="#main-content">Skip to main content</a>
+  ... 3 Menus, a search bar, etc.
+  <main id="main-content" tabindex="-1">
+    <h1>Heading</h1>
+    <p>This is the first paragraph</p>
+  </main>
+</body>
 ```
-
 
 ### Actionable Elements
 
@@ -267,13 +286,13 @@ It's also important to make the state of toggle-action elements clear to non-vis
 
 ```javascript
 function expand(trigger, menu) {
-    trigger.setAttribute('aria-expanded', 'true');
-    menu.removeAttribute('hidden');
+  trigger.setAttribute("aria-expanded", "true");
+  menu.removeAttribute("hidden");
 }
 
 function collapse(trigger, menu) {
-    trigger.setAttribute('aria-expanded', 'false');
-    menu.setAttribute('hidden', '');
+  trigger.setAttribute("aria-expanded", "false");
+  menu.setAttribute("hidden", "");
 }
 ```
 
@@ -298,14 +317,16 @@ Do not use the JavaScript pseudo-protocol to trigger JavaScript events. And per 
 **Good**:
 
 HTML
+
 ```html
 <button data-component="click-me">Open Menu</button>
 ```
 
 JavaScript
+
 ```javascript
 const trigger = document.querySelector('[data-component="click-me"]');
-trigger.addEventListener('click', handleOpen);
+trigger.addEventListener("click", handleOpen);
 ```
 
 When using a true `<button>`, you get keyboard activation (Enter and Space) for free — no separate `keypress` handler needed. The need for paired mouse/keyboard handlers usually only arises when a non-button element has been pressed into service as an interactive control, which itself is a smell worth fixing.
@@ -344,7 +365,7 @@ Style link text with some property besides color to increase visibility for low-
 
 Image-based content and information play a prominent role in the modern web. The accessibility standard expectations are very clear in their expectations for how this information should be delivered to screen-reader users: always provide equivalent alternative text-based sources of the information conveyed.
 
-An important task for the developer is to *identify* all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
+An important task for the developer is to _identify_ all sources of visual information, and ensure that the alternative text-based information conveys all of the same information as the image.
 
 #### Color, Shape, Location
 
@@ -394,13 +415,13 @@ When using images on the web, we need to keep in mind that they cause immediate 
 
 The `alt` attribute on image content is required (per WCAG SC 1.1.1) for providing text alternatives for non-text content. This is necessary because most tools used to translate web content into other consumable forms rely on text-based information.
 
-Rather than a description of the image itself, the alt attribute provides a description of the *purpose* of the image; what *information* it provides to a user who can see it, hover over it with the mouse, etc. For example, an image used as a navigation link must provide an alt attribute value that describes the destination of the link.
+Rather than a description of the image itself, the alt attribute provides a description of the _purpose_ of the image; what _information_ it provides to a user who can see it, hover over it with the mouse, etc. For example, an image used as a navigation link must provide an alt attribute value that describes the destination of the link.
 
 **Bad**:
 
 ```html
 <a href="#home">
-    <img src="ThinkCompanyLogo.png" alt="Image of thought bubble company logo" />
+  <img src="ThinkCompanyLogo.png" alt="Image of thought bubble company logo" />
 </a>
 ```
 
@@ -408,7 +429,7 @@ Rather than a description of the image itself, the alt attribute provides a desc
 
 ```html
 <a href="#home">
-    <img src="ThinkCompanyLogo.png" alt="thinkcompany.com homepage" />
+  <img src="ThinkCompanyLogo.png" alt="thinkcompany.com homepage" />
 </a>
 ```
 
@@ -437,17 +458,17 @@ As stated in the overview, labels are important to guiding users through a form.
 **Bad**:
 
 ```html
-<input type="text" placeholder="First Name">
-<input type="text" placeholder="Last Name">
+<input type="text" placeholder="First Name" />
+<input type="text" placeholder="Last Name" />
 ```
 
 **Good**:
 
 ```html
 <label for="first-name">First Name</label>
-<input id="first-name" type="text" placeholder="Tom...">
+<input id="first-name" type="text" placeholder="Tom..." />
 <label for="last-name">Last Name</label>
-<input id="last-name" type="text" placeholder="Brady...">
+<input id="last-name" type="text" placeholder="Brady..." />
 ```
 
 ### Radio Buttons and Checkboxes
@@ -468,31 +489,31 @@ Radio buttons and checkboxes are typically thematically grouped, and as such sho
 
 ```html
 <fieldset>
-    <legend>Favorite Foods</legend>
-    <label for="avocado-ice-cream">Avocado Ice Cream</label>
-    <input id="avocado-ice-cream" type="radio">
-    <label for="nightshades">Nightshades</label>
-    <input id="nightshades" type="radio">
+  <legend>Favorite Foods</legend>
+  <label for="avocado-ice-cream">Avocado Ice Cream</label>
+  <input id="avocado-ice-cream" type="radio" />
+  <label for="nightshades">Nightshades</label>
+  <input id="nightshades" type="radio" />
 </fieldset>
 ```
 
 ### Select
 
-Select menus must be accompanied by a `label` tag, similar to a simple input. `<optgroup>` tags can be used *like* fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
+Select menus must be accompanied by a `label` tag, similar to a simple input. `<optgroup>` tags can be used _like_ fieldsets to organize and group thematically related `<option>`s, which will help improve the overall simplicity of form-flow.
 
 ```html
 <label for="movies">Movies</label>
 <select id="movies">
-    <optgroup label="Comedy">
-        <option value="1">Superbad</option>
-        <option value="5">Shaun of the Dead</option>
-        <option value="7">Zoolander</option>
-    </optgroup>
-    <optgroup label="Horror">
-        <option value="3">Alien</option>
-        <option value="4">Saw II</option>
-        <option value="8">28 Days Later</option>
-    </optgroup>
+  <optgroup label="Comedy">
+    <option value="1">Superbad</option>
+    <option value="5">Shaun of the Dead</option>
+    <option value="7">Zoolander</option>
+  </optgroup>
+  <optgroup label="Horror">
+    <option value="3">Alien</option>
+    <option value="4">Saw II</option>
+    <option value="8">28 Days Later</option>
+  </optgroup>
 </select>
 ```
 
@@ -505,14 +526,15 @@ A list of rules about input format, password requirements, required inputs and o
 Alternatively, the label might include information for a specific form control:
 
 ```html
-<label for="pw">Password (min. 8 characters)</label><input type="password" id="pw">
+<label for="pw">Password (min. 8 characters)</label
+><input type="password" id="pw" />
 ```
 
 A third method that can be used to include instructional information from outside of the label. When using this method, we need the aria-describedby attribute to make explicit the relationship between the instructions and the control.
 
 ```html
 <label for="birthday">Expiration date:</label>
-<input type="text" id="birthday" aria-describedby="date-format">
+<input type="text" id="birthday" aria-describedby="date-format" />
 <span id="date-format">MM/YYYY</span>
 ```
 
@@ -528,15 +550,15 @@ HTML
 
 ```html
 <label for="name" class="required-field">Your Name</label>
-<input type="text" id="name" name="name" required>
+<input type="text" id="name" name="name" required />
 ```
 
 CSS
 
 ```css
 .required-field::after {
-    content: " *";
-    color: var(--color-error);
+  content: " *";
+  color: var(--color-error);
 }
 ```
 
@@ -548,7 +570,7 @@ Convention regarding disabled elements is to present them as dimmed or grayed ou
 Example
 
 ```html
-<input type="text" id="shipping-address" disabled>
+<input type="text" id="shipping-address" disabled />
 ```
 
 #### Disabling Submit Buttons
@@ -557,7 +579,7 @@ It is not best practice to disable a submit button. Since disabled form elements
 
 ### Validation
 
-Validation is the process of conveying to the user interfacing with inputs that the format of their input needs to be edited in some way to be accepted. The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats. We want actual form validation to be the *safety net*, not the only guideline.
+Validation is the process of conveying to the user interfacing with inputs that the format of their input needs to be edited in some way to be accepted. The first step to accessible validation is to utilize labels and additional instructional text to the extent that the user is clear on expected requirements/formats. We want actual form validation to be the _safety net_, not the only guideline.
 
 #### Validation timing
 
@@ -589,7 +611,7 @@ Let the user know that there are errors on the page. Upon validation:
 Example:
 
 ```html
-<input id="date" type="text" aria-invalid="true">
+<input id="date" type="text" aria-invalid="true" />
 ```
 
 Let the user know what the error is. Use the form field's `aria-describedby` attribute to tie it to the error message. When the offending field receives focus, the error message will be announced. Do not assign multiple labels to the same input field to handle error text.
@@ -598,7 +620,12 @@ Example:
 
 ```html
 <label for="name">Your Name</label>
-<input type="text" id="name" aria-invalid="true" aria-describedby="name-error">
+<input
+  type="text"
+  id="name"
+  aria-invalid="true"
+  aria-describedby="name-error"
+/>
 <p id="name-error">Please only use letters.</p>
 ```
 
@@ -608,7 +635,12 @@ Example (Best):
 
 ```html
 <label for="date">Date of Birth</label>
-<input type="text" id="date" aria-invalid="true" aria-describedby="date-error">
+<input
+  type="text"
+  id="date"
+  aria-invalid="true"
+  aria-describedby="date-error"
+/>
 <p id="date-error">Error 2 of 2: please enter a valid date.</p>
 ```
 
@@ -625,25 +657,29 @@ Example:
 
 ```html
 <table aria-describedby="char-table-desc">
-    <caption>Unicode Entities for Common Special Characters</caption>
-    <thead>
-        <tr>
-            <th scope="col">Character</th>
-            <th scope="col">Entity Code</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <th scope="row">Em Dash</th>
-            <td>&#8212;</td>
-        </tr>
-        <tr>
-            <th scope="row">Registered Trademark</th>
-            <td>&#8482;</td>
-        </tr>
-    </tbody>
+  <caption>
+    Unicode Entities for Common Special Characters
+  </caption>
+  <thead>
+    <tr>
+      <th scope="col">Character</th>
+      <th scope="col">Entity Code</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th scope="row">Em Dash</th>
+      <td>&#8212;</td>
+    </tr>
+    <tr>
+      <th scope="row">Registered Trademark</th>
+      <td>&#8482;</td>
+    </tr>
+  </tbody>
 </table>
-<p id="char-table-desc">Unicode entity codes used to render common special characters in HTML.</p>
+<p id="char-table-desc">
+  Unicode entity codes used to render common special characters in HTML.
+</p>
 ```
 
 More complex tables will require the use of `headers` and `id` attributes to associate data cells with multiple header cells.
@@ -672,23 +708,24 @@ Do not use positive `tabindex` values (`tabindex="1"`, `tabindex="2"`, etc.) to 
 ```css
 /* Risky — visual order no longer matches source order. */
 .layout {
-    display: flex;
-    flex-direction: column-reverse;
+  display: flex;
+  flex-direction: column-reverse;
 }
 ```
 
 ```html
 <!-- Better — reorder the source so visual and reading order match. -->
 <div class="layout">
-    <header>...</header>
-    <main>...</main>
-    <footer>...</footer>
+  <header>...</header>
+  <main>...</main>
+  <footer>...</footer>
 </div>
 ```
 
 Also avoid referring to the visual position of elements in instructional copy ("click the button on the right"). Position can change at smaller viewports or under user style overrides. Use the element's name or function instead.
 
 ## Accessible Email Requirements
+
 Most email accessibility standards would automatically be covered by Web Accessibility Standards. Yet, there are some important differences between the two. Those differences are covered below.
 
 ### Multiple Versions
@@ -701,7 +738,7 @@ Whenever possible, offer a link to a web version of your HTML email. The web ver
 
 Always use a descriptive subject line for the email.
 
-###  Reading Order
+### Reading Order
 
 Make sure your reading order is logical and the HTML follows the visual layout.
 
@@ -720,14 +757,16 @@ Email clients have limited support for relative units. Pixels are usually unavoi
 ### Contrast
 
 Identical to the web, text (be it HTML text or text in an image) must have a minimum contrast ratio of at least 4.5:1 unless:
-* It is large-scale or bold text. Large scale/bold text ratio must be at least 3:1
-* It is inactive (i.e. a disabled button) or decorative
-* It is part of a logo or brand.
+
+- It is large-scale or bold text. Large scale/bold text ratio must be at least 3:1
+- It is inactive (i.e. a disabled button) or decorative
+- It is part of a logo or brand.
 
 Beware of:
-* defining a color that's positioned in front of an image. Remember that images often don't render in an email client unless you opt in. That text must also pass against the background if the image is turned off.
-* photographic or variegated backgrounds. Test color contrast at the point of minimum contrast difference.
-* text inside of an image. Image text must also pass minimum standards.
+
+- defining a color that's positioned in front of an image. Remember that images often don't render in an email client unless you opt in. That text must also pass against the background if the image is turned off.
+- photographic or variegated backgrounds. Test color contrast at the point of minimum contrast difference.
+- text inside of an image. Image text must also pass minimum standards.
   You can use the following site to check color contrast for WCAG AA compliance: http://webaim.org/resources/contrastchecker/
 
 ### Alt Text
@@ -770,15 +809,15 @@ Per WCAG 2.2 SC 2.5.8 (Target Size — Minimum), the minimum target size is **24
 ### Tables
 
 Table layout is necessary in emails due to Outlook's rendering engine. Therefore follow these rules when using tables for layout:
-* Use tables only when absolutely necessary. Try not to use tables for the entire email.
-* Only use the `<table>`, `<tr>`, and `<td>` tags. Do not use `<tbody>`, `<th>`, `<col>`, etc.
-* Assign the role="presentation" attribute to the table tag. This prevents the table semantics from being read out to the screen reader when used for layout. It will need to be repeated for nested tables.
-* Do not use tables to format signatures.
-* Use relative widths for table and table cell.
+
+- Use tables only when absolutely necessary. Try not to use tables for the entire email.
+- Only use the `<table>`, `<tr>`, and `<td>` tags. Do not use `<tbody>`, `<th>`, `<col>`, etc.
+- Assign the role="presentation" attribute to the table tag. This prevents the table semantics from being read out to the screen reader when used for layout. It will need to be repeated for nested tables.
+- Do not use tables to format signatures.
+- Use relative widths for table and table cell.
 
 ### Mobile and Media Queries
 
 Use media queries for screens <= 600px and apply the following styles:
 
 Text for mobile <= 600px must be at least 16px. The "small print" for mobile must be at least 14px.
-

@@ -20,24 +20,28 @@ This document focuses on the **semantic** rules a linter can't enforce — patte
 
 ## Table of Contents
 
-  - [Modules](#modules)
-  - [Types](#types)
-  - [Variables and Constants](#variables-and-constants)
-  - [Objects](#objects)
-  - [Arrays](#arrays)
-  - [Strings](#strings)
-  - [Destructuring](#destructuring)
-  - [Functions](#functions)
-  - [Modern Operators](#modern-operators)
-  - [Async](#async)
-  - [Classes](#classes)
-  - [TypeScript](#typescript)
-  - [Comparison Operators & Equality](#comparison-operators--equality)
-  - [Blocks](#blocks)
-  - [Comments](#comments)
-  - [Type Casting & Coercion](#type-casting--coercion)
-  - [Naming Conventions](#naming-conventions)
-  - [Miscellaneous](#miscellaneous)
+- [Modules](#modules)
+- [Types](#types)
+- [Objects](#objects)
+- [Arrays](#arrays)
+- [Strings](#strings)
+- [Destructuring](#destructuring)
+- [Functions](#functions)
+- [Modern Operators](#modern-operators)
+- [Async](#async)
+- [Event Binding](#event-binding)
+- [Properties](#properties)
+- [Variables and Constants](#variables-and-constants)
+- [Comparison Operators & Equality](#comparison-operators--equality)
+- [Blocks](#blocks)
+- [Comments](#comments)
+- [Formatting](#formatting)
+- [Type Casting & Coercion](#type-casting--coercion)
+- [Naming Conventions](#naming-conventions)
+- [Classes](#classes)
+- [TypeScript](#typescript)
+- [Performance](#performance)
+- [Miscellaneous](#miscellaneous)
 
 ## Modules
 
@@ -45,8 +49,10 @@ Use **ES modules** (`import` / `export`). CommonJS (`require` / `module.exports`
 
 ```javascript
 // good
-import { Button } from './Button.js';
-export function MyComponent() { /* ... */ }
+import { Button } from "./Button.js";
+export function MyComponent() {
+  /* ... */
+}
 export default MyComponent;
 ```
 
@@ -58,11 +64,11 @@ export default MyComponent;
 
 **Primitives**: When you access a primitive type you work directly on its value.
 
-+ `string`
-+ `number`
-+ `boolean`
-+ `null`
-+ `undefined`
+- `string`
+- `number`
+- `boolean`
+- `null`
+- `undefined`
 
 ```javascript
 const foo = 1;
@@ -72,11 +78,12 @@ bar = 9;
 
 console.log(foo, bar); // => 1, 9
 ```
+
 **Complex**: When you access a complex type you work on a reference to its value.
 
-+ `object`
-+ `array`
-+ `function`
+- `object`
+- `array`
+- `function`
 
 ```javascript
 const foo = [1, 2];
@@ -86,7 +93,6 @@ bar[0] = 9;
 
 console.log(foo[0], bar[0]); // => 9, 9
 ```
-
 
 ## Objects
 
@@ -105,14 +111,14 @@ Don't use [reserved words](https://developer.mozilla.org/en-US/docs/Web/JavaScri
 ```javascript
 // bad
 const superman = {
-    default: { clark: 'kent' },
-    private: true
+  default: { clark: "kent" },
+  private: true,
 };
 
 // good
 const superman = {
-    defaults: { clark: 'kent' },
-    hidden: true
+  defaults: { clark: "kent" },
+  hidden: true,
 };
 ```
 
@@ -121,17 +127,17 @@ Use readable synonyms in place of reserved words.
 ```javascript
 // bad
 const superman = {
-    class: 'alien'
+  class: "alien",
 };
 
 // bad
 const superman = {
-    klass: 'alien'
+  klass: "alien",
 };
 
 // good
 const superman = {
-    type: 'alien'
+  type: "alien",
 };
 ```
 
@@ -153,10 +159,10 @@ Use `Array#push` instead of direct assignment to add items to an array.
 const someStack = [];
 
 // bad
-someStack[someStack.length] = 'abracadabra';
+someStack[someStack.length] = "abracadabra";
 
 // good
-someStack.push('abracadabra');
+someStack.push("abracadabra");
 ```
 
 To copy an array, use spread syntax or `Array.from`.
@@ -174,10 +180,9 @@ Prefer rest parameters (`...args`) over the `arguments` object in new code — t
 ```javascript
 // good
 function logAll(...args) {
-    args.forEach((arg) => console.log(arg));
+  args.forEach((arg) => console.log(arg));
 }
 ```
-
 
 ## Strings
 
@@ -187,55 +192,58 @@ Use single quotes `''` for strings.
 // bad
 const name = "Bob Parr";
 const fullName = "Bob " + this.lastName;
-const errorMessage = 'This is a super long error that was thrown because ' +
-    'of Batman. When you stop to think about how Batman had anything to do ' +
-    'with this, you would get nowhere fast.';
+const errorMessage =
+  "This is a super long error that was thrown because " +
+  "of Batman. When you stop to think about how Batman had anything to do " +
+  "with this, you would get nowhere fast.";
 
 // good
-const name = 'Bob Parr';
+const name = "Bob Parr";
 
 const fullName = `Bob ${this.lastName}`;
 
-const errorMessage = 'This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.'
+const errorMessage =
+  "This is a super long error that was thrown because of Batman. When you stop to think about how Batman had anything to do with this, you would get nowhere fast.";
 ```
 
-When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals). 
-```javascript
-const firstName = 'Mary';
-const lastName = 'Wind';
+When interpolating strings use [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).
 
-// bad 
-const fullName = 'My first name is' + firstName + 'and my last name is' + lastName + '.';
+```javascript
+const firstName = "Mary";
+const lastName = "Wind";
+
+// bad
+const fullName =
+  "My first name is" + firstName + "and my last name is" + lastName + ".";
 
 // good
 const fullName = `My first name is ${firstName} and my last name is ${lastName}.`;
-
 ```
+
 When programmatically building up a string, use `Array#map` and `Array#join` over a concatenation loop. It's more declarative and easier to read.
 
 ```javascript
 const messages = [
-    { state: 'success', message: 'This one worked.' },
-    { state: 'success', message: 'This one worked as well.' },
-    { state: 'error', message: 'This one did not work.' },
+  { state: "success", message: "This one worked." },
+  { state: "success", message: "This one worked as well." },
+  { state: "error", message: "This one did not work." },
 ];
 
 // bad
 function inbox(messages) {
-    let items = '<ul>';
-    for (let i = 0; i < messages.length; i++) {
-        items += '<li>' + messages[i].message + '</li>';
-    }
-    return items + '</ul>';
+  let items = "<ul>";
+  for (let i = 0; i < messages.length; i++) {
+    items += "<li>" + messages[i].message + "</li>";
+  }
+  return items + "</ul>";
 }
 
 // good
 function inbox(messages) {
-    const items = messages.map((m) => `<li>${m.message}</li>`).join('');
-    return `<ul>${items}</ul>`;
+  const items = messages.map((m) => `<li>${m.message}</li>`).join("");
+  return `<ul>${items}</ul>`;
 }
 ```
-
 
 ## Destructuring
 
@@ -243,15 +251,17 @@ Use destructuring to pull values out of objects and arrays. It is shorter, clear
 
 ```javascript
 // object destructuring with defaults and rename
-function greet({ name = 'friend', greeting: hello = 'Hello' } = {}) {
-    console.log(`${hello}, ${name}!`);
+function greet({ name = "friend", greeting: hello = "Hello" } = {}) {
+  console.log(`${hello}, ${name}!`);
 }
 
 // array destructuring
 const [first, second, ...rest] = items;
 
 // nested
-const { user: { id, email } } = response;
+const {
+  user: { id, email },
+} = response;
 ```
 
 Destructure function parameters when a function takes 3+ arguments — named parameters via a single options object are clearer than a long positional argument list.
@@ -265,7 +275,7 @@ Use a `function` declaration for top-level named functions and arrow functions f
 ```javascript
 // good — named function declaration, hoisted, named in stack traces
 function calculateTotal(items) {
-    return items.reduce((sum, item) => sum + item.price, 0);
+  return items.reduce((sum, item) => sum + item.price, 0);
 }
 
 // good — arrow function as a callback
@@ -277,13 +287,13 @@ Use **default parameters** rather than reassigning falsy values inside the funct
 ```javascript
 // bad
 function greet(name) {
-    name = name || 'friend';
-    console.log(`Hello, ${name}`);
+  name = name || "friend";
+  console.log(`Hello, ${name}`);
 }
 
 // good
-function greet(name = 'friend') {
-    console.log(`Hello, ${name}`);
+function greet(name = "friend") {
+  console.log(`Hello, ${name}`);
 }
 ```
 
@@ -292,7 +302,7 @@ Use **rest parameters** rather than the legacy `arguments` object — they are r
 ```javascript
 // good
 function sum(...numbers) {
-    return numbers.reduce((a, b) => a + b, 0);
+  return numbers.reduce((a, b) => a + b, 0);
 }
 ```
 
@@ -339,7 +349,7 @@ const fontSize = config.fontSize ?? 14;
 **Logical assignment (`??=`, `||=`, `&&=`)** combines the operator with assignment:
 
 ```javascript
-options.timeout ??= 5000;  // assign only if currently null/undefined
+options.timeout ??= 5000; // assign only if currently null/undefined
 ```
 
 ## Async
@@ -349,21 +359,21 @@ Prefer `async`/`await` over hand-rolled promise chains. It reads like synchronou
 ```javascript
 // bad — chained promises are hard to follow
 function loadUser(id) {
-    return fetchUser(id)
-        .then((user) => fetchOrders(user.id))
-        .then((orders) => orders.filter((o) => o.active))
-        .catch((err) => log(err));
+  return fetchUser(id)
+    .then((user) => fetchOrders(user.id))
+    .then((orders) => orders.filter((o) => o.active))
+    .catch((err) => log(err));
 }
 
 // good
 async function loadUser(id) {
-    try {
-        const user = await fetchUser(id);
-        const orders = await fetchOrders(user.id);
-        return orders.filter((o) => o.active);
-    } catch (err) {
-        log(err);
-    }
+  try {
+    const user = await fetchUser(id);
+    const orders = await fetchOrders(user.id);
+    return orders.filter((o) => o.active);
+  } catch (err) {
+    log(err);
+  }
 }
 ```
 
@@ -384,8 +394,8 @@ Bind events with `addEventListener`. Never use inline `on*` attributes in HTML.
 ```
 
 ```javascript
-document.getElementById('feel-blue').addEventListener('click', () => {
-    document.body.style.backgroundColor = 'lightblue';
+document.getElementById("feel-blue").addEventListener("click", () => {
+  document.body.style.backgroundColor = "lightblue";
 });
 ```
 
@@ -393,14 +403,17 @@ For high-frequency events (`scroll`, `resize`, `pointermove`, `input`), throttle
 
 ```javascript
 function debounce(fn, delay = 250) {
-    let timerId;
-    return (...args) => {
-        clearTimeout(timerId);
-        timerId = setTimeout(() => fn(...args), delay);
-    };
+  let timerId;
+  return (...args) => {
+    clearTimeout(timerId);
+    timerId = setTimeout(() => fn(...args), delay);
+  };
 }
 
-window.addEventListener('resize', debounce(() => console.log('resize')));
+window.addEventListener(
+  "resize",
+  debounce(() => console.log("resize")),
+);
 ```
 
 Cache DOM queries when you bind multiple events to the same node — repeated `document.querySelector` calls in tight loops add up.
@@ -413,12 +426,12 @@ Use dot notation when accessing properties.
 
 ```javascript
 const luke = {
-    jedi: true,
-    age: 28
+  jedi: true,
+  age: 28,
 };
 
 // bad
-const isJedi = luke['jedi'];
+const isJedi = luke["jedi"];
 
 // good
 const isJedi = luke.jedi;
@@ -428,17 +441,16 @@ Use subscript notation `[]` when accessing properties with a variable.
 
 ```javascript
 const luke = {
-    jedi: true,
-    age: 28
+  jedi: true,
+  age: 28,
 };
 
 function getProp(prop) {
-    return luke[prop];
+  return luke[prop];
 }
 
-const isJedi = getProp('jedi');
+const isJedi = getProp("jedi");
 ```
-
 
 ## Variables and Constants
 
@@ -462,11 +474,11 @@ const superPower = new SuperPower();
 ```javascript
 // good — declarations are next to their use
 async function loadDashboard(userId) {
-    const user = await fetchUser(userId);
-    if (!user) return null;
+  const user = await fetchUser(userId);
+  if (!user) return null;
 
-    const orders = await fetchOrders(user.id);
-    return { user, orders };
+  const orders = await fetchOrders(user.id);
+  return { user, orders };
 }
 ```
 
@@ -485,42 +497,48 @@ let depth;
 
 Minimize the use of module-scope mutable state. Treat any non-`const` value at module scope as a smell — it's usually a sign that state belongs inside a function, a class, or a dedicated store.
 
-
 ## Comparison Operators & Equality
 
 Use `===` and `!==`. The loose equality operators (`==`, `!=`) perform type coercion that produces surprising results (`0 == ''` is `true`, `null == undefined` is `true`).
 
 Conditional expressions coerce their value to boolean. The rules:
 
-+ **Objects** (including arrays and functions) → **true**
-+ **`undefined`** → **false**
-+ **`null`** → **false**
-+ **Booleans** → their value
-+ **Numbers** → **false** for `+0`, `-0`, `NaN`; **true** otherwise
-+ **Strings** → **false** for `''`; **true** otherwise
+- **Objects** (including arrays and functions) → **true**
+- **`undefined`** → **false**
+- **`null`** → **false**
+- **Booleans** → their value
+- **Numbers** → **false** for `+0`, `-0`, `NaN`; **true** otherwise
+- **Strings** → **false** for `''`; **true** otherwise
 
 Be explicit in conditions when the type is ambiguous. "Truthy check" shortcuts can hide bugs around `0`, `''`, and `null`:
 
 ```javascript
 // risky — also true for null, undefined, 0
-if (count) { /* ... */ }
+if (count) {
+  /* ... */
+}
 
 // explicit — only true for actual positive numbers
-if (count > 0) { /* ... */ }
+if (count > 0) {
+  /* ... */
+}
 
 // risky — also true for null, undefined
-if (name) { /* ... */ }
+if (name) {
+  /* ... */
+}
 
 // explicit — distinguishes null/undefined from empty string
-if (name != null) { /* ... */ }
+if (name != null) {
+  /* ... */
+}
 ```
 
 When you want to distinguish "not provided" from "provided but falsy," reach for `??`:
 
 ```javascript
-const label = props.label ?? 'Untitled';
+const label = props.label ?? "Untitled";
 ```
-
 
 ## Blocks
 
@@ -554,56 +572,55 @@ If you're using multi-line blocks with `if` and `else`, put `else` on the same l
 ```javascript
 // bad
 if (test) {
-    thing1();
-    thing2();
-}
-else {
-    thing3();
+  thing1();
+  thing2();
+} else {
+  thing3();
 }
 
 // good
 if (test) {
-    thing1();
-    thing2();
+  thing1();
+  thing2();
 } else {
-    thing3();
+  thing3();
 }
 ```
 
 Use the following format for an `if` statement:
 
 ```javascript
-    if (condition) {
-        // statements
-    }
-     
-    if (condition) {
-        // statements
-    } else {
-        // statements
-    }
-     
-    if (condition) {
-        // statements
-    } else if (condition) {
-        // statements
-    } else {
-        // statements
-    }
+if (condition) {
+  // statements
+}
+
+if (condition) {
+  // statements
+} else {
+  // statements
+}
+
+if (condition) {
+  // statements
+} else if (condition) {
+  // statements
+} else {
+  // statements
+}
 ```
+
 Use the following format for a `for` statement:
 
 ```javascript
+for (initialization; condition; update) {
+  // statements
+}
 
-    for (initialization; condition; update) {
-        // statements
-    }
-
-    for (variable in object) {
-        if (filter) {
-            // statements
-        }
-    }
+for (variable in object) {
+  if (filter) {
+    // statements
+  }
+}
 ```
 
 For array iteration, prefer `for...of` (or array methods like `forEach`/`map`/`filter`/`reduce`) over the C-style `for` loop. They're harder to get wrong.
@@ -611,7 +628,7 @@ For array iteration, prefer `for...of` (or array methods like `forEach`/`map`/`f
 ```javascript
 // good — direct, clear
 for (const item of items) {
-    process(item);
+  process(item);
 }
 
 // good — when index is needed
@@ -622,23 +639,24 @@ For object iteration, do **not** use `for...in` (it walks the prototype chain). 
 
 ```javascript
 for (const [key, value] of Object.entries(obj)) {
-    console.log(key, value);
+  console.log(key, value);
 }
 ```
 
 Use the following format for a `while` statement:
 
 ```javascript
-    while (condition) {
-        // statements
-    }
+while (condition) {
+  // statements
+}
 ```
+
 Use the following format for a `do` statement:
 
 ```javascript
-    do {
-        // statements
-    } while (condition);
+do {
+  // statements
+} while (condition);
 ```
 
 Unlike the other compound statements, the do statement always ends with a `;` (semicolon).
@@ -647,14 +665,14 @@ Use the following format for a `switch` statement. Indent each `case` under the 
 
 ```javascript
 switch (allegiance) {
-    case 'Jedi':
-        joinOrder();
-        break;
-    case 'Sith':
-        joinEmpire();
-        break;
-    default:
-        wander();
+  case "Jedi":
+    joinOrder();
+    break;
+  case "Sith":
+    joinEmpire();
+    break;
+  default:
+    wander();
 }
 ```
 
@@ -663,29 +681,28 @@ Each group of statements (except the `default`) should end with `break`, `return
 Use the following format for a `try` statement:
 
 ```javascript
-    try {
-        // statements
-    } catch (variable) {
-        // statements
-    }
+try {
+  // statements
+} catch (variable) {
+  // statements
+}
 
-    try {
-        // statements
-    } catch (variable) {
-        // statements
-    } finally {
-        // statements
-    }
+try {
+  // statements
+} catch (variable) {
+  // statements
+} finally {
+  // statements
+}
 ```
 
 Limit the use of the `continue` statement since it can obscure control flow in a function. It is best used at the start of a loop to handle pre-conditions. This technique reduces excessive indentation.
 
 Do not use the `with` statement. (Learn more at http://yuiblog.com/blog/2006/04/11/with-statement-considered-harmful/)
 
-
 ## Comments
 
-**Write comments that explain *why*, not *what*.** Well-named identifiers already explain what the code does; comments should capture the things that aren't visible from reading the code: a non-obvious constraint, a subtle invariant, a workaround for a specific bug, or behavior that would surprise a reader.
+**Write comments that explain _why_, not _what_.** Well-named identifiers already explain what the code does; comments should capture the things that aren't visible from reading the code: a non-obvious constraint, a subtle invariant, a workaround for a specific bug, or behavior that would surprise a reader.
 
 Don't waste the reader's time with restatement:
 
@@ -706,7 +723,7 @@ Retain comments related to open-source licensing.
 
 ### JSDoc
 
-In **TypeScript** projects, most JSDoc `@param` / `@return` tags are redundant — the types are already in the signature. Skip them. Use prose docstrings only when you need to explain *what the function is for* or *how it should be used*.
+In **TypeScript** projects, most JSDoc `@param` / `@return` tags are redundant — the types are already in the signature. Skip them. Use prose docstrings only when you need to explain _what the function is for_ or _how it should be used_.
 
 ```typescript
 /**
@@ -714,7 +731,7 @@ In **TypeScript** projects, most JSDoc `@param` / `@return` tags are redundant �
  * if the group is empty. Ties are broken by name (alphabetical).
  */
 function mostPowerful(jedi: Jedi[]): Jedi | undefined {
-    // ...
+  // ...
 }
 ```
 
@@ -727,7 +744,7 @@ In **plain JavaScript** projects, JSDoc with types is still valuable — modern 
  * @returns {Jedi}
  */
 function summon(name, midiChlorians) {
-    // ...
+  // ...
 }
 ```
 
@@ -738,10 +755,10 @@ Use `//` for single-line comments. Place them on the line above the code they de
 ```javascript
 // good
 function rank(jedi) {
-    // Council rank requires 12,000 midi-chlorians and 8 years of service.
-    const eligible = jedi.midiChlorians >= 12000 && jedi.yearsOfService >= 8;
+  // Council rank requires 12,000 midi-chlorians and 8 years of service.
+  const eligible = jedi.midiChlorians >= 12000 && jedi.yearsOfService >= 8;
 
-    return eligible ? 'Council' : 'Knight';
+  return eligible ? "Council" : "Knight";
 }
 ```
 
@@ -752,7 +769,6 @@ Use `// TODO:` for known work that hasn't been done yet. Use `// FIXME:` for a k
 ```javascript
 // TODO(PROJ-123): replace polling with a server-sent event stream
 ```
-
 
 ## Formatting
 
@@ -769,13 +785,13 @@ Use `eslint-config-thinkcompany` (with Prettier as a backup if ESLint doesn't co
 ```javascript
 // good
 const hero = {
-    firstName: 'Kevin',
-    lastName: 'Flynn',
-    superPower: 'strength',
+  firstName: "Kevin",
+  lastName: "Flynn",
+  superPower: "strength",
 };
 
 function fight() {
-    console.log('Swooosh!');
+  console.log("Swooosh!");
 }
 ```
 
@@ -783,11 +799,10 @@ For long method chains, indent each call on its own line with a leading dot:
 
 ```javascript
 const result = items
-    .filter((item) => item.active)
-    .map((item) => item.value)
-    .reduce((sum, value) => sum + value, 0);
+  .filter((item) => item.active)
+  .map((item) => item.value)
+  .reduce((sum, value) => sum + value, 0);
 ```
-
 
 ## Type Casting & Coercion
 
@@ -799,7 +814,7 @@ Perform type coercion explicitly, using the type's constructor function (called 
 const reviewScore = 9;
 
 // bad — relies on implicit coercion
-const totalScore = reviewScore + '';
+const totalScore = reviewScore + "";
 
 // good — explicit
 const totalScore = String(reviewScore);
@@ -810,7 +825,7 @@ const totalScore = String(reviewScore);
 Use `Number()` for general string-to-number conversion. Use `Number.parseInt(value, 10)` (or the legacy `parseInt`) when you need to parse leading digits out of a string and ignore trailing characters (e.g. `"24px"` → `24`). Always pass an explicit radix.
 
 ```javascript
-const inputValue = '4';
+const inputValue = "4";
 
 // bad
 const val = new Number(inputValue);
@@ -833,7 +848,7 @@ const hasJedi = Boolean(jedi.length);
 
 // also fine — well understood, common in conditionals
 if (jedi.length) {
-    // ...
+  // ...
 }
 ```
 
@@ -850,14 +865,20 @@ Don't use `_` as a name prefix to imply privacy — it provides none, and TypeSc
 
 ```javascript
 // bad
-function q() { /* ... */ }
+function q() {
+  /* ... */
+}
 let OBJ = {};
 
 // good
-function query() { /* ... */ }
+function query() {
+  /* ... */
+}
 const userPreferences = {};
 const MAX_RETRIES = 3;
-class UserSession { /* ... */ }
+class UserSession {
+  /* ... */
+}
 ```
 
 Use lexical `this` (arrow functions) rather than aliasing `this` to a variable.
@@ -865,13 +886,15 @@ Use lexical `this` (arrow functions) rather than aliasing `this` to a variable.
 ```javascript
 // bad
 function setup() {
-    const self = this;
-    setTimeout(function () { self.start(); }, 100);
+  const self = this;
+  setTimeout(function () {
+    self.start();
+  }, 100);
 }
 
 // good
 function setup() {
-    setTimeout(() => this.start(), 100);
+  setTimeout(() => this.start(), 100);
 }
 ```
 
@@ -879,10 +902,12 @@ Filenames should match the kind of module they contain. If a file exports a sing
 
 ```javascript
 // CheckBox.tsx
-export class CheckBox { /* ... */ }
+export class CheckBox {
+  /* ... */
+}
 
 // in some other file
-import { CheckBox } from './CheckBox.js';
+import { CheckBox } from "./CheckBox.js";
 ```
 
 ## Classes
@@ -899,57 +924,57 @@ For everything else — utility functions, plain data, single-method "services" 
 
 ```javascript
 class Jedi {
-    #name;
-    #midiChlorians;
-    jumping = false;
+  #name;
+  #midiChlorians;
+  jumping = false;
 
-    constructor({ name, midiChlorians }) {
-        this.#name = name;
-        this.#midiChlorians = midiChlorians;
-    }
+  constructor({ name, midiChlorians }) {
+    this.#name = name;
+    this.#midiChlorians = midiChlorians;
+  }
 
-    get name() {
-        return this.#name;
-    }
+  get name() {
+    return this.#name;
+  }
 
-    get isForceSensitive() {
-        return this.#midiChlorians >= 7000;
-    }
+  get isForceSensitive() {
+    return this.#midiChlorians >= 7000;
+  }
 
-    jump() {
-        this.jumping = true;
-        return this;
-    }
+  jump() {
+    this.jumping = true;
+    return this;
+  }
 
-    setHeight(height) {
-        this.height = height;
-        return this;
-    }
+  setHeight(height) {
+    this.height = height;
+    return this;
+  }
 
-    static fromHolocron(record) {
-        return new Jedi({
-            name: record.designation,
-            midiChlorians: record.midi_count,
-        });
-    }
+  static fromHolocron(record) {
+    return new Jedi({
+      name: record.designation,
+      midiChlorians: record.midi_count,
+    });
+  }
 }
 
 class SithLord extends Jedi {
-    constructor(args) {
-        super(args);
-        this.allegiance = 'Sith';
-    }
+  constructor(args) {
+    super(args);
+    this.allegiance = "Sith";
+  }
 
-    strikeDown(target) {
-        target.fallen = true;
-        return this;
-    }
+  strikeDown(target) {
+    target.fallen = true;
+    return this;
+  }
 }
 
-const luke = new Jedi({ name: 'Luke Skywalker', midiChlorians: 14500 });
+const luke = new Jedi({ name: "Luke Skywalker", midiChlorians: 14500 });
 luke.jump().setHeight(1.72);
 
-const vader = SithLord.fromHolocron(archive.lookup('DV-001'));
+const vader = SithLord.fromHolocron(archive.lookup("DV-001"));
 vader.strikeDown(luke);
 ```
 
@@ -971,11 +996,11 @@ Start every project with `"strict": true` in `tsconfig.json`. Strict mode bundle
 
 ```json
 {
-    "compilerOptions": {
-        "strict": true,
-        "noUncheckedIndexedAccess": true,
-        "exactOptionalPropertyTypes": true
-    }
+  "compilerOptions": {
+    "strict": true,
+    "noUncheckedIndexedAccess": true,
+    "exactOptionalPropertyTypes": true
+  }
 }
 ```
 
@@ -988,16 +1013,16 @@ Rule of thumb: use **`interface`** for object shapes you expect to be extended, 
 ```typescript
 // good — object shape, may be extended
 interface Jedi {
-    name: string;
-    midiChlorians: number;
+  name: string;
+  midiChlorians: number;
 }
 
 interface SithLord extends Jedi {
-    allegiance: 'Sith';
+  allegiance: "Sith";
 }
 
 // good — union; type is the right tool
-type Allegiance = 'Jedi' | 'Sith' | 'Gray';
+type Allegiance = "Jedi" | "Sith" | "Gray";
 
 // good — mapped/derived type
 type ReadonlyJedi = Readonly<Jedi>;
@@ -1012,20 +1037,20 @@ The two are nearly interchangeable for plain object shapes; pick one convention 
 ```typescript
 // bad — typecheck disabled
 function parseHolocron(record: any) {
-    return record.designation.toUpperCase();
+  return record.designation.toUpperCase();
 }
 
 // good — narrow before use
 function parseHolocron(record: unknown): string {
-    if (
-        typeof record === 'object' &&
-        record !== null &&
-        'designation' in record &&
-        typeof record.designation === 'string'
-    ) {
-        return record.designation.toUpperCase();
-    }
-    throw new Error('Invalid holocron record');
+  if (
+    typeof record === "object" &&
+    record !== null &&
+    "designation" in record &&
+    typeof record.designation === "string"
+  ) {
+    return record.designation.toUpperCase();
+  }
+  throw new Error("Invalid holocron record");
 }
 ```
 
@@ -1033,11 +1058,11 @@ For external data (API responses, user input), pair `unknown` with a runtime val
 
 ### Generics
 
-Reach for generics when a function or type works on a *shape* rather than a specific type. Don't make things generic preemptively — wait until you have a second concrete use.
+Reach for generics when a function or type works on a _shape_ rather than a specific type. Don't make things generic preemptively — wait until you have a second concrete use.
 
 ```typescript
 function mostPowerful<T extends Jedi>(jedi: T[]): T | undefined {
-    return jedi.toSorted((a, b) => b.midiChlorians - a.midiChlorians)[0];
+  return jedi.toSorted((a, b) => b.midiChlorians - a.midiChlorians)[0];
 }
 
 const winner = mostPowerful([luke, yoda, obiwan]); // type is Jedi | undefined
@@ -1045,13 +1070,13 @@ const winner = mostPowerful([luke, yoda, obiwan]); // type is Jedi | undefined
 
 ### `satisfies`
 
-The `satisfies` operator (TS 4.9+) lets you check that a value conforms to a type *without widening it*. Use it when you want to keep the precise literal type but verify the shape.
+The `satisfies` operator (TS 4.9+) lets you check that a value conforms to a type _without widening it_. Use it when you want to keep the precise literal type but verify the shape.
 
 ```typescript
 // inferred type: { name: string; allegiance: 'Jedi' }
 const luke = {
-    name: 'Luke Skywalker',
-    allegiance: 'Jedi',
+  name: "Luke Skywalker",
+  allegiance: "Jedi",
 } satisfies Jedi;
 
 // luke.allegiance is the literal 'Jedi', not string
@@ -1062,7 +1087,7 @@ const luke = {
 Pair `as const` with `satisfies` (or use it alone) to lock object and tuple types to their literal values — useful for config objects, lookup tables, and discriminator strings.
 
 ```typescript
-const ALLEGIANCES = ['Jedi', 'Sith', 'Gray'] as const;
+const ALLEGIANCES = ["Jedi", "Sith", "Gray"] as const;
 type Allegiance = (typeof ALLEGIANCES)[number]; // 'Jedi' | 'Sith' | 'Gray'
 ```
 
@@ -1072,19 +1097,19 @@ Model state as a union of variants, each tagged with a literal `kind` (or `statu
 
 ```typescript
 type ForceTrial =
-    | { status: 'idle' }
-    | { status: 'training'; padawan: Jedi }
-    | { status: 'complete'; result: 'pass' | 'fail' };
+  | { status: "idle" }
+  | { status: "training"; padawan: Jedi }
+  | { status: "complete"; result: "pass" | "fail" };
 
 function describe(trial: ForceTrial): string {
-    switch (trial.status) {
-        case 'idle':
-            return 'Awaiting student';
-        case 'training':
-            return `Training ${trial.padawan.name}`; // padawan is in scope
-        case 'complete':
-            return `Trial ${trial.result}`; // result is in scope
-    }
+  switch (trial.status) {
+    case "idle":
+      return "Awaiting student";
+    case "training":
+      return `Training ${trial.padawan.name}`; // padawan is in scope
+    case "complete":
+      return `Trial ${trial.result}`; // result is in scope
+  }
 }
 ```
 
@@ -1096,7 +1121,6 @@ For performance guidance — bundling, code splitting, lazy loading, third-party
 
 For measuring runtime cost in the page, use the **Performance panel** in Chrome DevTools (or the equivalent in Firefox / Safari). It will tell you, in concrete numbers for your real code, far more than micro-benchmarks ever could. Most of the historical "X is faster than Y" advice in JS style guides has been invalidated by modern engine optimizations — write clear code first, measure if it's actually slow, and optimize from data.
 
-
 ## Miscellaneous
 
 ### Assignment in Conditions
@@ -1105,13 +1129,13 @@ Don't assign inside the test of an `if` or `while` statement.
 
 ```javascript
 // is this a typo?
-if (a = b) {
-    // ...
+if ((a = b)) {
+  // ...
 }
 
 // or was this intended?
 if (a === b) {
-    // ...
+  // ...
 }
 ```
 
@@ -1123,8 +1147,8 @@ Avoid constructs that cannot easily be determined to be correct. ESLint's `no-co
 
 ```javascript
 // bad
-setTimeout('handleTimeout()', 1000);
-const sum = new Function('a', 'b', 'return a + b');
+setTimeout("handleTimeout()", 1000);
+const sum = new Function("a", "b", "return a + b");
 
 // good
 setTimeout(handleTimeout, 1000);
