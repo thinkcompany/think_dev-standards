@@ -1004,13 +1004,13 @@ Start every project with `"strict": true` in `tsconfig.json`. Strict mode bundle
 {
   "compilerOptions": {
     "strict": true,
-    "noUncheckedIndexedAccess": true,
-    "exactOptionalPropertyTypes": true
+    "noUncheckedIndexedAccess": true
   }
 }
 ```
 
-`noUncheckedIndexedAccess` is worth enabling on top of strict — it makes `arr[i]` return `T | undefined`, which surfaces a whole class of off-by-one bugs.
+- **`noUncheckedIndexedAccess`** is highly recommended on top of strict — it makes `arr[i]` return `T | undefined`, which surfaces a whole class of potential off-by-one bugs.
+- **`exactOptionalPropertyTypes`** is worth considering for very strict codebases. It enforces that optional properties are either omitted or match the exact type, preventing explicit `undefined` assignments. However, be aware that it can cause friction with common React prop-spreading patterns and third-party library types.
 
 ### `interface` vs `type`
 
