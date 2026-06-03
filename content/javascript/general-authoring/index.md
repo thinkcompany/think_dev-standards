@@ -844,12 +844,18 @@ The unary `+` (`+inputValue`) and double-bang (`!!value`) idioms are common in t
 ### Booleans
 
 ```javascript
-const hasJedi = Boolean(jedi.length);
-
-// also fine — well understood, common in conditionals
+// bad — relies on implicit coercion of a number/length
 if (jedi.length) {
   // ...
 }
+
+// good — explicit comparison
+if (jedi.length > 0) {
+  // ...
+}
+
+// explicit boolean coercion of other types (e.g. strings, objects)
+const hasAccess = Boolean(user.role);
 ```
 
 ## Naming Conventions
