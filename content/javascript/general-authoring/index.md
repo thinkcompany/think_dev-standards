@@ -513,7 +513,7 @@ Conditional expressions coerce their value to boolean. The rules:
 Be explicit in conditions when the type is ambiguous. "Truthy check" shortcuts can hide bugs around `0`, `''`, and `null`:
 
 ```javascript
-// risky — also true for null, undefined, 0
+// risky — also falsy for null, undefined, 0
 if (count) {
   /* ... */
 }
@@ -523,7 +523,7 @@ if (count > 0) {
   /* ... */
 }
 
-// risky — also true for null, undefined
+// risky — also falsy for null, undefined
 if (name) {
   /* ... */
 }
