@@ -1068,7 +1068,7 @@ Reach for generics when a function or type works on a _shape_ rather than a spec
 
 ```typescript
 function mostPowerful<T extends Jedi>(jedi: T[]): T | undefined {
-  return jedi.toSorted((a, b) => b.midiChlorians - a.midiChlorians)[0];
+  return [...jedi].sort((a, b) => b.midiChlorians - a.midiChlorians)[0];
 }
 
 const winner = mostPowerful([luke, yoda, obiwan]); // type is Jedi | undefined
