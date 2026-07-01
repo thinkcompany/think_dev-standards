@@ -14,7 +14,7 @@ Follow the standards in `AGENTS.md` at the repo root. The rules below are a summ
 - Be explicit in conditions: `if (count > 0)` over `if (count)` — truthy shortcuts hide `0`/`''`/`null` bugs.
 - Modern operators: `?.`, `??` (not `||`) for defaults, logical assignment.
 - `async`/`await` over promise chains; `Promise.all` for independent work.
-- `for...of` and `Object.entries` — never `for...in`. Trailing commas in multiline.
+- Prefer functional array methods (`.map`, `.filter`, `.reduce`, `.some`, `.every`) for data transformation and side-effect-free logic. Use `for...of` for sequential asynchronous tasks or when early break/continue is necessary. `Object.entries` over `for...in`. Trailing commas in multiline.
 - `addEventListener` only; `IntersectionObserver`/`ResizeObserver` over scroll/resize polling.
 
 ## React

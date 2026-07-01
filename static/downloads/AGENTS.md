@@ -42,7 +42,7 @@ These instructions apply to all AI-assisted coding at Think Company. They encode
 - Use ES modules (`import`/`export`). Prefer named exports over default exports for non-component modules.
 - Use the modern operators: optional chaining (`?.`), nullish coalescing (`??`), and logical assignment (`??=`, `||=`, `&&=`). Use `??` (not `||`) for defaults so `0` and `''` are preserved.
 - Use `async`/`await` over hand-rolled promise chains. Run independent async work concurrently with `Promise.all`; use `Promise.allSettled` when failures should not short-circuit. Sequential `await`s on independent calls are a performance bug.
-- Iterate with `for...of` and array methods. Never use `for...in`; use `Object.keys`/`Object.values`/`Object.entries` for objects.
+- Prefer functional array methods (`.map`, `.filter`, `.reduce`, `.some`, `.every`) for data transformation and side-effect-free logic. Use `for...of` for sequential asynchronous tasks or when early break/continue is necessary. Never use `for...in`; use `Object.keys`/`Object.values`/`Object.entries` for objects.
 - Bind events with `addEventListener` — never inline `on*` attributes. Use `IntersectionObserver`/`ResizeObserver` instead of polling `scroll`/`resize`; debounce or throttle high-frequency handlers.
 - Use trailing commas in multi-line objects, arrays, and parameter lists.
 - When converting strings to numbers, use `Number()` or `Number.parseInt(value, 10)` with an explicit radix.
