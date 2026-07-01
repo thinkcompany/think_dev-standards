@@ -1,0 +1,87 @@
+---
+title: AI-Assisted Coding
+date: "2026-05-21T00:00:00.000Z"
+area: AI
+section: 1. Overview
+description: "How Think Company uses AI coding assistants and the shared instruction files that keep them aligned with our standards."
+---
+
+This document covers how we work with AI coding assistants at Think Company and the shared instruction files that point those tools at the standards in this site.
+
+## Table of Contents
+
+- [Why Standardized AI Files](#why-standardized-ai-files)
+- [The Files](#the-files)
+- [Download the Files](#download-the-files)
+- [Per-Tool Setup](#per-tool-setup)
+- [Keeping Them in Sync](#keeping-them-in-sync)
+- [What's Inside](#whats-inside)
+- [Contributing](#contributing)
+
+## Why Standardized AI Files
+
+Most of our developers use an AI coding assistant — Claude Code, Cursor, GitHub Copilot, or more than one. Each tool reads project-level instructions from a different file in a different location, but the *guidance* should be identical no matter which tool a developer reaches for.
+
+We maintain one canonical source of truth and generate the per-tool files from it. This means:
+
+- The same standards apply whether code is written by a person or suggested by an assistant.
+- A developer switching tools (or a project using several) gets consistent results.
+- Updates to our standards flow to every assistant through one reviewed change.
+
+These instruction files encode the same standards published on this site — they are a machine-readable companion to the human-readable guidelines, not a separate ruleset.
+
+## The Files
+
+All four files live at the **root of each project repository**:
+
+| File | Tool | Role |
+| --- | --- | --- |
+| `AGENTS.md` | All / canonical | The source of truth. Human-readable, tool-agnostic. Edit this first. |
+| `CLAUDE.md` | Claude Code | Full copy of `AGENTS.md` plus a short Claude-specific behavior section. |
+| `.cursor/rules/think-standards.mdc` | Cursor | A scoped rule file (glob-targeted) summarizing the key rules. |
+| `.github/copilot-instructions.md` | GitHub Copilot | A condensed summary tuned for inline suggestions. |
+
+`AGENTS.md` is the authoritative document. `CLAUDE.md` is a complete embed of it (tools don't reliably follow file references, so it is duplicated rather than linked). The Cursor and Copilot files are intentional summaries.
+
+## Download the Files
+
+Grab the current version of any file and drop it into your project at the path shown above. These downloads are generated from the canonical files in the repository on every build, so they always reflect the latest standards.
+
+- <a href="/downloads/AGENTS.md" download="AGENTS.md"><code>AGENTS.md</code></a> — canonical source (all tools)
+- <a href="/downloads/CLAUDE.md" download="CLAUDE.md"><code>CLAUDE.md</code></a> — Claude Code
+- <a href="/downloads/think-standards.mdc" download="think-standards.mdc"><code>.cursor/rules/think-standards.mdc</code></a> — Cursor
+- <a href="/downloads/copilot-instructions.md" download="copilot-instructions.md"><code>.github/copilot-instructions.md</code></a> — GitHub Copilot
+
+## Per-Tool Setup
+
+**Claude Code** — Place `CLAUDE.md` in the repo root; it is read automatically every session. For a personal default across all projects, copy it to `~/.claude/CLAUDE.md` (project-level files take precedence).
+
+**Cursor** — Place `think-standards.mdc` in `.cursor/rules/`. Its `alwaysApply: true` frontmatter and glob targets load it automatically for matching files.
+
+**GitHub Copilot** — Place `copilot-instructions.md` in `.github/`. Copilot reads it automatically in VS Code (v1.99+) and on GitHub.com.
+
+## Keeping Them in Sync
+
+When standards change, edit `AGENTS.md` first, then regenerate the others:
+
+- **`CLAUDE.md`** = the full contents of `AGENTS.md` plus the Claude-specific behavior section appended at the end. Re-copy on every change.
+- **`.cursor/rules/think-standards.mdc`** and **`.github/copilot-instructions.md`** are summaries — update them only when a major section is added, removed, or reversed.
+
+Treat the instruction files like any other code: changes go through a pull request so the team can review them.
+
+## What's Inside
+
+The instruction files mirror the standards published across this site. Each maps to a section here:
+
+- [HTML](/html/programming-principles/) — semantic markup, attribute order, forms
+- [CSS](/css/) — vanilla CSS and Tailwind, SMACSS architecture, modern CSS features
+- [Javascript](/javascript/) — modern JS and TypeScript authoring
+- [React](/javascript/react-best-practices/) — components, hooks, state, effects
+- [Accessibility](/accessibility/) — WCAG 2.2 AA
+- [Performance](/performance/) — Core Web Vitals
+- [Quality Assurance](/quality-assurance/) — linting, type-checking, security
+- [Git](/git/) — branches, commits, pull requests
+
+## Contributing
+
+The canonical files live in the [think_dev-standards](https://github.com/thinkcompany/think_dev-standards) repository. To propose a change, open a pull request against `AGENTS.md` (and regenerate the per-tool files), or [open an issue](https://github.com/thinkcompany/think_dev-standards/issues) describing the change you'd like to see. As with all of our standards: if you can't meet a guideline, or you see a better practice worth adopting, say so.

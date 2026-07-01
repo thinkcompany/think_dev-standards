@@ -6,6 +6,23 @@ exports.createPages = async ({ graphql, actions }) => {
   const result = await graphql(
     `
       {
+        ai: allMdx(filter: { frontmatter: { area: { eq: "AI" } } }) {
+          edges {
+            node {
+              excerpt
+              fields {
+                slug
+              }
+              frontmatter {
+                date(formatString: "MMMM DD, YYYY")
+                title
+                section
+                description
+                area
+              }
+            }
+          }
+        }
         accessibility: allMdx(
           filter: { frontmatter: { area: { eq: "Accessibility" } } }
         ) {
@@ -196,6 +213,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   //This section loops through all the markdown data for each category of content.
   //It creates pages for that content using the landing.js template
+  const aiPosts = result.data.ai.edges;
   const accessibilityPosts = result.data.accessibility.edges;
   const automatedTestingPosts = result.data.automatedtesting.edges;
   const cssPosts = result.data.css.edges;
@@ -207,6 +225,19 @@ exports.createPages = async ({ graphql, actions }) => {
   const sassPosts = result.data.sass.edges;
   const seoPosts = result.data.seo.edges;
   const landingPage = path.resolve(`./src/templates/landing.js`);
+
+  //AI content
+  aiPosts.forEach((post) => {
+    createPage({
+      path: post.node.fields.slug,
+      component: landingPage,
+      context: {
+        slug: post.node.fields.slug,
+        area: "AI",
+        title: "AI-Assisted Coding",
+      },
+    });
+  });
 
   //Accessibility content
   accessibilityPosts.forEach((post) => {

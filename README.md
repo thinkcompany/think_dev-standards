@@ -19,6 +19,8 @@ To make updates to the static version of our docs site, you'll need to:
 - Run `npm start` to start the Gatsby development server.
 - Navigate to: [http://localhost:8000](http://localhost:8000) to get started.
 
+`npm run build`/`npm start` automatically run `copy:ai-files` first, which copies the canonical AI agent instruction files (`AGENTS.md`, `CLAUDE.md`, `.cursor/rules/think-standards.mdc`, `.github/copilot-instructions.md`) into `static/downloads/` so the `/ai/` page can serve them. Don't edit the files in `static/downloads/` directly — edit the source files at their original locations and the copies will regenerate.
+
 ## Environments
 - Production: [http://standards.thinkcompany.dev](http://standards.thinkcompany.dev)
 - Each branch pushed to `origin` results in [Netlify](https://www.netlify.com) building a branch deploy.

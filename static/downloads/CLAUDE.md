@@ -42,7 +42,7 @@ These instructions apply to all AI-assisted coding at Think Company. They encode
 - Use ES modules (`import`/`export`). Prefer named exports over default exports for non-component modules.
 - Use the modern operators: optional chaining (`?.`), nullish coalescing (`??`), and logical assignment (`??=`, `||=`, `&&=`). Use `??` (not `||`) for defaults so `0` and `''` are preserved.
 - Use `async`/`await` over hand-rolled promise chains. Run independent async work concurrently with `Promise.all`; use `Promise.allSettled` when failures should not short-circuit. Sequential `await`s on independent calls are a performance bug.
-- Prefer functional array methods (`.map`, `.filter`, `.reduce`, `.some`, `.every`) for data transformation and side-effect-free logic. Use `for...of` for sequential asynchronous tasks or when early break/continue is necessary. Never use `for...in`; use `Object.keys`/`Object.values`/`Object.entries` for objects.
+- Iterate with `for...of` and array methods. Never use `for...in`; use `Object.keys`/`Object.values`/`Object.entries` for objects.
 - Bind events with `addEventListener` — never inline `on*` attributes. Use `IntersectionObserver`/`ResizeObserver` instead of polling `scroll`/`resize`; debounce or throttle high-frequency handlers.
 - Use trailing commas in multi-line objects, arrays, and parameter lists.
 - When converting strings to numbers, use `Number()` or `Number.parseInt(value, 10)` with an explicit radix.
@@ -224,3 +224,14 @@ When reviewing or generating code for PR review:
 - Confirm accessibility requirements are met for any UI changes.
 - Confirm no secrets or credentials are present.
 - Confirm the PR description matches the diff.
+
+---
+
+## Claude-specific behavior
+
+- Do not create planning or analysis documents unless explicitly asked. Work from conversation context.
+- Do not add comments explaining what the code does. Add a comment only when the WHY is non-obvious.
+- Do not summarize what you just did at the end of a response. The diff speaks for itself.
+- Default to editing existing files. Only create new files when the task requires it.
+- Do not add features, refactors, or abstractions beyond the stated task.
+- Run the type checker and linter before reporting a task complete.
